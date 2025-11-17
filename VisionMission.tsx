@@ -16,18 +16,18 @@ const VisionMission: React.FC = () => {
     return (
         <Section>
             <div className="text-center mb-16">
-                 <h2 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">Our Guiding <span className="text-red-600">Principles</span></h2>
+                 <h2 className="text-4xl font-bold tracking-tight text-black sm:text-5xl">Our Guiding <span className="text-red-600">Principles</span></h2>
                  <p className="mt-4 text-lg text-gray-400">"Movies are made to be seen; advertising ensures they're remembered"</p>
             </div>
             <div className="grid md:grid-cols-2 gap-16 items-start">
-                <div className="bg-neutral-900 p-8 rounded-lg border-2 border-red-800/50 shadow-xl">
-                    <h3 className="text-3xl font-bold text-white font-serif mb-4">Vision</h3>
+                <div className="bg-white p-8 rounded-lg border-2 border-red-800/50 shadow-xl">
+                    <h3 className="text-3xl font-bold text-black font-serif mb-4">Vision</h3>
                     <p className="text-lg text-gray-300 italic">
                         "To be a global leader in post-production, setting the benchmark for creativity, quality, and innovation in transforming stories into unforgettable cinematic experiences."
                     </p>
                 </div>
-                <div className="bg-neutral-900 p-8 rounded-lg border-2 border-red-800/50 shadow-xl">
-                    <h3 className="text-3xl font-bold text-white font-serif mb-6">Mission</h3>
+                <div className="bg-white p-8 rounded-lg border-2 border-red-800/50 shadow-xl">
+                    <h3 className="text-3xl font-bold text-black font-serif mb-6">Mission</h3>
                     <ul className="space-y-3">
                         {missionItems.map((item, index) => (
                              <li key={index} className="flex items-center text-lg text-gray-300">
