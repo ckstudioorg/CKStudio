@@ -27,7 +27,7 @@ const servicesData: Service[] = [
 ];
 
 const ServiceCard: React.FC<{ service: Service }> = ({ service }) => (
-    <div className="bg-neutral-900 p-8 rounded-lg border border-neutral-800 hover:border-red-600 hover:shadow-2xl hover:shadow-red-900/30 transform hover:-translate-y-2 transition-all duration-300">
+    <div className="bg-white p-8 rounded-lg border border-neutral-800 hover:border-red-600 hover:shadow-2xl hover:shadow-red-900/30 transform hover:-translate-y-2 transition-all duration-300">
         <h3 className="text-2xl font-bold text-red-600 mb-4">{service.title}</h3>
         <ul className="space-y-2">
             {service.items.map((item, index) => (
@@ -39,10 +39,10 @@ const ServiceCard: React.FC<{ service: Service }> = ({ service }) => (
 
 const Services: React.FC = () => {
     return (
-        <Section className="bg-neutral-900">
+        <Section className="bg-white">
             <div className="text-center mb-16">
-                <h2 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">What We <span className="text-red-600">Do?</span></h2>
-                <p className="mt-4 text-lg text-gray-400">From concept to final cut, we offer a comprehensive suite of services.</p>
+                <h2 className="text-4xl font-bold tracking-tight text-black sm:text-5xl">What We <span className="text-red-600">Do?</span></h2>
+                <p className="mt-4 text-lg text-gray-700">From concept to final cut, we offer a comprehensive suite of services.</p>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                 {servicesData.map((service, index) => (
