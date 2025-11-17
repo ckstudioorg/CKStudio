@@ -31,7 +31,7 @@ const ServiceCard: React.FC<{ service: Service }> = ({ service }) => (
         <h3 className="text-2xl font-bold text-red-600 mb-4">{service.title}</h3>
         <ul className="space-y-2">
             {service.items.map((item, index) => (
-                <li key={index} className="text-gray-300">{item}</li>
+                <li key={index} className="text-gray-700">{item}</li>
             ))}
         </ul>
     </div>
