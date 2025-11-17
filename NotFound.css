@@ -1,0 +1,208 @@
+/* 404 Not Found Page - CK Studio Brand Colors */
+
+.not-found-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.not-found-content {
+  text-align: center;
+  z-index: 10;
+  max-width: 600px;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(220, 20, 60, 0.2);
+}
+
+.error-code {
+  font-size: 120px;
+  font-weight: 900;
+  color: #DC143C;
+  text-shadow: 0 0 20px rgba(220, 20, 60, 0.5);
+  line-height: 1;
+  margin-bottom: 20px;
+  animation: glitch 2s infinite;
+}
+
+@keyframes glitch {
+  0%, 100% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(2px, -2px); }
+  60% { transform: translate(-2px, -2px); }
+  80% { transform: translate(2px, 2px); }
+}
+
+.error-title {
+  font-size: 32px;
+  color: #FFFFFF;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.error-message {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+.error-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.btn-home, .btn-contact {
+  padding: 12px 30px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-home {
+  background: #DC143C;
+  color: #FFFFFF;
+  border: 2px solid #DC143C;
+}
+
+.btn-home:hover {
+  background: #FF1744;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(220, 20, 60, 0.4);
+}
+
+.btn-contact {
+  background: transparent;
+  color: #FFFFFF;
+  border: 2px solid #FFFFFF;
+}
+
+.btn-contact:hover {
+  background: #FFFFFF;
+  color: #1a1a1a;
+  transform: translateY(-2px);
+}
+
+.helpful-links {
+  margin-top: 30px;
+  padding-top: 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.helpful-links h3 {
+  color: #FFFFFF;
+  font-size: 18px;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.helpful-links ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.helpful-links li {
+  margin: 0;
+}
+
+.helpful-links a {
+  color: #DC143C;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.helpful-links a:hover {
+  color: #FF1744;
+  text-decoration: underline;
+}
+
+/* Film Strip Decoration */
+.film-strip {
+  position: absolute;
+  top: 0;
+  right: -100px;
+  width: 200px;
+  height: 100%;
+  display: flex;
+  gap: 20px;
+  opacity: 0.1;
+  transform: rotate(15deg);
+}
+
+.strip {
+  width: 40px;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 10%,
+    #DC143C 10%,
+    #DC143C 15%,
+    transparent 15%,
+    transparent 20%,
+    #DC143C 20%,
+    #DC143C 25%,
+    transparent 25%
+  );
+  background-size: 100% 100px;
+  animation: filmScroll 20s linear infinite;
+}
+
+@keyframes filmScroll {
+  from { background-position: 0 0; }
+  to { background-position: 0 100px; }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .error-code {
+    font-size: 80px;
+  }
+
+  .error-title {
+    font-size: 24px;
+  }
+
+  .error-message {
+    font-size: 16px;
+  }
+
+  .error-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .btn-home, .btn-contact {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .helpful-links ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .film-strip {
+    opacity: 0.05;
+  }
+}
