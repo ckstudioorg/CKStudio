@@ -50,12 +50,6 @@ const Portfolio: React.FC = () => {
                             alt={`Screenshot from ${activeTab} project ${index + 1}`} 
                             className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500 ease-in-out"
                         />
-                        <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center text-center p-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-black mb-2 transform group-hover:scale-110 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                            </svg>
-                            <p className="text-black text-base font-bold tracking-wider uppercase">View Project</p>
-                        </div>
                     </div>
                 ))}
             </div>
