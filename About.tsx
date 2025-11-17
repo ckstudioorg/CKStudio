@@ -21,7 +21,7 @@ const About: React.FC = () => {
                 </div>
             </div>
             <div className="mt-20 text-center">
-                <blockquote className="text-2xl italic font-medium text-gray-200 border-l-4 border-red-600 pl-6 max-w-4xl mx-auto">
+                <blockquote className="text-2xl italic font-medium text-gray-600 border-l-4 border-red-600 pl-6 max-w-4xl mx-auto">
                     "Great films aren't just made on set; they're crafted in post-production. It's where creativity meets precision, turning ideas into cinematic experiences that captivate and inspire."
                 </blockquote>
                 <p className="mt-6 text-xl text-gold-400 font-serif">your achievement, our success</p>
