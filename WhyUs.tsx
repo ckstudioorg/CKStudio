@@ -35,15 +35,15 @@ const WhyUs: React.FC = () => {
                 }
             `}</style>
              <div className="text-center mb-16">
-                <h2 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">Why <span className="text-red-600">CK Studio?</span></h2>
-                 <p className="mt-4 text-lg text-gray-400 max-w-3xl mx-auto">Your vision deserves more than just technical execution—it deserves artistry, passion, and precision. We craft cinematic masterpieces that leave a lasting impact.</p>
+                <h2 className="text-4xl font-bold tracking-tight text-black sm:text-5xl">Why <span className="text-red-600">CK Studio?</span></h2>
+                 <p className="mt-4 text-lg text-gray-700 max-w-3xl mx-auto">Your vision deserves more than just technical execution—it deserves artistry, passion, and precision. We craft cinematic masterpieces that leave a lasting impact.</p>
             </div>
             <div className="grid md:grid-cols-2 gap-12 items-center">
                  <div className="grid grid-cols-2 gap-x-8 gap-y-4">
                      {strengths.map((strength, index) => (
                          <div key={index} className="flex items-center">
                              <svg className="w-6 h-6 mr-3 text-red-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                             <span className="text-lg text-gray-300">{strength}</span>
+                             <span className="text-lg text-gray-700">{strength}</span>
                          </div>
                      ))}
                  </div>
@@ -64,7 +64,7 @@ const WhyUs: React.FC = () => {
                          </svg>
                          <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
                             <div className="text-4xl font-bold">100%</div>
-                            <div className="text-sm text-gray-400">Commitment</div>
+                            <div className="text-sm text-gray-700">Commitment</div>
                          </div>
                     </div>
                      <div className="text-center">
