@@ -4,16 +4,15 @@ import Section from './Section';
 
 const About: React.FC = () => {
     return (
-        <Section className="bg-neutral-900">
-            <div className="grid md:grid-cols-2 gap-12 items-center">
+      <Section className="bg-white">            <div className="grid md:grid-cols-2 gap-12 items-center">
                 <div className="space-y-6">
-                    <h2 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
+                    <h2 className="text-4xl font-bold tracking-tight text-black sm:text-5xl">
                         Crafting Cinematic <span className="text-red-600">Experiences</span>.
                     </h2>
-                    <p className="text-lg text-gray-300">
+                    <p className="text-lg text-gray-700">
                         CHENNA KESHAV STUDIO is a master project by like-minded creative film brains and business ideologists, led by Young, dynamic, and creative minds.
                     </p>
-                    <p className="text-lg text-gray-300">
+                    <p className="text-lg text-gray-700">
                         At CK Studio, we believe that the magic of cinema lies not just in shooting but in perfecting every frame. Our post-production team is dedicated to bringing your vision to life, with state-of-the-art technology, an experienced team, and a passion for storytelling.
                     </p>
                 </div>
