@@ -10,6 +10,8 @@ import Portfolio from './Portfolio';
 import Clients from './Clients';
 import Contact from './Contact';
 import Footer from './Footer';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import NotFound from './NotFound';
 
 const App: React.FC = () => {
     const [activeSection, setActiveSection] = useState<string>('home');
@@ -51,6 +53,10 @@ const App: React.FC = () => {
 
 
     return (
+            <Router>
+                      <Routes>
+                                  <Route path="/" element={
+                                              <>
         <div className="bg-black text-white selection:bg-red-700 selection:text-white">
             <Header activeSection={activeSection} />
             <main>
@@ -65,6 +71,11 @@ const App: React.FC = () => {
             </main>
             <Footer />
         </div>
+                                                          </>
+                                              } />
+                                  <Route path="*" element={<NotFound />} />
+                                </Routes>
+                    </Router>
     );
 };
 
