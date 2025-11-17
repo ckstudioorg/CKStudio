@@ -63,7 +63,7 @@ const WhyUs: React.FC = () => {
                              />
                          </svg>
                          <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-                            <div className="text-4xl font-bold">100%</div>
+                            <div className="text-4xl font-bold text-black">100%</div>
                             <div className="text-sm text-gray-700">Commitment</div>
                          </div>
                     </div>
