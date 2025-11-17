@@ -24,7 +24,7 @@ const Portfolio: React.FC = () => {
     const TabButton: React.FC<{ tab: Tab; label: string }> = ({ tab, label }) => (
         <button
             onClick={() => setActiveTab(tab)}
-            className={`px-6 py-2 text-lg font-semibold rounded-full transition-all duration-300 ${activeTab === tab ? 'bg-red-600 text-white' : 'bg-neutral-800 text-gray-300 hover:bg-neutral-700'}`}
+            className={`px-6 py-2 text-lg font-semibold rounded-full transition-all duration-300 ${activeTab === tab ? 'bg-red-600 text-black' : 'bg-neutral-800 text-gray-300 hover:bg-neutral-700'}`}
         >
             {label}
         </button>
@@ -33,10 +33,10 @@ const Portfolio: React.FC = () => {
     const imagesToShow = activeTab === 'commercials' ? commercialImages : movieImages;
 
     return (
-        <Section className="bg-neutral-900">
+        <Section className="bg-white">
             <div className="text-center mb-12">
-                <h2 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">Our <span className="text-red-600">Work</span></h2>
-                <p className="mt-4 text-lg text-gray-400">A glimpse into the worlds we've created.</p>
+                <h2 className="text-4xl font-bold tracking-tight text-black sm:text-5xl">Our <span className="text-red-600">Work</span></h2>
+                <p className="mt-4 text-lg text-gray-700">A glimpse into the worlds we've created.</p>
             </div>
             <div className="flex justify-center space-x-4 mb-12">
                 <TabButton tab="movies" label="Movie Works" />
@@ -51,10 +51,10 @@ const Portfolio: React.FC = () => {
                             className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500 ease-in-out"
                         />
                         <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center text-center p-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-white mb-2 transform group-hover:scale-110 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-black mb-2 transform group-hover:scale-110 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                             </svg>
-                            <p className="text-white text-base font-bold tracking-wider uppercase">View Project</p>
+                            <p className="text-black text-base font-bold tracking-wider uppercase">View Project</p>
                         </div>
                     </div>
                 ))}
