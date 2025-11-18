@@ -2,15 +2,15 @@ import React from 'react';
 import Section from './Section';
 
 const clientLogos = [
-  { name: "Palik Studios", logo: "https://via.placeholder.com/300/DC143C/FFFFFF?text=Palik+Studios" },
-  { name: "RR Creations", logo: "https://via.placeholder.com/300/DC143C/FFFFFF?text=RR+Creations" },
-  { name: "Srinidhi Real Estate", logo: "https://via.placeholder.com/300/DC143C/FFFFFF?text=Srinidhi" },
-  { name: "MBMR Infra", logo: "https://via.placeholder.com/300/DC143C/FFFFFF?text=MBMR+Infra" },
-  { name: "CM Productions", logo: "https://via.placeholder.com/300/DC143C/FFFFFF?text=CM+Productions" },
-  { name: "Sampathnandi Teamworks", logo: "https://via.placeholder.com/300/DC143C/FFFFFF?text=Sampathnandi" },
-  { name: "Kuviyam Mediaworks", logo: "https://via.placeholder.com/300/DC143C/FFFFFF?text=Kuviyam" },
-  { name: "Client 8", logo: "https://via.placeholder.com/300/DC143C/FFFFFF?text=Client+8" },
-  { name: "Client 9", logo: "https://via.placeholder.com/300/DC143C/FFFFFF?text=Client+9" },
+  { name: "Palik Studios", logo: "https://picsum.photos/seed/DC143C/FFFFFF?text=Palik+Studios" },
+  { name: "RR Creations", logo: "https://picsum.photos/seed/DC143C/FFFFFF?text=RR+Creations" },
+  { name: "Srinidhi Real Estate", logo: "https://picsum.photos/seed/DC143C/FFFFFF?text=Srinidhi" },
+  { name: "MBMR Infra", logo: "https://picsum.photos/seed/DC143C/FFFFFF?text=MBMR+Infra" },
+  { name: "CM Productions", logo: "https://picsum.photos/seed/DC143C/FFFFFF?text=CM+Productions" },
+  { name: "Sampathnandi Teamworks", logo: "https://picsum.photos/seed/DC143C/FFFFFF?text=Sampathnandi" },
+  { name: "Kuviyam Mediaworks", logo: "https://picsum.photos/seed/DC143C/FFFFFF?text=Kuviyam" },
+  { name: "Client 8", logo: "https://picsum.photos/seed/DC143C/FFFFFF?text=Client+8" },
+  { name: "Client 9", logo: "https://picsum.photos/seed/DC143C/FFFFFF?text=Client+9" },
 ];
 
 const Clients: React.FC = () => {
