@@ -43,12 +43,10 @@ const App: React.FC = () => {
             }
         });
 
-          // Show root div when React mounts (fixes FOUC)
+  // Show body when React mounts (fixes FOUC)
   useEffect(() => {
-    const root = document.getElementById('root');
-    if (root) root.style.visibility = 'visible';
+    document.body.classList.add('loaded');
   }, []);
-
         return () => {
             Object.values(sectionRefs).forEach((ref) => {
                 if (ref.current) {
