@@ -43,6 +43,12 @@ const App: React.FC = () => {
             }
         });
 
+          // Show root div when React mounts (fixes FOUC)
+  useEffect(() => {
+    const root = document.getElementById('root');
+    if (root) root.style.visibility = 'visible';
+  }, []);
+
         return () => {
             Object.values(sectionRefs).forEach((ref) => {
                 if (ref.current) {
