@@ -43,10 +43,6 @@ const App: React.FC = () => {
             }
         });
 
-  // Show body when React mounts (fixes FOUC)
-  useEffect(() => {
-    document.body.classList.add('loaded');
-  }, []);
         return () => {
             Object.values(sectionRefs).forEach((ref) => {
                 if (ref.current) {
@@ -56,6 +52,11 @@ const App: React.FC = () => {
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+      // Show body when React mounts (fixes FOUC)
+  useEffect(() => {
+    document.body.classList.add('loaded');
+  }, []);
 
 
     return (
