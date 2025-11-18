@@ -12,6 +12,8 @@ import Contact from './Contact';
 import Footer from './Footer';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NotFound from './NotFound';
+import Blog from './Blog';
+import BlogPost from './BlogPost';
 
 const App: React.FC = () => {
     const [activeSection, setActiveSection] = useState<string>('home');
@@ -72,6 +74,8 @@ const App: React.FC = () => {
             <Footer />
         </div>
                                                           </>
+                                                          <Route path="/blog" element={<Blog />} />
+                    <Route path="/blog/:slug" element={<BlogPost />} />
                                               } />
                                   <Route path="*" element={<NotFound />} />
                                 </Routes>
