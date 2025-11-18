@@ -241,15 +241,19 @@
     "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/"
   }
 }</script>
-      <style>
-    /* Prevent FOUC (Flash of Unstyled Content) */
-    #root:empty {
-      display: none;
-    }
+          <style>
+    /* Prevent FOUC - hide body until React loads */
     body {
       margin: 0;
       padding: 0;
+      opacity: 0;
+      background: #fff;
+      transition: opacity 0.1s ease-in;
     }
+    body.loaded {
+      opacity: 1;
+    }
+    </style>
   </style>
     <link rel="stylesheet" href="/index.css" />
 </head>
