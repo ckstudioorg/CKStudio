@@ -73,7 +73,8 @@ const App: React.FC = () => {
             </main>
             <Footer />
         </div>
-                                                          </>
+                                                                  </>
+                                                  } />
                                                           <Route path="/blog" element={<Blog />} />
                     <Route path="/blog/:slug" element={<BlogPost />} />
                                               } />
