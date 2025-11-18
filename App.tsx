@@ -64,7 +64,7 @@ const App: React.FC = () => {
                       <Routes>
                                   <Route path="/" element={
                                               <>
-        <div className="bg-black text-white selection:bg-red-700 selection:text-white">
+        <div className="bg-white text-black selection:bg-red-700 selection:text-white">
             <Header activeSection={activeSection} />
             <main>
                 <div id="home" ref={sectionRefs.home}><Hero /></div>
@@ -89,3 +89,4 @@ const App: React.FC = () => {
 };
 
 export default App;
+    
