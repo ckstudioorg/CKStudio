@@ -33,6 +33,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection }) => {
         { id: 'about', title: 'About' },
         { id: 'services', title: 'Services' },
         { id: 'portfolio', title: 'Portfolio' },
+            { id: 'blog', title: 'Blog' },
         { id: 'contact', title: 'Contact' },
     ];
 
