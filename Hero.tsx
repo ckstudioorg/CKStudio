@@ -1,29 +1,68 @@
-
-import React from 'react';
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 const Hero: React.FC = () => {
+    const ref = useRef(null);
+    const { scrollYProgress } = useScroll({
+        target: ref,
+        offset: ["start start", "end start"]
+    });
+
+    // Parallax effects
+    const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+    const textY = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+    const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+
     return (
-              <section className="h-screen flex flex-col justify-center items-center text-center relative bg-white">
-            <div className="z-10 p-6">
-                        <h1 className="text-5xl md:text-7xl lg:text-8xl font-black uppercase tracking-widest text-black animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
-                    CK <span className="text-red-600">STUDIO</span>
-                </h1>
-                        <p className="mt-4 text-xl md:text-2xl font-light tracking-[0.3em] text-gray-700 animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
-                    PRE | PRODUCTION | POST
-                </p>
-            </div>
-            <style>{`
-                @keyframes fade-in-down {
-                    0% { opacity: 0; transform: translateY(-20px); }
-                    100% { opacity: 1; transform: translateY(0); }
-                }
-                @keyframes fade-in-up {
-                    0% { opacity: 0; transform: translateY(20px); }
-                    100% { opacity: 1; transform: translateY(0); }
-                }
-                .animate-fade-in-down { animation: fade-in-down 0.8s ease-out forwards; }
-                .animate-fade-in-up { animation: fade-in-up 0.8s ease-out forwards; }
-            `}</style>
+        <section ref={ref} className="h-screen relative flex items-center justify-center overflow-hidden bg-black">
+            {/* Animated Background Gradient */}
+            <motion.div 
+                style={{ y: backgroundY }}
+                className="absolute inset-0 z-0"
+            >
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-neutral-900 via-black to-black opacity-80" />
+                {/* Add a video background here for maximum impact if available */}
+                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-20 animate-pulse" />
+            </motion.div>
+
+            <motion.div 
+                style={{ y: textY, opacity }}
+                className="relative z-10 text-center px-6 max-w-5xl mx-auto"
+            >
+                <motion.div
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ duration: 1.2, ease: "easeOut" }}
+                >
+                    <h1 className="text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter text-white mb-2">
+                        CK <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-red-900">STUDIO</span>
+                    </h1>
+                </motion.div>
+
+                <div className="h-1 w-32 bg-red-600 mx-auto my-8 rounded-full" />
+
+                <motion.div 
+                    className="overflow-hidden"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.5, duration: 1 }}
+                >
+                    <p className="text-xl md:text-3xl font-light tracking-[0.5em] text-gray-300 uppercase">
+                        Pre <span className="text-red-600">•</span> Production <span className="text-red-600">•</span> Post
+                    </p>
+                </motion.div>
+
+                {/* Scroll Indicator */}
+                <motion.div 
+                    className="absolute bottom-10 left-1/2 -translate-x-1/2"
+                    animate={{ y: [0, 10, 0] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                >
+                    <div className="w-6 h-10 border-2 border-red-600/50 rounded-full flex justify-center p-1">
+                        <div className="w-1 h-3 bg-red-600 rounded-full" />
+                    </div>
+                </motion.div>
+            </motion.div>
         </section>
     );
 };
