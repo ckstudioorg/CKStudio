@@ -14,14 +14,13 @@ const Hero: React.FC = () => {
     const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
     return (
-        <section ref={ref} className="h-screen relative flex items-center justify-center overflow-hidden bg-black">
+        <section ref={ref} className="h-screen relative flex items-center justify-center overflow-hidden ">
             {/* Animated Background Gradient */}
             <motion.div 
                 style={{ y: backgroundY }}
                 className="absolute inset-0 z-0"
             >
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-neutral-900 via-black to-black opacity-80" />
-                {/* Add a video background here for maximum impact if available */}
+                <div className="absolute inset-0 bg-gradient-to-br from-red-50 via-white to-red-50 opacity-40" />                {/* Add a video background here for maximum impact if available */}
                 <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-20 animate-pulse" />
             </motion.div>
 
@@ -34,7 +33,7 @@ const Hero: React.FC = () => {
                     animate={{ scale: 1, opacity: 1 }}
                     transition={{ duration: 1.2, ease: "easeOut" }}
                 >
-                    <h1 className="text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter text-white mb-2">
+                    <h1 className="text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter  mb-2">
                         CK <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-red-900">STUDIO</span>
                     </h1>
                 </motion.div>
@@ -47,7 +46,7 @@ const Hero: React.FC = () => {
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.5, duration: 1 }}
                 >
-                    <p className="text-xl md:text-3xl font-light tracking-[0.5em] text-gray-300 uppercase">
+                    <p className="text-xl md:text-3xl font-light tracking-[0.5em]  uppercase">
                         Pre <span className="text-red-600">•</span> Production <span className="text-red-600">•</span> Post
                     </p>
                 </motion.div>
