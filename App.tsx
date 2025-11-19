@@ -14,6 +14,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NotFound from './NotFound';
 import Blog from './Blog';
 import BlogPost from './BlogPost';
+import { HelmetProvider } from 'react-helmet-async';
+import SEO from './SEO';
 
 const App: React.FC = () => {
     const [activeSection, setActiveSection] = useState<string>('home');
@@ -60,10 +62,15 @@ const App: React.FC = () => {
 
 
     return (
+                <HelmetProvider>
             <Router>
                       <Routes>
                                   <Route path="/" element={
                                               <>
+                                                                      <SEO 
+                        title="Home" 
+                        description="Premium video production services in Hyderabad. Feature films, commercials, and post-production excellence." 
+                    />
         <div className="bg-white text-black selection:bg-red-700 selection:text-white">
             <Header activeSection={activeSection} />
             <main>
@@ -80,11 +87,16 @@ const App: React.FC = () => {
         </div>
                                                                   </>
                                                   } />
-                                                          <Route path="/blog" element={<Blog />} />
-                    <Route path="/blog/:slug" element={<BlogPost />} />
+            <Route path="/blog" element={
+                <>
+                    <SEO title="Blog" description="Insights into filmmaking and video production." />
+                    <Blog />
+                </>
+            } />                    <Route path="/blog/:slug" element={<BlogPost />} />
                                   <Route path="*" element={<NotFound />} />
                                 </Routes>
                     </Router>
+                            </HelmetProvider>
     );
 };
 
