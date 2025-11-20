@@ -1,7 +1,8 @@
 import React from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
-import { blogPosts } from './blogData';
+import { blogPosts } from '../data/blogData';
 import { Calendar, User, Tag, Clock, ArrowLeft } from 'lucide-react';
+import SEO from '../components/SEO';
 
 const BlogPost: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -13,6 +14,13 @@ const BlogPost: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-white py-20">
+      <SEO
+        title={post.title}
+        description={post.excerpt}
+        image={post.image}
+        url={`https://ckstudio.org/blog/${post.slug}`}
+        type="article"
+      />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Back Button */}
         <Link to="/blog" className="inline-flex items-center gap-2 text-red-600 hover:text-red-700 font-semibold mb-8 group">

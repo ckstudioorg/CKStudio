@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { blogPosts } from './blogData';
+import { blogPosts } from '../data/blogData';
 import { Calendar, Tag, User, Search, Filter } from 'lucide-react';
 
 const Blog: React.FC = () => {
@@ -12,8 +12,8 @@ const Blog: React.FC = () => {
   const filteredPosts = blogPosts.filter(post => {
     const matchesCategory = selectedCategory === 'All' || post.categories.includes(selectedCategory);
     const matchesSearch = post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         post.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         post.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
+      post.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      post.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
     return matchesCategory && matchesSearch;
   });
 
@@ -35,8 +35,7 @@ const Blog: React.FC = () => {
           <div className="flex flex-wrap gap-3">
             <Filter className="w-5 h-5 text-gray-600 mt-2" />
             {categories.map(category => (
-              <button key={category} onClick={() => setSelectedCategory(category)} className={`px-6 py-2 rounded-full font-medium transition-all ${
-                selectedCategory === category ? 'bg-red-600 text-white shadow-lg' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}>{category}</button>
+              <button key={category} onClick={() => setSelectedCategory(category)} className={`px-6 py-2 rounded-full font-medium transition-all ${selectedCategory === category ? 'bg-red-600 text-white shadow-lg' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}>{category}</button>
             ))}
           </div>
         </div>

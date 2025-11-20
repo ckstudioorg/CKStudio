@@ -7,16 +7,34 @@ interface SEOProps {
   image?: string;
   url?: string;
   type?: string;
+  structuredData?: object;
 }
 
-const SEO: React.FC<SEOProps> = ({ 
-  title, 
-  description, 
-  image = 'https://ckstudio.org/images/branding/og-image.jpg', 
-  url = 'https://ckstudio.org', 
-  type = 'website' 
+const SEO: React.FC<SEOProps> = ({
+  title,
+  description,
+  image = 'https://ckstudio.org/images/branding/og-image.jpg',
+  url = 'https://ckstudio.org',
+  type = 'website',
+  structuredData
 }) => {
   const siteTitle = "CK Studio | Professional Video Production";
+
+  const defaultStructuredData = {
+    "@context": "https://schema.org",
+    "@type": type === 'article' ? 'Article' : 'Organization',
+    "name": siteTitle,
+    "url": url,
+    "headline": title,
+    "description": description,
+    "image": [image],
+    "author": {
+      "@type": "Organization",
+      "name": "CK Studio"
+    }
+  };
+
+  const finalStructuredData = structuredData || defaultStructuredData;
 
   return (
     <Helmet>
@@ -38,22 +56,10 @@ const SEO: React.FC<SEOProps> = ({
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={image} />
-      
+
       {/* JSON-LD Structured Data for Rich Results */}
       <script type="application/ld+json">
-        {JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": type === 'article' ? 'Article' : 'Organization',
-          "name": siteTitle,
-          "url": url,
-          "headline": title,
-          "description": description,
-          "image": [image],
-          "author": {
-            "@type": "Organization",
-            "name": "CK Studio"
-          }
-        })}
+        {JSON.stringify(finalStructuredData)}
       </script>
     </Helmet>
   );

@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-primary-white text-primary-black font-sans antialiased;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-block px-10 py-4 rounded-full font-semibold text-lg transition-all duration-300 cursor-pointer border-none;
+  }
+  .btn-primary {
+    @apply bg-gradient-to-br from-primary-red to-[#B01030] text-primary-white shadow-lg hover:-translate-y-1 hover:shadow-xl;
+  }
+  .btn-secondary {
+    @apply bg-primary-white text-primary-red border-2 border-primary-red hover:bg-primary-red hover:text-primary-white hover:-translate-y-1;
+  }
+}
