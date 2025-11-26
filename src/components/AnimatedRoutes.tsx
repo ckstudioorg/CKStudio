@@ -14,6 +14,7 @@ import Footer from './Footer';
 import NotFound from '../pages/NotFound';
 import Blog from '../pages/Blog';
 import BlogPost from '../pages/BlogPost';
+import FAQ from '../pages/FAQ';
 import SEO from './SEO';
 import PageTransition from './PageTransition';
 
@@ -113,6 +114,20 @@ const AnimatedRoutes: React.FC<AnimatedRoutesProps> = ({ activeSection, sectionR
                             </main>
                             <Footer />
                         </div>
+                    </PageTransition>
+                } />
+                <Route path="/faq" element={
+                    <PageTransition>
+                        <>
+                            <SEO title="FAQ" description="Frequently asked questions about CK Studio's video production services." />
+                            <div className="bg-white text-black selection:bg-red-700 selection:text-white">
+                                <Header activeSection="faq" />
+                                <main className="pt-20">
+                                    <FAQ />
+                                </main>
+                                <Footer />
+                            </div>
+                        </>
                     </PageTransition>
                 } />
                 <Route path="*" element={

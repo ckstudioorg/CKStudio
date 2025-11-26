@@ -40,9 +40,9 @@ const Header: React.FC<HeaderProps> = ({ activeSection }) => {
     };
 
     const handleNavClick = (id: string) => {
-        if (id === 'blog') {
-            if (location.pathname !== '/blog') {
-                window.location.href = '/blog';
+        if (id === 'blog' || id === 'faq') {
+            if (location.pathname !== `/${id}`) {
+                window.location.href = `/${id}`;
             }
             setIsMenuOpen(false);
             return;
@@ -63,6 +63,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection }) => {
         { id: 'services', name: 'Services' },
         { id: 'portfolio', name: 'Portfolio' },
         { id: 'blog', name: 'Blog' },
+        { id: 'faq', name: 'FAQ' },
         { id: 'contact', name: 'Contact' },
     ];
 
