@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
 import logo from '../assets/logo.png';
 import Magnetic from './Magnetic';
 import { useLocation } from 'react-router-dom';
@@ -67,46 +66,56 @@ const Header: React.FC<HeaderProps> = ({ activeSection }) => {
         { id: 'contact', name: 'Contact' },
     ];
 
-    // Force dark header on non-home pages or when scrolled
-    const headerBackgroundClass = (scrolled || isMenuOpen || !isHomePage)
-        ? 'bg-black/90 backdrop-blur-md shadow-lg border-b border-white/10'
+    const headerBg = (scrolled || isMenuOpen || !isHomePage)
+        ? 'bg-dark-950/80 backdrop-blur-xl shadow-lg shadow-black/20 border-b border-white/[0.04]'
         : 'bg-transparent';
 
     return (
         <>
             <motion.header
-                className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${headerBackgroundClass}`}
+                className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${headerBg}`}
                 initial={{ y: -100 }}
                 animate={{ y: 0 }}
                 transition={{ duration: 0.5 }}
             >
-                <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-                    {/* Logo Removed as per request */}
-                    <div />
+                <div className="container mx-auto px-6 py-3 flex justify-between items-center">
+                    {/* Logo */}
+                    <motion.a
+                        href="/"
+                        className="flex items-center gap-3 group"
+                        whileHover={{ scale: 1.02 }}
+                    >
+                        <img src={logo} alt="CK Studio" className="h-10 w-auto object-contain brightness-110" style={{ filter: 'drop-shadow(0 0 8px rgba(220,20,60,0.2))' }} />
+                    </motion.a>
 
                     {/* Desktop Nav */}
-                    <nav className="hidden md:flex space-x-8 items-center">
+                    <nav className="hidden md:flex items-center gap-1">
                         {navLinks.map((link) => (
                             <Magnetic key={link.name}>
                                 <button
                                     onClick={() => handleNavClick(link.id)}
-                                    className={`text-sm font-bold uppercase tracking-wider transition-colors duration-300 ${activeSection === link.id ? 'text-primary-red' : 'text-white hover:text-primary-red'
-                                        }`}
+                                    className={`relative px-4 py-2 text-xs font-bold uppercase tracking-[0.15em] transition-colors duration-300 rounded-full ${
+                                        activeSection === link.id
+                                            ? 'text-primary-red'
+                                            : 'text-gray-400 hover:text-white'
+                                    }`}
                                 >
                                     {link.name}
                                     {activeSection === link.id && (
                                         <motion.span
-                                            layoutId="underline"
-                                            className="absolute left-0 top-full block h-0.5 w-full bg-primary-red mt-1"
+                                            layoutId="nav-indicator"
+                                            className="absolute inset-0 rounded-full bg-white/[0.05] border border-white/[0.08]"
+                                            transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                                         />
                                     )}
                                 </button>
                             </Magnetic>
                         ))}
+                        <div className="w-px h-6 bg-white/10 mx-3" />
                         <Magnetic>
                             <button
                                 onClick={() => handleNavClick('contact')}
-                                className="px-6 py-2 bg-primary-red text-white rounded-full font-medium hover:bg-red-700 transition-colors duration-300"
+                                className="px-6 py-2.5 bg-gradient-to-r from-primary-red to-crimson-800 text-white rounded-full font-semibold text-xs tracking-wider uppercase hover:shadow-lg hover:shadow-primary-red/20 transition-all duration-300"
                             >
                                 Get Started
                             </button>
@@ -147,22 +156,36 @@ const Header: React.FC<HeaderProps> = ({ activeSection }) => {
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: '100%' }}
                         transition={{ type: 'tween', duration: 0.3 }}
-                        className="fixed inset-0 bg-black z-40 md:hidden flex items-center justify-center"
+                        className="fixed inset-0 bg-dark-950/98 backdrop-blur-xl z-40 md:hidden flex items-center justify-center"
                     >
-                        <nav className="flex flex-col items-center space-y-8">
+                        <nav className="flex flex-col items-center space-y-6">
                             {navLinks.map((link, index) => (
                                 <motion.button
                                     key={link.id}
                                     onClick={() => handleNavClick(link.id)}
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: 0.1 + index * 0.1 }}
-                                    className={`text-3xl font-bold uppercase tracking-widest ${activeSection === link.id ? 'text-primary-red' : 'text-white'
-                                        }`}
+                                    transition={{ delay: 0.1 + index * 0.08 }}
+                                    className={`text-2xl font-display font-bold uppercase tracking-[0.2em] ${
+                                        activeSection === link.id ? 'text-primary-red' : 'text-white'
+                                    }`}
                                 >
                                     {link.name}
                                 </motion.button>
                             ))}
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ delay: 0.8 }}
+                                className="mt-8 pt-8 border-t border-white/10"
+                            >
+                                <button
+                                    onClick={() => handleNavClick('contact')}
+                                    className="px-10 py-4 bg-gradient-to-r from-primary-red to-crimson-800 text-white rounded-full font-bold text-sm tracking-wider uppercase"
+                                >
+                                    Start Your Project
+                                </button>
+                            </motion.div>
                         </nav>
                     </motion.div>
                 )}

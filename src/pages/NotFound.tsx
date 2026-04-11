@@ -1,47 +1,36 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './NotFound.css';
+import { motion } from 'framer-motion';
 
 const NotFound: React.FC = () => {
-  return (
-    <div className="not-found-container">
-      <div className="not-found-content">
-        <div className="error-code">404</div>
-        <h1 className="error-title">Page Not Found</h1>
-        <p className="error-message">
-          Oops! The page you're looking for doesn't exist.
-          It might have been moved or deleted.
-        </p>
-        <div className="error-actions">
-          <Link to="/" className="btn-home">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-              <polyline points="9 22 9 12 15 12 15 22"></polyline>
-            </svg>
-            Back to Home
-          </Link>
-          <Link to="/#contact" className="btn-contact">
-            Contact Us
-          </Link>
+    return (
+        <div className="min-h-screen bg-dark-950 flex items-center justify-center relative overflow-hidden">
+            <div className="absolute inset-0">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary-red/5 rounded-full blur-[200px] pointer-events-none" />
+            </div>
+
+            <div className="text-center relative z-10 px-6">
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.6 }}
+                >
+                    <h1 className="text-8xl md:text-9xl font-display font-black text-primary-red text-glow-strong mb-4">404</h1>
+                    <h2 className="text-2xl md:text-3xl font-display font-bold text-white mb-4">Scene Not Found</h2>
+                    <p className="text-gray-500 text-lg mb-8 max-w-md mx-auto">
+                        This scene didn't make the final cut. Let's get you back to the main production.
+                    </p>
+                    <Link
+                        to="/"
+                        className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-primary-red to-crimson-800 text-white rounded-full font-bold text-base tracking-wide hover:shadow-lg hover:shadow-primary-red/30 transition-all duration-300"
+                    >
+                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M7 16l-4-4m0 0l4-4m-4 4h18" /></svg>
+                        Back to Home
+                    </Link>
+                </motion.div>
+            </div>
         </div>
-        <div className="helpful-links">
-          <h3>You might be looking for:</h3>
-          <ul>
-            <li><Link to="/#services">Our Services</Link></li>
-            <li><Link to="/#portfolio">Portfolio</Link></li>
-            <li><Link to="/#about">About Us</Link></li>
-            <li><Link to="/#contact">Contact</Link></li>
-          </ul>
-        </div>
-      </div>
-      <div className="film-strip">
-        <div className="strip"></div>
-        <div className="strip"></div>
-        <div className="strip"></div>
-        <div className="strip"></div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default NotFound;
