@@ -85,7 +85,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection }) => {
                         className="flex items-center gap-3 group"
                         whileHover={{ scale: 1.02 }}
                     >
-                        <img src={logo} alt="CK Studio" className="h-10 w-auto object-contain brightness-110" style={{ filter: 'drop-shadow(0 0 8px rgba(220,20,60,0.2))' }} />
+                        <img src={logo} alt="CK Studio" className="h-10 w-auto object-contain brightness-110" style={{ filter: 'drop-shadow(0 0 8px rgba(139,0,0,0.2))' }} />
                     </motion.a>
 
                     {/* Desktop Nav */}

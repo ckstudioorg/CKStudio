@@ -1,80 +1,127 @@
 import React from 'react';
 import Section from './Section';
 import { motion } from 'framer-motion';
+import { ExternalLink, ImageIcon, PlayCircle } from 'lucide-react';
 
-const adFilmImages = [
-    'https://images.unsplash.com/photo-1536240478700-b869070f9279?w=500&h=350&fit=crop',
-    'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=500&h=350&fit=crop',
-    'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=500&h=350&fit=crop',
-    'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=500&h=350&fit=crop',
-    'https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=500&h=350&fit=crop',
-    'https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=500&h=350&fit=crop',
-    'https://images.unsplash.com/photo-1505533321630-975218a5f66f?w=500&h=350&fit=crop',
-    'https://images.unsplash.com/photo-1524712245354-2c4e5e7121c0?w=500&h=350&fit=crop',
-    'https://images.unsplash.com/photo-1616530940355-351fabd9524b?w=500&h=350&fit=crop',
-    'https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?w=500&h=350&fit=crop',
-    'https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=500&h=350&fit=crop',
-    'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&h=350&fit=crop',
+interface WorkItem {
+    title: string;
+    category: string;
+    url?: string;
+    youtubeId?: string;
+    note?: string;
+}
+
+const works: WorkItem[] = [
+    {
+        title: 'Baali Movie Teaser',
+        category: 'Movie Teaser',
+        url: 'https://www.youtube.com/watch?v=MIL0vVMcZ9k',
+        youtubeId: 'MIL0vVMcZ9k',
+    },
+    {
+        title: 'Odela Movie Lyrical Song',
+        category: 'Lyrical Video',
+        url: 'https://www.youtube.com/watch?v=C8l8U5PxQgk',
+        youtubeId: 'C8l8U5PxQgk',
+    },
+    {
+        title: 'Gangothri Ad',
+        category: 'Commercial',
+        note: 'Final thumbnail and video link required',
+    },
+    {
+        title: 'Seetimaar Lyrical Song',
+        category: 'Lyrical Video',
+        url: 'https://www.youtube.com/watch?v=6Anj4GBzS28',
+        youtubeId: '6Anj4GBzS28',
+    },
+    {
+        title: 'Ugly Story Lyrical Songs',
+        category: 'Lyrical Video',
+        url: 'https://www.youtube.com/watch?v=wFJbGtddTv0',
+        youtubeId: 'wFJbGtddTv0',
+    },
+    {
+        title: 'Babu Bullshit Guy Lyrical Songs',
+        category: 'Lyrical Video',
+        url: 'https://www.youtube.com/watch?v=LKDJZ_yBDlA',
+        youtubeId: 'LKDJZ_yBDlA',
+    },
+    {
+        title: 'Aajyam Lyrical Song',
+        category: 'Lyrical Video',
+        url: 'https://www.youtube.com/watch?v=9Gl7CNrfgSo',
+        youtubeId: '9Gl7CNrfgSo',
+    },
 ];
 
-const commercialImages = [
-    'https://images.unsplash.com/photo-1551817958-d9d86fb29431?w=500&h=350&fit=crop',
-    'https://images.unsplash.com/photo-1542204165-65bf26472b9b?w=500&h=350&fit=crop',
-    'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=500&h=350&fit=crop',
-    'https://images.unsplash.com/photo-1579566346927-c68383817a25?w=500&h=350&fit=crop',
-    'https://images.unsplash.com/photo-1518929458119-e5bf444c30f4?w=500&h=350&fit=crop',
-    'https://images.unsplash.com/photo-1533750516457-a7f992034fec?w=500&h=350&fit=crop',
-    'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=500&h=350&fit=crop',
-    'https://images.unsplash.com/photo-1523726491678-bf852e717f6a?w=500&h=350&fit=crop',
-    'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=500&h=350&fit=crop',
-    'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=500&h=350&fit=crop',
-    'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=500&h=350&fit=crop',
-    'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=500&h=350&fit=crop',
-];
+const getYouTubeThumbnail = (youtubeId?: string) =>
+    youtubeId ? `https://img.youtube.com/vi/${youtubeId}/hqdefault.jpg` : null;
 
-const ScrollingReel: React.FC<{ images: string[]; direction?: 'left' | 'right'; label: string }> = ({ images, direction = 'left', label }) => {
-    const animClass = direction === 'left' ? 'animate-scroll-left' : 'animate-scroll-right';
+const WorkCard: React.FC<{ work: WorkItem; index: number }> = ({ work, index }) => {
+    const thumbnail = getYouTubeThumbnail(work.youtubeId);
 
     return (
-        <div className="overflow-hidden py-6 group relative">
-            {/* Fade edges */}
-            <div className="absolute left-0 top-0 bottom-0 w-32 z-10 bg-gradient-to-r from-dark-950 to-transparent pointer-events-none" />
-            <div className="absolute right-0 top-0 bottom-0 w-32 z-10 bg-gradient-to-l from-dark-950 to-transparent pointer-events-none" />
-
-            <div
-                className={`flex gap-5 ${animClass} hover-pause`}
-            >
-                {[...images, ...images, ...images].map((img, index) => (
-                    <motion.div
-                        key={index}
-                        className="flex-shrink-0 relative group/card rounded-xl overflow-hidden"
-                        whileHover={{ scale: 1.03, zIndex: 10 }}
-                        transition={{ duration: 0.3 }}
-                    >
+        <motion.article
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: index * 0.06 }}
+            className="group glass-card overflow-hidden hover:border-primary-red/30 transition-all duration-300"
+        >
+            <div className="relative aspect-video overflow-hidden bg-dark-800">
+                {thumbnail ? (
+                    <>
                         <img
-                            src={img}
-                            alt={`${label} ${(index % images.length) + 1}`}
-                            className="h-48 w-72 md:h-56 md:w-80 object-cover rounded-xl transition-all duration-300"
+                            src={thumbnail}
+                            alt={work.title}
+                            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                             loading="lazy"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-dark-950/80 via-transparent to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 rounded-xl" />
-                        <div className="absolute bottom-3 left-3 right-3 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300">
-                            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary-red/90 text-white text-xs font-bold">
-                                <Sparkle /> AI-Powered
+                        <div className="absolute inset-0 bg-gradient-to-t from-dark-950/90 via-dark-950/20 to-transparent" />
+                        <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                            <span className="flex h-14 w-14 items-center justify-center rounded-full bg-primary-red/90 text-white shadow-lg shadow-primary-red/30">
+                                <PlayCircle className="h-7 w-7" />
                             </span>
                         </div>
-                    </motion.div>
-                ))}
+                    </>
+                ) : (
+                    <div className="flex h-full flex-col items-center justify-center gap-3 bg-gradient-to-br from-dark-800 via-dark-900 to-primary-red/20 text-center">
+                        <ImageIcon className="h-10 w-10 text-brand-gold" />
+                        <span className="px-6 text-xs font-semibold uppercase tracking-[0.2em] text-brand-silver">
+                            Project Asset Required
+                        </span>
+                    </div>
+                )}
+                <span className="absolute left-4 top-4 rounded-full border border-brand-gold/30 bg-dark-950/70 px-3 py-1 text-xs font-bold uppercase tracking-wider text-brand-gold backdrop-blur-sm">
+                    {work.category}
+                </span>
             </div>
-        </div>
+
+            <div className="p-6">
+                <h3 className="text-lg font-display font-bold text-white transition-colors duration-300 group-hover:text-brand-gold">
+                    {work.title}
+                </h3>
+                {work.note && (
+                    <p className="mt-3 text-sm text-gray-500">
+                        {work.note}
+                    </p>
+                )}
+                {work.url && (
+                    <a
+                        href={work.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-primary-red transition-colors hover:text-brand-gold"
+                    >
+                        Watch Project
+                        <ExternalLink className="h-4 w-4" />
+                    </a>
+                )}
+            </div>
+        </motion.article>
     );
 };
-
-const Sparkle = () => (
-    <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
-        <path d="M12 0L14.59 8.41L23 12L14.59 15.59L12 24L9.41 15.59L1 12L9.41 8.41Z" />
-    </svg>
-);
 
 const Portfolio: React.FC = () => {
     return (
@@ -104,40 +151,17 @@ const Portfolio: React.FC = () => {
                     whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.2 }}
-                    className="mt-4 text-lg text-gray-500"
+                    className="mt-4 text-lg text-gray-500 max-w-2xl mx-auto"
                 >
-                    A glimpse into the AI-enhanced worlds we've created.
+                    Selected movie teasers, lyrical videos, and commercial work from CK Studio.
                 </motion.p>
             </div>
 
-            {/* AI Ad Films Section */}
-            <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
-                className="mb-12"
-            >
-                <h3 className="text-2xl font-display font-bold text-white mb-6 px-6 border-l-2 border-primary-red ml-4 md:ml-12 flex items-center gap-3">
-                    AI Ad Films
-                    <span className="text-xs px-3 py-1 rounded-full bg-primary-red/10 text-primary-red border border-primary-red/20 font-semibold">Featured</span>
-                </h3>
-                <ScrollingReel images={adFilmImages} direction="left" label="AI Ad Film" />
-            </motion.div>
-
-            {/* AI Commercials Section */}
-            <motion.div
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
-            >
-                <h3 className="text-2xl font-display font-bold text-white mb-6 px-6 border-r-2 border-primary-red mr-4 md:mr-12 text-right flex items-center justify-end gap-3">
-                    <span className="text-xs px-3 py-1 rounded-full bg-primary-red/10 text-primary-red border border-primary-red/20 font-semibold">Commercials</span>
-                    AI-Enhanced Commercials
-                </h3>
-                <ScrollingReel images={commercialImages} direction="right" label="AI Commercial" />
-            </motion.div>
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 relative">
+                {works.map((work, index) => (
+                    <WorkCard key={work.title} work={work} index={index} />
+                ))}
+            </div>
         </Section>
     );
 };

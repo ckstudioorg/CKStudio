@@ -1,7 +1,7 @@
 import React from 'react';
 import Section from './Section';
 import { motion } from 'framer-motion';
-import { Film, Sparkles, Palette, Building2, PenTool, Camera } from 'lucide-react';
+import { Clapperboard, Film, PenTool, Share2, Sparkles } from 'lucide-react';
 
 interface Service {
     title: string;
@@ -12,40 +12,34 @@ interface Service {
 
 const servicesData: Service[] = [
     {
-        title: 'AI Ad Films',
-        description: 'AI-scripted, AI-storyboarded, and AI-enhanced television commercial production.',
-        items: ['Feature Films', 'TVC / Ad Films', 'AI Storyboarding', 'Lyrical Videos', 'Movie Publicity Material'],
+        title: 'Commercials',
+        description: 'AI-assisted commercial production from scripting to final execution.',
+        items: ['AI Ad Films', 'TVC', 'Creative Designing', 'AI Photoshoot & Product Shoot', 'Corporate Films', 'Industrial Films', 'Brand Films', 'Investor Videos', 'Training Contents', 'Corporate Documentaries'],
         icon: <Film className="w-6 h-6" />,
     },
     {
-        title: 'AI Visual Effects',
-        description: 'Neural rendering and AI-powered compositing for cinematic visual effects.',
-        items: ['Neural Rendering', 'AI Compositing', 'Motion Graphics', 'CGI Enhancement', 'VFX Supervision'],
-        icon: <Sparkles className="w-6 h-6" />,
-    },
-    {
-        title: 'AI Post-Production',
-        description: 'Machine learning powered editing, color grading, and audio mastering.',
-        items: ['AI Color Grading', 'AI Audio Mixing', 'Intelligent Editing', 'DCP Outputs', 'Format Optimization'],
-        icon: <Palette className="w-6 h-6" />,
-    },
-    {
-        title: 'Corporate Films',
-        description: 'AI-optimized corporate storytelling for brands and enterprises.',
-        items: ['Corporate Documentaries', 'Industrial Films', 'Brand Films', 'Investor Videos', 'Training Content'],
-        icon: <Building2 className="w-6 h-6" />,
-    },
-    {
-        title: 'AI Creative Design',
-        description: 'AI-generated visual concepts, branding, and creative assets.',
-        items: ['Logo & Identity', 'Brochure & Flyers', 'Pitch Decks', 'Social Media', 'Design Packages'],
+        title: 'Designing',
+        description: 'Brand, publicity, pitch, and product design assets for campaigns and companies.',
+        items: ['Publicity Designs', 'Commercial Pitch Deck', 'Company Start Package', 'Product Retouching', 'Product Catalogues / Brochures'],
         icon: <PenTool className="w-6 h-6" />,
     },
     {
-        title: 'Photography',
-        description: 'AI-enhanced professional photography and retouching services.',
-        items: ['Profile Shoots', 'Product Photography', 'Brand Shoots', 'Event Coverage', 'AI Retouching'],
-        icon: <Camera className="w-6 h-6" />,
+        title: 'Movie Works',
+        description: 'Complete movie publicity, pitch, edit, pre-look, and post-production support.',
+        items: ['Movie Publicity Designs', 'Teaser & Trailer Works', 'Lyrical Videos', 'Professional Movie Pitch Deck', 'Movie Editing', 'AI Pre-Looks for Movies', 'AI Pre-Teaser for Movies', 'DI / Color Correction', 'DCP Outputs', 'Post-Production Supervision'],
+        icon: <Clapperboard className="w-6 h-6" />,
+    },
+    {
+        title: 'Social Media Management',
+        description: 'AI-integrated web and social media systems for ongoing digital presence.',
+        items: ['AI Integrated Web Designing', 'Social Media Strategy', 'Social Media Maintenance', 'Digital Ad Campaign in Meta'],
+        icon: <Share2 className="w-6 h-6" />,
+    },
+    {
+        title: 'Visual Effects & CG Works',
+        description: 'Product videos, AI compositing, CGI enhancements, and animated brand assets.',
+        items: ['Product Videos', 'Lyrical Videos', 'AI Compositing', 'CGI Enhancements', 'Logo Animation'],
+        icon: <Sparkles className="w-6 h-6" />,
     },
 ];
 
@@ -61,7 +55,7 @@ const ServiceCard: React.FC<{ service: Service; index: number }> = ({ service, i
             {/* Gradient border glow on hover */}
             <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                 style={{
-                    background: 'linear-gradient(135deg, rgba(220,20,60,0.1) 0%, transparent 50%, rgba(220,20,60,0.05) 100%)',
+                    background: 'linear-gradient(135deg, rgba(139,0,0,0.1) 0%, transparent 50%, rgba(139,0,0,0.05) 100%)',
                 }}
             />
 

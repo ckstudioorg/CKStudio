@@ -24,7 +24,7 @@ const CTABanner: React.FC = () => {
             {/* Grid pattern */}
             <div className="absolute inset-0 opacity-20 pointer-events-none"
                 style={{
-                    backgroundImage: 'linear-gradient(rgba(220,20,60,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(220,20,60,0.05) 1px, transparent 1px)',
+                    backgroundImage: 'linear-gradient(rgba(139,0,0,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(139,0,0,0.05) 1px, transparent 1px)',
                     backgroundSize: '60px 60px',
                 }}
             />

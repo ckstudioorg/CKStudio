@@ -11,7 +11,7 @@ interface FAQItem {
 const sampleFAQs: FAQItem[] = [
     {
         question: "What services does CK Studio offer?",
-        answer: "We offer a comprehensive range of AI-powered video production services including AI Ad Films, AI Visual Effects, AI Post-Production (color grading, audio mixing, editing), Corporate Films, AI Creative Design, and Professional Photography. We specialize in combining artificial intelligence with cinematic expertise.",
+        answer: "We offer commercials, designing, movie works, social media management, and visual effects & CG works. This includes AI ad films, TVCs, creative designing, corporate films, industrial films, brand films, pitch decks, publicity designs, lyrical videos, DI/color correction, DCP outputs, AI compositing, CGI enhancements, product videos, AI-integrated web designing, and Meta ad campaigns.",
         category: "General"
     },
     {
@@ -70,7 +70,7 @@ const FAQ: React.FC = () => {
             <div className="relative py-24 overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-b from-dark-800 to-dark-950" />
                 <div className="absolute inset-0 opacity-20 pointer-events-none" style={{
-                    backgroundImage: 'radial-gradient(circle, rgba(220,20,60,0.06) 1px, transparent 1px)',
+                    backgroundImage: 'radial-gradient(circle, rgba(139,0,0,0.06) 1px, transparent 1px)',
                     backgroundSize: '24px 24px',
                 }} />
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-primary-red/5 rounded-full blur-[180px] pointer-events-none" />

@@ -104,37 +104,37 @@
   }
 
   .text-glow {
-    text-shadow: 0 0 20px rgba(220, 20, 60, 0.3);
+    text-shadow: 0 0 20px rgba(139, 0, 0, 0.3);
   }
 
   .text-glow-strong {
-    text-shadow: 0 0 30px rgba(220, 20, 60, 0.5), 0 0 60px rgba(220, 20, 60, 0.2);
+    text-shadow: 0 0 30px rgba(139, 0, 0, 0.5), 0 0 60px rgba(139, 0, 0, 0.2);
   }
 
   /* ─── Dividers ─── */
   .divider-glow {
     @apply h-px w-full;
-    background: linear-gradient(90deg, transparent, rgba(220, 20, 60, 0.5), transparent);
+    background: linear-gradient(90deg, transparent, rgba(139, 0, 0, 0.5), transparent);
   }
 
   .divider-red {
     @apply h-1 rounded-full;
-    background: linear-gradient(90deg, #DC143C, transparent);
+    background: linear-gradient(90deg, #8B0000, transparent);
   }
 
   /* ─── Grid Pattern Overlay ─── */
   .grid-overlay::before {
     content: '';
     @apply absolute inset-0 pointer-events-none opacity-30;
-    background-image: linear-gradient(rgba(220, 20, 60, 0.03) 1px, transparent 1px),
-                      linear-gradient(90deg, rgba(220, 20, 60, 0.03) 1px, transparent 1px);
+    background-image: linear-gradient(rgba(139, 0, 0, 0.03) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(139, 0, 0, 0.03) 1px, transparent 1px);
     background-size: 60px 60px;
   }
 
   .dot-overlay::before {
     content: '';
     @apply absolute inset-0 pointer-events-none opacity-40;
-    background-image: radial-gradient(circle, rgba(220, 20, 60, 0.06) 1px, transparent 1px);
+    background-image: radial-gradient(circle, rgba(139, 0, 0, 0.06) 1px, transparent 1px);
     background-size: 24px 24px;
   }
 
@@ -147,11 +147,11 @@
 
   /* ─── Glow Effects ─── */
   .glow-red {
-    box-shadow: 0 0 30px rgba(220, 20, 60, 0.15), 0 0 60px rgba(220, 20, 60, 0.05);
+    box-shadow: 0 0 30px rgba(139, 0, 0, 0.15), 0 0 60px rgba(139, 0, 0, 0.05);
   }
 
   .glow-red-strong {
-    box-shadow: 0 0 40px rgba(220, 20, 60, 0.3), 0 0 80px rgba(220, 20, 60, 0.1);
+    box-shadow: 0 0 40px rgba(139, 0, 0, 0.3), 0 0 80px rgba(139, 0, 0, 0.1);
   }
 
   /* ─── Counter Animation ─── */

@@ -99,7 +99,7 @@ const WhyUs: React.FC = () => {
                                     strokeDashoffset: inView ? 56.54 : 282.74,
                                     transform: 'rotate(-90deg)',
                                     transformOrigin: '50% 50%',
-                                    filter: 'drop-shadow(0 0 8px rgba(220, 20, 60, 0.4))',
+                                    filter: 'drop-shadow(0 0 8px rgba(139, 0, 0, 0.4))',
                                 }}
                             />
                         </svg>
@@ -111,11 +111,11 @@ const WhyUs: React.FC = () => {
 
                     <div className="text-center space-y-3">
                         <div className="glass-card px-6 py-3">
-                            <span className="text-primary-red text-xl font-display font-bold">80%</span>
+                            <span className="text-brand-silver text-xl font-display font-bold">80%</span>
                             <span className="text-sm text-gray-400 ml-2">Dedicated Creative & AI Team</span>
                         </div>
                         <div className="glass-card px-6 py-3">
-                            <span className="text-primary-red text-xl font-display font-bold">20%</span>
+                            <span className="text-brand-gold text-xl font-display font-bold">20%</span>
                             <span className="text-sm text-gray-400 ml-2">CK's Magic at Work</span>
                         </div>
                     </div>

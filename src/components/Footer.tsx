@@ -10,10 +10,11 @@ const footerLinks = {
         { name: 'FAQ', href: '/faq' },
     ],
     services: [
-        { name: 'AI Ad Films', href: '#services' },
-        { name: 'AI Visual Effects', href: '#services' },
-        { name: 'AI Post-Production', href: '#services' },
-        { name: 'Corporate Films', href: '#services' },
+        { name: 'Commercials', href: '#services' },
+        { name: 'Designing', href: '#services' },
+        { name: 'Movie Works', href: '#services' },
+        { name: 'Social Media', href: '#services' },
+        { name: 'VFX & CG Works', href: '#services' },
     ],
     connect: [
         { name: 'Contact Us', href: '#contact' },

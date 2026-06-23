@@ -82,7 +82,7 @@ const Hero: React.FC = () => {
                 {/* Subtle Grid Overlay */}
                 <div className="absolute inset-0 z-20 pointer-events-none opacity-20"
                     style={{
-                        backgroundImage: 'linear-gradient(rgba(220,20,60,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(220,20,60,0.04) 1px, transparent 1px)',
+                        backgroundImage: 'linear-gradient(rgba(139,0,0,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(139,0,0,0.04) 1px, transparent 1px)',
                         backgroundSize: '80px 80px'
                     }}
                 />
@@ -142,7 +142,7 @@ const Hero: React.FC = () => {
                     animate={{ scale: 1, opacity: 1, y: 0 }}
                     transition={{ duration: 1, ease: "easeOut" }}
                 >
-                    <img src={logo} alt="CK Studio" className="w-[100vw] max-w-none relative left-1/2 -translate-x-1/2 mb-4 drop-shadow-2xl object-contain" style={{ filter: 'drop-shadow(0 0 40px rgba(220,20,60,0.15))' }} />
+                    <img src={logo} alt="CK Studio" className="w-[100vw] max-w-none relative left-1/2 -translate-x-1/2 mb-4 drop-shadow-2xl object-contain" style={{ filter: 'drop-shadow(0 0 40px rgba(139,0,0,0.15))' }} />
                 </motion.div>
 
                 {/* Typewriter Heading */}

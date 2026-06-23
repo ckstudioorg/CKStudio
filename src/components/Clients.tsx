@@ -4,18 +4,21 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
 const clientLogos = [
+    { name: "Gangothri Nutrients & Fertilizers" },
+    { name: "Vande Media" },
+    { name: "Pride of Bharat" },
+    { name: "Plasil Organics" },
+    { name: "Gangothri InfraEdge" },
     { name: "Palik Studios" },
-    { name: "RR Creations" },
-    { name: "Srinidhi Real Estate" },
-    { name: "MBMR Infra" },
-    { name: "CM Productions" },
-    { name: "Sampathnandi Teamworks" },
+    { name: "Sampathnandhi Teamworks" },
     { name: "Kuviyam Mediaworks" },
-    { name: "Excel Movies" },
-    { name: "IC Productions" },
-    { name: "Steed Films" },
-    { name: "Harivillu Creations" },
-    { name: "IDFC Films" },
+    { name: "Aswini Media" },
+    { name: "AIROC" },
+    { name: "Harivillu Developers" },
+    { name: "CM Productions" },
+    { name: "Hindu Law Firm" },
+    { name: "LN Associates" },
+    { name: "Shree Radha's VS Group" },
 ];
 
 const Clients: React.FC = () => {

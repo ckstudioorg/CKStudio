@@ -8,9 +8,15 @@ export default {
     extend: {
       colors: {
         primary: {
-          red: '#DC143C',
-          black: '#000000',
-          white: '#FFFFFF',
+          red: '#8B0000',
+          black: '#111111',
+          white: '#E6E6E6',
+        },
+        brand: {
+          gold: '#D4AF37',
+          red: '#8B0000',
+          black: '#111111',
+          silver: '#E6E6E6',
         },
         secondary: {
           black: '#1a1a1a',
@@ -26,16 +32,16 @@ export default {
           400: '#333333',
         },
         crimson: {
-          50: '#fef2f4',
-          100: '#fde6ea',
-          200: '#fbd0d9',
-          300: '#f7a4b8',
-          400: '#f27293',
-          500: '#e63e6d',
-          600: '#DC143C',
-          700: '#b91034',
-          800: '#9b1132',
-          900: '#84112f',
+          50: '#fff1f1',
+          100: '#ffe1e1',
+          200: '#ffc7c7',
+          300: '#ff9f9f',
+          400: '#ff6464',
+          500: '#d72c2c',
+          600: '#8B0000',
+          700: '#760000',
+          800: '#5f0000',
+          900: '#420000',
         }
       },
       fontFamily: {
@@ -72,8 +78,8 @@ export default {
           '100%': { backgroundPosition: '200% 0' },
         },
         pulseGlow: {
-          '0%, 100%': { boxShadow: '0 0 20px rgba(220, 20, 60, 0.3)' },
-          '50%': { boxShadow: '0 0 40px rgba(220, 20, 60, 0.6)' },
+          '0%, 100%': { boxShadow: '0 0 20px rgba(139, 0, 0, 0.3)' },
+          '50%': { boxShadow: '0 0 40px rgba(139, 0, 0, 0.6)' },
         },
         gradientShift: {
           '0%, 100%': { backgroundPosition: '0% 50%' },
@@ -100,8 +106,8 @@ export default {
           '100%': { opacity: '1', transform: 'translateY(0)', filter: 'blur(0)' },
         },
         glow: {
-          '0%': { textShadow: '0 0 10px rgba(220, 20, 60, 0.5)' },
-          '100%': { textShadow: '0 0 20px rgba(220, 20, 60, 0.8), 0 0 40px rgba(220, 20, 60, 0.4)' },
+          '0%': { textShadow: '0 0 10px rgba(139, 0, 0, 0.5)' },
+          '100%': { textShadow: '0 0 20px rgba(139, 0, 0, 0.8), 0 0 40px rgba(139, 0, 0, 0.4)' },
         },
         particle: {
           '0%': { transform: 'translate(0, 0) rotate(0deg)', opacity: '0' },
@@ -113,8 +119,8 @@ export default {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-        'grid-pattern': 'linear-gradient(rgba(220, 20, 60, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(220, 20, 60, 0.03) 1px, transparent 1px)',
-        'dot-pattern': 'radial-gradient(circle, rgba(220, 20, 60, 0.08) 1px, transparent 1px)',
+        'grid-pattern': 'linear-gradient(rgba(139, 0, 0, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(139, 0, 0, 0.03) 1px, transparent 1px)',
+        'dot-pattern': 'radial-gradient(circle, rgba(139, 0, 0, 0.08) 1px, transparent 1px)',
       },
       backgroundSize: {
         'grid': '60px 60px',
