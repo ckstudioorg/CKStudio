@@ -6,6 +6,7 @@ import { ExternalLink, ImageIcon, PlayCircle } from 'lucide-react';
 interface WorkItem {
     title: string;
     category: string;
+    group: 'Movies' | 'Commercials' | 'Events';
     url?: string;
     youtubeId?: string;
     note?: string;
@@ -14,45 +15,64 @@ interface WorkItem {
 const works: WorkItem[] = [
     {
         title: 'Baali Movie Teaser',
+        group: 'Movies',
         category: 'Movie Teaser',
         url: 'https://www.youtube.com/watch?v=MIL0vVMcZ9k',
         youtubeId: 'MIL0vVMcZ9k',
     },
     {
-        title: 'Odela Movie Lyrical Song',
+        title: 'Odela 2',
+        group: 'Movies',
         category: 'Lyrical Video',
         url: 'https://www.youtube.com/watch?v=C8l8U5PxQgk',
         youtubeId: 'C8l8U5PxQgk',
     },
     {
         title: 'Gangothri Ad',
+        group: 'Commercials',
         category: 'Commercial',
         note: 'Final thumbnail and video link required',
     },
     {
         title: 'Seetimaar Lyrical Song',
+        group: 'Movies',
         category: 'Lyrical Video',
         url: 'https://www.youtube.com/watch?v=6Anj4GBzS28',
         youtubeId: '6Anj4GBzS28',
     },
     {
         title: 'Ugly Story Lyrical Songs',
+        group: 'Movies',
         category: 'Lyrical Video',
         url: 'https://www.youtube.com/watch?v=wFJbGtddTv0',
         youtubeId: 'wFJbGtddTv0',
     },
     {
         title: 'Babu Bullshit Guy Lyrical Songs',
+        group: 'Movies',
         category: 'Lyrical Video',
         url: 'https://www.youtube.com/watch?v=LKDJZ_yBDlA',
         youtubeId: 'LKDJZ_yBDlA',
     },
     {
         title: 'Aajyam Lyrical Song',
+        group: 'Movies',
         category: 'Lyrical Video',
         url: 'https://www.youtube.com/watch?v=9Gl7CNrfgSo',
         youtubeId: '9Gl7CNrfgSo',
     },
+    ...['Beach Road Chethan', 'Bhima', 'Beauty'].map(title => ({
+        title, group: 'Movies' as const, category: 'Movie',
+        note: 'Project image and video link pending',
+    })),
+    ...['Plasil Organics', 'Vande Media', 'Pride of Bharat'].map(title => ({
+        title, group: 'Commercials' as const, category: 'Commercial',
+        note: 'Project image and video link pending',
+    })),
+    ...['AIROC', 'OBR', 'Jayaho NTR', 'CMMA'].map(title => ({
+        title, group: 'Events' as const, category: 'Event',
+        note: 'Project image and video link pending',
+    })),
 ];
 
 const getYouTubeThumbnail = (youtubeId?: string) =>
@@ -99,9 +119,9 @@ const WorkCard: React.FC<{ work: WorkItem; index: number }> = ({ work, index }) 
             </div>
 
             <div className="p-6">
-                <h3 className="text-lg font-display font-bold text-white transition-colors duration-300 group-hover:text-brand-gold">
+                <h4 className="text-lg font-display font-bold text-white transition-colors duration-300 group-hover:text-brand-gold">
                     {work.title}
-                </h3>
+                </h4>
                 {work.note && (
                     <p className="mt-3 text-sm text-gray-500">
                         {work.note}
@@ -153,13 +173,21 @@ const Portfolio: React.FC = () => {
                     transition={{ delay: 0.2 }}
                     className="mt-4 text-lg text-gray-500 max-w-2xl mx-auto"
                 >
-                    Selected movie teasers, lyrical videos, and commercial work from CK Studio.
+                    Explore our work across movies, commercials, and events.
                 </motion.p>
             </div>
 
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 relative">
-                {works.map((work, index) => (
-                    <WorkCard key={work.title} work={work} index={index} />
+            <div className="space-y-16">
+                {(['Movies', 'Commercials', 'Events'] as const).map(group => (
+                    <section key={group} aria-labelledby={`work-${group.toLowerCase()}`}>
+                        <h3 id={`work-${group.toLowerCase()}`} className="text-2xl md:text-3xl font-display font-bold text-brand-gold mb-8">{group}</h3>
+                        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 relative">
+                            {works.filter(work => work.group === group).map((work, index) => (
+                                <WorkCard key={work.title} work={work} index={index} />
+                            ))}
+                        </div>
+                        <p className="mt-6 text-sm text-gray-400">And many more…</p>
+                    </section>
                 ))}
             </div>
         </Section>

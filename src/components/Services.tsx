@@ -14,19 +14,19 @@ const servicesData: Service[] = [
     {
         title: 'Commercials',
         description: 'AI-assisted commercial production from scripting to final execution.',
-        items: ['AI Ad Films', 'TVC', 'Creative Designing', 'AI Photoshoot & Product Shoot', 'Corporate Films', 'Industrial Films', 'Brand Films', 'Investor Videos', 'Training Contents', 'Corporate Documentaries'],
+        items: ['AI Ad Films — from scripting to final execution, entirely using AI software', 'TVC', 'Creative Designing', 'AI Photoshoot & Product Shoot', 'Corporate Films', 'Industrial Films', 'Brand Films', 'Investor Videos', 'Training Content', 'Corporate Documentaries'],
         icon: <Film className="w-6 h-6" />,
     },
     {
         title: 'Designing',
         description: 'Brand, publicity, pitch, and product design assets for campaigns and companies.',
-        items: ['Publicity Designs', 'Commercial Pitch Deck', 'Company Start Package', 'Product Retouching', 'Product Catalogues / Brochures'],
+        items: ['Publicity Designs', 'Event Branding Kit', 'Commercial Pitch Deck', 'Company Start Package (logo, letterhead, visiting cards, presentations, brochures, flyers)', 'Product Retouching', 'Product Catalogues / Brochures'],
         icon: <PenTool className="w-6 h-6" />,
     },
     {
         title: 'Movie Works',
         description: 'Complete movie publicity, pitch, edit, pre-look, and post-production support.',
-        items: ['Movie Publicity Designs', 'Teaser & Trailer Works', 'Lyrical Videos', 'Professional Movie Pitch Deck', 'Movie Editing', 'AI Pre-Looks for Movies', 'AI Pre-Teaser for Movies', 'DI / Color Correction', 'DCP Outputs', 'Post-Production Supervision'],
+        items: ['Movie Publicity Designs', 'Teaser & Trailer Works', 'Pre- and Post-Credit Design', 'Lyrical Videos', 'Professional Movie Pitch Deck (for producers, investors, exhibitors, and digital partners)', 'Movie Editing', 'AI Pre-Looks for Movies', 'AI Pre-Teaser for Movies', 'DI / Color Correction', 'DCP Outputs', 'Post-Production Supervision'],
         icon: <Clapperboard className="w-6 h-6" />,
     },
     {

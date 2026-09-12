@@ -34,7 +34,7 @@ const Footer: React.FC = () => {
     return (
         <footer className="relative bg-dark-950 border-t border-white/[0.04]">
             {/* Top glow */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-px bg-gradient-to-r from-transparent via-primary-red/30 to-transparent" />
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] max-w-full h-px bg-gradient-to-r from-transparent via-primary-red/30 to-transparent" />
 
             <div className="container mx-auto px-6">
                 {/* Main Footer Content */}

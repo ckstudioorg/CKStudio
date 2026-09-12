@@ -28,7 +28,7 @@ const Clients: React.FC = () => {
     });
 
     return (
-        <Section className="section-dark noise-overlay">
+        <Section id="clients" className="section-dark noise-overlay">
             <motion.div
                 ref={ref}
                 initial={{ opacity: 0, y: 30 }}

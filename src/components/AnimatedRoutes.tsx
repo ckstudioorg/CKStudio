@@ -5,6 +5,7 @@ import Header from './Header';
 import Hero from './Hero';
 import About from './About';
 import VisionMission from './VisionMission';
+import Philosophy from './Philosophy';
 import Services from './Services';
 import AIWorkflow from './AIWorkflow';
 import WhyUs from './WhyUs';
@@ -83,16 +84,15 @@ const AnimatedRoutes: React.FC<AnimatedRoutesProps> = ({ activeSection, sectionR
                                 <main>
                                     <div id="home" ref={sectionRefs.home}><Hero /></div>
                                     <div id="about" ref={sectionRefs.about}><About /></div>
+                                    <Philosophy />
                                     <VisionMission />
                                     <div id="services" ref={sectionRefs.services}><Services /></div>
                                     <AIWorkflow />
-                                    <WhyUs />
-                                    <StatsCounter />
-                                    <div id="portfolio" ref={sectionRefs.portfolio}><Portfolio /></div>
-                                    <Testimonials />
                                     <Clients />
-                                    <div id="contact" ref={sectionRefs.contact}><Contact /></div>
-                                    <CTABanner />
+                                    <div id="portfolio" ref={sectionRefs.portfolio}><Portfolio /></div>
+                                    <div id="why-us"><WhyUs /><StatsCounter /></div>
+                                    <Testimonials />
+                                    <div id="contact" ref={sectionRefs.contact}><Contact /><CTABanner /></div>
                                 </main>
                                 <Footer />
                             </div>
