@@ -1,7 +1,7 @@
 import React from 'react';
 import Section from './Section';
 import { LocationIcon, PhoneIcon, MailIcon, FacebookIcon, TwitterIcon, YoutubeIcon, InstagramIcon } from './SocialIcons';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 
 const socialLinks = [
     { Icon: FacebookIcon, href: "https://www.facebook.com/CKStudio.org/", name: "Facebook" },

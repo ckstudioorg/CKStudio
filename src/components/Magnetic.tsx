@@ -1,11 +1,12 @@
 import React, { useRef, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 
 interface MagneticProps {
     children: React.ReactElement;
+    strength?: number;
 }
 
-const Magnetic: React.FC<MagneticProps> = ({ children }) => {
+const Magnetic: React.FC<MagneticProps> = ({ children, strength = 0.1 }) => {
     const ref = useRef<HTMLDivElement>(null);
     const [position, setPosition] = useState({ x: 0, y: 0 });
 
@@ -15,7 +16,7 @@ const Magnetic: React.FC<MagneticProps> = ({ children }) => {
         const middleX = clientX - (left + width / 2);
         const middleY = clientY - (top + height / 2);
 
-        setPosition({ x: middleX * 0.1, y: middleY * 0.1 });
+        setPosition({ x: middleX * strength, y: middleY * strength });
     };
 
     const reset = () => {

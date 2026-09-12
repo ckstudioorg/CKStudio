@@ -1,6 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@config "../tailwind.config.ts";
 
 @layer base {
   /* CSS Custom Properties from Theme */
@@ -107,16 +106,16 @@
     --space-96: 24rem;
 
     /* Typography */
-    --text-xs: clamp(0.7rem, 0.68rem + 0.1vw, 0.75rem);
-    --text-sm: clamp(0.8125rem, 0.78rem + 0.16vw, 0.875rem);
-    --text-base: clamp(0.9375rem, 0.89rem + 0.24vw, 1rem);
-    --text-lg: clamp(1.0625rem, 1.0rem + 0.32vw, 1.125rem);
-    --text-xl: clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
-    --text-2xl: clamp(1.5rem, 1.35rem + 0.75vw, 2rem);
-    --text-3xl: clamp(2rem, 1.7rem + 1.5vw, 3rem);
-    --text-4xl: clamp(2.5rem, 2rem + 2.5vw, 4rem);
-    --text-5xl: clamp(3.5rem, 2.5rem + 5vw, 6rem);
-    --text-6xl: clamp(4.5rem, 3rem + 7.5vw, 8rem);
+    --ck-text-xs: clamp(0.7rem, 0.68rem + 0.1vw, 0.75rem);
+    --ck-text-sm: clamp(0.8125rem, 0.78rem + 0.16vw, 0.875rem);
+    --ck-text-base: clamp(0.9375rem, 0.89rem + 0.24vw, 1rem);
+    --ck-text-lg: clamp(1.0625rem, 1.0rem + 0.32vw, 1.125rem);
+    --ck-text-xl: clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
+    --ck-text-2xl: clamp(1.5rem, 1.35rem + 0.75vw, 2rem);
+    --ck-text-3xl: clamp(2rem, 1.7rem + 1.5vw, 3rem);
+    --ck-text-4xl: clamp(2.5rem, 2rem + 2.5vw, 4rem);
+    --ck-text-5xl: clamp(3.5rem, 2.5rem + 5vw, 6rem);
+    --ck-text-6xl: clamp(4.5rem, 3rem + 7.5vw, 8rem);
 
     /* Border Radius */
     --radius-none: 0;
@@ -306,13 +305,9 @@
   }
 
   /* Glass Cards */
-  .glass-card {
-    @apply bg-surface-glass backdrop-blur-xl border border-surface-glass-border rounded-2xl;
-  }
 
-  .glass-card-hover {
-    @apply glass-card transition-all duration-300 hover:bg-surface-glass-hover hover:border-surface-glass-border-hover;
-  }
+
+
 
   .glass-card-strong {
     @apply bg-surface-glass-strong backdrop-blur-2xl border border-surface-glass-border rounded-2xl;
@@ -387,9 +382,7 @@
   }
 
   /* Buttons */
-  .btn {
-    @apply inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full font-semibold text-base tracking-wider transition-all duration-200;
-  }
+
 
   .btn-primary {
     @apply btn bg-gradient-brand text-white shadow-brand-sm hover:shadow-brand-md hover:-translate-y-0.5 active:translate-y-0;
@@ -434,9 +427,7 @@
   }
 
   /* Badge */
-  .badge {
-    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold tracking-wider;
-  }
+
 
   .badge-brand {
     @apply badge bg-crimson-900/50 border border-crimson-800/50 text-crimson-300;
@@ -455,9 +446,7 @@
     @apply glass-card p-6;
   }
 
-  .card-hover {
-    @apply glass-card-hover p-6;
-  }
+
 
   .card-interactive {
     @apply card-hover cursor-pointer;
@@ -749,3 +738,23 @@
     will-change: auto;
   }
 }
+
+@utility glass-card {
+    @apply bg-surface-glass backdrop-blur-xl border border-surface-glass-border rounded-2xl;
+  }
+
+@utility glass-card-hover {
+    @apply glass-card transition-all duration-300 hover:bg-surface-glass-hover hover:border-surface-glass-border-hover;
+  }
+
+@utility btn {
+    @apply inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full font-semibold text-base tracking-wider transition-all duration-200;
+  }
+
+@utility badge {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold tracking-wider;
+  }
+
+@utility card-hover {
+    @apply glass-card-hover p-6;
+  }

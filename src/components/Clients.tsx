@@ -1,6 +1,6 @@
 import React from 'react';
 import Section from './Section';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { useInView } from 'react-intersection-observer';
 
 const clientLogos = [

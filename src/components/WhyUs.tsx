@@ -1,6 +1,6 @@
 import React from 'react';
 import Section from './Section';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { useInView } from 'react-intersection-observer';
 import { CheckCircle2 } from 'lucide-react';
 
@@ -75,32 +75,30 @@ const WhyUs: React.FC = () => {
                         {/* Glow behind ring */}
                         <div className="absolute inset-8 bg-primary-red/10 rounded-full blur-3xl" />
                         
-                        <svg className="w-full h-full relative z-10" viewBox="0 0 100 100">
+                        <svg className="w-full h-full relative z-10" viewBox="0 0 100 100" role="img" aria-label="Commitment: 80% dedicated creative and AI team, 20% CK's magic at work">
+                            {/* Normalized circumference keeps the two segments exactly 80/20. */}
                             <circle
-                                className="text-white/[0.04]"
+                                className="text-primary-red"
+                                pathLength="100"
+                                strokeDasharray="80 20"
                                 strokeWidth="6"
+                                strokeLinecap="butt"
                                 stroke="currentColor"
-                                fill="transparent"
-                                r="45"
-                                cx="50"
-                                cy="50"
+                                fill="none"
+                                r="45" cx="50" cy="50"
+                                transform="rotate(-90 50 50)"
                             />
                             <circle
-                                className="text-primary-red transition-all duration-[2s] ease-out"
+                                className="text-brand-gold"
+                                pathLength="100"
+                                strokeDasharray="20 80"
+                                strokeDashoffset="-80"
                                 strokeWidth="6"
-                                strokeLinecap="round"
+                                strokeLinecap="butt"
                                 stroke="currentColor"
-                                fill="transparent"
-                                r="45"
-                                cx="50"
-                                cy="50"
-                                style={{
-                                    strokeDasharray: 282.74,
-                                    strokeDashoffset: inView ? 56.54 : 282.74,
-                                    transform: 'rotate(-90deg)',
-                                    transformOrigin: '50% 50%',
-                                    filter: 'drop-shadow(0 0 8px rgba(139, 0, 0, 0.4))',
-                                }}
+                                fill="none"
+                                r="45" cx="50" cy="50"
+                                transform="rotate(-90 50 50)"
                             />
                         </svg>
                         <div className="absolute inset-0 flex flex-col items-center justify-center text-center z-10">
@@ -111,11 +109,11 @@ const WhyUs: React.FC = () => {
 
                     <div className="text-center space-y-3">
                         <div className="glass-card px-6 py-3">
-                            <span className="text-brand-silver text-xl font-display font-bold">80%</span>
+                            <span className="text-primary-red text-xl font-display font-bold">80%</span>
                             <span className="text-sm text-gray-400 ml-2">Dedicated Creative & AI Team</span>
                         </div>
                         <div className="glass-card px-6 py-3">
-                            <span className="text-brand-gold text-xl font-display font-bold">20%</span>
+                            <span className="text-primary-red text-xl font-display font-bold">20%</span>
                             <span className="text-sm text-gray-400 ml-2">CK's Magic at Work</span>
                         </div>
                     </div>

@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 
 const NotFound: React.FC = () => {
     return (
         <div className="min-h-screen bg-dark-950 flex items-center justify-center relative overflow-hidden">
+            <title>Page Not Found | CK Studio</title>
+            <meta name="robots" content="noindex" />
             <div className="absolute inset-0">
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary-red/5 rounded-full blur-[200px] pointer-events-none" />
             </div>

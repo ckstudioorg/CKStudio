@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'motion/react';
 import Header from './Header';
 import Hero from './Hero';
 import About from './About';
@@ -16,10 +16,10 @@ import Clients from './Clients';
 import Contact from './Contact';
 import CTABanner from './CTABanner';
 import Footer from './Footer';
-import NotFound from '../pages/NotFound';
-import Blog from '../pages/Blog';
-import BlogPost from '../pages/BlogPost';
-import FAQ from '../pages/FAQ';
+const NotFound = lazy(() => import('../pages/NotFound'));
+const Blog = lazy(() => import('../pages/Blog'));
+const BlogPost = lazy(() => import('../pages/BlogPost'));
+const FAQ = lazy(() => import('../pages/FAQ'));
 import SEO from './SEO';
 import PageTransition from './PageTransition';
 
@@ -32,6 +32,7 @@ const AnimatedRoutes: React.FC<AnimatedRoutesProps> = ({ activeSection, sectionR
     const location = useLocation();
 
     return (
+        <Suspense fallback={<div role="status" className="min-h-screen bg-dark-950 text-white p-12">Loading page…</div>}>
         <AnimatePresence mode="wait">
             <Routes location={location}>
                 <Route path="/" element={
@@ -145,6 +146,7 @@ const AnimatedRoutes: React.FC<AnimatedRoutesProps> = ({ activeSection, sectionR
                 } />
             </Routes>
         </AnimatePresence>
+        </Suspense>
     );
 };
 

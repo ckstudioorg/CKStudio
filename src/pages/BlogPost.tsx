@@ -2,7 +2,7 @@ import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { blogPosts } from '../data/blogData';
 import { Calendar, User, Clock, ArrowLeft, Tag } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import SEO from '../components/SEO';
 
 const BlogPost: React.FC = () => {
@@ -12,6 +12,8 @@ const BlogPost: React.FC = () => {
     if (!post) {
         return (
             <div className="min-h-screen bg-dark-950 flex items-center justify-center text-white">
+                <title>Post Not Found | CK Studio</title>
+                <meta name="robots" content="noindex" />
                 <div className="text-center">
                     <h1 className="text-4xl font-display font-bold mb-4">Post Not Found</h1>
                     <Link to="/blog" className="text-primary-red hover:underline">← Back to Blog</Link>

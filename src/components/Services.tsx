@@ -1,6 +1,6 @@
 import React from 'react';
 import Section from './Section';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { Clapperboard, Film, PenTool, Share2, Sparkles } from 'lucide-react';
 
 interface Service {

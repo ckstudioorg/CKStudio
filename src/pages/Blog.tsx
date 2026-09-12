@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { blogPosts } from '../data/blogData';
 import { Calendar, Tag, User, Search, Filter } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 
 const Blog: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');

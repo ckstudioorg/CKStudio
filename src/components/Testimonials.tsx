@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'motion/react';
 import Section from './Section';
 import { Star, ChevronLeft, ChevronRight, Quote } from 'lucide-react';
 

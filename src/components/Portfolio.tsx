@@ -1,6 +1,6 @@
 import React from 'react';
 import Section from './Section';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { ExternalLink, ImageIcon, PlayCircle } from 'lucide-react';
 
 interface WorkItem {

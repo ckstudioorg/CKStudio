@@ -9,6 +9,11 @@ const utilityColors = (tokens: Record<string, string>) => ({
   ])),
 });
 
+const stringTokens = (tokens: Record<string, unknown>): Record<string, string> => Object.fromEntries(
+  Object.entries(tokens).filter(([, value]) => typeof value === 'string' || typeof value === 'number')
+    .map(([key, value]) => [key, String(value)]),
+);
+
 const config: Config = {
   content: [
     './index.html',
@@ -59,23 +64,24 @@ const config: Config = {
 
       // Typography
       fontFamily: {
-        sans: theme.typography.fontFamily.sans,
-        display: theme.typography.fontFamily.display,
-        mono: theme.typography.fontFamily.mono,
+        sans: [...theme.typography.fontFamily.sans],
+        display: [...theme.typography.fontFamily.display],
+        mono: [...theme.typography.fontFamily.mono],
       },
-      fontWeight: theme.typography.fontWeight,
-      lineHeight: theme.typography.lineHeight,
+      fontWeight: stringTokens(theme.typography.fontWeight),
+      lineHeight: stringTokens(theme.typography.lineHeight),
       letterSpacing: theme.typography.letterSpacing,
 
       // Spacing
-      spacing: theme.spacing,
+      spacing: stringTokens(theme.spacing),
 
       // Border Radius
       borderRadius: theme.borderRadius,
 
       // Shadows
       boxShadow: {
-        ...theme.shadows,
+        'glow-gold': '0 0 20px rgba(212, 175, 55, 0.2)',
+        ...stringTokens(theme.shadows),
         // Flattened for Tailwind
         xs: theme.shadows.xs,
         sm: theme.shadows.sm,
@@ -108,7 +114,7 @@ const config: Config = {
       opacity: theme.opacity,
 
       // Z-Index
-      zIndex: theme.zIndex,
+      zIndex: stringTokens(theme.zIndex),
 
       // Containers
       container: {
@@ -405,9 +411,6 @@ const config: Config = {
     },
   },
   plugins: [],
-  corePlugins: {
-    preflight: true,
-  },
 };
 
 export default config;

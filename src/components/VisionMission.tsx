@@ -1,6 +1,6 @@
 import React from 'react';
 import Section from './Section';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { useInView } from 'react-intersection-observer';
 import { Eye, Target, Zap, Brain, Lightbulb, Users, Rocket } from 'lucide-react';
 
@@ -37,7 +37,7 @@ const VisionMission: React.FC = () => {
             y: 0,
             transition: {
                 duration: 0.6,
-                ease: "easeOut",
+                ease: "easeOut" as const,
             },
         },
     };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Helmet } from 'react-helmet-async';
+import { useLocation } from 'react-router-dom';
 
 interface SEOProps {
   title: string;
@@ -14,17 +14,19 @@ const SEO: React.FC<SEOProps> = ({
   title,
   description,
   image = 'https://ckstudio.org/images/branding/og-image.jpg',
-  url = 'https://ckstudio.org',
+  url,
   type = 'website',
   structuredData
 }) => {
+  const { pathname } = useLocation();
+  const canonicalUrl = url ?? `https://ckstudio.org${pathname === '/' ? '' : pathname}`;
   const siteTitle = "CK Studio | Professional Video Production";
 
   const defaultStructuredData = {
     "@context": "https://schema.org",
     "@type": type === 'article' ? 'Article' : 'Organization',
     "name": siteTitle,
-    "url": url,
+    "url": canonicalUrl,
     "headline": title,
     "description": description,
     "image": [image],
@@ -37,15 +39,15 @@ const SEO: React.FC<SEOProps> = ({
   const finalStructuredData = structuredData || defaultStructuredData;
 
   return (
-    <Helmet>
+    <>
       {/* Standard Metadata */}
       <title>{`${title} | CK Studio`}</title>
       <meta name="description" content={description} />
-      <link rel="canonical" href={url} />
+      <link rel="canonical" href={canonicalUrl} />
 
       {/* Open Graph / Facebook */}
       <meta property="og:type" content={type} />
-      <meta property="og:url" content={url} />
+      <meta property="og:url" content={canonicalUrl} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={image} />
@@ -61,7 +63,7 @@ const SEO: React.FC<SEOProps> = ({
       <script type="application/ld+json">
         {JSON.stringify(finalStructuredData)}
       </script>
-    </Helmet>
+    </>
   );
 };
 

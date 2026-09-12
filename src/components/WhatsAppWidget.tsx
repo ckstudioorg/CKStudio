@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 
 const WhatsAppWidget: React.FC = () => {
     const phoneNumber = "919700970762"; // Adding 91 for India

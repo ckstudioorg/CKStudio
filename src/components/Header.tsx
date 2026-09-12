@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'motion/react';
 import logo from '../assets/logo.png';
 import Magnetic from './Magnetic';
 import { useLocation } from 'react-router-dom';

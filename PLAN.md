@@ -1,3 +1,18 @@
+# Technology upgrade — September 12, 2026 (local, not published)
+
+- Local branch: `codex/modern-stack`. Keep GitHub Pages and React; no framework or hosting replacement.
+- Registry-verified stable versions: React 19.3.0, Vite 8.3.0, TypeScript 7.0.2, Tailwind 4.3.3, Motion 13.2.0, React Router 7.18.3. Node 24 LTS baseline.
+- Switched from Framer Motion package imports to `motion/react`, and from Helmet to native React metadata with per-route canonical URLs. Static duplicate metadata removed.
+- Tailwind uses its Vite plugin, a single theme config, and v4 custom utilities. Removed redundant PostCSS and old JS Tailwind configuration. Namespaced draft font-size CSS variables to prevent v4 typography collisions.
+- Strict type checking now covers all source, including repaired draft hooks/components. Added Vitest regression tests and check-only CI for branches/PRs; deployment uses `npm ci` and checks first.
+- Lazy-loaded secondary routes. Removed unused client API-key injection. No new backend, 3D library, or animation redesign.
+- Browser support tradeoff: Safari 16.4+, Chrome 111+, Firefox 128+.
+- Preserved the unpublished 80% red / 20% gold chart correction and original red labels.
+- Verified: clean npm ci succeeds; strict TypeScript checks pass; all four migration regression tests pass; production build succeeds; npm audit reports zero known vulnerabilities. Browser checks cover desktop/mobile layout, navigation, homepage order, and Blog/FAQ metadata.
+- Pending: user review before publication. Existing missing assets, placeholder articles, claim verification, and broader accessibility review remain separate work.
+
+---
+
 # Current approved work — September 12, 2026
 
 This status takes precedence over the historical proposal below. Its broad redesign ideas and completion labels are not approved scope.
@@ -8,7 +23,7 @@ This status takes precedence over the historical proposal below. Its broad redes
 - Homepage sequence: Hero; About Us; Our Philosophy; Vision and Mission; What We Do; Our Process; Our Partners; Our Portfolio; Why Choose Us; Testimonials; Get In Touch.
 - Split Philosophy from Vision/Mission. Retained statistics within Why Choose Us and the closing CTA within Get In Touch.
 - Grouped existing and supplied projects into Movies, Commercials, and Events. Preserved existing video links and the additional Seetimaar entry. Missing media is explicitly marked.
-- Partner list already matches the document. Brand utilities use gold #D4AF37, red #8B0000, black #111111, and silver #E6E6E6. Percentage labels retain silver for 80% and gold for 20%.
+- Partner list already matches the document. Brand utilities use gold #D4AF37, red #8B0000, black #111111, and silver #E6E6E6. Corrected interpretation: the commitment ring is 80% red and 20% gold; both percentage labels use their original red. This correction is local and pending publishing approval.
 - Fixed pre-existing Tailwind stylesheet/configuration incompatibilities needed to build the local site. Preserved prior draft source work.
 - Local production build succeeds. Whole-project TypeScript checking reports existing draft hook/UI and theme configuration errors; broader type cleanup remains outstanding.
 - Mobile review found a footer decoration extending past the viewport; constrained its width.
