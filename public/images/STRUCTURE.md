@@ -1,6 +1,6 @@
 # CK Studio Image Structure
 
-Use the root-level `DESIGNER_IMAGE_REQUIREMENTS.md` file as the source of truth for image sizes, formats, names, and delivery folders.
+Use the `docs/DESIGNER_IMAGE_REQUIREMENTS.md` file as the source of truth for image sizes, formats, names, and delivery folders.
 
 Expected folders:
 

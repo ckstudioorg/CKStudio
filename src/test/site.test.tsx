@@ -3,9 +3,9 @@ import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { MemoryRouter, useNavigate } from 'react-router-dom';
 import SEO from '../components/SEO';
-import WhyUs from '../components/WhyUs';
-import Portfolio from '../components/Portfolio';
-import Header from '../components/Header';
+import WhyUs from '../sections/WhyUs';
+import Portfolio from '../sections/Portfolio';
+import Header from '../components/layout/Header';
 
 function MetadataPage() {
   const navigate = useNavigate();
@@ -27,14 +27,14 @@ describe('site migration safeguards', () => {
   it('renders complementary red and gold chart arcs and original red labels', () => {
     render(<WhyUs />);
     const chart = screen.getByRole('img', { name: /Commitment: 80%/ });
-    const arcs = chart.querySelectorAll('circle');
+    const arcs = chart.querySelectorAll('circle[data-arc]');
     expect(arcs).toHaveLength(2);
     expect(arcs[0]).toHaveAttribute('stroke-dasharray', '80 20');
-    expect(arcs[0]).toHaveClass('text-primary-red');
+    expect(arcs[0]).toHaveClass('text-ck-red');
     expect(arcs[1]).toHaveAttribute('stroke-dasharray', '20 80');
     expect(arcs[1]).toHaveAttribute('stroke-dashoffset', '-80');
-    expect(arcs[1]).toHaveClass('text-brand-gold');
-    expect(screen.getByText('20%')).toHaveClass('text-primary-red');
+    expect(arcs[1]).toHaveClass('text-ck-gold');
+    expect(screen.getByText('20%')).toHaveClass('text-ck-red');
   });
 
   it('preserves the portfolio groups and six existing project links', () => {
