@@ -8,11 +8,10 @@ import VisionMission from '../sections/VisionMission';
 import Philosophy from '../sections/Philosophy';
 import Services from '../sections/Services';
 import Process from '../sections/Process';
-import WhyUs from './WhyUs';
-import StatsCounter from './StatsCounter';
-import Portfolio from './Portfolio';
+import WhyUs from '../sections/WhyUs';
+import Portfolio from '../sections/Portfolio';
 import Testimonials from './Testimonials';
-import Clients from './Clients';
+import Partners from '../sections/Partners';
 import Contact from './Contact';
 import CTABanner from './CTABanner';
 import Footer from './Footer';
@@ -87,9 +86,9 @@ const AnimatedRoutes: React.FC = () => {
                                     <VisionMission />
                                     <div id="services"><Services /></div>
                                     <Process />
-                                    <Clients />
+                                    <Partners />
                                     <div id="portfolio"><Portfolio /></div>
-                                    <div id="why-us"><WhyUs /><StatsCounter /></div>
+                                    <div id="why-us"><WhyUs /></div>
                                     <Testimonials />
                                     <div id="contact"><Contact /><CTABanner /></div>
                                 </main>
