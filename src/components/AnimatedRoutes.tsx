@@ -20,6 +20,8 @@ const NotFound = lazy(() => import('../pages/NotFound'));
 const Blog = lazy(() => import('../pages/Blog'));
 const BlogPost = lazy(() => import('../pages/BlogPost'));
 const FAQ = lazy(() => import('../pages/FAQ'));
+// Local-only style preview for the redesign (never included in the live site)
+const DesignPreview = import.meta.env.DEV ? lazy(() => import('../pages/DesignPreview')) : null;
 import SEO from './SEO';
 import PageTransition from './PageTransition';
 
@@ -139,6 +141,7 @@ const AnimatedRoutes: React.FC<AnimatedRoutesProps> = ({ activeSection, sectionR
                         </>
                     </PageTransition>
                 } />
+                {DesignPreview && <Route path="/design-preview" element={<DesignPreview />} />}
                 <Route path="*" element={
                     <PageTransition>
                         <NotFound />

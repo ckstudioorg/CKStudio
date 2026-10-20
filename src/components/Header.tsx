@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import logo from '../assets/logo.png';
 import Magnetic from './Magnetic';
 import { useLocation } from 'react-router-dom';
+import { scrollToSection as smoothScrollTo } from '../lib/smoothScroll';
 
 interface HeaderProps {
     activeSection: string;
@@ -31,9 +32,8 @@ const Header: React.FC<HeaderProps> = ({ activeSection }) => {
     }, [isMenuOpen]);
 
     const scrollToSection = (id: string) => {
-        const element = document.getElementById(id);
-        if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
+        if (document.getElementById(id)) {
+            smoothScrollTo(id);
             setIsMenuOpen(false);
         }
     };

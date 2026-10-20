@@ -39,10 +39,10 @@ Tailwind 4 requires Safari 16.4+, Chrome 111+, or Firefox 128+. CSS draft typogr
 
 - `src/components/`: homepage sections, shared UI, and metadata
 - `src/pages/`: Blog, FAQ, article, and not-found routes
-- `src/config/`, `src/hooks/`, `src/motion/`: reusable development foundations
+- `src/config/theme.ts`: legacy design tokens used by `tailwind.config.ts` (removed once the redesign is complete)
 - `src/test/`: test setup and migration regression tests
 - `public/`: static files, including the GitHub Pages deep-link fallback
-- `PLAN.md`: current decisions, progress, and pending assets
+- `docs/PLAN.md`: current decisions, progress, and pending assets
 
 ## Publishing
 

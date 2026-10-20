@@ -38,13 +38,26 @@ This is **not** plain HTML pages. It is a **React single-page app** (TypeScript 
 | Logo | `src/assets/logo.png` |
 | Static files copied as-is | `public/` (404 page, robots.txt, sitemap.xml) |
 | Tests | `src/test/site.test.tsx` (checks portfolio groups/links, chart colours, header button, SEO tags) — update them if a change intentionally breaks them |
-| Project history/decisions | `PLAN.md`, `README.md`, `DESIGNER_IMAGE_REQUIREMENTS.md`, `AUDIT.md` (untracked, older) |
+| Project history/decisions | `docs/PLAN.md`, `docs/DESIGNER_IMAGE_REQUIREMENTS.md`, `README.md`, `AUDIT.md` (untracked, older) |
 
 Pages: Home (`/`), Blog (`/blog`, `/blog/:slug`), FAQ (`/faq`), and a 404 page.
 
 Homepage order: Hero → About → Philosophy → Vision & Mission → What We Do → Our Process → Partners → Portfolio (Movies / Commercials / Events) → Why Choose Us + stats → Testimonials → Get In Touch + CTA → Footer.
 
-## Design
+## Redesign in progress (branch `redesign-2026`, started 2026-10-21)
+
+Full visual redesign, same content and section order. Plan agreed with the owner:
+- **Pure white background.** Red `#8B0000` for headlines/key words/buttons, black `#111111` for all other text, gold `#D4AF37` only for rare special moments (80/20 ring "CK's Magic", hero star, final CTA).
+- Fonts: **Clash Display** (headings, `font-heading`) + **Satoshi** (body, `font-body`), self-hosted in `public/fonts/` (licence note in `docs/FONTS.md`).
+- Motion: **GSAP 3 + ScrollTrigger + SplitText** for scroll-scrubbed/pinned animation, **Lenis** for smooth scroll. Setup and helpers (`scrollToSection`, `resetScroll`) in `src/lib/smoothScroll.ts`. Always respect reduced-motion. Use `gsap.context()` + `revert()` for cleanup.
+- New tokens live in `src/styles/foundation.css` (`bg-paper`, `text-ink`, `text-ink-soft`, `text-ck-red`, `text-ck-gold`, `text-mega/giant/title`, `ease-cinema`). Old dark tokens (`tailwind.config.ts` + `src/config/theme.ts`, Outfit/Inter Google Fonts) stay only until every old section is rebuilt, then delete them.
+- Hero: a 5–8 s video scrubbed by scroll (owner will supply; convert to all-keyframe MP4 for smooth scrubbing). Placeholder until then.
+- Testimonials: don't invent quotes. Draft quotes for real partners to approve; show only approved ones.
+- Blog: rewrite as real, accurate articles about CK Studio's services.
+- Local-only style preview at `/design-preview` (`src/pages/DesignPreview.tsx`, dev mode only, excluded from the live build).
+- Steps: 1 foundation ✅ · 2 Header + Hero · 3 About/Philosophy/Vision · 4 Services/Process · 5 Partners/Portfolio/Why Us · 6 Testimonials/Contact/Footer · 7 Blog/FAQ/404 · 8 mobile, speed, accessibility polish. Owner previews each step.
+
+## Design (old, being replaced)
 
 Dark cinematic theme. Brand colours: red `#8B0000`, gold `#D4AF37`, near-black `#111111` / `#050505`, silver `#E6E6E6`. Fonts: Outfit (headings) and Inter (body) from Google Fonts. Custom mouse cursor, floating WhatsApp button, scroll animations.
 
@@ -57,5 +70,5 @@ Dark cinematic theme. Brand colours: red `#8B0000`, gold `#D4AF37`, near-black `
 - **Map pin coordinates** (17.385044, 78.486671) are central Hyderabad, not Jeedimetla.
 - **Contact details are duplicated** in about six files — change all of them together.
 - **Stats counter** may briefly show "0+" until scrolled into view (counting animation).
-- **Leftover / unused code:** nothing on the live site uses `src/config/` (contact, site, theme), `src/hooks/`, `src/motion/`, or `src/components/ui/` (Button, Card) — they only reference each other. Leftover drafts from the Antigravity build; don't rely on them. Local branch `codex/modern-stack` is an older work branch.
+- **Leftover code:** unused Antigravity drafts (config/hooks/motion/ui) were removed on 2026-10-21. Local branch `codex/modern-stack` is an older work branch.
 - Single-page app means search engines see mostly empty HTML until JavaScript runs — weaker SEO than plain HTML. Changing this would be a big job; ask first.

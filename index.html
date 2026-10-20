@@ -26,8 +26,8 @@
   <meta name="ICBM" content="17.385044, 78.486671" />
   
   <!-- Additional SEO -->
-  <meta name="theme-color" content="#8B0000">
-  <meta name="msapplication-TileColor" content="#0a0a0a">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="msapplication-TileColor" content="#ffffff">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="format-detection" content="telephone=yes">
@@ -38,7 +38,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="dns-prefetch" href="https://fonts.googleapis.com">
               
-  <!-- Google Fonts: Outfit + Inter -->
+  <!-- Redesign fonts (self-hosted): Clash Display + Satoshi -->
+  <link rel="preload" href="/fonts/clash-display-600.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/satoshi-400.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- Legacy Google Fonts (Outfit + Inter): remove once every section is redesigned -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <!-- JSON-LD Structured Data -->
@@ -76,24 +80,11 @@
 
   <style>
       body {
-          font-family: 'Inter', system-ui, sans-serif;
+          font-family: 'Satoshi', system-ui, sans-serif;
           margin: 0;
           padding: 0;
-          background: #050505;
-          color: #fff;
-      }
-      ::-webkit-scrollbar {
-          width: 6px;
-      }
-      ::-webkit-scrollbar-track {
-          background: #0a0a0a;
-      }
-      ::-webkit-scrollbar-thumb {
-          background: #8B0000;
-          border-radius: 4px;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-          background: #b91034;
+          background: #ffffff;
+          color: #111111;
       }
   </style>
 </head>

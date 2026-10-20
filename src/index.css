@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@import "lenis/dist/lenis.css";
+@import "./styles/foundation.css";
 @config "../tailwind.config.ts";
 
 @layer base {
@@ -187,21 +189,13 @@
 
   /* Base HTML */
   html {
-    scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    html {
-      scroll-behavior: auto;
-    }
-  }
-
   body {
-    @apply bg-bg-primary text-text-primary font-sans antialiased;
-    background: var(--gradient-hero);
+    @apply antialiased;
     min-height: 100vh;
   }
 
@@ -234,19 +228,16 @@
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-bg-primary;
+    background: var(--color-paper);
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-crimson-700 rounded-full;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    @apply bg-crimson-500;
+    background: var(--color-ck-red);
+    border-radius: 9999px;
   }
 
   ::-webkit-scrollbar-corner {
-    @apply bg-bg-primary;
+    background: var(--color-paper);
   }
 
   /* Focus Visible - Accessible focus styles */

@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
 import logo from '../assets/logo.png';
 import Magnetic from './Magnetic';
+import { scrollToSection } from '../lib/smoothScroll';
 
 const TYPEWRITER_TEXTS = [
     'Cinematic Advertising',
@@ -53,12 +54,6 @@ const Hero: React.FC = () => {
         return () => clearTimeout(timeout);
     }, [displayedText, isDeleting, currentTextIndex]);
 
-    const scrollToSection = (id: string) => {
-        const element = document.getElementById(id);
-        if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
-        }
-    };
 
     return (
         <section ref={ref} className="h-screen relative flex items-center justify-center overflow-hidden bg-dark-950">

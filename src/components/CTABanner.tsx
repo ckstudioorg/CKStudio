@@ -1,14 +1,9 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import Magnetic from './Magnetic';
+import { scrollToSection } from '../lib/smoothScroll';
 
 const CTABanner: React.FC = () => {
-    const scrollToSection = (id: string) => {
-        const element = document.getElementById(id);
-        if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
-        }
-    };
 
     return (
         <section className="relative py-28 overflow-hidden">
