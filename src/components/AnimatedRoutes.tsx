@@ -6,8 +6,8 @@ import Hero from '../sections/Hero';
 import About from '../sections/About';
 import VisionMission from '../sections/VisionMission';
 import Philosophy from '../sections/Philosophy';
-import Services from './Services';
-import AIWorkflow from './AIWorkflow';
+import Services from '../sections/Services';
+import Process from '../sections/Process';
 import WhyUs from './WhyUs';
 import StatsCounter from './StatsCounter';
 import Portfolio from './Portfolio';
@@ -86,7 +86,7 @@ const AnimatedRoutes: React.FC = () => {
                                     <Philosophy />
                                     <VisionMission />
                                     <div id="services"><Services /></div>
-                                    <AIWorkflow />
+                                    <Process />
                                     <Clients />
                                     <div id="portfolio"><Portfolio /></div>
                                     <div id="why-us"><WhyUs /><StatsCounter /></div>

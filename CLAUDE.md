@@ -57,7 +57,7 @@ Full visual redesign, same content and section order. Plan agreed with the owner
 - Local-only style preview at `/design-preview` (`src/pages/DesignPreview.tsx`, dev mode only, excluded from the live build).
 - New structure: rebuilt homepage sections in `src/sections/`, shared pieces in `src/components/layout/` (Header) and `src/components/brand/` (Logo: PNG used as a CSS mask so it is always exact brand red), editable text in `src/content/` (e.g. `hero.ts`, which also holds the hero video paths; `about.ts`). Reusable scroll animations in `src/lib/motion.ts` (`useGsap`, `revealLines`, `fillWords`, `riseIn`, `countUp`, `drawLine`). Never put a CSS `transition` on transform/translate of an element GSAP moves; wrap it instead. Section labels are numbered (01 About … 10 Contact) via `components/ui/SectionLabel`. Missing images use `components/ui/ImageSlot` (shows required size and path). The header tracks the active section itself with ScrollTrigger.
 - Breakpoints: legacy config sets `sm` = 375px (standard is 640px). Use `md` (768) / `lg` (1024) in new code until the legacy config is removed.
-- Steps: 1 foundation ✅ · 2 Header + Hero ✅ · 3 About/Philosophy/Vision ✅ · 4 Services/Process · 5 Partners/Portfolio/Why Us · 6 Testimonials/Contact/Footer · 7 Blog/FAQ/404 · 8 mobile, speed, accessibility polish. Owner previews each step.
+- Steps: 1 foundation ✅ · 2 Header + Hero ✅ · 3 About/Philosophy/Vision ✅ · 4 Services/Process ✅ · 5 Partners/Portfolio/Why Us · 6 Testimonials/Contact/Footer · 7 Blog/FAQ/404 · 8 mobile, speed, accessibility polish. Owner previews each step.
 
 ## Design (old, being replaced)
 
