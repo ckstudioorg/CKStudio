@@ -10,11 +10,10 @@ import Services from '../sections/Services';
 import Process from '../sections/Process';
 import WhyUs from '../sections/WhyUs';
 import Portfolio from '../sections/Portfolio';
-import Testimonials from './Testimonials';
+import Testimonials from '../sections/Testimonials';
 import Partners from '../sections/Partners';
-import Contact from './Contact';
-import CTABanner from './CTABanner';
-import Footer from './Footer';
+import Contact from '../sections/Contact';
+import Footer from './layout/Footer';
 const NotFound = lazy(() => import('../pages/NotFound'));
 const Blog = lazy(() => import('../pages/Blog'));
 const BlogPost = lazy(() => import('../pages/BlogPost'));
@@ -90,7 +89,7 @@ const AnimatedRoutes: React.FC = () => {
                                     <div id="portfolio"><Portfolio /></div>
                                     <div id="why-us"><WhyUs /></div>
                                     <Testimonials />
-                                    <div id="contact"><Contact /><CTABanner /></div>
+                                    <div id="contact"><Contact /></div>
                                 </main>
                                 <Footer />
                             </div>

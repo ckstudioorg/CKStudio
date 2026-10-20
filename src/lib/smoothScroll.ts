@@ -32,7 +32,11 @@ export function startSmoothScroll(): () => void {
 export function scrollToSection(id: string): void {
     const element = document.getElementById(id);
     if (!element) return;
-    if (lenis) lenis.scrollTo(element);
+    if (lenis) {
+        // The page may have just changed height (e.g. after switching pages), so re-measure first
+        lenis.resize();
+        lenis.scrollTo(element);
+    }
     else element.scrollIntoView({ behavior: 'smooth' });
 }
 

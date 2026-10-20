@@ -3,14 +3,29 @@ import { BrowserRouter as Router, useLocation } from 'react-router-dom';
 import CustomCursor from './components/CustomCursor';
 import AnimatedRoutes from './components/AnimatedRoutes';
 import WhatsAppWidget from './components/WhatsAppWidget';
-import { startSmoothScroll, resetScroll } from './lib/smoothScroll';
+import { startSmoothScroll, resetScroll, scrollToSection } from './lib/smoothScroll';
 
 // We need a wrapper component to use useLocation inside Router context
 const ScrollToTop = () => {
     const location = useLocation();
     useEffect(() => {
         resetScroll();
-    }, [location.pathname]);
+        // Arriving with a link like /#about: scroll there once the page has laid out
+        if (!location.hash) return;
+        // The page fades in first, so keep checking until the section exists, then let animations settle
+        const id = decodeURIComponent(location.hash.slice(1));
+        let tries = 0;
+        let timer = 0;
+        const attempt = () => {
+            if (document.getElementById(id)) {
+                timer = window.setTimeout(() => scrollToSection(id), 350);
+            } else if (tries++ < 30) {
+                timer = window.setTimeout(attempt, 150);
+            }
+        };
+        attempt();
+        return () => window.clearTimeout(timer);
+    }, [location.pathname, location.hash]);
     return null;
 };
 

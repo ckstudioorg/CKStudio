@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Logo from '../brand/Logo';
+import { contact } from '../../content/contact';
 import { ScrollTrigger, scrollToSection, setScrollLocked } from '../../lib/smoothScroll';
 
 interface HeaderProps {
@@ -106,7 +107,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection }) => {
             if (isMenuOpen) requestAnimationFrame(() => scrollToSection(id));
             else scrollToSection(id);
         } else {
-            window.location.href = `/#${id}`;
+            navigate(`/#${id}`);
         }
     };
 
@@ -224,7 +225,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection }) => {
                             transition={{ duration: 0.6, ease, delay: 0.55 }}
                             className="flex flex-wrap items-center justify-between gap-4 pt-6"
                         >
-                            <a href="tel:+919700970762" className="text-sm text-ink-soft">+91 9700 970 762</a>
+                            <a href={`tel:${contact.phone.tel}`} className="text-sm text-ink-soft">{contact.phone.international}</a>
                             <button
                                 onClick={() => handleNavClick('contact')}
                                 className="inline-flex items-center gap-2 rounded-full bg-ck-red px-6 py-3.5 text-sm font-medium uppercase tracking-[0.12em] text-paper"

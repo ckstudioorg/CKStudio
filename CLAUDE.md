@@ -57,7 +57,7 @@ Full visual redesign, same content and section order. Plan agreed with the owner
 - Local-only style preview at `/design-preview` (`src/pages/DesignPreview.tsx`, dev mode only, excluded from the live build).
 - New structure: rebuilt homepage sections in `src/sections/`, shared pieces in `src/components/layout/` (Header) and `src/components/brand/` (Logo: PNG used as a CSS mask so it is always exact brand red), editable text in `src/content/` (e.g. `hero.ts`, which also holds the hero video paths; `about.ts`; `services.ts`; `work.ts` for partners, portfolio items and Why Us/stats — add a portfolio thumbnail with `image:` or a video with `url`/`youtubeId`; `note` is internal only). Reusable scroll animations in `src/lib/motion.ts` (`useGsap`, `revealLines`, `fillWords`, `riseIn`, `countUp`, `drawLine`). Never put a CSS `transition` on transform/translate of an element GSAP moves; wrap it instead. Section labels are numbered (01 About … 10 Contact) via `components/ui/SectionLabel`. Missing images use `components/ui/ImageSlot` (shows required size and path). The header tracks the active section itself with ScrollTrigger.
 - Breakpoints: legacy config sets `sm` = 375px (standard is 640px). Use `md` (768) / `lg` (1024) in new code until the legacy config is removed.
-- Steps: 1 foundation ✅ · 2 Header + Hero ✅ · 3 About/Philosophy/Vision ✅ · 4 Services/Process ✅ · 5 Partners/Portfolio/Why Us ✅ · 6 Testimonials/Contact/Footer · 7 Blog/FAQ/404 · 8 mobile, speed, accessibility polish. Owner previews each step.
+- Steps: 1 foundation ✅ · 2 Header + Hero ✅ · 3 About/Philosophy/Vision ✅ · 4 Services/Process ✅ · 5 Partners/Portfolio/Why Us ✅ · 6 Testimonials/Contact/Footer ✅ · 7 Blog/FAQ/404 · 8 mobile, speed, accessibility polish. Owner previews each step.
 
 ## Design (old, being replaced)
 
@@ -66,11 +66,11 @@ Dark cinematic theme. Brand colours: red `#8B0000`, gold `#D4AF37`, near-black `
 ## Known issues / risks (as of 2026-10-21)
 
 - **Missing files:** `favicon.svg`, `/images/branding/logo.png` and `/images/branding/og-image.jpg` are referenced but don't exist (no browser-tab icon; broken image in social-media link previews and SEO data).
-- **Footer links to pages that don't exist:** Privacy Policy, Terms of Service, Cookie Policy (`/privacy`, `/terms`, `/cookies`) → show the 404 page. "Careers" just jumps to Contact.
-- **Placeholder content on the live site:** 5 testimonials with likely invented names; blog articles are placeholder text with Unsplash stock photos; About also uses a stock photo; many portfolio cards say "Project asset required"; stats (150+ projects, 50+ brands, 10+ years) need confirming.
+- **Privacy Policy / Terms of Service pages don't exist**, so their footer links are hidden (`footer.legal[].ready` in `content/contact.ts`). "Careers" just jumps to Contact.
+- **Testimonials:** the invented ones were removed in the redesign; only client-approved quotes go in `testimonials.approved` (drafts in `docs/TESTIMONIAL_DRAFTS.md`). Until then the section shows real work. **Other placeholder content:** blog articles are placeholder text with Unsplash stock photos; About also uses a stock photo; many portfolio cards say "Project asset required"; stats (150+ projects, 50+ brands, 10+ years) need confirming.
 - **Social links** point to "CKStudio-Music" / "ckstudio_music" accounts — confirm they're the right ones. LinkedIn link is unverified.
 - **Map pin coordinates** (17.385044, 78.486671) are central Hyderabad, not Jeedimetla.
-- **Contact details are duplicated** in about six files — change all of them together.
+- **Contact details** now live in ONE file: `src/content/contact.ts` (phone, email, address, WhatsApp, socials). Only the SEO data in `AnimatedRoutes.tsx` and `index.html` still repeats them (to be tidied in step 8).
 - **Stats counter** may briefly show "0+" until scrolled into view (counting animation).
 - **Leftover code:** unused Antigravity drafts (config/hooks/motion/ui) were removed on 2026-10-21. Local branch `codex/modern-stack` is an older work branch.
 - Single-page app means search engines see mostly empty HTML until JavaScript runs — weaker SEO than plain HTML. Changing this would be a big job; ask first.

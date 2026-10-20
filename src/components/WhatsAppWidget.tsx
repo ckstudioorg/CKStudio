@@ -1,10 +1,11 @@
 import React from 'react';
 import { motion } from 'motion/react';
+import { whatsappUrl as buildWhatsappUrl } from '../content/contact';
 
 const WhatsAppWidget: React.FC = () => {
-    const phoneNumber = "919700970762"; // Adding 91 for India
+
     const message = "Hi! I'm interested in your services.";
-    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = buildWhatsappUrl(message);
 
     return (
         <motion.a
