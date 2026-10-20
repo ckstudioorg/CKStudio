@@ -5,7 +5,7 @@ import { MemoryRouter, useNavigate } from 'react-router-dom';
 import SEO from '../components/SEO';
 import WhyUs from '../components/WhyUs';
 import Portfolio from '../components/Portfolio';
-import Header from '../components/Header';
+import Header from '../components/layout/Header';
 
 function MetadataPage() {
   const navigate = useNavigate();

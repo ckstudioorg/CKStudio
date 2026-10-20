@@ -36,6 +36,14 @@ export function scrollToSection(id: string): void {
     else element.scrollIntoView({ behavior: 'smooth' });
 }
 
+/** Freezes page scrolling (e.g. while the mobile menu is open) and releases it again. */
+export function setScrollLocked(locked: boolean): void {
+    document.documentElement.style.overflow = locked ? 'hidden' : '';
+    if (!lenis) return;
+    if (locked) lenis.stop();
+    else lenis.start();
+}
+
 /** Jumps straight to the top, e.g. when changing page. */
 export function resetScroll(): void {
     if (lenis) lenis.scrollTo(0, { immediate: true, force: true });

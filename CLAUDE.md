@@ -55,7 +55,9 @@ Full visual redesign, same content and section order. Plan agreed with the owner
 - Testimonials: don't invent quotes. Draft quotes for real partners to approve; show only approved ones.
 - Blog: rewrite as real, accurate articles about CK Studio's services.
 - Local-only style preview at `/design-preview` (`src/pages/DesignPreview.tsx`, dev mode only, excluded from the live build).
-- Steps: 1 foundation ✅ · 2 Header + Hero · 3 About/Philosophy/Vision · 4 Services/Process · 5 Partners/Portfolio/Why Us · 6 Testimonials/Contact/Footer · 7 Blog/FAQ/404 · 8 mobile, speed, accessibility polish. Owner previews each step.
+- New structure: rebuilt homepage sections in `src/sections/`, shared pieces in `src/components/layout/` (Header) and `src/components/brand/` (Logo: PNG used as a CSS mask so it is always exact brand red), editable text in `src/content/` (e.g. `hero.ts`, which also holds the hero video paths).
+- Breakpoints: legacy config sets `sm` = 375px (standard is 640px). Use `md` (768) / `lg` (1024) in new code until the legacy config is removed.
+- Steps: 1 foundation ✅ · 2 Header + Hero ✅ · 3 About/Philosophy/Vision · 4 Services/Process · 5 Partners/Portfolio/Why Us · 6 Testimonials/Contact/Footer · 7 Blog/FAQ/404 · 8 mobile, speed, accessibility polish. Owner previews each step.
 
 ## Design (old, being replaced)
 

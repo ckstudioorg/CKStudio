@@ -1,8 +1,8 @@
 import React, { lazy, Suspense } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'motion/react';
-import Header from './Header';
-import Hero from './Hero';
+import Header from './layout/Header';
+import Hero from '../sections/Hero';
 import About from './About';
 import VisionMission from './VisionMission';
 import Philosophy from './Philosophy';
