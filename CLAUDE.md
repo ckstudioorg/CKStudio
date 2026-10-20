@@ -32,7 +32,7 @@ This is **not** plain HTML pages. It is a **React single-page app** (TypeScript 
 | Page list (routes) and homepage section order | `src/components/AnimatedRoutes.tsx` |
 | Homepage sections | `src/components/` — `Hero`, `About`, `Philosophy`, `VisionMission`, `Services`, `AIWorkflow`, `Clients` (partners), `Portfolio`, `WhyUs` + `StatsCounter`, `Testimonials`, `Contact` + `CTABanner`, `Header`, `Footer` |
 | Other pages | `src/pages/` — `Blog`, `BlogPost`, `FAQ`, `NotFound` |
-| Blog articles | `src/data/blogData.ts` |
+| Blog articles, FAQ | `src/content/blog.ts`, `src/content/faq.ts` |
 | Phone, email, address, WhatsApp, social links | Typed directly into each section: `Contact.tsx`, `CTABanner.tsx`, `Footer.tsx`, `WhatsAppWidget.tsx`, `AnimatedRoutes.tsx` (SEO data), `index.html`. **`src/config/contact.ts` and `site.ts` are NOT used by the live site** — editing them changes nothing. Search the whole `src/` folder and change every copy. |
 | Colours, fonts, design tokens | `tailwind.config.ts`, `src/index.css` |
 | Logo | `src/assets/logo.png` |
@@ -53,11 +53,11 @@ Full visual redesign, same content and section order. Plan agreed with the owner
 - New tokens live in `src/styles/foundation.css` (`bg-paper`, `text-ink`, `text-ink-soft`, `text-ck-red`, `text-ck-gold`, `text-mega/giant/title`, `ease-cinema`). Old dark tokens (`tailwind.config.ts` + `src/config/theme.ts`, Outfit/Inter Google Fonts) stay only until every old section is rebuilt, then delete them.
 - Hero: a 5–8 s video scrubbed by scroll (owner will supply; convert to all-keyframe MP4 for smooth scrubbing). Placeholder until then.
 - Testimonials: don't invent quotes. Draft quotes for real partners to approve; show only approved ones.
-- Blog: rewrite as real, accurate articles about CK Studio's services.
+- Blog: 7 real articles about CK Studio services in `src/content/blog.ts` (block-based: p/h2/list/quote); designed covers until real images (`image:` 1200x800). FAQ in `src/content/faq.ts` (with FAQPage structured data). Keep `public/sitemap.xml` in sync when adding articles.
 - Local-only style preview at `/design-preview` (`src/pages/DesignPreview.tsx`, dev mode only, excluded from the live build).
 - New structure: rebuilt homepage sections in `src/sections/`, shared pieces in `src/components/layout/` (Header) and `src/components/brand/` (Logo: PNG used as a CSS mask so it is always exact brand red), editable text in `src/content/` (e.g. `hero.ts`, which also holds the hero video paths; `about.ts`; `services.ts`; `work.ts` for partners, portfolio items and Why Us/stats — add a portfolio thumbnail with `image:` or a video with `url`/`youtubeId`; `note` is internal only). Reusable scroll animations in `src/lib/motion.ts` (`useGsap`, `revealLines`, `fillWords`, `riseIn`, `countUp`, `drawLine`). Never put a CSS `transition` on transform/translate of an element GSAP moves; wrap it instead. Section labels are numbered (01 About … 10 Contact) via `components/ui/SectionLabel`. Missing images use `components/ui/ImageSlot` (shows required size and path). The header tracks the active section itself with ScrollTrigger.
 - Breakpoints: legacy config sets `sm` = 375px (standard is 640px). Use `md` (768) / `lg` (1024) in new code until the legacy config is removed.
-- Steps: 1 foundation ✅ · 2 Header + Hero ✅ · 3 About/Philosophy/Vision ✅ · 4 Services/Process ✅ · 5 Partners/Portfolio/Why Us ✅ · 6 Testimonials/Contact/Footer ✅ · 7 Blog/FAQ/404 · 8 mobile, speed, accessibility polish. Owner previews each step.
+- Steps: 1 foundation ✅ · 2 Header + Hero ✅ · 3 About/Philosophy/Vision ✅ · 4 Services/Process ✅ · 5 Partners/Portfolio/Why Us ✅ · 6 Testimonials/Contact/Footer ✅ · 7 Blog/FAQ/404 ✅ · 8 mobile, speed, accessibility polish. Owner previews each step.
 
 ## Design (old, being replaced)
 
@@ -67,7 +67,7 @@ Dark cinematic theme. Brand colours: red `#8B0000`, gold `#D4AF37`, near-black `
 
 - **Missing files:** `favicon.svg`, `/images/branding/logo.png` and `/images/branding/og-image.jpg` are referenced but don't exist (no browser-tab icon; broken image in social-media link previews and SEO data).
 - **Privacy Policy / Terms of Service pages don't exist**, so their footer links are hidden (`footer.legal[].ready` in `content/contact.ts`). "Careers" just jumps to Contact.
-- **Testimonials:** the invented ones were removed in the redesign; only client-approved quotes go in `testimonials.approved` (drafts in `docs/TESTIMONIAL_DRAFTS.md`). Until then the section shows real work. **Other placeholder content:** blog articles are placeholder text with Unsplash stock photos; About also uses a stock photo; many portfolio cards say "Project asset required"; stats (150+ projects, 50+ brands, 10+ years) need confirming.
+- **Testimonials:** the invented ones were removed in the redesign; only client-approved quotes go in `testimonials.approved` (drafts in `docs/TESTIMONIAL_DRAFTS.md`). Until then the section shows real work. **Still waiting on assets:** About photo (image slot), hero video, portfolio items without media ("Visuals coming soon"). Stats (150+ projects, 50+ brands, 10+ years, 98% satisfaction) need the owner to confirm.
 - **Social links** point to "CKStudio-Music" / "ckstudio_music" accounts — confirm they're the right ones. LinkedIn link is unverified.
 - **Map pin coordinates** (17.385044, 78.486671) are central Hyderabad, not Jeedimetla.
 - **Contact details** now live in ONE file: `src/content/contact.ts` (phone, email, address, WhatsApp, socials). Only the SEO data in `AnimatedRoutes.tsx` and `index.html` still repeats them (to be tidied in step 8).

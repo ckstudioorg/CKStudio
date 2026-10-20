@@ -1,116 +1,155 @@
-import React from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { blogPosts } from '../data/blogData';
-import { Calendar, User, Clock, ArrowLeft, Tag } from 'lucide-react';
-import { motion } from 'motion/react';
+import React, { useRef } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { gsap } from '../lib/smoothScroll';
+import { revealLines, riseIn, useGsap } from '../lib/motion';
+import { articles, blogPage, formatDate, readTime, type Block } from '../content/blog';
+import { mailtoUrl, whatsappUrl } from '../content/contact';
 import SEO from '../components/SEO';
+import ArticleCover from '../components/ui/ArticleCover';
+
+const BackArrow = () => (
+    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" className="h-4 w-4">
+        <path d="M19 12H5m0 0 6 6m-6-6 6-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+);
+
+const renderBlock = (block: Block, i: number) => {
+    switch (block.type) {
+        case 'h2':
+            return <h2 key={i} className="mt-14 mb-5 font-heading text-[clamp(1.5rem,1rem+1.4vw,2.25rem)] font-semibold leading-tight tracking-[-0.02em]">{block.text}</h2>;
+        case 'list':
+            return (
+                <ul key={i} className="my-6 space-y-3">
+                    {block.items.map((item) => (
+                        <li key={item} className="flex gap-4">
+                            <span aria-hidden="true" className="mt-[0.7em] h-1.5 w-1.5 shrink-0 rounded-full bg-ck-red" />
+                            <span>{item}</span>
+                        </li>
+                    ))}
+                </ul>
+            );
+        case 'quote':
+            return (
+                <blockquote key={i} className="my-14 border-l-2 border-ck-red pl-6 md:pl-8 font-heading text-[clamp(1.4rem,1rem+1.4vw,2.2rem)] font-medium leading-[1.2] tracking-[-0.02em] text-ink">
+                    {block.text}
+                </blockquote>
+            );
+        default:
+            return <p key={i} className="my-5">{block.text}</p>;
+    }
+};
 
 const BlogPost: React.FC = () => {
     const { slug } = useParams();
-    const post = blogPosts.find(p => p.slug === slug);
+    const root = useRef<HTMLElement>(null);
+    const index = articles.findIndex((a) => a.slug === slug);
+    const post = articles[index];
+
+    useGsap(() => {
+        if (!post) return;
+        const q = gsap.utils.selector(root);
+        revealLines(q('[data-title]')[0], { start: 'top 95%' });
+        riseIn(q('[data-intro]'), q('[data-intro]')[0], { start: 'top 95%' });
+        gsap.fromTo(q('[data-cover]'), { clipPath: 'inset(0% 0% 100% 0% round 28px)' }, { clipPath: 'inset(0% 0% 0% 0% round 28px)', duration: 1.4, ease: 'expo.inOut', delay: 0.2 });
+    }, root, [slug]);
 
     if (!post) {
         return (
-            <div className="min-h-screen bg-dark-950 flex items-center justify-center text-white">
+            <div className="flex min-h-[70svh] items-center justify-center bg-paper px-5 text-center text-ink">
                 <title>Post Not Found | CK Studio</title>
                 <meta name="robots" content="noindex" />
-                <div className="text-center">
-                    <h1 className="text-4xl font-display font-bold mb-4">Post Not Found</h1>
-                    <Link to="/blog" className="text-primary-red hover:underline">← Back to Blog</Link>
+                <div>
+                    <h1 className="font-heading text-title font-semibold">{blogPage.notFound.title}</h1>
+                    <p className="mt-4 text-ink-soft">{blogPage.notFound.text}</p>
+                    <Link to="/blog" className="mt-8 inline-flex items-center gap-2 rounded-full border border-ink px-6 py-3 text-sm font-medium uppercase tracking-[0.14em] transition-colors hover:bg-ink hover:text-paper">
+                        <BackArrow /> {blogPage.back}
+                    </Link>
                 </div>
             </div>
         );
     }
 
+    const related = articles.filter((a) => a.slug !== post.slug && a.category === post.category)
+        .concat(articles.filter((a) => a.slug !== post.slug && a.category !== post.category))
+        .slice(0, 2);
+
     return (
-        <div className="min-h-screen bg-dark-950">
+        <article ref={root} className="bg-paper text-ink">
             <SEO
                 title={post.title}
                 description={post.excerpt}
-                image={post.image}
+                image={post.image ? `https://ckstudio.org${post.image}` : undefined}
                 type="article"
+                structuredData={{
+                    '@context': 'https://schema.org',
+                    '@type': 'Article',
+                    headline: post.title,
+                    description: post.excerpt,
+                    datePublished: post.date,
+                    author: { '@type': 'Organization', name: 'CK Studio' },
+                    publisher: { '@type': 'Organization', name: 'CK Studio', url: 'https://ckstudio.org' },
+                    mainEntityOfPage: `https://ckstudio.org/blog/${post.slug}`,
+                }}
             />
 
-            {/* Hero Image */}
-            <div className="relative h-[50vh] min-h-[400px] overflow-hidden">
-                <img src={post.image} alt={post.title} className="w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-dark-950 via-dark-950/60 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-8 md:p-16">
-                    <div className="max-w-4xl mx-auto">
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                        >
-                            <Link to="/blog" className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-primary-red transition-colors mb-6">
-                                <ArrowLeft className="w-4 h-4" /> Back to Blog
-                            </Link>
-                            <div className="flex flex-wrap gap-2 mb-4">
-                                {post.categories.map(cat => (
-                                    <span key={cat} className="px-3 py-1 rounded-full bg-primary-red/90 text-white text-xs font-bold">{cat}</span>
-                                ))}
-                            </div>
-                            <h1 className="text-3xl md:text-5xl font-display font-black text-white leading-tight mb-4">{post.title}</h1>
-                            <div className="flex flex-wrap items-center gap-6 text-sm text-gray-400">
-                                <span className="flex items-center gap-2"><User className="w-4 h-4" />{post.author}</span>
-                                <span className="flex items-center gap-2"><Calendar className="w-4 h-4" />{post.date}</span>
-                                <span className="flex items-center gap-2"><Clock className="w-4 h-4" />{post.readTime}</span>
-                            </div>
-                        </motion.div>
-                    </div>
+            <header className="mx-auto max-w-[1600px] px-5 md:px-10 pt-14 md:pt-20">
+                <Link to="/blog" data-intro className="inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.18em] text-ink-soft transition-colors hover:text-ck-red">
+                    <BackArrow /> {blogPage.back}
+                </Link>
+                <p data-intro className="mt-10 text-xs font-medium uppercase tracking-[0.22em] text-ck-red">{post.category}</p>
+                <h1 data-title className="mt-5 max-w-[22ch] font-heading font-semibold text-[clamp(2.25rem,1rem+4.6vw,6rem)] leading-[0.98] tracking-[-0.04em]">{post.title}</h1>
+                <p data-intro className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-xs uppercase tracking-[0.18em] text-ink-soft">
+                    <span>{post.author}</span><span>{formatDate(post.date)}</span><span>{readTime(post)}</span>
+                </p>
+                <div data-cover className="mt-12 md:mt-16 aspect-[16/9] md:aspect-[21/9] overflow-hidden rounded-[28px]">
+                    <ArticleCover article={post} index={index} large />
                 </div>
-            </div>
+            </header>
 
-            {/* Content */}
-            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2 }}
-                    className="glass-card p-8 md:p-12"
-                >
-                    <p className="text-lg text-gray-300 leading-relaxed mb-8">{post.excerpt}</p>
-                    <div className="divider-glow mb-8" />
-                    <div className="prose prose-invert prose-red max-w-none text-gray-400 leading-relaxed">
-                        <p>{post.content}</p>
+            <div className="mx-auto max-w-[1600px] px-5 md:px-10">
+                <div className="mx-auto max-w-[44rem] py-16 md:py-24">
+                    <p className="font-heading text-[clamp(1.3rem,1rem+1vw,1.8rem)] font-medium leading-[1.35] tracking-[-0.01em]">{post.excerpt}</p>
+                    <div className="mt-10 border-t border-ink-faint pt-4 text-[1.0625rem] md:text-lg leading-[1.75] text-ink/85">
+                        {post.body.map(renderBlock)}
                     </div>
-                </motion.div>
 
-                {/* Tags */}
-                <div className="mt-8 flex flex-wrap gap-2">
-                    {post.tags.map(tag => (
-                        <span key={tag} className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/[0.04] text-gray-500 rounded-full text-xs border border-white/[0.06]">
-                            <Tag className="w-3 h-3" />{tag}
-                        </span>
-                    ))}
+                    <ul className="mt-14 flex flex-wrap gap-2">
+                        {post.tags.map((tag) => (
+                            <li key={tag} className="rounded-full border border-ink-faint px-3.5 py-1.5 text-xs text-ink-soft">{tag}</li>
+                        ))}
+                    </ul>
+
+                    {/* Gentle call to action */}
+                    <aside className="mt-16 rounded-[28px] border border-ink-faint p-8 md:p-10">
+                        <h2 className="font-heading text-2xl md:text-3xl font-semibold tracking-[-0.02em]">{blogPage.articleCta.title}</h2>
+                        <p className="mt-2 text-ink-soft">{blogPage.articleCta.text}</p>
+                        <div className="mt-6 flex flex-wrap gap-3">
+                            <a href={whatsappUrl()} target="_blank" rel="noopener noreferrer" className="rounded-full bg-ck-red px-6 py-3 text-xs font-medium uppercase tracking-[0.14em] text-paper transition-colors hover:bg-ink">{blogPage.articleCta.whatsapp}</a>
+                            <a href={mailtoUrl()} className="rounded-full border border-ink px-6 py-3 text-xs font-medium uppercase tracking-[0.14em] text-ink transition-colors hover:bg-ink hover:text-paper">{blogPage.articleCta.email}</a>
+                        </div>
+                    </aside>
                 </div>
 
-                {/* Related Posts */}
-                <div className="mt-16">
-                    <h3 className="text-xl font-display font-bold text-white mb-6">Related Articles</h3>
-                    <div className="grid md:grid-cols-2 gap-6">
-                        {blogPosts
-                            .filter(p => p.slug !== post.slug)
-                            .slice(0, 2)
-                            .map(relatedPost => (
-                                <Link
-                                    key={relatedPost.slug}
-                                    to={`/blog/${relatedPost.slug}`}
-                                    className="glass-card overflow-hidden hover:border-primary-red/20 transition-all duration-300 group"
-                                >
-                                    <div className="relative h-40 overflow-hidden">
-                                        <img src={relatedPost.image} alt={relatedPost.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-dark-950 to-transparent opacity-60" />
+                {/* Related */}
+                <section aria-labelledby="related-title" className="border-t border-ink pb-28 md:pb-40 pt-14">
+                    <h2 id="related-title" className="font-heading text-title font-semibold">{blogPage.related}</h2>
+                    <ul className="mt-10 grid gap-x-6 gap-y-12 md:grid-cols-2">
+                        {related.map((a) => (
+                            <li key={a.slug}>
+                                <Link to={`/blog/${a.slug}`} className="group block">
+                                    <div className="aspect-[3/2] overflow-hidden rounded-[22px]">
+                                        <ArticleCover article={a} index={articles.indexOf(a)} className="transition-transform duration-[1200ms] ease-cinema group-hover:scale-[1.04]" />
                                     </div>
-                                    <div className="p-5">
-                                        <h4 className="text-sm font-display font-bold text-white group-hover:text-primary-red transition-colors line-clamp-2">{relatedPost.title}</h4>
-                                        <p className="text-xs text-gray-500 mt-2">{relatedPost.date} · {relatedPost.readTime}</p>
-                                    </div>
+                                    <p className="mt-6 text-[0.68rem] font-medium uppercase tracking-[0.22em] text-ck-red">{a.category}</p>
+                                    <h3 className="mt-3 font-heading text-xl md:text-2xl font-semibold leading-tight tracking-[-0.02em] transition-colors group-hover:text-ck-red">{a.title}</h3>
+                                    <p className="mt-3 text-[0.68rem] uppercase tracking-[0.18em] text-ink-soft">{formatDate(a.date)} · {readTime(a)}</p>
                                 </Link>
-                            ))}
-                    </div>
-                </div>
+                            </li>
+                        ))}
+                    </ul>
+                </section>
             </div>
-        </div>
+        </article>
     );
 };
 

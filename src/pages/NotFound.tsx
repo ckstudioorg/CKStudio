@@ -1,36 +1,46 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'motion/react';
+import { SplitText } from 'gsap/SplitText';
+import { gsap } from '../lib/smoothScroll';
+import { useGsap } from '../lib/motion';
+import { notFound } from '../content/faq';
+import Logo from '../components/brand/Logo';
 
 const NotFound: React.FC = () => {
+    const root = useRef<HTMLDivElement>(null);
+
+    useGsap(() => {
+        const q = gsap.utils.selector(root);
+        const split = SplitText.create(q('[data-code]')[0], { type: 'chars', mask: 'chars' });
+        gsap.timeline({ delay: 0.15 })
+            .from(split.chars, { yPercent: 110, duration: 1.3, ease: 'expo.out', stagger: 0.08 })
+            .from(q('[data-in]'), { y: 24, autoAlpha: 0, duration: 1, ease: 'expo.out', stagger: 0.08 }, 0.4);
+    }, root);
+
     return (
-        <div className="min-h-screen bg-dark-950 flex items-center justify-center relative overflow-hidden">
+        <div ref={root} className="flex min-h-svh flex-col bg-paper text-ink">
             <title>Page Not Found | CK Studio</title>
             <meta name="robots" content="noindex" />
-            <div className="absolute inset-0">
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary-red/5 rounded-full blur-[200px] pointer-events-none" />
+            <div className="px-5 md:px-10 py-6">
+                <Link to="/" aria-label="CK Studio home" className="text-ck-red"><Logo className="h-8 md:h-9" /></Link>
             </div>
-
-            <div className="text-center relative z-10 px-6">
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.6 }}
+            <main className="flex flex-1 flex-col items-center justify-center px-5 pb-24 text-center">
+                <p data-in className="text-xs font-medium uppercase tracking-[0.3em] text-ink-soft">Error</p>
+                <h1 className="mt-4">
+                    <span data-code className="block font-heading font-semibold leading-[0.85] tracking-[-0.06em] text-ck-red text-[clamp(8rem,4rem+22vw,22rem)]">{notFound.code}</span>
+                    <span data-in className="mt-6 block font-heading text-[clamp(1.75rem,1rem+2.4vw,3rem)] font-semibold tracking-[-0.03em]">{notFound.title}</span>
+                </h1>
+                <p data-in className="mt-5 max-w-md text-base md:text-lg text-ink-soft">{notFound.text}</p>
+                <Link
+                    data-in
+                    to="/"
+                    className="group relative mt-10 inline-flex items-center gap-3 overflow-hidden rounded-full bg-ck-red px-8 py-4 text-sm font-medium uppercase tracking-[0.14em] text-paper"
                 >
-                    <h1 className="text-8xl md:text-9xl font-display font-black text-primary-red text-glow-strong mb-4">404</h1>
-                    <h2 className="text-2xl md:text-3xl font-display font-bold text-white mb-4">Scene Not Found</h2>
-                    <p className="text-gray-500 text-lg mb-8 max-w-md mx-auto">
-                        This scene didn't make the final cut. Let's get you back to the main production.
-                    </p>
-                    <Link
-                        to="/"
-                        className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-primary-red to-crimson-800 text-white rounded-full font-bold text-base tracking-wide hover:shadow-lg hover:shadow-primary-red/30 transition-all duration-300"
-                    >
-                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M7 16l-4-4m0 0l4-4m-4 4h18" /></svg>
-                        Back to Home
-                    </Link>
-                </motion.div>
-            </div>
+                    <span aria-hidden="true" className="absolute inset-0 translate-y-full rounded-full bg-ink transition-transform duration-500 ease-cinema group-hover:translate-y-0" />
+                    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" className="relative h-4 w-4"><path d="M19 12H5m0 0 6 6m-6-6 6-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                    <span className="relative">{notFound.action}</span>
+                </Link>
+            </main>
         </div>
     );
 };

@@ -28,7 +28,7 @@ const AnimatedRoutes: React.FC = () => {
     const location = useLocation();
 
     return (
-        <Suspense fallback={<div role="status" className="min-h-screen bg-dark-950 text-white p-12">Loading page…</div>}>
+        <Suspense fallback={<div role="status" className="min-h-screen bg-paper text-ink-soft p-12">Loading page…</div>}>
         <AnimatePresence mode="wait">
             <Routes location={location}>
                 <Route path="/" element={
@@ -76,7 +76,7 @@ const AnimatedRoutes: React.FC = () => {
                                     ]
                                 }}
                             />
-                            <div className="bg-dark-950 text-white selection:bg-primary-red selection:text-white">
+                            <div className="bg-paper text-ink selection:bg-ck-red selection:text-paper">
                                 <Header activeSection="home" />
                                 <main>
                                     <div id="home"><Hero /></div>
@@ -100,9 +100,9 @@ const AnimatedRoutes: React.FC = () => {
                     <PageTransition>
                         <>
                             <SEO title="Blog | AI Film Making Insights" description="Insights into AI-powered filmmaking, advertising technology, and video production innovation." />
-                            <div className="bg-dark-950 text-white selection:bg-primary-red selection:text-white">
+                            <div className="bg-paper text-ink selection:bg-ck-red selection:text-paper">
                                 <Header activeSection="blog" />
-                                <main className="pt-20">
+                                <main className="pt-16 md:pt-20">
                                     <Blog />
                                 </main>
                                 <Footer />
@@ -112,9 +112,9 @@ const AnimatedRoutes: React.FC = () => {
                 } />
                 <Route path="/blog/:slug" element={
                     <PageTransition>
-                        <div className="bg-dark-950 text-white selection:bg-primary-red selection:text-white">
+                        <div className="bg-paper text-ink selection:bg-ck-red selection:text-paper">
                             <Header activeSection="blog" />
-                            <main className="pt-20">
+                            <main className="pt-16 md:pt-20">
                                 <BlogPost />
                             </main>
                             <Footer />
@@ -124,10 +124,9 @@ const AnimatedRoutes: React.FC = () => {
                 <Route path="/faq" element={
                     <PageTransition>
                         <>
-                            <SEO title="FAQ | AI Film Making Questions" description="Frequently asked questions about CK Studio's AI-powered film production and video production services." />
-                            <div className="bg-dark-950 text-white selection:bg-primary-red selection:text-white">
+                            <div className="bg-paper text-ink selection:bg-ck-red selection:text-paper">
                                 <Header activeSection="faq" />
-                                <main className="pt-20">
+                                <main className="pt-16 md:pt-20">
                                     <FAQ />
                                 </main>
                                 <Footer />

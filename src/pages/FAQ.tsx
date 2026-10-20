@@ -1,166 +1,130 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { Plus, Minus, Search } from 'lucide-react';
+import React, { useId, useMemo, useRef, useState } from 'react';
+import { gsap, ScrollTrigger } from '../lib/smoothScroll';
+import { revealLines, riseIn, useGsap } from '../lib/motion';
+import { faqPage, faqs } from '../content/faq';
+import SEO from '../components/SEO';
+import SectionLabel from '../components/ui/SectionLabel';
 
-interface FAQItem {
-    question: string;
-    answer: string;
-    category: string;
-}
-
-const sampleFAQs: FAQItem[] = [
-    {
-        question: "What services does CK Studio offer?",
-        answer: "We offer commercials, designing, movie works, social media management, and visual effects & CG works. This includes AI ad films, TVCs, creative designing, corporate films, industrial films, brand films, pitch decks, publicity designs, lyrical videos, DI/color correction, DCP outputs, AI compositing, CGI enhancements, product videos, AI-integrated web designing, and Meta ad campaigns.",
-        category: "General"
-    },
-    {
-        question: "How does AI enhance your film production process?",
-        answer: "AI is integrated into every stage of our workflow. From AI-generated storyboards and script analysis in pre-production, to AI-assisted cinematography during shooting, and neural color grading, AI editing, and intelligent VFX in post-production. This enables faster turnaround, higher quality, and innovative creative possibilities.",
-        category: "AI Technology"
-    },
-    {
-        question: "Do you work with clients outside Hyderabad?",
-        answer: "Yes! While we are based in Hyderabad, we work with clients across India and globally. We handle logistics for out-of-station shoots to ensure seamless production. Our AI-powered workflow also enables efficient remote collaboration.",
-        category: "General"
-    },
-    {
-        question: "What is the typical timeline for an AI-powered ad film?",
-        answer: "With our AI-accelerated workflow, a typical ad film takes 1-3 weeks from concept to final delivery — significantly faster than traditional production. This includes AI-assisted pre-production (scripting, storyboarding), production (shooting), and AI-powered post-production (editing, color grading, VFX, sound design).",
-        category: "Production"
-    },
-    {
-        question: "Can you help with scriptwriting and concept development?",
-        answer: "Absolutely. We use a combination of our creative team's expertise and AI-powered tools for concept development, scriptwriting, and storyboarding. AI helps us generate multiple creative directions quickly, while our experienced team curates and refines the best ideas.",
-        category: "Pre-Production"
-    },
-    {
-        question: "What makes CK Studio different from other production houses?",
-        answer: "CK Studio is one of India's few AI-first ad film production studios. We combine 10+ years of cinematic expertise with cutting-edge AI technology. This unique blend allows us to deliver Hollywood-grade quality at competitive pricing with faster turnaround times.",
-        category: "General"
-    },
-    {
-        question: "What AI technologies do you use in production?",
-        answer: "We utilize a range of AI technologies including generative AI for concept development, neural rendering for VFX, machine learning for color grading and audio mastering, AI-powered editing tools, and intelligent format optimization for multi-platform delivery.",
-        category: "AI Technology"
-    },
-    {
-        question: "How do you ensure quality with AI-assisted production?",
-        answer: "AI is a tool that enhances our creative process, not replaces it. Every AI-generated output goes through rigorous human quality review by our experienced creative team. We use AI to accelerate the process while maintaining the highest standards of cinematic quality.",
-        category: "Quality"
-    },
-];
+const pad = (n: number) => String(n).padStart(2, '0');
 
 const FAQ: React.FC = () => {
-    const [activeIndex, setActiveIndex] = useState<number | null>(null);
-    const [searchTerm, setSearchTerm] = useState('');
+    const root = useRef<HTMLDivElement>(null);
+    const baseId = useId();
+    const [open, setOpen] = useState<number | null>(0);
+    const [search, setSearch] = useState('');
+    const [category, setCategory] = useState('All');
 
-    const toggleAccordion = (index: number) => {
-        setActiveIndex(activeIndex === index ? null : index);
-    };
+    const categories = useMemo(() => ['All', ...Array.from(new Set(faqs.map((f) => f.category)))], []);
+    const term = search.trim().toLowerCase();
+    const filtered = faqs
+        .map((faq, i) => ({ ...faq, i }))
+        .filter((f) => (category === 'All' || f.category === category) && (!term || `${f.question} ${f.answer}`.toLowerCase().includes(term)));
 
-    const filteredFAQs = sampleFAQs.filter(faq =>
-        faq.question.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        faq.answer.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    useGsap(() => {
+        const q = gsap.utils.selector(root);
+        revealLines(q('[data-title]')[0], { start: 'top 95%' });
+        riseIn(q('[data-intro]'), q('[data-intro]')[0], { start: 'top 95%' });
+        riseIn(q('[data-row]'), q('[data-list]')[0], { stagger: 0.06, start: 'top 95%' });
+    }, root);
 
     return (
-        <div className="min-h-screen bg-dark-950">
-            {/* Hero Banner */}
-            <div className="relative py-24 overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-b from-dark-800 to-dark-950" />
-                <div className="absolute inset-0 opacity-20 pointer-events-none" style={{
-                    backgroundImage: 'radial-gradient(circle, rgba(139,0,0,0.06) 1px, transparent 1px)',
-                    backgroundSize: '24px 24px',
-                }} />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-primary-red/5 rounded-full blur-[180px] pointer-events-none" />
+        <div ref={root} className="bg-paper text-ink">
+            <SEO
+                title="FAQ | AI Film Making Questions"
+                description="Frequently asked questions about CK Studio's AI-powered film production and video production services."
+                structuredData={{
+                    '@context': 'https://schema.org',
+                    '@type': 'FAQPage',
+                    mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.question, acceptedAnswer: { '@type': 'Answer', text: f.answer } })),
+                }}
+            />
+            <div className="mx-auto grid max-w-[1600px] gap-14 px-5 md:px-10 pt-16 md:pt-24 pb-28 md:pb-40 lg:grid-cols-12 lg:gap-10">
+                {/* Heading, search and categories */}
+                <div className="lg:col-span-5">
+                    <div className="lg:sticky lg:top-32">
+                        <SectionLabel>{faqPage.label}</SectionLabel>
+                        <h1 data-title className="mt-8 font-heading font-semibold text-[clamp(2.75rem,1rem+4.4vw,6.5rem)] leading-[0.95] tracking-[-0.04em]">
+                            {faqPage.title.lead} <span className="text-ck-red">{faqPage.title.highlight}</span>
+                        </h1>
+                        <p data-intro className="mt-8 max-w-md text-base md:text-lg leading-relaxed text-ink-soft">{faqPage.intro}</p>
 
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-                    <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.08] text-xs font-semibold text-gray-400 uppercase tracking-[0.2em] mb-6"
-                    >
-                        <span className="w-1.5 h-1.5 rounded-full bg-primary-red" />
-                        Help Center
-                    </motion.div>
-                    <motion.h1
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="text-4xl md:text-6xl font-display font-black mb-6"
-                    >
-                        <span className="heading-gradient">Frequently Asked</span>{' '}
-                        <span className="heading-red">Questions</span>
-                    </motion.h1>
-                    <motion.p
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.2 }}
-                        className="text-lg text-gray-500 max-w-2xl mx-auto"
-                    >
-                        Everything you need to know about our AI-powered production services, process, and pricing.
-                    </motion.p>
-                </div>
-            </div>
-
-            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-                {/* Search Bar */}
-                <div className="relative mb-12">
-                    <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-600 w-5 h-5" />
-                    <input
-                        type="text"
-                        placeholder="Search for answers..."
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                        className="w-full pl-12 pr-4 py-4 bg-white/[0.03] border border-white/[0.08] rounded-xl focus:border-primary-red/50 focus:outline-none text-base text-white placeholder:text-gray-600 backdrop-blur-sm transition-colors"
-                    />
-                </div>
-
-                <div className="space-y-3">
-                    {filteredFAQs.map((faq, index) => (
-                        <motion.div
-                            key={index}
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: index * 0.05 }}
-                            className="glass-card overflow-hidden hover:border-primary-red/20 transition-colors"
-                        >
-                            <button
-                                onClick={() => toggleAccordion(index)}
-                                className="w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none group"
-                            >
-                                <span className="text-base font-semibold text-gray-200 pr-8 group-hover:text-white transition-colors">{faq.question}</span>
-                                <span className="flex-shrink-0">
-                                    {activeIndex === index ? (
-                                        <Minus className="w-5 h-5 text-primary-red" />
-                                    ) : (
-                                        <Plus className="w-5 h-5 text-gray-600 group-hover:text-gray-400 transition-colors" />
-                                    )}
-                                </span>
-                            </button>
-                            <AnimatePresence>
-                                {activeIndex === index && (
-                                    <motion.div
-                                        initial={{ height: 0, opacity: 0 }}
-                                        animate={{ height: 'auto', opacity: 1 }}
-                                        exit={{ height: 0, opacity: 0 }}
-                                        transition={{ duration: 0.3 }}
-                                    >
-                                        <div className="px-6 pb-6 text-gray-400 leading-relaxed text-sm border-t border-white/[0.04] pt-4">
-                                            {faq.answer}
-                                        </div>
-                                    </motion.div>
-                                )}
-                            </AnimatePresence>
-                        </motion.div>
-                    ))}
-                </div>
-
-                {filteredFAQs.length === 0 && (
-                    <div className="text-center py-12 text-gray-600">
-                        No questions found matching your search.
+                        <label data-intro className="relative mt-10 block max-w-md">
+                            <span className="sr-only">Search questions</span>
+                            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-soft">
+                                <circle cx="11" cy="11" r="7" stroke="currentColor" strokeWidth="1.5" /><path d="m20 20-3.5-3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                            </svg>
+                            <input
+                                type="search"
+                                value={search}
+                                onChange={(e) => setSearch(e.target.value)}
+                                placeholder={faqPage.searchPlaceholder}
+                                className="w-full rounded-full border border-ink-faint bg-paper py-3.5 pl-11 pr-4 text-sm text-ink placeholder:text-ink-soft focus:border-ck-red focus:outline-none"
+                            />
+                        </label>
+                        <div data-intro className="mt-5 flex flex-wrap gap-2">
+                            {categories.map((c) => (
+                                <button
+                                    key={c}
+                                    type="button"
+                                    onClick={() => setCategory(c)}
+                                    aria-pressed={category === c}
+                                    className={`rounded-full border px-4 py-2 text-xs font-medium uppercase tracking-[0.16em] transition-colors duration-300 ${
+                                        category === c ? 'border-ck-red bg-ck-red text-paper' : 'border-ink-faint text-ink hover:border-ck-red hover:text-ck-red'
+                                    }`}
+                                >
+                                    {c}
+                                </button>
+                            ))}
+                        </div>
                     </div>
-                )}
+                </div>
+
+                {/* Questions */}
+                <div data-list className="lg:col-span-7">
+                    {filtered.length === 0 && <p className="border-t border-ink py-16 text-ink-soft">{faqPage.empty}</p>}
+                    <ul>
+                        {filtered.map((faq) => {
+                            const isOpen = open === faq.i;
+                            const panelId = `${baseId}-${faq.i}`;
+                            return (
+                                <li key={faq.question} data-row className="border-t border-ink">
+                                    <h2>
+                                        <button
+                                            type="button"
+                                            onClick={() => setOpen(isOpen ? null : faq.i)}
+                                            aria-expanded={isOpen}
+                                            aria-controls={panelId}
+                                            className="group flex w-full items-start gap-4 md:gap-8 py-6 md:py-7 text-left"
+                                        >
+                                            <span className={`w-8 pt-1.5 text-xs font-medium tabular-nums tracking-[0.2em] transition-colors ${isOpen ? 'text-ck-red' : 'text-ink-soft'}`}>{pad(faq.i + 1)}</span>
+                                            <span className={`flex-1 font-heading text-[clamp(1.2rem,1rem+0.9vw,1.75rem)] font-semibold leading-snug tracking-[-0.02em] transition-colors duration-300 ${isOpen ? 'text-ck-red' : 'group-hover:text-ck-red'}`}>
+                                                {faq.question}
+                                            </span>
+                                            <span aria-hidden="true" className={`relative mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border transition-colors duration-500 ${isOpen ? 'border-ck-red bg-ck-red text-paper' : 'border-ink-faint group-hover:border-ck-red group-hover:text-ck-red'}`}>
+                                                <span className="absolute h-[1.5px] w-3.5 bg-current" />
+                                                <span className={`absolute h-3.5 w-[1.5px] bg-current transition-transform duration-500 ease-cinema ${isOpen ? 'scale-y-0' : ''}`} />
+                                            </span>
+                                        </button>
+                                    </h2>
+                                    <div
+                                        id={panelId}
+                                        role="region"
+                                        aria-label={faq.question}
+                                        onTransitionEnd={(e) => { if (e.propertyName === 'grid-template-rows') ScrollTrigger.refresh(); }}
+                                        className={`grid transition-[grid-template-rows] duration-700 ease-cinema ${isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}
+                                    >
+                                        <div className="overflow-hidden">
+                                            <p className={`pb-8 pl-12 md:pl-16 pr-12 text-base md:text-lg leading-relaxed text-ink-soft transition-opacity duration-500 ${isOpen ? 'opacity-100 delay-150' : 'opacity-0'}`}>
+                                                {faq.answer}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </li>
+                            );
+                        })}
+                    </ul>
+                    {filtered.length > 0 && <div className="h-px bg-ink" />}
+                </div>
             </div>
         </div>
     );
