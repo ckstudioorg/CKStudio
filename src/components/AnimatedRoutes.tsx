@@ -3,9 +3,9 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'motion/react';
 import Header from './layout/Header';
 import Hero from '../sections/Hero';
-import About from './About';
-import VisionMission from './VisionMission';
-import Philosophy from './Philosophy';
+import About from '../sections/About';
+import VisionMission from '../sections/VisionMission';
+import Philosophy from '../sections/Philosophy';
 import Services from './Services';
 import AIWorkflow from './AIWorkflow';
 import WhyUs from './WhyUs';
@@ -25,12 +25,8 @@ const DesignPreview = import.meta.env.DEV ? lazy(() => import('../pages/DesignPr
 import SEO from './SEO';
 import PageTransition from './PageTransition';
 
-interface AnimatedRoutesProps {
-    activeSection: string;
-    sectionRefs: any;
-}
 
-const AnimatedRoutes: React.FC<AnimatedRoutesProps> = ({ activeSection, sectionRefs }) => {
+const AnimatedRoutes: React.FC = () => {
     const location = useLocation();
 
     return (
@@ -83,19 +79,19 @@ const AnimatedRoutes: React.FC<AnimatedRoutesProps> = ({ activeSection, sectionR
                                 }}
                             />
                             <div className="bg-dark-950 text-white selection:bg-primary-red selection:text-white">
-                                <Header activeSection={activeSection} />
+                                <Header activeSection="home" />
                                 <main>
-                                    <div id="home" ref={sectionRefs.home}><Hero /></div>
-                                    <div id="about" ref={sectionRefs.about}><About /></div>
+                                    <div id="home"><Hero /></div>
+                                    <div id="about"><About /></div>
                                     <Philosophy />
                                     <VisionMission />
-                                    <div id="services" ref={sectionRefs.services}><Services /></div>
+                                    <div id="services"><Services /></div>
                                     <AIWorkflow />
                                     <Clients />
-                                    <div id="portfolio" ref={sectionRefs.portfolio}><Portfolio /></div>
+                                    <div id="portfolio"><Portfolio /></div>
                                     <div id="why-us"><WhyUs /><StatsCounter /></div>
                                     <Testimonials />
-                                    <div id="contact" ref={sectionRefs.contact}><Contact /><CTABanner /></div>
+                                    <div id="contact"><Contact /><CTABanner /></div>
                                 </main>
                                 <Footer />
                             </div>

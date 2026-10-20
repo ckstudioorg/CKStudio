@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Logo from '../brand/Logo';
-import { scrollToSection, setScrollLocked } from '../../lib/smoothScroll';
+import { ScrollTrigger, scrollToSection, setScrollLocked } from '../../lib/smoothScroll';
 
 interface HeaderProps {
     activeSection: string;
@@ -19,6 +19,7 @@ const navLinks = [
 ];
 
 const pageRoutes = new Set(['blog', 'faq']);
+const trackedSections = ['home', 'about', 'services', 'portfolio', 'contact'];
 const ease = [0.16, 1, 0.3, 1] as const;
 
 /** Text that rolls up to a copy of itself on hover. */
@@ -45,6 +46,24 @@ const Header: React.FC<HeaderProps> = ({ activeSection }) => {
     const location = useLocation();
     const navigate = useNavigate();
     const isHomePage = location.pathname === '/';
+    const [tracked, setTracked] = useState(activeSection);
+
+    // On the home page, highlight the menu item for the section currently in the middle of the screen
+    useEffect(() => {
+        setTracked(activeSection);
+        if (!isHomePage) return;
+        const triggers = trackedSections.flatMap((id) => {
+            const el = document.getElementById(id);
+            if (!el) return [];
+            return [ScrollTrigger.create({
+                trigger: el,
+                start: 'top 45%',
+                end: 'bottom 45%',
+                onToggle: (self) => setTracked((current) => (self.isActive ? id : current === id ? '' : current)),
+            })];
+        });
+        return () => triggers.forEach((t) => t.kill());
+    }, [isHomePage, activeSection]);
 
     // Solid background after scrolling, hide on scroll down / show on scroll up, reading progress line
     useEffect(() => {
@@ -114,7 +133,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection }) => {
                         {/* Desktop navigation */}
                         <nav aria-label="Main" className="hidden lg:flex items-center gap-1">
                             {navLinks.map((link) => {
-                                const active = activeSection === link.id;
+                                const active = tracked === link.id;
                                 return (
                                     <button
                                         key={link.id}
@@ -189,7 +208,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection }) => {
                                         exit={{ y: '110%' }}
                                         transition={{ duration: 0.8, ease, delay: 0.15 + index * 0.05 }}
                                         className={`flex w-full items-baseline gap-4 py-2 text-left font-heading text-[clamp(2.4rem,9vw,4.5rem)] font-semibold leading-[1.05] tracking-[-0.03em] ${
-                                            activeSection === link.id ? 'text-ck-red' : 'text-ink'
+                                            tracked === link.id ? 'text-ck-red' : 'text-ink'
                                         }`}
                                     >
                                         <span className="font-body text-xs font-medium tracking-[0.2em] text-ink-soft">0{index + 1}</span>
