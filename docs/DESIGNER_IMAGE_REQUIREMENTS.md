@@ -6,10 +6,10 @@ This is the handoff list for the designer. Please provide optimized web assets u
 
 | Color | Hex | Use |
 | --- | --- | --- |
-| Gold | `#D4AF37` | Premium accents, highlights, 20% CK magic |
-| Red | `#8B0000` | Primary brand action color |
-| Black | `#111111` | Main background and dark surfaces |
-| White / Silver | `#E6E6E6` | Text, client logo monochrome, 80% team |
+| White | `#FFFFFF` | Background of the whole site (2026 redesign) |
+| Red | `#8B0000` | Headlines, key words, buttons, logo |
+| Black | `#111111` | All other text |
+| Gold | `#D4AF37` | Rare, special moments only (e.g. the 20% "CK magic") |
 
 ## General Rules
 
@@ -31,8 +31,9 @@ This is the handoff list for the designer. Please provide optimized web assets u
 | Favicon | Browser favicon | 32 x 32, 48 x 48 | `svg`, `ico`, `png` | `public/favicon.svg`, `public/favicon.ico` |
 | App icon | Mobile/social app icon | 180 x 180, 512 x 512 | `png` | `public/images/branding/apple-touch-icon.png`, `public/images/branding/icon-512.png` |
 | Social preview | Open Graph preview | 1200 x 630 px | `jpg` or `webp` | `public/images/branding/og-image.jpg` |
-| Hero | Cinematic hero loop | 1920 x 1080 px, 10-20 sec loop, no important audio | `mp4` H.264 | `public/images/hero/ckstudio-hero-loop.mp4` |
-| Hero | Hero fallback poster | 1920 x 1080 px | `webp` | `public/images/hero/ckstudio-hero-poster.webp` |
+| Hero | Scroll-controlled hero video (plays forward/back as visitors scroll) | 1920 x 1080 px, 5-8 sec, one smooth continuous shot, no cuts, no text, no audio; starts and ends on (or fades to) pure white | `mp4`, highest quality export (Claude converts it for scrubbing) | `public/videos/hero-desktop.mp4` |
+| Hero | Phone version (recommended) | 1080 x 1920 px vertical, same rules | `mp4` | `public/videos/hero-mobile.mp4` |
+| Hero | Poster (first frame, shown while loading) | 1920 x 1080 px | `webp` | `public/videos/hero-poster.webp` |
 | About | AI film production image | 1200 x 1500 px, 4:5 vertical | `webp` | `public/images/about/ai-film-production.webp` |
 | Contact | Connect/social image | 800 x 800 px | `webp` | `public/images/contact/connect-with-ck-studio.webp` |
 
@@ -57,7 +58,7 @@ Optional for each portfolio item: provide a 1920 x 1080 poster version for futur
 Provide each logo in two versions:
 
 - Full-color logo for future detailed client sections.
-- Single-color silver or white logo for the current dark marquee.
+- Single-color black (or brand red) logo for the white site. (The partners strip currently shows names; logos can replace them once all are supplied.)
 
 Preferred format: `svg`. Fallback: transparent `png`, minimum 1000 px wide for horizontal logos or 800 x 800 px for square marks.
 
@@ -103,4 +104,6 @@ clients/
 blog/
 ```
 
-Also include a short note listing any fonts used inside logo artwork and whether each logo is approved for use on a dark background.
+Also include a short note listing any fonts used inside logo artwork. The site is now white, so logos must work on a white background (a dark-background version is a bonus).
+
+Note: interim icons and the link-preview image (`public/favicon-*.png`, `public/images/branding/`) were generated from the current logo on 2026-10-21. Final designer files with the same names simply replace them.

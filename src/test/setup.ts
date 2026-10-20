@@ -1,7 +1,6 @@
 import '@testing-library/jest-dom/vitest';
 import { afterEach, beforeEach, vi } from 'vitest';
 import { cleanup } from '@testing-library/react';
-import { setupIntersectionMocking, resetIntersectionMocking } from 'react-intersection-observer/test-utils';
 
 // Defined up front too, because GSAP's ScrollTrigger reads matchMedia as soon as it's imported.
 const mockMatchMedia = () => Object.defineProperty(window, 'matchMedia', { configurable: true, value: vi.fn((query: string) => ({
@@ -12,9 +11,8 @@ const mockMatchMedia = () => Object.defineProperty(window, 'matchMedia', { confi
 mockMatchMedia();
 
 beforeEach(() => {
-  setupIntersectionMocking(vi.fn);
   mockMatchMedia();
   window.scrollTo = vi.fn();
   Element.prototype.scrollIntoView = vi.fn();
 });
-afterEach(() => { cleanup(); resetIntersectionMocking(); });
+afterEach(() => { cleanup(); });

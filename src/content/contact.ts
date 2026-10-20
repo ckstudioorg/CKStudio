@@ -7,7 +7,16 @@ export const contact = {
     phone: { display: '9700 970 762', international: '+91 9700 970 762', tel: '+919700970762' },
     email: 'ckstudio.org@gmail.com',
     emailSubject: 'Inquiry from CK Studio Website',
-    address: { lines: ['CK STUDIO, 11-008 N/R, Gajularamaram,', 'IDA Jeedimetla, Hyderabad.'] },
+    address: {
+        lines: ['CK STUDIO, 11-008 N/R, Gajularamaram,', 'IDA Jeedimetla, Hyderabad.'],
+        // Structured version for search engines
+        street: '11-008 N/R, Gajularamaram, IDA Jeedimetla',
+        city: 'Hyderabad',
+        region: 'Telangana',
+        postalCode: '500055',
+        country: 'IN',
+    },
+    hours: { days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'], opens: '09:00', closes: '18:00' },
     mapsUrl: 'https://maps.google.com/?q=CK+Studio+11-008+N%2FR+Gajularamaram+IDA+Jeedimetla+Hyderabad',
     whatsapp: { number: '919700970762', message: "Hi! I'm interested in AI-powered ad film production." },
     website: { label: 'www.ckstudio.org', url: 'https://ckstudio.org' },

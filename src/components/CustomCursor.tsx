@@ -1,80 +1,65 @@
 import React, { useEffect, useState } from 'react';
-import { motion } from 'motion/react';
+import { motion, useMotionValue, useSpring } from 'motion/react';
 
+/**
+ * Brand-red dot + ring that follows the mouse. Only on mouse/trackpad devices that allow motion
+ * (never on phones or for reduced-motion visitors), and hidden until the mouse first moves.
+ * Uses motion values, so following the mouse doesn't re-render the page.
+ */
 const CustomCursor: React.FC = () => {
-    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-    const [isHovering, setIsHovering] = useState(false);
+    const [enabled] = useState(() =>
+        typeof window !== 'undefined' && window.matchMedia('(pointer: fine) and (prefers-reduced-motion: no-preference)').matches,
+    );
+    const [visible, setVisible] = useState(false);
+    const [hovering, setHovering] = useState(false);
+    const x = useMotionValue(-100);
+    const y = useMotionValue(-100);
+    const dotX = useSpring(x, { stiffness: 700, damping: 40, mass: 0.4 });
+    const dotY = useSpring(y, { stiffness: 700, damping: 40, mass: 0.4 });
+    const ringX = useSpring(x, { stiffness: 260, damping: 26, mass: 0.7 });
+    const ringY = useSpring(y, { stiffness: 260, damping: 26, mass: 0.7 });
 
     useEffect(() => {
-        const updateMousePosition = (e: MouseEvent) => {
-            setMousePosition({
-                x: e.clientX,
-                y: e.clientY
-            });
+        if (!enabled) return;
+        document.documentElement.classList.add('has-custom-cursor');
+        const move = (e: MouseEvent) => {
+            x.set(e.clientX);
+            y.set(e.clientY);
+            setVisible(true);
         };
-
-        const handleMouseOver = (e: MouseEvent) => {
+        const over = (e: MouseEvent) => {
             const target = e.target as HTMLElement;
-            if (target.tagName === 'A' || target.tagName === 'BUTTON' || target.closest('a') || target.closest('button')) {
-                setIsHovering(true);
-            } else {
-                setIsHovering(false);
-            }
+            setHovering(!!target.closest('a, button, [role="button"], input, label'));
         };
-
-        window.addEventListener('mousemove', updateMousePosition);
-        window.addEventListener('mouseover', handleMouseOver);
-
+        const leave = () => setVisible(false);
+        window.addEventListener('mousemove', move);
+        window.addEventListener('mouseover', over);
+        document.documentElement.addEventListener('mouseleave', leave);
         return () => {
-            window.removeEventListener('mousemove', updateMousePosition);
-            window.removeEventListener('mouseover', handleMouseOver);
+            document.documentElement.classList.remove('has-custom-cursor');
+            window.removeEventListener('mousemove', move);
+            window.removeEventListener('mouseover', over);
+            document.documentElement.removeEventListener('mouseleave', leave);
         };
-    }, []);
+    }, [enabled, x, y]);
+
+    if (!enabled) return null;
 
     return (
-        <>
-            {/* Main Dot */}
+        <div aria-hidden="true" className={`pointer-events-none fixed inset-0 z-[9999] transition-opacity duration-300 ${visible ? 'opacity-100' : 'opacity-0'}`}>
             <motion.div
-                className="fixed top-0 left-0 w-4 h-4 bg-red-600 rounded-full pointer-events-none z-[9999]"
-                style={{
-                    translateX: "-50%",
-                    translateY: "-50%",
-                }}
-                animate={{
-                    x: mousePosition.x,
-                    y: mousePosition.y,
-                    scale: isHovering ? 1.5 : 1,
-                }}
-                transition={{
-                    type: "spring",
-                    stiffness: 500,
-                    damping: 28,
-                    mass: 0.5
-                }}
+                className="absolute left-0 top-0 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-ck-red"
+                style={{ x: dotX, y: dotY }}
+                animate={{ scale: hovering ? 0 : 1 }}
+                transition={{ duration: 0.25 }}
             />
-            
-            {/* Spotlight / Glow Trail */}
             <motion.div
-                className="fixed top-0 left-0 w-8 h-8 border-2 border-red-600 rounded-full pointer-events-none z-[9998]"
-                style={{
-                    translateX: "-50%",
-                    translateY: "-50%",
-                }}
-                animate={{
-                    x: mousePosition.x,
-                    y: mousePosition.y,
-                    scale: isHovering ? 2.5 : 1,
-                    opacity: isHovering ? 0.8 : 0.4,
-                    backgroundColor: isHovering ? 'rgba(139, 0, 0, 0.1)' : 'transparent'
-                }}
-                transition={{
-                    type: "spring",
-                    stiffness: 250,
-                    damping: 20,
-                    mass: 0.8
-                }}
+                className="absolute left-0 top-0 h-9 w-9 -translate-x-1/2 -translate-y-1/2 rounded-full border border-ck-red"
+                style={{ x: ringX, y: ringY }}
+                animate={{ scale: hovering ? 1.8 : 1, backgroundColor: hovering ? 'rgba(139,0,0,0.12)' : 'rgba(139,0,0,0)' }}
+                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
             />
-        </>
+        </div>
     );
 };
 

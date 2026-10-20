@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, useLocation } from 'react-router-dom';
+import { MotionConfig } from 'motion/react';
 import CustomCursor from './components/CustomCursor';
 import AnimatedRoutes from './components/AnimatedRoutes';
 import WhatsAppWidget from './components/WhatsAppWidget';
@@ -39,14 +40,14 @@ const App: React.FC = () => {
     useEffect(() => startSmoothScroll(), []);
 
     return (
-        <>
+        <MotionConfig reducedMotion="user">
             <CustomCursor />
             <WhatsAppWidget />
             <Router>
                 <ScrollToTop />
                 <AnimatedRoutes />
             </Router>
-        </>
+        </MotionConfig>
     );
 };
 

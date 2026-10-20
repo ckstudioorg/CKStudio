@@ -113,8 +113,24 @@ const Header: React.FC<HeaderProps> = ({ activeSection }) => {
 
     const solid = scrolled || isMenuOpen || !isHomePage;
 
+    const skipToContent = (e: React.MouseEvent) => {
+        e.preventDefault();
+        const main = document.getElementById('main');
+        if (!main) return;
+        main.focus({ preventScroll: true });
+        scrollToSection('main');
+    };
+
     return (
         <>
+            {/* Keyboard shortcut past the menu; only visible when focused with Tab */}
+            <a
+                href="#main"
+                onClick={skipToContent}
+                className="fixed left-4 top-4 z-[60] -translate-y-24 rounded-full bg-ck-red px-5 py-3 text-sm font-medium text-paper transition-transform focus:translate-y-0"
+            >
+                Skip to content
+            </a>
             <motion.header
                 className="fixed inset-x-0 top-0 z-50"
                 initial={{ y: -100 }}
