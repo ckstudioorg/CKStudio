@@ -38,14 +38,43 @@ export const visionMission = {
     },
     mission: {
         label: 'Mission',
+        /** Each point opens to a short explanation and a link (to a page, a home-page section like '/#portfolio', or an article) */
         items: [
-            'Pioneer AI-Driven Filmmaking',
-            'Visual Excellence at Scale',
-            'Intelligent Creative Marketing',
-            'Deliver Beyond Expectations',
-            'Innovate with AI Technology',
-            'Foster Human-AI Collaboration',
-            'Inspire the Future of Ads',
+            {
+                title: 'Pioneer AI-Driven Filmmaking',
+                text: 'AI is part of our films from day one — concept frames, pre-looks and complete AI ad films — so ideas can be seen and tested before money is spent on a shoot.',
+                link: { label: 'AI ad films and commercials', to: '/services/ad-films-and-commercials/' },
+            },
+            {
+                title: 'Visual Excellence at Scale',
+                text: 'Every frame is graded, composited and checked by people — whether it is one hero film or dozens of versions for every screen and platform.',
+                link: { label: 'VFX and CG works', to: '/services/vfx-and-cg/' },
+            },
+            {
+                title: 'Intelligent Creative Marketing',
+                text: 'Films, designs and social media planned together, so a campaign looks and feels like one brand everywhere it appears.',
+                link: { label: 'Social media and web design', to: '/services/social-media-and-web-design/' },
+            },
+            {
+                title: 'Deliver Beyond Expectations',
+                text: 'Clear plans, honest timelines and the finishing touches you did not have to ask for — on every project, large or small.',
+                link: { label: 'See our work', to: '/#portfolio' },
+            },
+            {
+                title: 'Innovate with AI Technology',
+                text: 'We try new AI tools as they arrive and keep the ones that genuinely make the work better — and we are open about what AI can and cannot do yet.',
+                link: { label: 'What AI can and cannot do in ad films', to: '/blog/ai-ad-films-what-ai-can-and-cannot-do/' },
+            },
+            {
+                title: 'Foster Human-AI Collaboration',
+                text: 'AI speeds up the work; our editors, colourists and designers make the decisions. That balance keeps the results feeling human.',
+                link: { label: 'Movie post-production', to: '/services/movie-post-production/' },
+            },
+            {
+                title: 'Inspire the Future of Ads',
+                text: 'We share what we learn through our articles and our work, to help brands and filmmakers in Hyderabad and beyond make bolder ads.',
+                link: { label: 'Read our blog', to: '/blog/' },
+            },
         ],
     },
 };
