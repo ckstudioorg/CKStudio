@@ -162,7 +162,7 @@ const Hero: React.FC = () => {
 
     // Final hero layout: shown at the end of the logo animation (or straight away for reduced motion)
     const finalLayout = (
-        <div data-final-wrap className={`relative z-10 mx-auto flex max-w-[1600px] flex-col px-5 pb-6 pt-24 md:px-10 md:pb-8 md:pt-28 ${reduced ? 'min-h-svh' : 'h-full'}`}>
+        <div data-final-wrap className={`relative z-10 mx-auto flex max-w-[1600px] flex-col px-5 pb-6 pt-24 md:px-10 md:pb-8 md:pt-[min(7rem,14svh)] ${reduced ? 'min-h-svh' : 'h-full'}`}>
             <div data-final className="flex items-center justify-between text-[0.7rem] md:text-xs uppercase tracking-[0.28em]">
                 <Badge />
                 <span className="hidden md:inline text-ink-soft">{hero.scrollHint}</span>
@@ -170,7 +170,7 @@ const Hero: React.FC = () => {
 
             <h1 className="mt-6 md:mt-8 flex flex-1 flex-col justify-center font-heading font-semibold">
                 <span className="block overflow-hidden pb-[0.04em]">
-                    <span data-final-line className="block text-ck-red text-[clamp(3.6rem,1rem+10vw,9.5rem)] leading-[0.9] tracking-[-0.045em]">
+                    <span data-final-line className="block text-ck-red text-[min(clamp(3.6rem,1rem+10vw,9.5rem),calc(20svh_-_2.5rem))] leading-[0.9] tracking-[-0.045em]">
                         {hero.headline.first}
                     </span>
                 </span>
@@ -179,17 +179,17 @@ const Hero: React.FC = () => {
                 <span aria-hidden="true" className="my-5 md:my-7 flex items-center gap-4 md:gap-7">
                     <span data-final-rule className="hidden md:block h-[2px] flex-1 origin-right bg-ck-red" />
                     <img data-final src={taglineUrl} alt="" className="block h-auto w-[min(68vw,560px)]" />
-                    <span data-final-rule className="block h-px flex-1 origin-left bg-ink-faint" />
+                    <span data-final-rule className="block h-[2px] flex-1 origin-left bg-ck-red" />
                 </span>
 
                 <span className="block self-end text-right">
                     <span className="block overflow-hidden pb-[0.04em]">
-                        <span data-final-line className="block text-ink text-[clamp(3.6rem,1rem+10vw,9.5rem)] leading-[0.9] tracking-[-0.045em]">
+                        <span data-final-line className="block text-ink text-[min(clamp(3.6rem,1rem+10vw,9.5rem),calc(20svh_-_2.5rem))] leading-[0.9] tracking-[-0.045em]">
                             {hero.headline.second}
                         </span>
                     </span>
                     <span className="block overflow-hidden">
-                        <span data-final-line className="mt-2 block text-ck-red text-[clamp(1.35rem,0.8rem+2.2vw,3rem)] leading-[1.05] tracking-[-0.03em]">
+                        <span data-final-line className="mt-2 block text-ck-red text-[min(clamp(1.35rem,0.8rem+2.2vw,3rem),6svh)] leading-[1.05] tracking-[-0.03em]">
                             <RotatingPhrase />
                         </span>
                     </span>
@@ -242,7 +242,7 @@ const Hero: React.FC = () => {
                 <div
                     ref={frame}
                     aria-hidden="true"
-                    className="pointer-events-none absolute left-1/2 top-1/2 z-20 w-[min(80vw,600px)] md:w-[min(44vw,640px)] -translate-x-1/2 -translate-y-[62%]"
+                    className="pointer-events-none absolute left-1/2 top-1/2 z-20 w-[min(80vw,600px,max(220px,calc(174svh_-_720px)))] md:w-[min(44vw,640px,max(220px,calc(174svh_-_720px)))] -translate-x-1/2 -translate-y-[62%]"
                     style={{ aspectRatio: `${GROUP.w} / ${GROUP.h}` }}
                 >
                     <div data-logo-group className="absolute inset-0 origin-top-left text-ck-red">
@@ -273,7 +273,7 @@ const Hero: React.FC = () => {
                 <div data-cue className="absolute inset-x-0 bottom-6 md:bottom-8 z-10 flex justify-center px-5">
                     <div data-cue-inner className="flex flex-col items-center gap-4 text-center">
                         <Badge className="text-[0.62rem] tracking-[0.25em] uppercase md:text-xs md:tracking-[0.3em]" />
-                        <span aria-hidden="true" className="relative block h-12 w-px overflow-hidden bg-ink-faint md:h-16">
+                        <span aria-hidden="true" className="relative block h-12 w-px overflow-hidden bg-ink-faint md:h-[min(4rem,6svh)]">
                             <span className="ck-scroll-dot absolute left-0 top-0 block h-1/3 w-px bg-ck-red" />
                         </span>
                         <span className="text-[0.62rem] md:text-[0.7rem] uppercase tracking-[0.3em] text-ink-soft">{hero.scrollCue}</span>
