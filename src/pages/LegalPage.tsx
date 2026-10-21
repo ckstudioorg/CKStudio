@@ -21,8 +21,12 @@ const renderBlock = (block: Block, i: number) => {
             );
         case 'quote':
             return <p key={i} className="mt-5 border-l-2 border-ck-red pl-5 italic">{block.text}</p>;
-        default:
+        case 'p':
+        case 'h3':
+        case 'tip':
             return <p key={i} className="mt-5">{block.text}</p>;
+        default:
+            return null;
     }
 };
 

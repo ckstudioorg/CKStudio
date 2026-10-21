@@ -1,13 +1,34 @@
 /**
- * Blog articles. Each article is a list of blocks: paragraphs, headings, lists and pull quotes.
- * To add an article, copy one entry, give it a new unique `slug`, and write the blocks.
+ * Blog articles. Each article is a list of blocks: paragraphs, headings, lists, numbered steps, tables,
+ * tip boxes and pull quotes. To add an article, copy one entry, give it a new unique `slug`, and write the blocks.
+ * Newer articles live in src/content/articles/ (grouped by topic) and are listed first.
+ *
+ * Writing for Google and AI answer engines (ChatGPT, Gemini, Perplexity, Google AI Overviews):
+ * - `answer`: 2–3 sentences that directly answer the question in the title (shown as "Quick answer").
+ * - `keyPoints`: 3–5 short takeaways. Question-style h2 headings. Tables for comparisons, steps for processes.
+ * - `faqs`: real questions people ask, answered in 2–4 sentences (also sent to Google as FAQ data).
+ * - `sources`: links for any rule, number or spec that can change. Never invent statistics or client results.
+ * - Inside any text: [link text](/services/vfx-and-cg/) makes a link; **words** makes them bold.
  * Optional `image`: a 1200x800 webp in public/images/blog/[slug].webp. Without it, a designed cover is shown.
  */
+
+import { commercialsArticles } from './articles/commercials';
+import { aiArticles } from './articles/ai';
+import { productionArticles } from './articles/production';
+import { movieAndMarketingArticles } from './articles/movies-marketing';
+import { videoArticles } from './articles/video';
+import { designArticles } from './articles/design';
+import { digitalArticles } from './articles/digital';
+import { vfxMusicMovieArticles } from './articles/vfx-music-movies';
 
 export type Block =
     | { type: 'p'; text: string }
     | { type: 'h2'; text: string }
+    | { type: 'h3'; text: string }
     | { type: 'list'; items: string[] }
+    | { type: 'steps'; items: string[] }
+    | { type: 'table'; head: string[]; rows: string[][]; caption?: string }
+    | { type: 'tip'; text: string }
     | { type: 'quote'; text: string };
 
 export interface Article {
@@ -17,10 +38,37 @@ export interface Article {
     category: string;
     tags: string[];
     date: string; // ISO date, e.g. '2026-10-21'
+    updated?: string; // ISO date of the last real update
     author: string;
     image?: string;
+    /** Direct 2–3 sentence answer to the title's question, shown first */
+    answer?: string;
+    keyPoints?: string[];
     body: Block[];
+    faqs?: { q: string; a: string }[];
+    sources?: { label: string; url: string }[];
+    /** Service page slug this article leads to (content/servicePages.ts) */
+    service?: string;
 }
+
+/** Text without link/bold markup, for reading time, search data and the blog search box. */
+export const plainText = (text: string) => text.replace(/\[([^\]]+)\]\([^)\s]+\)/g, '$1').replace(/\*\*([^*]+)\*\*/g, '$1');
+
+export const blockText = (b: Block): string => {
+    switch (b.type) {
+        case 'list':
+        case 'steps':
+            return b.items.map(plainText).join(' ');
+        case 'table':
+            return [...b.head, ...b.rows.flat()].map(plainText).join(' ');
+        default:
+            return plainText(b.text);
+    }
+};
+
+/** All readable words of an article (quick answer, body and FAQs). */
+export const articleText = (a: Article) =>
+    [a.answer ?? '', ...a.body.map(blockText), ...(a.faqs ?? []).flatMap((f) => [f.q, plainText(f.a)])].join(' ');
 
 export const blogPage = {
     label: 'Our Blog',
@@ -34,7 +82,7 @@ export const blogPage = {
     articleCta: { title: 'Planning a project like this?', text: 'Tell us about it on WhatsApp or by email.', whatsapp: 'WhatsApp Us', email: 'Email Us' },
 };
 
-export const articles: Article[] = [
+const originalArticles: Article[] = [
     {
         slug: 'ai-pre-looks-and-pre-teasers-for-movies',
         title: 'AI Pre-Looks and Pre-Teasers: Show Your Film Before the First Shot',
@@ -262,12 +310,22 @@ export const articles: Article[] = [
     },
 ];
 
+/** Newest first: the 2026 guides, then the original seven articles. */
+export const articles: Article[] = [
+    ...commercialsArticles,
+    ...aiArticles,
+    ...productionArticles,
+    ...movieAndMarketingArticles,
+    ...videoArticles,
+    ...designArticles,
+    ...digitalArticles,
+    ...vfxMusicMovieArticles,
+    ...originalArticles,
+];
+
 /** Rough reading time from the word count (about 220 words a minute). */
 export const readTime = (article: Article) => {
-    const words = article.body
-        .map((b) => (b.type === 'list' ? b.items.join(' ') : b.text))
-        .join(' ')
-        .split(/\s+/).length;
+    const words = articleText(article).split(/\s+/).length;
     return `${Math.max(1, Math.round(words / 220))} min read`;
 };
 

@@ -5,7 +5,7 @@
 import { prerender } from 'react-dom/static';
 import App from './App';
 
-export { getPageMeta, headTags, sitePaths, sitemapXml } from './lib/seo';
+export { getPageMeta, headTags, llmsTxt, sitePaths, sitemapXml } from './lib/seo';
 
 export async function render(url: string): Promise<string> {
     const { prelude } = await prerender(<App location={url} />);
