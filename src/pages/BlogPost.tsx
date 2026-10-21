@@ -7,6 +7,8 @@ import { mailtoUrl, whatsappUrl } from '../content/contact';
 import { paths } from '../lib/paths';
 import { alreadyOnScreen } from '../lib/prerendered';
 import ArticleCover from '../components/ui/ArticleCover';
+import RichText from '../components/ui/RichText';
+import { getServicePage } from '../content/servicePages';
 
 const BackArrow = () => (
     <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" className="h-4 w-4">
@@ -18,25 +20,67 @@ const renderBlock = (block: Block, i: number) => {
     switch (block.type) {
         case 'h2':
             return <h2 key={i} className="mt-14 mb-5 font-heading text-[clamp(1.5rem,1rem+1.4vw,2.25rem)] font-semibold leading-tight tracking-[-0.02em]">{block.text}</h2>;
+        case 'h3':
+            return <h3 key={i} className="mt-10 mb-3 font-heading text-xl md:text-2xl font-semibold tracking-[-0.02em] text-ink">{block.text}</h3>;
         case 'list':
             return (
                 <ul key={i} className="my-6 space-y-3">
                     {block.items.map((item) => (
                         <li key={item} className="flex gap-4">
                             <span aria-hidden="true" className="mt-[0.7em] h-1.5 w-1.5 shrink-0 rounded-full bg-ck-red" />
-                            <span>{item}</span>
+                            <span><RichText text={item} /></span>
                         </li>
                     ))}
                 </ul>
             );
+        case 'steps':
+            return (
+                <ol key={i} className="my-8 space-y-4">
+                    {block.items.map((item, n) => (
+                        <li key={item} className="flex gap-4">
+                            <span aria-hidden="true" className="mt-[0.15em] flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-ck-red text-xs font-semibold tabular-nums text-paper">{n + 1}</span>
+                            <span><RichText text={item} /></span>
+                        </li>
+                    ))}
+                </ol>
+            );
+        case 'table':
+            return (
+                <div key={i} className="my-8 -mx-5 overflow-x-auto px-5 md:mx-0 md:px-0">
+                    <table className="w-full min-w-[34rem] border-collapse text-left text-[0.95rem] leading-snug">
+                        {block.caption && <caption className="mb-3 text-left text-xs font-medium uppercase tracking-[0.18em] text-ink-soft">{block.caption}</caption>}
+                        <thead>
+                            <tr className="border-b-2 border-ink">
+                                {block.head.map((h) => <th key={h} scope="col" className="py-3 pr-4 font-heading font-semibold text-ink">{h}</th>)}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {block.rows.map((row) => (
+                                <tr key={row.join('|')} className="border-b border-ink-faint align-top">
+                                    {row.map((cell, c) => c === 0
+                                        ? <th key={c} scope="row" className="py-3 pr-4 font-medium text-ink"><RichText text={cell} /></th>
+                                        : <td key={c} className="py-3 pr-4"><RichText text={cell} /></td>)}
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            );
+        case 'tip':
+            return (
+                <aside key={i} className="my-8 rounded-2xl border border-ck-red/25 bg-ck-red/[0.04] px-6 py-5">
+                    <p className="text-[0.7rem] font-medium uppercase tracking-[0.22em] text-ck-red">Studio tip</p>
+                    <p className="mt-2 text-ink"><RichText text={block.text} /></p>
+                </aside>
+            );
         case 'quote':
             return (
                 <blockquote key={i} className="my-14 border-l-2 border-ck-red pl-6 md:pl-8 font-heading text-[clamp(1.4rem,1rem+1.4vw,2.2rem)] font-medium leading-[1.2] tracking-[-0.02em] text-ink">
-                    {block.text}
+                    <RichText text={block.text} />
                 </blockquote>
             );
         default:
-            return <p key={i} className="my-5">{block.text}</p>;
+            return <p key={i} className="my-5"><RichText text={block.text} /></p>;
     }
 };
 
@@ -68,6 +112,7 @@ const BlogPost: React.FC = () => {
         );
     }
 
+    const service = getServicePage(post.service);
     const related = articles.filter((a) => a.slug !== post.slug && a.category === post.category)
         .concat(articles.filter((a) => a.slug !== post.slug && a.category !== post.category))
         .slice(0, 2);
@@ -92,9 +137,56 @@ const BlogPost: React.FC = () => {
             <div className="mx-auto max-w-[1600px] px-5 md:px-10">
                 <div className="mx-auto max-w-[44rem] py-16 md:py-24">
                     <p className="font-heading text-[clamp(1.3rem,1rem+1vw,1.8rem)] font-medium leading-[1.35] tracking-[-0.01em]">{post.excerpt}</p>
+
+                    {/* Quick answer + key takeaways: the short version, for readers and answer engines */}
+                    {post.answer && (
+                        <section aria-labelledby="quick-answer" className="mt-10 rounded-[24px] bg-ink px-6 py-7 md:px-9 md:py-9 text-paper">
+                            <h2 id="quick-answer" className="text-[0.7rem] font-medium uppercase tracking-[0.25em] text-paper/60">Quick answer</h2>
+                            <p className="mt-3 text-[1.0625rem] md:text-lg leading-relaxed text-paper"><RichText text={post.answer} /></p>
+                            {post.keyPoints && (
+                                <ul className="mt-6 space-y-2.5 border-t border-paper/15 pt-5 text-[0.98rem] text-paper/85">
+                                    {post.keyPoints.map((k) => (
+                                        <li key={k} className="flex gap-3">
+                                            <svg aria-hidden="true" viewBox="0 0 16 16" className="mt-[0.3em] h-4 w-4 shrink-0 text-ck-red" fill="none"><path d="M3 8.5 6.5 12 13 4.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                                            <span><RichText text={k} /></span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
+                        </section>
+                    )}
+
                     <div className="mt-10 border-t border-ink-faint pt-4 text-[1.0625rem] md:text-lg leading-[1.75] text-ink/85">
                         {post.body.map(renderBlock)}
                     </div>
+
+                    {/* Frequently asked questions */}
+                    {post.faqs && post.faqs.length > 0 && (
+                        <section aria-labelledby="faq-title" className="mt-16">
+                            <h2 id="faq-title" className="font-heading text-[clamp(1.5rem,1rem+1.4vw,2.25rem)] font-semibold leading-tight tracking-[-0.02em]">Frequently asked questions</h2>
+                            <dl className="mt-6 border-t border-ink">
+                                {post.faqs.map((f) => (
+                                    <div key={f.q} className="border-b border-ink-faint py-6">
+                                        <dt className="font-heading text-lg md:text-xl font-semibold tracking-[-0.01em] text-ink">{f.q}</dt>
+                                        <dd className="mt-2 text-[1.0625rem] leading-[1.7] text-ink/85"><RichText text={f.a} /></dd>
+                                    </div>
+                                ))}
+                            </dl>
+                        </section>
+                    )}
+
+                    {/* Sources for rules, specs and figures that can change */}
+                    {post.sources && post.sources.length > 0 && (
+                        <section aria-labelledby="sources-title" className="mt-12">
+                            <h2 id="sources-title" className="text-xs font-medium uppercase tracking-[0.22em] text-ink-soft">Sources and further reading</h2>
+                            <ul className="mt-3 space-y-1.5 text-sm">
+                                {post.sources.map((s) => (
+                                    <li key={s.url}><a href={s.url} target="_blank" rel="noopener noreferrer" className="text-ink-soft underline decoration-ink-faint underline-offset-4 transition-colors hover:text-ck-red">{s.label}</a></li>
+                                ))}
+                            </ul>
+                            <p className="mt-3 text-xs text-ink-soft">Last checked {formatDate(post.updated ?? post.date)}. Rules and platform specs change, so confirm the latest version before you rely on them.</p>
+                        </section>
+                    )}
 
                     <ul className="mt-14 flex flex-wrap gap-2">
                         {post.tags.map((tag) => (
@@ -106,6 +198,11 @@ const BlogPost: React.FC = () => {
                     <aside className="mt-16 rounded-[28px] border border-ink-faint p-8 md:p-10">
                         <h2 className="font-heading text-2xl md:text-3xl font-semibold tracking-[-0.02em]">{blogPage.articleCta.title}</h2>
                         <p className="mt-2 text-ink-soft">{blogPage.articleCta.text}</p>
+                        {service && (
+                            <p className="mt-4 text-ink">
+                                See how we handle it: <Link to={paths.service(service.slug)} className="text-ck-red underline decoration-ck-red/30 underline-offset-4 hover:decoration-ck-red">{service.name}</Link>
+                            </p>
+                        )}
                         <div className="mt-6 flex flex-wrap gap-3">
                             <a href={whatsappUrl()} target="_blank" rel="noopener noreferrer" className="rounded-full bg-ck-red px-6 py-3 text-xs font-medium uppercase tracking-[0.14em] text-paper transition-colors hover:bg-ink">{blogPage.articleCta.whatsapp}</a>
                             <a href={mailtoUrl()} className="rounded-full border border-ink px-6 py-3 text-xs font-medium uppercase tracking-[0.14em] text-ink transition-colors hover:bg-ink hover:text-paper">{blogPage.articleCta.email}</a>

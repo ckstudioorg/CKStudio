@@ -11,7 +11,7 @@ import { pathToFileURL } from 'node:url';
 
 const dist = join(process.cwd(), 'dist');
 const ssrDir = join(process.cwd(), 'dist-ssr');
-const { render, getPageMeta, headTags, sitePaths, sitemapXml } = await import(pathToFileURL(join(ssrDir, 'entry-server.js')).href);
+const { render, getPageMeta, headTags, llmsTxt, sitePaths, sitemapXml } = await import(pathToFileURL(join(ssrDir, 'entry-server.js')).href);
 
 const template = await readFile(join(dist, 'index.html'), 'utf8');
 
@@ -72,6 +72,9 @@ await savePage('/404/', '404.html');
 const today = new Date().toISOString().slice(0, 10);
 await writeFile(join(dist, 'sitemap.xml'), sitemapXml(today));
 console.log(`  sitemap.xml with ${sitePaths().length} pages`);
+// A plain-text guide to the site for AI assistants (see llmsTxt in src/lib/seo.ts)
+await writeFile(join(dist, 'llms.txt'), llmsTxt());
+console.log('  llms.txt for AI assistants');
 
 await rm(ssrDir, { recursive: true, force: true });
 await rm(join(dist, '.vite'), { recursive: true, force: true });
