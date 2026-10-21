@@ -124,6 +124,10 @@
   [data-hero-stage]:not([data-js]) [data-final-rule] { transform: scaleX(0); }
   [data-hero-stage]:not([data-js]) [data-final-wrap] { transform: scale(1.06); transform-origin: 50% 45%; }
 
+  /* Hero on very short screens (set by the fit check in Hero.tsx): hide the figures, then the description */
+  [data-final-wrap][data-compact] [data-hero-stats],
+  [data-final-wrap][data-compact='2'] [data-hero-lede] { display: none !important; }
+
   /* Tight headline tracking squeezes the gaps between words; open them back up */
   .font-heading {
     word-spacing: 0.14em;

@@ -160,6 +160,53 @@ const Hero: React.FC = () => {
         };
     }, [reduced]);
 
+    /*
+     * The finished hero must always fit its screen (it is pinned, so anything taller is cut off).
+     * If the content is taller than the screen — short laptop windows, medium widths, big fonts — shrink the
+     * big headline step by step until it fits. Re-checked when the window size changes or the fonts load.
+     */
+    useLayoutEffect(() => {
+        if (reduced || prefersReducedMotion() || typeof ResizeObserver === 'undefined') return;
+        const wrap = root.current?.querySelector<HTMLElement>('[data-final-wrap]');
+        if (!wrap) return;
+        // Layout sizes only (offsetHeight ignores the animation's temporary shifts, which scrollHeight would count)
+        const [top, heading, bottom] = Array.from(wrap.children) as HTMLElement[];
+        const px = (el: Element, prop: 'marginTop' | 'paddingTop' | 'paddingBottom') => parseFloat(getComputedStyle(el)[prop]) || 0;
+        const overflow = () => {
+            const lines = Array.from(heading.children) as HTMLElement[];
+            const last = lines[lines.length - 1];
+            const headline = last.offsetTop + last.offsetHeight - lines[0].offsetTop;
+            const needed = top.offsetHeight + px(heading, 'marginTop') + headline + px(bottom, 'marginTop') + bottom.offsetHeight;
+            const available = wrap.clientHeight - px(wrap, 'paddingTop') - px(wrap, 'paddingBottom');
+            return needed - available;
+        };
+        // Shrink the headline a little; if that is not enough, first hide the figures (also shown further down
+        // the page), then the description line, before shrinking further (data-compact, see foundation.css)
+        const fit = () => {
+            for (const level of [0, 1, 2]) {
+                if (level) wrap.setAttribute('data-compact', String(level));
+                else wrap.removeAttribute('data-compact');
+                let scale = 1;
+                wrap.style.setProperty('--hero-fit', '1');
+                const floor = level < 2 ? 0.76 : 0.5;
+                while (overflow() > 0 && scale > floor) {
+                    scale -= 0.04;
+                    wrap.style.setProperty('--hero-fit', scale.toFixed(2));
+                }
+                if (overflow() <= 0) return;
+            }
+        };
+        fit();
+        const observer = new ResizeObserver(fit);
+        observer.observe(wrap);
+        document.fonts?.ready.then(fit);
+        return () => {
+            observer.disconnect();
+            wrap.style.removeProperty('--hero-fit');
+            wrap.removeAttribute('data-compact');
+        };
+    }, [reduced]);
+
     // Final hero layout: shown at the end of the logo animation (or straight away for reduced motion)
     const finalLayout = (
         <div data-final-wrap className={`relative z-10 mx-auto flex max-w-[1600px] flex-col px-5 pb-6 pt-24 md:px-10 md:pb-8 md:pt-[min(7rem,14svh)] ${reduced ? 'min-h-svh' : 'h-full'}`}>
@@ -170,7 +217,7 @@ const Hero: React.FC = () => {
 
             <h1 className="mt-6 md:mt-8 flex flex-1 flex-col justify-center font-heading font-semibold">
                 <span className="block overflow-hidden pb-[0.04em]">
-                    <span data-final-line className="block text-ck-red text-[min(clamp(3.6rem,1rem+10vw,9.5rem),calc(20svh_-_2.5rem))] leading-[0.9] tracking-[-0.045em]">
+                    <span data-final-line className="block text-ck-red text-[calc(min(clamp(3.6rem,1rem+10vw,9.5rem),calc(20svh_-_2.5rem))*var(--hero-fit,1))] leading-[0.9] tracking-[-0.045em]">
                         {hero.headline.first}
                     </span>
                 </span>
@@ -184,42 +231,42 @@ const Hero: React.FC = () => {
 
                 <span className="block self-end text-right">
                     <span className="block overflow-hidden pb-[0.04em]">
-                        <span data-final-line className="block text-ink text-[min(clamp(3.6rem,1rem+10vw,9.5rem),calc(20svh_-_2.5rem))] leading-[0.9] tracking-[-0.045em]">
+                        <span data-final-line className="block text-ink text-[calc(min(clamp(3.6rem,1rem+10vw,9.5rem),calc(20svh_-_2.5rem))*var(--hero-fit,1))] leading-[0.9] tracking-[-0.045em]">
                             {hero.headline.second}
                         </span>
                     </span>
                     <span className="block overflow-hidden">
-                        <span data-final-line className="mt-2 block text-ck-red text-[min(clamp(1.35rem,0.8rem+2.2vw,3rem),6svh)] leading-[1.05] tracking-[-0.03em]">
+                        <span data-final-line className="mt-2 block text-ck-red text-[calc(min(clamp(1.35rem,0.8rem+2.2vw,3rem),6svh)*var(--hero-fit,1))] leading-[1.05] tracking-[-0.03em]">
                             <RotatingPhrase />
                         </span>
                     </span>
                 </span>
             </h1>
 
-            <div className="mt-6 md:mt-8 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-                <div className="flex flex-col gap-4 md:gap-5">
-                <p data-final className="max-w-md text-sm md:text-base leading-relaxed text-ink-soft">{hero.lede}</p>
-                <div data-final className="flex flex-wrap gap-3">
+            <div className="mt-6 md:mt-8 flex flex-col gap-6 min-[1000px]:flex-row min-[1000px]:items-end min-[1000px]:justify-between">
+                <div className="flex shrink-0 flex-col gap-4 md:gap-5">
+                <p data-final data-hero-lede className="max-w-md text-sm md:text-base leading-relaxed text-ink-soft">{hero.lede}</p>
+                <div data-final className="flex flex-wrap gap-3 sm:flex-nowrap">
                     <button
                         onClick={() => scrollToSection(hero.actions.primary.target)}
-                        className="group relative overflow-hidden rounded-full bg-ck-red px-6 py-3.5 md:px-7 md:py-4 text-sm font-medium uppercase tracking-[0.12em] text-paper"
+                        className="group relative overflow-hidden whitespace-nowrap rounded-full bg-ck-red px-6 py-3.5 md:px-7 md:py-4 text-sm font-medium uppercase tracking-[0.12em] text-paper"
                     >
                         <span aria-hidden="true" className="absolute inset-0 translate-y-full rounded-full bg-ink transition-transform duration-500 ease-cinema group-hover:translate-y-0" />
                         <span className="relative">{hero.actions.primary.label}</span>
                     </button>
                     <button
                         onClick={() => scrollToSection(hero.actions.secondary.target)}
-                        className="rounded-full border border-ink px-6 py-3.5 md:px-7 md:py-4 text-sm font-medium uppercase tracking-[0.12em] text-ink transition-colors duration-500 ease-cinema hover:bg-ink hover:text-paper"
+                        className="whitespace-nowrap rounded-full border border-ink px-6 py-3.5 md:px-7 md:py-4 text-sm font-medium uppercase tracking-[0.12em] text-ink transition-colors duration-500 ease-cinema hover:bg-ink hover:text-paper"
                     >
                         {hero.actions.secondary.label}
                     </button>
                 </div>
                 </div>
-                <dl data-final className="grid grid-cols-3 gap-4 md:gap-10 border-t border-ink-faint pt-4 md:border-0 md:pt-0">
+                <dl data-final data-hero-stats className="grid grid-cols-3 gap-4 md:gap-6 xl:gap-10 border-t border-ink-faint pt-4 min-[1000px]:border-0 min-[1000px]:pt-0">
                     {hero.stats.map((stat) => (
                         <div key={stat.label} className="flex flex-col-reverse">
                             <dt className="mt-1 text-[0.62rem] md:text-[0.7rem] uppercase tracking-[0.2em] text-ink-soft">{stat.label}</dt>
-                            <dd className="font-heading text-xl md:text-3xl font-semibold tracking-[-0.02em] text-ink">{stat.number}</dd>
+                            <dd className="whitespace-nowrap font-heading text-xl md:text-3xl font-semibold tracking-[-0.02em] text-ink">{stat.number}</dd>
                         </div>
                     ))}
                 </dl>
