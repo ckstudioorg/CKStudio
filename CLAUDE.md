@@ -24,6 +24,7 @@ A **React single-page app** (TypeScript + Vite 8 + Tailwind CSS 4, GSAP + Lenis 
 - **Custom domain:** `CNAME` sits in the repo root (not in `public/`), so it isn't copied into `dist/`. With GitHub Actions deploys, the domain is held in the repo's Pages settings, so this is fine. Leave it alone either way.
 - **Deep links:** `public/404.html` + a small script in `index.html` let direct visits to `/blog`, `/faq` etc. work on GitHub Pages. Don't remove them.
 - **Build splitting:** `vite.config.ts` puts React and the animation libraries in their own cached files.
+- **Blank-page self-recovery:** GitHub Pages lets browsers reuse `index.html` for 10 min (`max-age=600`), so right after a deploy a cached page can point to removed `/assets/` files and render blank. An inline script in `index.html` reloads once (max once per 30 s) if an `/assets/` file fails, a lazy page chunk fails (`vite:preloadError`), or the root element is still empty 8 s after load. Keep it.
 
 ## Design (2026 white redesign)
 

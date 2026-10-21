@@ -143,7 +143,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection }) => {
             >
                 <div
                     className={`transition-[background-color,backdrop-filter,border-color] duration-500 border-b ${
-                        solid ? 'bg-paper/80 backdrop-blur-xl border-ink-faint/60' : 'bg-transparent border-transparent'
+                        solid ? 'bg-paper/95 backdrop-blur-md border-ink-faint/60' : 'bg-transparent border-transparent'
                     }`}
                 >
                     <div className="mx-auto flex h-16 md:h-20 max-w-[1600px] items-center justify-between px-5 md:px-10">

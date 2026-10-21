@@ -67,6 +67,38 @@
     }
   </script>
 
+  <!--
+    Self-recovery after a site update: GitHub Pages lets browsers reuse this page for up to 10 minutes,
+    and a reused copy can point to code files that the update removed, which shows a blank page.
+    If a site file fails to load, or nothing has appeared 8 seconds after loading, reload once to fetch
+    the fresh page. At most once per 30 seconds, so it can never loop.
+  -->
+  <script>
+    (function () {
+      var KEY = 'ck-recover-at';
+      function recover() {
+        try {
+          var last = Number(sessionStorage.getItem(KEY) || 0);
+          if (Date.now() - last < 30000) return;
+          sessionStorage.setItem(KEY, String(Date.now()));
+        } catch (e) { return; }
+        window.location.reload();
+      }
+      window.addEventListener('error', function (e) {
+        var t = e.target;
+        var url = t && (t.src || t.href);
+        if (url && /\/assets\//.test(url) && (t.tagName === 'SCRIPT' || t.tagName === 'LINK')) recover();
+      }, true);
+      window.addEventListener('vite:preloadError', function (e) { if (e.preventDefault) e.preventDefault(); recover(); });
+      window.addEventListener('load', function () {
+        setTimeout(function () {
+          var root = document.getElementById('root');
+          if (root && root.children.length === 0) recover();
+        }, 8000);
+      });
+    })();
+  </script>
+
   <!-- Single Page Apps for GitHub Pages -->
   <script type="text/javascript">
     (function (l) {
