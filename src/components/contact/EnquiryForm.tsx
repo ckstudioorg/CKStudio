@@ -1,5 +1,6 @@
 import React, { useId, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
+import { Link } from 'react-router-dom';
 import { ScrollTrigger } from '../../lib/smoothScroll';
 import { contact, enquiry, whatsappUrl } from '../../content/contact';
 
@@ -207,6 +208,10 @@ const EnquiryForm: React.FC = () => {
                             </button>
                             <p className="text-sm text-ink-soft">{enquiry.note}</p>
                         </div>
+                        <p className="mt-6 text-xs text-ink-soft">
+                            {enquiry.privacy}{' '}
+                            <Link to="/privacy/" className="underline underline-offset-4 transition-colors hover:text-ck-red">Privacy Policy</Link>.
+                        </p>
                     </motion.form>
                 )}
             </AnimatePresence>

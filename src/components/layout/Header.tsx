@@ -23,6 +23,12 @@ const pageRoutes = new Set(['blog', 'faq']);
 const trackedSections = ['home', 'about', 'services', 'portfolio', 'contact'];
 const ease = [0.16, 1, 0.3, 1] as const;
 
+/** Real link addresses (so search engines can follow the menu): pages get their own address, sections a #jump. */
+const hrefFor = (id: string) => (pageRoutes.has(id) ? `/${id}/` : id === 'home' ? '/' : `/#${id}`);
+
+/** Ctrl/Cmd/Shift-click or middle-click: let the browser open the link normally (e.g. in a new tab). */
+const isPlainClick = (e: React.MouseEvent) => e.button === 0 && !e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey;
+
 /** Text that rolls up to a copy of itself on hover. */
 const RollText: React.FC<{ children: string }> = ({ children }) => (
     <span className="relative inline-flex overflow-hidden align-top">
@@ -99,10 +105,14 @@ const Header: React.FC<HeaderProps> = ({ activeSection }) => {
         return () => setScrollLocked(false);
     }, [isMenuOpen]);
 
-    const handleNavClick = (id: string) => {
+    const handleNavClick = (id: string, e?: React.MouseEvent) => {
+        if (e) {
+            if (!isPlainClick(e)) return;
+            e.preventDefault();
+        }
         setIsMenuOpen(false);
         if (pageRoutes.has(id)) {
-            if (location.pathname !== `/${id}`) navigate(`/${id}`);
+            if (location.pathname.replace(/\/$/, '') !== `/${id}`) navigate(hrefFor(id));
             return;
         }
         if (isHomePage) {
@@ -157,9 +167,10 @@ const Header: React.FC<HeaderProps> = ({ activeSection }) => {
                             {navLinks.map((link) => {
                                 const active = tracked === link.id;
                                 return (
-                                    <button
+                                    <a
                                         key={link.id}
-                                        onClick={() => handleNavClick(link.id)}
+                                        href={hrefFor(link.id)}
+                                        onClick={(e) => handleNavClick(link.id, e)}
                                         aria-current={active ? 'true' : undefined}
                                         className={`group relative px-3.5 py-2 text-[0.8rem] font-medium uppercase tracking-[0.14em] transition-colors duration-300 ${
                                             active ? 'text-ck-red' : 'text-ink hover:text-ck-red'
@@ -173,20 +184,21 @@ const Header: React.FC<HeaderProps> = ({ activeSection }) => {
                                                 transition={{ duration: 0.6, ease }}
                                             />
                                         )}
-                                    </button>
+                                    </a>
                                 );
                             })}
                         </nav>
 
                         <div className="flex items-center gap-2">
-                            <button
-                                onClick={() => handleNavClick('contact')}
+                            <a
+                                href={hrefFor('contact')}
+                                onClick={(e) => handleNavClick('contact', e)}
                                 className="group relative hidden md:inline-flex items-center gap-2 overflow-hidden rounded-full bg-ck-red px-5 py-2.5 text-[0.8rem] font-medium uppercase tracking-[0.12em] text-paper"
                             >
                                 <span aria-hidden="true" className="absolute inset-0 translate-y-full rounded-full bg-ink transition-transform duration-500 ease-cinema group-hover:translate-y-0" />
                                 <span className="relative"><RollText>Get Started</RollText></span>
                                 <Arrow className="relative transition-transform duration-500 ease-cinema group-hover:rotate-45" />
-                            </button>
+                            </a>
 
                             {/* Mobile / tablet menu toggle */}
                             <button
@@ -223,8 +235,9 @@ const Header: React.FC<HeaderProps> = ({ activeSection }) => {
                         <nav aria-label="Mobile" className="flex flex-1 flex-col justify-center">
                             {navLinks.map((link, index) => (
                                 <div key={link.id} className="overflow-hidden border-b border-ink-faint/70">
-                                    <motion.button
-                                        onClick={() => handleNavClick(link.id)}
+                                    <motion.a
+                                        href={hrefFor(link.id)}
+                                        onClick={(e) => handleNavClick(link.id, e)}
                                         initial={{ y: '110%' }}
                                         animate={{ y: 0 }}
                                         exit={{ y: '110%' }}
@@ -235,7 +248,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection }) => {
                                     >
                                         <span className="font-body text-xs font-medium tracking-[0.2em] text-ink-soft">0{index + 1}</span>
                                         {link.name}
-                                    </motion.button>
+                                    </motion.a>
                                 </div>
                             ))}
                         </nav>
@@ -247,12 +260,13 @@ const Header: React.FC<HeaderProps> = ({ activeSection }) => {
                             className="flex flex-wrap items-center justify-between gap-4 pt-6"
                         >
                             <a href={`tel:${contact.phone.tel}`} className="text-sm text-ink-soft">{contact.phone.international}</a>
-                            <button
-                                onClick={() => handleNavClick('contact')}
+                            <a
+                                href={hrefFor('contact')}
+                                onClick={(e) => handleNavClick('contact', e)}
                                 className="inline-flex items-center gap-2 rounded-full bg-ck-red px-6 py-3.5 text-sm font-medium uppercase tracking-[0.12em] text-paper"
                             >
                                 Start Your Project <Arrow />
-                            </button>
+                            </a>
                         </motion.div>
                     </motion.div>
                 )}

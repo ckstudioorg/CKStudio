@@ -6,7 +6,9 @@ export const hero = {
     scrollHint: 'Scroll to explore',
     headline: { first: 'Where AI', second: 'Meets' },
     /** Rotating phrases that complete "Where AI Meets …" */
-    rotating: ['Cinematic Advertising', 'AI-Powered Storytelling', 'Neural Visual Effects', 'Intelligent Post-Production'],
+    rotating: ['Ad Film Making', 'Movie Post-Production', 'Cinematic Advertising', 'Visual Effects'],
+    /** One plain sentence under the headline: what we do and where (helps visitors and Google) */
+    lede: 'Ad films, movie post-production, design and VFX — a pre- and post-production studio in Hyderabad.',
     /** Alt text for the logo's tagline image */
     tagline: 'Pre | Production | Post',
     actions: {

@@ -18,8 +18,21 @@ const NotFound = lazy(() => import('../pages/NotFound'));
 const Blog = lazy(() => import('../pages/Blog'));
 const BlogPost = lazy(() => import('../pages/BlogPost'));
 const FAQ = lazy(() => import('../pages/FAQ'));
-import SEO from './SEO';
-import { homeSeo } from '../content/seo';
+const ServicePage = lazy(() => import('../pages/ServicePage'));
+const LegalPage = lazy(() => import('../pages/LegalPage'));
+
+/** Header + page + footer, shared by every page except the home page and 404 */
+const SubPage: React.FC<{ active: string; children: React.ReactNode }> = ({ active, children }) => (
+    <PageTransition>
+        <div className="bg-paper text-ink selection:bg-ck-red selection:text-paper">
+            <Header activeSection={active} />
+            <main id="main" tabIndex={-1} className="pt-16 md:pt-20 outline-none">
+                {children}
+            </main>
+            <Footer />
+        </div>
+    </PageTransition>
+);
 import PageTransition from './PageTransition';
 
 
@@ -33,7 +46,6 @@ const AnimatedRoutes: React.FC = () => {
                 <Route path="/" element={
                     <PageTransition>
                         <>
-                            <SEO title={homeSeo.title} description={homeSeo.description} structuredData={homeSeo.structuredData} />
                             <div className="bg-paper text-ink selection:bg-ck-red selection:text-paper">
                                 <Header activeSection="home" />
                                 <main id="main" tabIndex={-1} className="outline-none">
@@ -57,7 +69,6 @@ const AnimatedRoutes: React.FC = () => {
                 <Route path="/blog" element={
                     <PageTransition>
                         <>
-                            <SEO title="Blog | AI Film Making Insights" description="Insights into AI-powered filmmaking, advertising technology, and video production innovation." />
                             <div className="bg-paper text-ink selection:bg-ck-red selection:text-paper">
                                 <Header activeSection="blog" />
                                 <main id="main" tabIndex={-1} className="pt-16 md:pt-20 outline-none">
@@ -92,6 +103,9 @@ const AnimatedRoutes: React.FC = () => {
                         </>
                     </PageTransition>
                 } />
+                <Route path="/services/:slug" element={<SubPage active="services"><ServicePage /></SubPage>} />
+                <Route path="/privacy" element={<SubPage active=""><LegalPage slug="privacy" /></SubPage>} />
+                <Route path="/terms" element={<SubPage active=""><LegalPage slug="terms" /></SubPage>} />
                 <Route path="*" element={
                     <PageTransition>
                         <NotFound />

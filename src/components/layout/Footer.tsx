@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { SplitText } from 'gsap/SplitText';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { gsap, scrollToSection } from '../../lib/smoothScroll';
 import { useGsap } from '../../lib/motion';
 import { contact, footer, whatsappUrl } from '../../content/contact';
@@ -20,7 +20,10 @@ const Footer: React.FC = () => {
     const location = useLocation();
     const navigate = useNavigate();
 
-    const goToSection = (id: string) => {
+    // Real links (so search engines can follow them); a plain click scrolls smoothly instead of jumping
+    const goToSection = (id: string, e: React.MouseEvent) => {
+        if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+        e.preventDefault();
         if (location.pathname === '/') scrollToSection(id);
         else navigate(`/#${id}`);
     };
@@ -64,9 +67,9 @@ const Footer: React.FC = () => {
                                 {col.links.map((link) => (
                                     <li key={link.name}>
                                         {link.section ? (
-                                            <button type="button" onClick={() => goToSection(link.section!)} className={linkClass}>{link.name}</button>
+                                            <a href={`/#${link.section}`} onClick={(e) => goToSection(link.section!, e)} className={linkClass}>{link.name}</a>
                                         ) : link.page ? (
-                                            <button type="button" onClick={() => navigate(link.page!)} className={linkClass}>{link.name}</button>
+                                            <Link to={link.page} className={linkClass}>{link.name}</Link>
                                         ) : (
                                             <a href={whatsappUrl()} target="_blank" rel="noopener noreferrer" className={linkClass}>{link.name}</a>
                                         )}
@@ -119,7 +122,7 @@ const Footer: React.FC = () => {
                     <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
                         <a href={contact.website.url} className="transition-colors hover:text-ck-red">{contact.website.label}</a>
                         {footer.legal.filter((l) => l.ready).map((l) => (
-                            <button key={l.name} type="button" onClick={() => navigate(l.page)} className="transition-colors hover:text-ck-red">{l.name}</button>
+                            <Link key={l.name} to={l.page} className="transition-colors hover:text-ck-red">{l.name}</Link>
                         ))}
                     </div>
                 </div>

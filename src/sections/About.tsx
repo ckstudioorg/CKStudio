@@ -4,6 +4,7 @@ import { countUp, drawLine, fillWords, revealLines, riseIn, useGsap } from '../l
 import { about } from '../content/about';
 import SectionLabel from '../components/ui/SectionLabel';
 import ImageSlot from '../components/ui/ImageSlot';
+import FilmStripArt from '../components/brand/FilmStripArt';
 
 const About: React.FC = () => {
     const root = useRef<HTMLElement>(null);
@@ -25,6 +26,11 @@ const About: React.FC = () => {
             yPercent: 8, scale: 1.08, ease: 'none',
             scrollTrigger: { trigger: frame, start: 'top bottom', end: 'bottom top', scrub: true },
         });
+        // Film-strip artwork: the film advances slowly through the frame as you scroll
+        gsap.fromTo(q('[data-strip]'), { y: 40 }, {
+            y: -40, ease: 'none',
+            scrollTrigger: { trigger: frame, start: 'top bottom', end: 'bottom top', scrub: true },
+        });
 
         drawLine(q('[data-line]')[0]);
         fillWords(q('[data-quote]')[0], { start: 'top 75%', end: 'bottom 50%' });
@@ -44,7 +50,10 @@ const About: React.FC = () => {
                     <figure className="md:col-span-5">
                         <div data-frame className="relative aspect-[4/5] overflow-hidden rounded-[28px]">
                             <div data-parallax className="absolute inset-0 will-change-transform">
-                                <ImageSlot {...about.image} />
+                                {/* A real photo replaces the film-strip artwork once about.image.src is set */}
+                                {about.image.src
+                                    ? <ImageSlot {...about.image} />
+                                    : <FilmStripArt className="block h-full w-full" />}
                             </div>
                             <figcaption className="absolute bottom-4 left-4 right-4 md:bottom-6 md:left-6 md:right-auto rounded-2xl bg-paper/90 backdrop-blur-md px-5 py-4">
                                 <span className="block text-[0.7rem] font-medium uppercase tracking-[0.22em] text-ck-red">{about.imageCaption.title}</span>

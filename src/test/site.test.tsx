@@ -1,6 +1,6 @@
 import React from 'react';
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor, within } from '@testing-library/react';
 import { MemoryRouter, useNavigate } from 'react-router-dom';
 import SEO from '../components/SEO';
 import WhyUs from '../sections/WhyUs';
@@ -9,17 +9,17 @@ import Header from '../components/layout/Header';
 
 function MetadataPage() {
   const navigate = useNavigate();
-  return <><SEO title="Studio insights" description="Production insights" />
+  return <><SEO />
     <button onClick={() => navigate('/faq')}>Change page</button></>;
 }
 
 describe('site migration safeguards', () => {
   it('hoists metadata and updates the canonical URL after navigation', async () => {
     render(<MemoryRouter initialEntries={['/blog']}><MetadataPage /></MemoryRouter>);
-    await waitFor(() => expect(document.title).toBe('Studio insights | CK Studio'));
-    expect(document.head.querySelector('link[rel="canonical"]')).toHaveAttribute('href', 'https://ckstudio.org/blog');
+    await waitFor(() => expect(document.title).toMatch(/^Blog: .* \| CK Studio$/));
+    expect(document.head.querySelector('link[rel="canonical"]')).toHaveAttribute('href', 'https://ckstudio.org/blog/');
     fireEvent.click(screen.getByRole('button', { name: 'Change page' }));
-    await waitFor(() => expect(document.head.querySelector('link[rel="canonical"]')).toHaveAttribute('href', 'https://ckstudio.org/faq'));
+    await waitFor(() => expect(document.head.querySelector('link[rel="canonical"]')).toHaveAttribute('href', 'https://ckstudio.org/faq/'));
     expect(document.head.querySelectorAll('link[rel="canonical"]')).toHaveLength(1);
     expect(document.head.querySelectorAll('meta[name="description"]')).toHaveLength(1);
   });
@@ -48,7 +48,17 @@ describe('site migration safeguards', () => {
 
   it('keeps Get Started connected to the contact section', () => {
     render(<MemoryRouter><Header activeSection="home" /><div id="contact">Contact target</div></MemoryRouter>);
-    fireEvent.click(screen.getByRole('button', { name: 'Get Started' }));
+    const getStarted = screen.getByRole('link', { name: 'Get Started' });
+    expect(getStarted).toHaveAttribute('href', '/#contact');
+    fireEvent.click(getStarted);
     expect(Element.prototype.scrollIntoView).toHaveBeenCalledWith({ behavior: 'smooth' });
+  });
+
+  it('uses real links in the menu so search engines can find every page', () => {
+    render(<MemoryRouter><Header activeSection="home" /></MemoryRouter>);
+    const menu = screen.getByRole('navigation', { name: 'Main' });
+    expect(within(menu).getByRole('link', { name: 'Blog' })).toHaveAttribute('href', '/blog/');
+    expect(within(menu).getByRole('link', { name: 'FAQ' })).toHaveAttribute('href', '/faq/');
+    expect(within(menu).getByRole('link', { name: 'About' })).toHaveAttribute('href', '/#about');
   });
 });

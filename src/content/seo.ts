@@ -1,36 +1,40 @@
-/** Search-engine data for the home page, built from the shared contact details. */
-import { contact } from './contact';
+/**
+ * What Google (and link previews on WhatsApp, Facebook, LinkedIn, X) show for each page.
+ * Titles: keep under ~60 characters. Descriptions: keep under ~155 characters.
+ * Blog articles use their own title and excerpt from content/blog.ts.
+ */
 
-export const homeSeo = {
-    title: 'AI-Powered Ad Film Making',
-    description:
-        "CK Studio — India's premier AI-powered ad film production studio. Combining artificial intelligence with cinematic expertise for feature films, commercials, and AI-driven post-production.",
-    structuredData: {
-        '@context': 'https://schema.org',
-        '@type': 'ProfessionalService',
-        '@id': 'https://ckstudio.org',
-        name: 'CK Studio',
-        alternateName: 'CK Studio - AI Ad Film Making',
-        description: "India's premier AI-powered ad film production studio combining artificial intelligence with cinematic expertise.",
-        url: 'https://ckstudio.org',
-        logo: 'https://ckstudio.org/images/branding/logo.png',
-        image: 'https://ckstudio.org/images/branding/og-image.jpg',
-        telephone: contact.phone.tel,
-        email: contact.email,
-        address: {
-            '@type': 'PostalAddress',
-            streetAddress: contact.address.street,
-            addressLocality: contact.address.city,
-            addressRegion: contact.address.region,
-            postalCode: contact.address.postalCode,
-            addressCountry: contact.address.country,
-        },
-        openingHoursSpecification: {
-            '@type': 'OpeningHoursSpecification',
-            dayOfWeek: contact.hours.days,
-            opens: contact.hours.opens,
-            closes: contact.hours.closes,
-        },
-        sameAs: contact.socials.map((s) => s.url),
+export const site = {
+    name: 'CK Studio',
+    legalName: 'Chenna Keshav Studio',
+    url: 'https://ckstudio.org',
+    logo: 'https://ckstudio.org/images/branding/logo.png',
+    image: 'https://ckstudio.org/images/branding/og-image.jpg',
+    imageAlt: 'CK Studio — Where AI Meets Cinema',
+    locale: 'en_IN',
+};
+
+export const pageSeo = {
+    home: {
+        title: 'CK Studio | Ad Film & Post-Production Studio, Hyderabad',
+        description:
+            'CK Studio is a pre- and post-production studio in Hyderabad for AI ad films, commercials, movie works, DI and DCP, VFX, design and social media.',
+    },
+    blog: {
+        title: 'Blog: Film, Ad and Post-Production Insights | CK Studio',
+        description:
+            'Practical guides from CK Studio on AI ad films, movie pitch decks, pre-looks, DI and colour correction, DCP delivery, lyrical videos and brand design.',
+    },
+    faq: {
+        title: 'FAQ: Ad Films and Post-Production | CK Studio',
+        description:
+            'Answers about CK Studio’s services, AI in film production, timelines, quality and working with clients in Hyderabad and across India.',
+    },
+    notFound: {
+        title: 'Page Not Found | CK Studio',
+        description: "This page doesn't exist. Visit CK Studio's home page for ad films, movie works and post-production in Hyderabad.",
     },
 };
+
+/** Places CK Studio serves, used in Google's business details. */
+export const areaServed = ['Hyderabad', 'Telangana', 'Andhra Pradesh', 'India'];
