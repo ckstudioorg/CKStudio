@@ -2,7 +2,6 @@ import React, { useId, useMemo, useRef, useState } from 'react';
 import { gsap, ScrollTrigger } from '../lib/smoothScroll';
 import { revealLines, riseIn, useGsap } from '../lib/motion';
 import { faqPage, faqs } from '../content/faq';
-import SEO from '../components/SEO';
 import SectionLabel from '../components/ui/SectionLabel';
 
 const pad = (n: number) => String(n).padStart(2, '0');
@@ -29,15 +28,6 @@ const FAQ: React.FC = () => {
 
     return (
         <div ref={root} className="bg-paper text-ink">
-            <SEO
-                title="FAQ | AI Film Making Questions"
-                description="Frequently asked questions about CK Studio's AI-powered film production and video production services."
-                structuredData={{
-                    '@context': 'https://schema.org',
-                    '@type': 'FAQPage',
-                    mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.question, acceptedAnswer: { '@type': 'Answer', text: f.answer } })),
-                }}
-            />
             <div className="mx-auto grid max-w-[1600px] gap-14 px-5 md:px-10 pt-16 md:pt-24 pb-28 md:pb-40 lg:grid-cols-12 lg:gap-10">
                 {/* Heading, search and categories */}
                 <div className="lg:col-span-5">

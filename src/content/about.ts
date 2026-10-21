@@ -4,10 +4,10 @@ export const about = {
     label: 'About Us',
     title: { lead: 'Crafting the Future of', highlight: 'AI Advertising' },
     intro:
-        'CHENNA KESHAV STUDIO is where visionary filmmakers meet cutting-edge artificial intelligence. We are a team of creative minds and technology pioneers, redefining how advertising content is conceived, produced, and delivered.',
+        'CHENNA KESHAV STUDIO (CK Studio) is a pre- and post-production studio in Hyderabad where filmmakers meet artificial intelligence. We are a team of editors, designers, colourists and technologists rethinking how ad films and movie content are conceived, produced and delivered.',
     paragraphs: [
-        'We harness the power of Generative AI, Neural Rendering, and Machine Learning to revolutionize advertising production — delivering Hollywood-grade ad films at unprecedented speed and scale, while keeping the soul of cinematic storytelling alive.',
-        'From AI-assisted storyboarding to neural color grading, every frame we produce is a fusion of human creativity and machine intelligence.',
+        'We use generative AI and AI-assisted tools across concept, production and finishing — so brands and filmmakers get cinema-quality ad films, pre-looks and post-production faster, without losing the soul of cinematic storytelling.',
+        'From AI-assisted storyboards to the final colour grade, every frame is directed, checked and finished by people.',
     ],
     stats: [
         { value: 10, suffix: '+', label: 'Years of Excellence' },

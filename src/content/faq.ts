@@ -16,7 +16,7 @@ export const faqs = [
     },
     {
         question: 'How does AI enhance your film production process?',
-        answer: 'AI is integrated into every stage of our workflow. From AI-generated storyboards and script analysis in pre-production, to AI-assisted cinematography during shooting, and neural color grading, AI editing, and intelligent VFX in post-production. This enables faster turnaround, higher quality, and innovative creative possibilities.',
+        answer: 'AI is part of every stage of our work: concepts, storyboards and pre-looks in pre-production; AI-generated scenes or AI-assisted shoots in production; and faster editing, colour grading, compositing and VFX in post-production. The result is quicker turnaround, more creative options to choose from, and more budget left for what matters on screen.',
         category: 'AI Technology',
     },
     {
@@ -36,12 +36,12 @@ export const faqs = [
     },
     {
         question: 'What makes CK Studio different from other production houses?',
-        answer: "CK Studio is one of India's few AI-first ad film production studios. We combine 10+ years of cinematic expertise with cutting-edge AI technology. This unique blend allows us to deliver Hollywood-grade quality at competitive pricing with faster turnaround times.",
+        answer: "We combine 10+ years of film and advertising experience with AI built into every stage of the work, and we handle pre-production, production and post-production under one roof in Hyderabad. That means cinema-quality results at competitive prices, with faster turnaround and fewer hand-offs between vendors.",
         category: 'General',
     },
     {
         question: 'What AI technologies do you use in production?',
-        answer: 'We utilize a range of AI technologies including generative AI for concept development, neural rendering for VFX, machine learning for color grading and audio mastering, AI-powered editing tools, and intelligent format optimization for multi-platform delivery.',
+        answer: 'We use generative AI for concepts, storyboards, pre-looks and AI ad films, and AI-assisted tools for compositing, clean-up, editing, colour and sound. The tools change quickly, so we pick what suits each project — and every output is finished and checked by our editors, colourists and designers.',
         category: 'AI Technology',
     },
     {

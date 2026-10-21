@@ -191,6 +191,8 @@ const Hero: React.FC = () => {
             </h1>
 
             <div className="mt-6 md:mt-8 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+                <div className="flex flex-col gap-4 md:gap-5">
+                <p data-final className="max-w-md text-sm md:text-base leading-relaxed text-ink-soft">{hero.lede}</p>
                 <div data-final className="flex flex-wrap gap-3">
                     <button
                         onClick={() => scrollToSection(hero.actions.primary.target)}
@@ -205,6 +207,7 @@ const Hero: React.FC = () => {
                     >
                         {hero.actions.secondary.label}
                     </button>
+                </div>
                 </div>
                 <dl data-final className="grid grid-cols-3 gap-4 md:gap-10 border-t border-ink-faint pt-4 md:border-0 md:pt-0">
                     {hero.stats.map((stat) => (

@@ -1,9 +1,11 @@
 import React from 'react';
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import EnquiryForm from '../components/contact/EnquiryForm';
+import { MemoryRouter } from 'react-router-dom';
+import Form from '../components/contact/EnquiryForm';
 import { enquiry } from '../content/contact';
 
+const EnquiryForm = () => <MemoryRouter><Form /></MemoryRouter>;
 const fill = (label: RegExp, value: string) => fireEvent.change(screen.getByLabelText(label), { target: { value } });
 
 describe('project enquiry form', () => {

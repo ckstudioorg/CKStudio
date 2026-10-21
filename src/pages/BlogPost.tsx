@@ -4,7 +4,7 @@ import { gsap } from '../lib/smoothScroll';
 import { revealLines, riseIn, useGsap } from '../lib/motion';
 import { articles, blogPage, formatDate, readTime, type Block } from '../content/blog';
 import { mailtoUrl, whatsappUrl } from '../content/contact';
-import SEO from '../components/SEO';
+import { paths } from '../lib/seo';
 import ArticleCover from '../components/ui/ArticleCover';
 
 const BackArrow = () => (
@@ -56,12 +56,10 @@ const BlogPost: React.FC = () => {
     if (!post) {
         return (
             <div className="flex min-h-[70svh] items-center justify-center bg-paper px-5 text-center text-ink">
-                <title>Post Not Found | CK Studio</title>
-                <meta name="robots" content="noindex" />
                 <div>
                     <h1 className="font-heading text-title font-semibold">{blogPage.notFound.title}</h1>
                     <p className="mt-4 text-ink-soft">{blogPage.notFound.text}</p>
-                    <Link to="/blog" className="mt-8 inline-flex items-center gap-2 rounded-full border border-ink px-6 py-3 text-sm font-medium uppercase tracking-[0.14em] transition-colors hover:bg-ink hover:text-paper">
+                    <Link to={paths.blog} className="mt-8 inline-flex items-center gap-2 rounded-full border border-ink px-6 py-3 text-sm font-medium uppercase tracking-[0.14em] transition-colors hover:bg-ink hover:text-paper">
                         <BackArrow /> {blogPage.back}
                     </Link>
                 </div>
@@ -75,25 +73,9 @@ const BlogPost: React.FC = () => {
 
     return (
         <article ref={root} className="bg-paper text-ink">
-            <SEO
-                title={post.title}
-                description={post.excerpt}
-                image={post.image ? `https://ckstudio.org${post.image}` : undefined}
-                type="article"
-                structuredData={{
-                    '@context': 'https://schema.org',
-                    '@type': 'Article',
-                    headline: post.title,
-                    description: post.excerpt,
-                    datePublished: post.date,
-                    author: { '@type': 'Organization', name: 'CK Studio' },
-                    publisher: { '@type': 'Organization', name: 'CK Studio', url: 'https://ckstudio.org' },
-                    mainEntityOfPage: `https://ckstudio.org/blog/${post.slug}`,
-                }}
-            />
 
             <header className="mx-auto max-w-[1600px] px-5 md:px-10 pt-14 md:pt-20">
-                <Link to="/blog" data-intro className="inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.18em] text-ink-soft transition-colors hover:text-ck-red">
+                <Link to={paths.blog} data-intro className="inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.18em] text-ink-soft transition-colors hover:text-ck-red">
                     <BackArrow /> {blogPage.back}
                 </Link>
                 <p data-intro className="mt-10 text-xs font-medium uppercase tracking-[0.22em] text-ck-red">{post.category}</p>
@@ -136,7 +118,7 @@ const BlogPost: React.FC = () => {
                     <ul className="mt-10 grid gap-x-6 gap-y-12 md:grid-cols-2">
                         {related.map((a) => (
                             <li key={a.slug}>
-                                <Link to={`/blog/${a.slug}`} className="group block">
+                                <Link to={paths.post(a.slug)} className="group block">
                                     <div className="aspect-[3/2] overflow-hidden rounded-[22px]">
                                         <ArticleCover article={a} index={articles.indexOf(a)} className="transition-transform duration-[1200ms] ease-cinema group-hover:scale-[1.04]" />
                                     </div>

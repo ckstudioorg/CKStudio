@@ -76,6 +76,7 @@ export const enquiry = {
     send: 'Send enquiry',
     sending: 'Sending…',
     note: 'Prefer to talk? WhatsApp or call us directly.',
+    privacy: 'We use your details only to reply to your enquiry. See our',
     thanks: {
         label: 'Enquiry sent',
         title: 'Thank you',
@@ -100,7 +101,7 @@ export const cta = {
 };
 
 export const footer = {
-    blurb: "India's premier AI-powered ad film production studio. Where artificial intelligence meets cinematic advertising.",
+    blurb: 'A pre- and post-production studio in Hyderabad for ad films, movie works, design, social media and VFX — with AI built into every stage.',
     badge: 'Powered by AI',
     columns: [
         {
@@ -108,18 +109,18 @@ export const footer = {
             links: [
                 { name: 'About Us', section: 'about' },
                 { name: 'Our Work', section: 'portfolio' },
-                { name: 'Blog', page: '/blog' },
-                { name: 'FAQ', page: '/faq' },
+                { name: 'Blog', page: '/blog/' },
+                { name: 'FAQ', page: '/faq/' },
             ],
         },
         {
             title: 'Services',
             links: [
-                { name: 'Commercials', section: 'services' },
-                { name: 'Designing', section: 'services' },
-                { name: 'Movie Works', section: 'services' },
-                { name: 'Social Media', section: 'services' },
-                { name: 'VFX & CG Works', section: 'services' },
+                { name: 'Ad Films & Commercials', page: '/services/ad-films-and-commercials/' },
+                { name: 'Design & Branding', page: '/services/design-and-branding/' },
+                { name: 'Movie Post-Production', page: '/services/movie-post-production/' },
+                { name: 'Social Media & Web', page: '/services/social-media-and-web-design/' },
+                { name: 'VFX & CG Works', page: '/services/vfx-and-cg/' },
             ],
         },
         {
@@ -131,10 +132,10 @@ export const footer = {
             ],
         },
     ] as { title: string; links: { name: string; section?: string; page?: string; external?: 'whatsapp' }[] }[],
-    /** These pages don't exist yet; links are hidden until they do. Set `ready: true` once a page is added. */
+    /** Wording for these pages lives in content/legal.ts. `ready: false` hides a link. */
     legal: [
-        { name: 'Privacy Policy', page: '/privacy', ready: false },
-        { name: 'Terms of Service', page: '/terms', ready: false },
+        { name: 'Privacy Policy', page: '/privacy/', ready: true },
+        { name: 'Terms of Service', page: '/terms/', ready: true },
     ],
     copyright: 'CK Studio. All Rights Reserved.',
 };

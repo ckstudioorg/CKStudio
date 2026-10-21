@@ -19,8 +19,6 @@ const NotFound: React.FC = () => {
 
     return (
         <div ref={root} className="flex min-h-svh flex-col bg-paper text-ink">
-            <title>Page Not Found | CK Studio</title>
-            <meta name="robots" content="noindex" />
             <div className="px-5 md:px-10 py-6">
                 <Link to="/" aria-label="CK Studio home" className="text-ck-red"><Logo className="h-8 md:h-9" /></Link>
             </div>

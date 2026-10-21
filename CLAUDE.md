@@ -22,7 +22,8 @@ A **React single-page app** (TypeScript + Vite 8 + Tailwind CSS 4, GSAP + Lenis 
 - **Checks on branches:** `.github/workflows/check.yml` runs the same check on other branches and pull requests, without deploying.
 - **Run locally:** `npm ci` once, then `npm run dev` (http://127.0.0.1:3000/). `npm run check` runs everything the deploy runs. Project asks for Node 24 (`.nvmrc`); this PC has Node 25 — it works, but may print an "engine" warning.
 - **Custom domain:** `CNAME` sits in the repo root (not in `public/`), so it isn't copied into `dist/`. With GitHub Actions deploys, the domain is held in the repo's Pages settings, so this is fine. Leave it alone either way.
-- **Deep links:** `public/404.html` + a small script in `index.html` let direct visits to `/blog`, `/faq` etc. work on GitHub Pages. Don't remove them.
+- **Ready-made pages (pre-rendering, for Google):** `npm run build` also runs `npm run prerender`: `src/entry-server.tsx` renders every page at build time and `scripts/prerender.mjs` saves it as real HTML (`dist/index.html`, `dist/blog/index.html`, `dist/blog/<slug>/index.html`, `dist/faq/index.html`, `dist/404.html`) with the full text, title, description, link-preview tags and structured data, plus `dist/sitemap.xml`. The copy stays hidden (`#root[data-prerendered]`) until `src/main.tsx` swaps in the live site (no hydration, so animation code needn't match). Page addresses end in `/` (`/blog/`, `/faq/`, `/blog/<slug>/`); GitHub Pages redirects `/blog` → `/blog/`. Code that runs during render must not touch `window`/`document` (guard with `typeof window`), or the build fails. The build fails if a page has no `<h1>`.
+- **Search details:** one source, `src/lib/seo.ts` (`getPageMeta`, `headTags`, `sitePaths`, `sitemapXml`); wording in `src/content/seo.ts`; `components/SEO.tsx` swaps the `[data-seo]` head tags on page change. `index.html` has a `<!--seo-->` marker where they go. Menu/footer items are real `<a href>` links so search engines can follow them — keep them links, not buttons. The old `?/` deep-link restore script in `index.html` is kept for old bookmarks.
 - **Build splitting:** `vite.config.ts` puts React and the animation libraries in their own cached files.
 - **Blank-page self-recovery:** GitHub Pages lets browsers reuse `index.html` for 10 min (`max-age=600`), so right after a deploy a cached page can point to removed `/assets/` files and render blank. An inline script in `index.html` reloads once (max once per 30 s) if an `/assets/` file fails, a lazy page chunk fails (`vite:preloadError`), or the root element is still empty 8 s after load. Keep it.
 
@@ -44,9 +45,9 @@ A **React single-page app** (TypeScript + Vite 8 + Tailwind CSS 4, GSAP + Lenis 
 | Header, Footer, Logo | `src/components/layout/`, `src/components/brand/Logo.tsx` (PNG used as a CSS mask so it's always exact brand red) |
 | Other pages | `src/pages/` — Blog, BlogPost, FAQ, NotFound |
 | Routes and homepage order | `src/components/AnimatedRoutes.tsx` |
-| Page shell, link-preview tags, icons | `index.html` |
+| Page shell, icons (page titles/link previews come from `src/lib/seo.ts`) | `index.html` |
 | Icons, logo file, link-preview image | `public/favicon-*.png`, `public/images/branding/` (interim versions generated from `src/assets/logo.png`; replace with designer files when ready) |
-| Static files | `public/` (404 redirect, robots.txt, sitemap.xml — **keep the sitemap in sync when adding articles**) |
+| Static files | `public/` (robots.txt, fonts, images). The sitemap and 404 page are generated at build time — new articles are added automatically |
 | Tests | `src/test/site.test.tsx`, `src/test/redesign.test.tsx` — update them if a change intentionally breaks them |
 | Notes for the owner/designer | `docs/` — `DESIGNER_IMAGE_REQUIREMENTS.md`, `TESTIMONIAL_DRAFTS.md`, `FONTS.md`, `PLAN.md` (history) |
 
@@ -67,9 +68,10 @@ Branch `redesign-2026` (started 2026-10-21), done in 8 steps, each previewed and
 
 ## Known issues / waiting on the owner (as of 2026-10-21)
 
-- **Waiting on assets:** About photo (image slot), portfolio media for items marked "Visuals coming soon", final logo/icons from the designer, client-approved testimonials.
+- **About image:** film-strip artwork (`components/brand/FilmStripArt.tsx`, concept A from Claude Design canvas https://claude.ai/artifact/92T3qoCw8aEzdkcC5gVRvw) shows until a real photo is set in `about.image.src`.
+- **Waiting on assets:** a real About photo (optional), portfolio media for items marked "Visuals coming soon", final logo/icons from the designer, client-approved testimonials.
 - **Please confirm:** stats (150+ projects, 50+ brands, 10+ years, 98% satisfaction). Social links were updated to the CKStudioFilms accounts on 2026-10-21 (owner-confirmed).
 - **Privacy Policy / Terms of Service pages don't exist**, so their footer links are hidden (`footer.legal[].ready` in `content/contact.ts`). "Careers" just jumps to Contact.
 - **No map pin:** the old coordinates were wrong (central Hyderabad) and were removed; add exact coordinates only if the owner supplies them.
-- Single-page app means search engines see mostly empty HTML until JavaScript runs — weaker SEO than plain HTML. Changing this (pre-rendering) would be a bigger job; ask first.
+- **Google setup the owner still needs to do:** verify the site in Google Search Console and submit `https://ckstudio.org/sitemap.xml`; create/claim a Google Business Profile (biggest factor for local "ad film makers Hyderabad" searches). A real link-preview image (`og-image.jpg`) and article cover images would help further.
 - Local branch `codex/modern-stack` is an old work branch.

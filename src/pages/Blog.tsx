@@ -5,6 +5,7 @@ import { revealLines, riseIn, useGsap } from '../lib/motion';
 import { articles, blogPage, formatDate, readTime } from '../content/blog';
 import SectionLabel from '../components/ui/SectionLabel';
 import ArticleCover from '../components/ui/ArticleCover';
+import { paths } from '../lib/seo';
 
 const Blog: React.FC = () => {
     const root = useRef<HTMLDivElement>(null);
@@ -75,7 +76,7 @@ const Blog: React.FC = () => {
 
                 {/* Featured article */}
                 {featured && (
-                    <Link to={`/blog/${featured.slug}`} className="group mt-10 grid gap-8 md:grid-cols-12 md:items-end">
+                    <Link to={paths.post(featured.slug)} className="group mt-10 grid gap-8 md:grid-cols-12 md:items-end">
                         <div className="md:col-span-7 aspect-[3/2] overflow-hidden rounded-[28px]">
                             <ArticleCover article={featured} index={articles.indexOf(featured)} large className="transition-transform duration-[1200ms] ease-cinema group-hover:scale-[1.03]" />
                         </div>
@@ -95,7 +96,7 @@ const Blog: React.FC = () => {
                     <ul className="mt-20 md:mt-28 grid gap-x-6 gap-y-14 md:grid-cols-2 lg:grid-cols-3">
                         {rest.map((a) => (
                             <li key={a.slug}>
-                                <Link to={`/blog/${a.slug}`} className="group block">
+                                <Link to={paths.post(a.slug)} className="group block">
                                     <div className="aspect-[3/2] overflow-hidden rounded-[22px]">
                                         <ArticleCover article={a} index={articles.indexOf(a)} className="transition-transform duration-[1200ms] ease-cinema group-hover:scale-[1.04]" />
                                     </div>

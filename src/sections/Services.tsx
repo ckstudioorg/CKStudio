@@ -1,4 +1,6 @@
 import React, { useId, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { paths } from '../lib/seo';
 import { gsap, ScrollTrigger } from '../lib/smoothScroll';
 import { revealLines, riseIn, useGsap } from '../lib/motion';
 import { services } from '../content/services';
@@ -90,6 +92,16 @@ const Services: React.FC = () => {
                                                     </li>
                                                 ))}
                                             </ul>
+                                            <Link
+                                                to={paths.service(service.slug)}
+                                                tabIndex={isOpen ? undefined : -1}
+                                                className="group/link mt-8 inline-flex items-center gap-3 rounded-full bg-ck-red px-6 py-3.5 text-sm font-medium uppercase tracking-[0.12em] text-paper transition-colors duration-500 hover:bg-ink"
+                                            >
+                                                Explore {service.title}
+                                                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" className="h-4 w-4 transition-transform duration-500 ease-cinema group-hover/link:rotate-45">
+                                                    <path d="M6 18 18 6m0 0H8m10 0v10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                                                </svg>
+                                            </Link>
                                         </div>
                                     </div>
                                 </div>

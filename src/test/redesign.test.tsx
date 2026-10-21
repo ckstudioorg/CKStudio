@@ -42,7 +42,7 @@ describe('redesign safeguards', () => {
     });
 
     it('opens one service at a time', () => {
-        render(<Services />);
+        render(<MemoryRouter><Services /></MemoryRouter>);
         const buttons = services.list.map((s) => screen.getByRole('button', { name: new RegExp(s.title) }));
         expect(buttons[0]).toHaveAttribute('aria-expanded', 'true');
         fireEvent.click(buttons[2]);
@@ -59,7 +59,8 @@ describe('redesign safeguards', () => {
     it('keeps dead legal links out of the footer', () => {
         render(<MemoryRouter><Footer /></MemoryRouter>);
         const footer = screen.getByRole('contentinfo');
-        expect(within(footer).queryByText('Privacy Policy')).not.toBeInTheDocument();
+        expect(within(footer).getByRole('link', { name: 'Privacy Policy' })).toHaveAttribute('href', '/privacy/');
+        expect(within(footer).getByRole('link', { name: 'Movie Post-Production' })).toHaveAttribute('href', '/services/movie-post-production/');
         expect(within(footer).getByRole('link', { name: /9700 970 762/ })).toHaveAttribute('href', 'tel:+919700970762');
     });
 });

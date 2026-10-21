@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, useLocation } from 'react-router-dom';
+import { BrowserRouter, StaticRouter, useLocation } from 'react-router-dom';
 import { MotionConfig } from 'motion/react';
 import CustomCursor from './components/CustomCursor';
 import AnimatedRoutes from './components/AnimatedRoutes';
 import WhatsAppWidget from './components/WhatsAppWidget';
+import SEO from './components/SEO';
 import { startSmoothScroll, resetScroll, scrollToSection } from './lib/smoothScroll';
 
 // We need a wrapper component to use useLocation inside Router context
@@ -30,7 +31,8 @@ const ScrollToTop = () => {
     return null;
 };
 
-const App: React.FC = () => {
+/** `location` is only passed when building the ready-made HTML files (scripts/prerender.mjs). */
+const App: React.FC<{ location?: string }> = ({ location }) => {
     // Show body when React mounts (fixes FOUC)
     useEffect(() => {
         document.body.classList.add('loaded');
@@ -43,10 +45,17 @@ const App: React.FC = () => {
         <MotionConfig reducedMotion="user">
             <CustomCursor />
             <WhatsAppWidget />
-            <Router>
-                <ScrollToTop />
-                <AnimatedRoutes />
-            </Router>
+            {location ? (
+                <StaticRouter location={location}>
+                    <AnimatedRoutes />
+                </StaticRouter>
+            ) : (
+                <BrowserRouter>
+                    <ScrollToTop />
+                    <SEO />
+                    <AnimatedRoutes />
+                </BrowserRouter>
+            )}
         </MotionConfig>
     );
 };
