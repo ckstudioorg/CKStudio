@@ -12,6 +12,8 @@ export default defineConfig(({ isSsrBuild }) => ({
   ssr: { noExternal: true },
   build: {
     copyPublicDir: !isSsrBuild,
+    // List of built files, used by scripts/prerender.mjs to tell each page which code file it needs (then deleted)
+    manifest: !isSsrBuild,
     rolldownOptions: {
       output: {
         // Big libraries that rarely change get their own files, so browsers keep them cached between site updates

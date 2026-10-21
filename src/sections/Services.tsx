@@ -1,6 +1,6 @@
 import React, { useId, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { paths } from '../lib/seo';
+import { paths } from '../lib/paths';
 import { gsap, ScrollTrigger } from '../lib/smoothScroll';
 import { revealLines, riseIn, useGsap } from '../lib/motion';
 import { services } from '../content/services';

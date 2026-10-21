@@ -5,7 +5,7 @@ import { revealLines, riseIn, useGsap } from '../lib/motion';
 import { articles, blogPage, formatDate, readTime } from '../content/blog';
 import SectionLabel from '../components/ui/SectionLabel';
 import ArticleCover from '../components/ui/ArticleCover';
-import { paths } from '../lib/seo';
+import { paths } from '../lib/paths';
 
 const Blog: React.FC = () => {
     const root = useRef<HTMLDivElement>(null);

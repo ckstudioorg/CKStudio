@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { SplitText } from 'gsap/SplitText';
 import { gsap } from '../lib/smoothScroll';
 import { useGsap } from '../lib/motion';
+import { alreadyOnScreen } from '../lib/prerendered';
 import { notFound } from '../content/faq';
 import Logo from '../components/brand/Logo';
 
@@ -11,6 +12,7 @@ const NotFound: React.FC = () => {
 
     useGsap(() => {
         const q = gsap.utils.selector(root);
+        if (alreadyOnScreen(q('[data-code]')[0])) return; // arrived ready-made: keep it still, no flicker
         const split = SplitText.create(q('[data-code]')[0], { type: 'chars', mask: 'chars' });
         gsap.timeline({ delay: 0.15 })
             .from(split.chars, { yPercent: 110, duration: 1.3, ease: 'expo.out', stagger: 0.08 })

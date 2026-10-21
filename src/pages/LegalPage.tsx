@@ -4,7 +4,7 @@ import { gsap } from '../lib/smoothScroll';
 import { revealLines, riseIn, useGsap } from '../lib/motion';
 import { formatDate, type Block } from '../content/blog';
 import { getLegalPage, legalPages } from '../content/legal';
-import { paths } from '../lib/seo';
+import { paths } from '../lib/paths';
 import SectionLabel from '../components/ui/SectionLabel';
 
 const renderBlock = (block: Block, i: number) => {

@@ -41,7 +41,8 @@ const AnimatedRoutes: React.FC = () => {
 
     return (
         <Suspense fallback={<div role="status" className="min-h-screen bg-paper text-ink-soft p-12">Loading page…</div>}>
-        <AnimatePresence mode="wait">
+        {/* initial={false}: the first page shows straight away (it may already be on screen, ready-made) */}
+        <AnimatePresence mode="wait" initial={false}>
             <Routes location={location}>
                 <Route path="/" element={
                     <PageTransition>
