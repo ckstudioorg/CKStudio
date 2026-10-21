@@ -89,6 +89,16 @@
     font-family: var(--font-body);
   }
 
+  /* Hero scroll cue: a red dot travelling down a thin line (switched off by the reduced-motion rule) */
+  .ck-scroll-dot {
+    animation: ck-scroll-dot 2.2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+  }
+  @keyframes ck-scroll-dot {
+    0% { transform: translateY(-100%); opacity: 0; }
+    25% { opacity: 1; }
+    100% { transform: translateY(300%); opacity: 0; }
+  }
+
   /* Tight headline tracking squeezes the gaps between words; open them back up */
   .font-heading {
     word-spacing: 0.14em;
