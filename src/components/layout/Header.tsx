@@ -147,7 +147,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection }) => {
             </a>
             <motion.header
                 className="fixed inset-x-0 top-0 z-50"
-                initial={{ y: -100 }}
+                initial={false}
                 animate={{ y: hidden && !isMenuOpen ? -100 : 0 }}
                 transition={{ duration: 0.7, ease }}
             >

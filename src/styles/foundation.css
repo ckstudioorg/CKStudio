@@ -99,6 +99,31 @@
     100% { transform: translateY(300%); opacity: 0; }
   }
 
+  /*
+   * Hero opening (home page): the browser plays this by itself as soon as the page arrives,
+   * without waiting for the site's code. The C and K slide together, CK STUDIO rises,
+   * PRE | PRODUCTION | POST appear one by one, the red line draws, the scroll cue arrives.
+   * The scroll "curtain" animation (GSAP, Hero.tsx) moves the outer wrappers, never these inner pieces.
+   */
+  [data-hero-stage] [data-letter-inner='c'] { animation: ck-hero-c 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both; }
+  [data-hero-stage] [data-letter-inner='k'] { animation: ck-hero-k 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both; }
+  [data-hero-stage] [data-wordmark] { animation: ck-hero-rise 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.95s both; }
+  [data-hero-stage] [data-tag] { animation: ck-hero-tag 0.9s cubic-bezier(0.16, 1, 0.3, 1) calc(1.25s + var(--i, 0) * 0.12s) both; }
+  [data-hero-stage] [data-rule] { animation: ck-hero-rule 1.1s cubic-bezier(0.87, 0, 0.13, 1) 1.4s both; }
+  [data-hero-stage] [data-cue-inner] { animation: ck-hero-cue 1s cubic-bezier(0.16, 1, 0.3, 1) 1.7s both; }
+  @keyframes ck-hero-c { from { transform: translateX(-42%); opacity: 0; } }
+  @keyframes ck-hero-k { from { transform: translateX(36%); opacity: 0; } }
+  @keyframes ck-hero-rise { from { transform: translateY(110%); } }
+  @keyframes ck-hero-tag { from { transform: translateY(12px); opacity: 0; } }
+  @keyframes ck-hero-rule { from { transform: scaleX(0); } }
+  @keyframes ck-hero-cue { from { transform: translateY(16px); opacity: 0; } }
+
+  /* Hero content waits behind the logo until scrolling reveals it (GSAP takes over these values) */
+  [data-hero-stage]:not([data-js]) [data-final] { opacity: 0; visibility: hidden; transform: translateY(30px); }
+  [data-hero-stage]:not([data-js]) [data-final-line] { transform: translateY(105%); }
+  [data-hero-stage]:not([data-js]) [data-final-rule] { transform: scaleX(0); }
+  [data-hero-stage]:not([data-js]) [data-final-wrap] { transform: scale(1.06); transform-origin: 50% 45%; }
+
   /* Tight headline tracking squeezes the gaps between words; open them back up */
   .font-heading {
     word-spacing: 0.14em;

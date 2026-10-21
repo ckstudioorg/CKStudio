@@ -7,9 +7,11 @@ import { motion, useMotionValue, useSpring } from 'motion/react';
  * Uses motion values, so following the mouse doesn't re-render the page.
  */
 const CustomCursor: React.FC = () => {
-    const [enabled] = useState(() =>
-        typeof window !== 'undefined' && window.matchMedia('(pointer: fine) and (prefers-reduced-motion: no-preference)').matches,
-    );
+    // Decided after the page is on screen, so the first render matches the ready-made HTML
+    const [enabled, setEnabled] = useState(false);
+    useEffect(() => {
+        setEnabled(window.matchMedia('(pointer: fine) and (prefers-reduced-motion: no-preference)').matches);
+    }, []);
     const [visible, setVisible] = useState(false);
     const [hovering, setHovering] = useState(false);
     const x = useMotionValue(-100);

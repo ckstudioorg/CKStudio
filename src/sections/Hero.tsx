@@ -35,6 +35,8 @@ const LAYOUT = {
     pipe2: { x: 453, y: 420, w: 3, h: 23 },
 };
 const at = (p: { x: number; y: number; w: number; h: number }) => place(p.x, p.y, p.w, p.h);
+/** Position plus its place in the PRE | PRODUCTION | POST sequence (the CSS opening uses --i for the stagger) */
+const tag = (p: { x: number; y: number; w: number; h: number }, i: number) => ({ ...at(p), '--i': i }) as React.CSSProperties;
 
 
 /** "Where AI Meets …" phrase that slides to the next one every few seconds. */
@@ -77,10 +79,17 @@ const Hero: React.FC = () => {
     const root = useRef<HTMLElement>(null);
     const stage = useRef<HTMLDivElement>(null);
     const frame = useRef<HTMLDivElement>(null);
-    const [reduced] = useState(() => typeof window !== 'undefined' && prefersReducedMotion());
+    // Starts false so the page matches its ready-made HTML; reduced-motion visitors switch before the first paint
+    const [reduced, setReduced] = useState(false);
+    useLayoutEffect(() => {
+        if (prefersReducedMotion()) {
+            setReduced(true);
+            document.documentElement.style.removeProperty('--ck-header-logo');
+        }
+    }, []);
 
     useLayoutEffect(() => {
-        if (reduced || !root.current) return;
+        if (reduced || prefersReducedMotion() || !root.current || !stage.current) return;
         const docStyle = document.documentElement.style;
 
         const ctx = gsap.context(() => {
@@ -101,22 +110,18 @@ const Hero: React.FC = () => {
                     : s.width - left + growth + 40; // off the right edge
             };
 
-            // Starting state for everything that appears later (set up front so staggered items all start hidden)
+            // Starting state for everything that appears later. CSS holds the same values until now
+            // (see [data-hero-stage] in foundation.css); data-js hands them over to GSAP.
+            stage.current!.setAttribute('data-js', '');
             gsap.set(q('[data-final]'), { autoAlpha: 0, y: 30 });
             gsap.set(q('[data-final-line]'), { yPercent: 105 });
             gsap.set(q('[data-final-rule]'), { scaleX: 0 });
 
             /*
-             * Opening (plays by itself as the page loads, ~2.4 s): the C and K slide together and lock,
-             * CK STUDIO rises, PRE | PRODUCTION | POST appear one by one, a red line draws, the scroll cue arrives.
+             * Opening (~2.4 s): played by the browser itself as soon as the page arrives, without waiting for this
+             * code — see "Hero opening" in foundation.css. The C and K slide together, CK STUDIO rises,
+             * PRE | PRODUCTION | POST appear one by one, a red line draws, the scroll cue arrives.
              */
-            gsap.timeline({ delay: 0.2, defaults: { ease: 'expo.out' } })
-                .from(q('[data-letter-inner="c"]'), { xPercent: -42, autoAlpha: 0, duration: 1.4 }, 0)
-                .from(q('[data-letter-inner="k"]'), { xPercent: 36, autoAlpha: 0, duration: 1.4 }, 0)
-                .from(q('[data-wordmark]'), { yPercent: 110, duration: 1.1 }, 0.75)
-                .from(q('[data-tag]'), { autoAlpha: 0, y: 12, duration: 0.9, stagger: 0.12 }, 1.05)
-                .from(q('[data-rule]'), { scaleX: 0, duration: 1.1, ease: 'expo.inOut' }, 1.2)
-                .from(q('[data-cue-inner]'), { y: 16, autoAlpha: 0, duration: 1 }, 1.5);
 
             /*
              * Scrolling: the logo opens like theatre curtains. The C glides off to the left and the K to the
@@ -150,6 +155,7 @@ const Hero: React.FC = () => {
 
         return () => {
             ctx.revert();
+            stage.current?.removeAttribute('data-js');
             docStyle.removeProperty('--ck-header-logo');
         };
     }, [reduced]);
@@ -231,7 +237,7 @@ const Hero: React.FC = () => {
 
     return (
         <section ref={root} aria-label="Introduction" className="relative bg-paper text-ink h-[200vh] md:h-[220vh]">
-            <div ref={stage} className="sticky top-0 h-svh overflow-hidden">
+            <div ref={stage} data-hero-stage className="sticky top-0 h-svh overflow-hidden">
                 {/* The assembling logo (decorative: the header logo and headline carry the meaning) */}
                 <div
                     ref={frame}
@@ -249,15 +255,15 @@ const Hero: React.FC = () => {
                         {/* Separate layers for the opening animation (inner) and the scroll animation (outer) */}
                         <div className="absolute overflow-hidden" style={at(LAYOUT.wordmark)}>
                             <div data-wordmark-scroll className="h-full w-full">
-                                <img data-wordmark src={wordmarkUrl} alt="" className="block h-full w-full" />
+                                <img data-wordmark src={wordmarkUrl} alt="" fetchPriority="high" className="block h-full w-full" />
                             </div>
                         </div>
                         <div data-lower className="absolute inset-0">
-                            <img data-tag src={preUrl} alt="" className="absolute" style={at(LAYOUT.pre)} />
-                            <span data-tag className="absolute bg-ink" style={at(LAYOUT.pipe1)} />
-                            <img data-tag src={productionUrl} alt="" className="absolute" style={at(LAYOUT.production)} />
-                            <span data-tag className="absolute bg-ink" style={at(LAYOUT.pipe2)} />
-                            <img data-tag src={postUrl} alt="" className="absolute" style={at(LAYOUT.post)} />
+                            <img data-tag src={preUrl} alt="" className="absolute" style={tag(LAYOUT.pre, 0)} />
+                            <span data-tag className="absolute bg-ink" style={tag(LAYOUT.pipe1, 1)} />
+                            <img data-tag src={productionUrl} alt="" className="absolute" style={tag(LAYOUT.production, 2)} />
+                            <span data-tag className="absolute bg-ink" style={tag(LAYOUT.pipe2, 3)} />
+                            <img data-tag src={postUrl} alt="" className="absolute" style={tag(LAYOUT.post, 4)} />
                             <span data-rule className="absolute left-[35%] top-[calc(100%+32px)] h-[2px] w-[30%] origin-center bg-ck-red" />
                         </div>
                     </div>

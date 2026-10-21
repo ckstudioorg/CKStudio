@@ -118,7 +118,7 @@ const Footer: React.FC = () => {
             {/* Bottom bar */}
             <div className="mx-auto max-w-[1600px] px-5 md:px-10">
                 <div className="flex flex-col gap-3 border-t border-ink-faint py-6 text-xs text-ink-soft md:flex-row md:items-center md:justify-between">
-                    <p>&copy; {new Date().getFullYear()} {footer.copyright}</p>
+                    <p suppressHydrationWarning>&copy; {new Date().getFullYear()} {footer.copyright}</p>
                     <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
                         <a href={contact.website.url} className="transition-colors hover:text-ck-red">{contact.website.label}</a>
                         {footer.legal.filter((l) => l.ready).map((l) => (

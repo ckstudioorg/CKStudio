@@ -11,15 +11,9 @@ import { areaServed, pageSeo, site } from '../content/seo';
 import { servicePages } from '../content/servicePages';
 import { legalPages } from '../content/legal';
 
-/** Page addresses. Every page lives in its own folder, so addresses end with "/". */
-export const paths = {
-    home: '/',
-    blog: '/blog/',
-    faq: '/faq/',
-    post: (slug: string) => `/blog/${slug}/`,
-    service: (slug: string) => `/services/${slug}/`,
-    legal: (slug: string) => `/${slug}/`,
-};
+import { normalizePath, paths } from './paths';
+
+export { normalizePath, paths };
 
 export interface PageMeta {
     title: string;
@@ -33,13 +27,6 @@ export interface PageMeta {
     modified?: string;
     tags?: string[];
     jsonLd: object[];
-}
-
-/** "/blog" and "/blog/" are the same page; always use the version with the final slash. */
-export function normalizePath(pathname: string): string {
-    const clean = pathname.split(/[?#]/)[0] || '/';
-    const withLead = clean.startsWith('/') ? clean : `/${clean}`;
-    return withLead.endsWith('/') ? withLead : `${withLead}/`;
 }
 
 export const absolute = (path: string) => `${site.url}${path}`;

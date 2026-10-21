@@ -47,6 +47,8 @@ const App: React.FC<{ location?: string }> = ({ location }) => {
             <WhatsAppWidget />
             {location ? (
                 <StaticRouter location={location}>
+                    <ScrollToTop />
+                    <SEO />
                     <AnimatedRoutes />
                 </StaticRouter>
             ) : (

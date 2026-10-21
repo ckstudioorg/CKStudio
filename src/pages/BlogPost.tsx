@@ -4,7 +4,8 @@ import { gsap } from '../lib/smoothScroll';
 import { revealLines, riseIn, useGsap } from '../lib/motion';
 import { articles, blogPage, formatDate, readTime, type Block } from '../content/blog';
 import { mailtoUrl, whatsappUrl } from '../content/contact';
-import { paths } from '../lib/seo';
+import { paths } from '../lib/paths';
+import { alreadyOnScreen } from '../lib/prerendered';
 import ArticleCover from '../components/ui/ArticleCover';
 
 const BackArrow = () => (
@@ -50,7 +51,7 @@ const BlogPost: React.FC = () => {
         const q = gsap.utils.selector(root);
         revealLines(q('[data-title]')[0], { start: 'top 95%' });
         riseIn(q('[data-intro]'), q('[data-intro]')[0], { start: 'top 95%' });
-        gsap.fromTo(q('[data-cover]'), { clipPath: 'inset(0% 0% 100% 0% round 28px)' }, { clipPath: 'inset(0% 0% 0% 0% round 28px)', duration: 1.4, ease: 'expo.inOut', delay: 0.2 });
+        if (!alreadyOnScreen(q('[data-cover]')[0])) gsap.fromTo(q('[data-cover]'), { clipPath: 'inset(0% 0% 100% 0% round 28px)' }, { clipPath: 'inset(0% 0% 0% 0% round 28px)', duration: 1.4, ease: 'expo.inOut', delay: 0.2 });
     }, root, [slug]);
 
     if (!post) {

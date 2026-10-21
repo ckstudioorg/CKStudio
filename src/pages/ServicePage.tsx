@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { gsap } from '../lib/smoothScroll';
 import { revealLines, riseIn, useGsap } from '../lib/motion';
-import { paths } from '../lib/seo';
+import { paths } from '../lib/paths';
 import { getServicePage, servicePages, servicePageText as t } from '../content/servicePages';
 import { portfolio } from '../content/work';
 import { articles, formatDate, readTime } from '../content/blog';

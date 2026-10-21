@@ -1,6 +1,7 @@
 import { useLayoutEffect, type DependencyList, type RefObject } from 'react';
 import { SplitText } from 'gsap/SplitText';
 import { gsap } from './smoothScroll';
+import { alreadyOnScreen } from './prerendered';
 
 gsap.registerPlugin(SplitText);
 
@@ -20,7 +21,9 @@ export function useGsap(setup: () => void | (() => void), scope: RefObject<HTMLE
 
 /** Lines slide up from behind a mask when the element scrolls into view. */
 export function revealLines(target: Element | string, { delay = 0, start = 'top 85%' } = {}) {
-    return SplitText.create(target, {
+    const el = typeof target === 'string' ? document.querySelector(target) : target;
+    if (!el || alreadyOnScreen(el)) return null;
+    return SplitText.create(el, {
         type: 'lines',
         mask: 'lines',
         autoSplit: true,
@@ -53,7 +56,9 @@ export function fillWords(target: Element | string, { start = 'top 80%', end = '
 
 /** Fades and lifts elements in, one after another, when they scroll into view. */
 export function riseIn(targets: string | Element[], trigger: Element | string, { stagger = 0.08, start = 'top 85%' } = {}) {
-    return gsap.from(targets, {
+    const items = gsap.utils.toArray<Element>(targets).filter((el) => !alreadyOnScreen(el));
+    if (!items.length) return null;
+    return gsap.from(items, {
         y: 40,
         autoAlpha: 0,
         duration: 1.1,
