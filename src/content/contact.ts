@@ -57,6 +57,39 @@ export const getInTouch = {
     connect: { title: 'Connect With Us', text: 'Follow our AI filmmaking journey' },
 };
 
+/**
+ * Project enquiry form (Get In Touch section). Enquiries are delivered by Web3Forms (free, 250/month)
+ * to the email address the access key was created with.
+ * Paste the access key from web3forms.com below. It is safe to keep it public; it only lets people send you enquiries.
+ * While it is empty, pressing Send opens the visitor's email app with their details filled in instead.
+ */
+export const enquiry = {
+    accessKey: '9c8e3c30-9d5e-486e-bb6b-814566e3401e',
+    endpoint: 'https://api.web3forms.com/submit',
+    subject: 'New project enquiry from the CK Studio website',
+    label: 'Project Enquiry',
+    title: { lead: 'Tell us about your', highlight: 'project' },
+    intro: 'Share a few details and we will call you back within one working day.',
+    services: ['Commercials', 'AI ad film', 'Movie works', 'VFX & CG', 'Designing', 'Social media'],
+    budgets: ['Not sure yet', 'Under ₹1 lakh', '₹1–5 lakh', '₹5–20 lakh', '₹20 lakh+'],
+    timelines: ['Flexible', 'Within 2 weeks', 'Within a month', '1–3 months'],
+    send: 'Send enquiry',
+    sending: 'Sending…',
+    note: 'Prefer to talk? WhatsApp or call us directly.',
+    thanks: {
+        label: 'Enquiry sent',
+        title: 'Thank you',
+        text: 'We have your project details and will get back to you within one working day.',
+        again: 'Send another enquiry',
+    },
+    errors: {
+        name: 'Enter your name',
+        phone: 'Enter a phone number we can call',
+        email: 'Check your email address',
+        failed: "Your enquiry couldn't be sent. Please try again, or reach us on WhatsApp.",
+    },
+};
+
 export const cta = {
     badge: 'AI-Powered Production',
     title: { lead: 'Ready to Create Your', highlight: 'AI-Powered Ad Film?' },

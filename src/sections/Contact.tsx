@@ -1,9 +1,10 @@
 import React, { useRef } from 'react';
 import { SplitText } from 'gsap/SplitText';
-import { gsap } from '../lib/smoothScroll';
+import { gsap, scrollToSection } from '../lib/smoothScroll';
 import { revealLines, riseIn, useGsap } from '../lib/motion';
-import { contact, cta, getInTouch, mailtoUrl, whatsappUrl } from '../content/contact';
+import { contact, cta, enquiry, getInTouch, whatsappUrl } from '../content/contact';
 import SectionLabel from '../components/ui/SectionLabel';
+import EnquiryForm from '../components/contact/EnquiryForm';
 import { FacebookIcon, InstagramIcon, TwitterIcon, YoutubeIcon } from '../components/SocialIcons';
 
 const socialIcons: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> = {
@@ -38,6 +39,8 @@ const Contact: React.FC = () => {
                 .fromTo(row.querySelector('[data-rule]'), { scaleX: 0 }, { scaleX: 1, duration: 1.2, ease: 'expo.inOut' })
                 .from(row.querySelectorAll('[data-in]'), { yPercent: 110, duration: 1, ease: 'expo.out', stagger: 0.06 }, 0.25);
         });
+        revealLines(q('[data-enquiry-title]')[0]);
+        riseIn(q('[data-enquiry-in]'), q('[data-enquiry]')[0]);
         riseIn(q('[data-social]'), q('[data-connect]')[0], { stagger: 0.06 });
 
         // Closing headline: words rise and settle in step with the scroll
@@ -95,6 +98,20 @@ const Contact: React.FC = () => {
                     <li aria-hidden="true" className="h-px bg-ink" />
                 </ul>
 
+                {/* Project enquiry form */}
+                <div id="enquiry" data-enquiry className="mt-24 md:mt-36 grid gap-12 md:grid-cols-12 md:gap-10 scroll-mt-28">
+                    <div className="md:col-span-4">
+                        <p data-enquiry-in className="text-xs md:text-sm font-medium uppercase tracking-[0.22em] text-ck-red">{enquiry.label}</p>
+                        <h3 data-enquiry-title className="mt-5 font-heading font-semibold text-title">
+                            {enquiry.title.lead} <span className="text-ck-red">{enquiry.title.highlight}</span>
+                        </h3>
+                        <p data-enquiry-in className="mt-5 max-w-sm text-base md:text-lg leading-relaxed text-ink-soft">{enquiry.intro}</p>
+                    </div>
+                    <div data-enquiry-in className="md:col-span-8">
+                        <EnquiryForm />
+                    </div>
+                </div>
+
                 {/* Connect */}
                 <div data-connect className="mt-14 md:mt-20 flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
                     <div>
@@ -136,7 +153,8 @@ const Contact: React.FC = () => {
                     <div data-cta-actions className="mt-12 flex flex-col items-center justify-center gap-3 sm:flex-row">
                         <a
                             data-cta-in
-                            href={mailtoUrl()}
+                            href="#enquiry"
+                            onClick={(e) => { e.preventDefault(); scrollToSection('enquiry'); }}
                             className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full bg-ck-red px-9 py-5 text-sm font-medium uppercase tracking-[0.14em] text-paper shadow-[0_0_0_1px_rgba(212,175,55,0.5),0_18px_50px_-12px_rgba(212,175,55,0.55)] transition-shadow duration-500 hover:shadow-[0_0_0_2px_rgba(212,175,55,0.9),0_24px_70px_-10px_rgba(212,175,55,0.7)]"
                         >
                             <span aria-hidden="true" className="absolute inset-0 translate-y-full rounded-full bg-ink transition-transform duration-500 ease-cinema group-hover:translate-y-0" />
