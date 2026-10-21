@@ -67,7 +67,7 @@ Branch `redesign-2026` (started 2026-10-21), done in 8 steps, each previewed and
 ## Known issues / waiting on the owner (as of 2026-10-21)
 
 - **Waiting on assets:** About photo (image slot), portfolio media for items marked "Visuals coming soon", final logo/icons from the designer, client-approved testimonials.
-- **Please confirm:** stats (150+ projects, 50+ brands, 10+ years, 98% satisfaction); social links point to "CKStudio-Music" / "ckstudio_music" accounts.
+- **Please confirm:** stats (150+ projects, 50+ brands, 10+ years, 98% satisfaction). Social links were updated to the CKStudioFilms accounts on 2026-10-21 (owner-confirmed).
 - **Privacy Policy / Terms of Service pages don't exist**, so their footer links are hidden (`footer.legal[].ready` in `content/contact.ts`). "Careers" just jumps to Contact.
 - **No map pin:** the old coordinates were wrong (central Hyderabad) and were removed; add exact coordinates only if the owner supplies them.
 - Single-page app means search engines see mostly empty HTML until JavaScript runs — weaker SEO than plain HTML. Changing this (pre-rendering) would be a bigger job; ask first.
