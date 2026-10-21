@@ -21,10 +21,10 @@ export const contact = {
     whatsapp: { number: '919700970762', message: "Hi! I'm interested in AI-powered ad film production." },
     website: { label: 'www.ckstudio.org', url: 'https://ckstudio.org' },
     socials: [
-        { name: 'Facebook', url: 'https://www.facebook.com/CKStudio.org/' },
-        { name: 'X', url: 'https://x.com/CKStudio_Music' },
-        { name: 'YouTube', url: 'https://www.youtube.com/@CKStudio-Music' },
-        { name: 'Instagram', url: 'https://www.instagram.com/ckstudio_music/' },
+        { name: 'Facebook', url: 'https://www.facebook.com/CKStudioFilms/' },
+        { name: 'X', url: 'https://x.com/CKStudioFilms' },
+        { name: 'YouTube', url: 'https://www.youtube.com/@CKStudioFilms' },
+        { name: 'Instagram', url: 'https://www.instagram.com/ckstudiofilms/' },
     ],
 };
 

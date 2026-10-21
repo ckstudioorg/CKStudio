@@ -74,9 +74,13 @@ const Header: React.FC<HeaderProps> = ({ activeSection }) => {
             frame = 0;
             const y = window.scrollY;
             const max = document.documentElement.scrollHeight - window.innerHeight;
-            setScrolled(y > 40);
+            // On the home page the hero animation plays first: keep the header clear (no white strip)
+            // and visible until it has finished
+            const home = document.getElementById('home');
+            const heroEnd = Math.max(home ? home.offsetTop + home.offsetHeight - window.innerHeight : 0, 0);
+            setScrolled(y > heroEnd + 40);
             if (Math.abs(y - lastY) > 6) {
-                setHidden(y > lastY && y > window.innerHeight * 0.6);
+                setHidden(y > lastY && y > heroEnd + window.innerHeight * 0.6);
                 lastY = y;
             }
             if (progressRef.current) progressRef.current.style.transform = `scaleX(${max > 0 ? Math.min(1, y / max) : 0})`;
@@ -143,7 +147,8 @@ const Header: React.FC<HeaderProps> = ({ activeSection }) => {
                     }`}
                 >
                     <div className="mx-auto flex h-16 md:h-20 max-w-[1600px] items-center justify-between px-5 md:px-10">
-                        <a href="/" aria-label="CK Studio home" className="text-ck-red transition-opacity hover:opacity-80">
+                        {/* The home-page hero fades this logo in as its big logo shrinks into it (--ck-header-logo) */}
+                        <a href="/" aria-label="CK Studio home" data-header-logo className="block text-ck-red transition-opacity hover:opacity-80" style={{ opacity: 'var(--ck-header-logo, 1)' }}>
                             <Logo className="h-8 md:h-9" />
                         </a>
 

@@ -25,10 +25,20 @@ describe('redesign safeguards', () => {
         preferReducedMotion();
         const { container } = render(<Hero />);
         expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Where AI');
-        // No tall scroll stage, and the screen sits inside the headline gap
+        // No tall scroll stage and no animated logo: just the finished hero with its tagline row
         expect(container.querySelector('section')!.className).not.toMatch(/h-\[/);
-        expect(screen.getByText('Hero video placeholder')).toBeInTheDocument();
+        expect(container.querySelector('[data-logo-group]')).toBeNull();
+        expect(container.querySelector('img[src*="ck-tagline"]')).not.toBeNull();
         expect(screen.getByRole('button', { name: 'Explore Our Work' })).toBeInTheDocument();
+    });
+
+    it('builds the animated logo from the vector C and K for everyone else', () => {
+        const { container } = render(<Hero />);
+        expect(container.querySelector('section')!.className).toMatch(/h-\[/);
+        expect(container.querySelectorAll('[data-letter] svg path')).toHaveLength(2);
+        expect(container.querySelectorAll('[data-tag]')).toHaveLength(5);
+        // The heading stays readable text for search engines and screen readers
+        expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/Where AI.*Meets/);
     });
 
     it('opens one service at a time', () => {

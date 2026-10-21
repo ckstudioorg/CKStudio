@@ -38,7 +38,7 @@ A **React single-page app** (TypeScript + Vite 8 + Tailwind CSS 4, GSAP + Lenis 
 
 | What | File |
 |---|---|
-| **All wording + contact details** | `src/content/` — `hero.ts` (also hero video paths), `about.ts`, `services.ts`, `work.ts` (partners, portfolio, Why Us + stats), `contact.ts` (**the one place** for phone/email/address/WhatsApp/socials, plus testimonials, CTA, footer), `blog.ts`, `faq.ts` (+ 404 text), `seo.ts` |
+| **All wording + contact details** | `src/content/` — `hero.ts`, `about.ts`, `services.ts`, `work.ts` (partners, portfolio, Why Us + stats), `contact.ts` (**the one place** for phone/email/address/WhatsApp/socials, plus testimonials, CTA, footer), `blog.ts`, `faq.ts` (+ 404 text), `seo.ts` |
 | Homepage sections | `src/sections/` — Hero, About, Philosophy, VisionMission, Services, Process, Partners, Portfolio, WhyUs, Testimonials, Contact (+ closing CTA) |
 | Header, Footer, Logo | `src/components/layout/`, `src/components/brand/Logo.tsx` (PNG used as a CSS mask so it's always exact brand red) |
 | Other pages | `src/pages/` — Blog, BlogPost, FAQ, NotFound |
@@ -58,7 +58,7 @@ Homepage order: Hero → About → Philosophy → Vision & Mission → What We D
 - **Testimonials:** never invent quotes. Only client-approved ones go in `testimonials.approved` (drafts to send for approval: `docs/TESTIMONIAL_DRAFTS.md`). While empty, the section shows real work.
 - **Blog:** 7 real articles (block-based: p / h2 / list / quote). Designed number covers until real images (`image:` 1200×800 in `public/images/blog/`).
 - **Portfolio:** add a thumbnail with `image:` or a video with `url` + `youtubeId`. `note` is internal and never shown.
-- **Hero video:** 5–8 s, 1920×1080 (+ optional 1080×1920 for phones), no audio, starts/ends on white. Convert the designer's export to an all-keyframe MP4 before using it so scroll-scrubbing is smooth; set paths in `content/hero.ts`.
+- **Hero = logo animation** (storyboard: Claude Design canvas https://claude.ai/artifact/9fqoVuqX95oogiajnWRfgH; the owner later asked for a cleaner opening). On load (no scrolling needed) the full logo assembles centred: C and mirrored K slide together, CK STUDIO rises, PRE | PRODUCTION | POST appear, a red line draws, the scroll cue arrives. On scroll the logo opens like theatre curtains (C glides off left, K off right, both growing), CK STUDIO sinks back, the tagline fades, and the hero content settles in behind; the small header logo then fades in (`--ck-header-logo` CSS variable on `<html>`). The header stays visible and clear (no white strip) until the hero ends. The owner rejected flying the logo into the header corner ("childish") and giant cropped letters as the opening ("odd"). C and K are vector paths in `components/brand/LogoLetters.tsx` (traced from the official logo); name/tagline pieces in `src/assets/hero/`. Layout numbers in `sections/Hero.tsx` (`LAYOUT`) come from the logo file — re-measure if the logo artwork changes. No hero video any more; one could be added later as an extra layer.
 
 ## Redesign history
 
@@ -66,8 +66,8 @@ Branch `redesign-2026` (started 2026-10-21), done in 8 steps, each previewed and
 
 ## Known issues / waiting on the owner (as of 2026-10-21)
 
-- **Waiting on assets:** hero video, About photo (image slot), portfolio media for items marked "Visuals coming soon", final logo/icons from the designer, client-approved testimonials.
-- **Please confirm:** stats (150+ projects, 50+ brands, 10+ years, 98% satisfaction); social links point to "CKStudio-Music" / "ckstudio_music" accounts.
+- **Waiting on assets:** About photo (image slot), portfolio media for items marked "Visuals coming soon", final logo/icons from the designer, client-approved testimonials.
+- **Please confirm:** stats (150+ projects, 50+ brands, 10+ years, 98% satisfaction). Social links were updated to the CKStudioFilms accounts on 2026-10-21 (owner-confirmed).
 - **Privacy Policy / Terms of Service pages don't exist**, so their footer links are hidden (`footer.legal[].ready` in `content/contact.ts`). "Careers" just jumps to Contact.
 - **No map pin:** the old coordinates were wrong (central Hyderabad) and were removed; add exact coordinates only if the owner supplies them.
 - Single-page app means search engines see mostly empty HTML until JavaScript runs — weaker SEO than plain HTML. Changing this (pre-rendering) would be a bigger job; ask first.
