@@ -35,28 +35,32 @@ const Philosophy: React.FC = () => {
     }, root);
 
     return (
-        <section id="philosophy" ref={root} aria-labelledby="philosophy-title" className="relative flex min-h-svh flex-col justify-center overflow-hidden bg-paper text-ink py-24">
-            <div className="mx-auto w-full max-w-[1600px] px-5 md:px-10">
-                <SectionLabel index="02">{philosophy.label}</SectionLabel>
-                <h2 id="philosophy-title" data-title className="mt-6 font-heading font-semibold text-title">
-                    {philosophy.title.lead} <span className="text-ck-red">{philosophy.title.highlight}</span>
+        <section id="philosophy" ref={root} aria-labelledby="philosophy-title" className="relative flex min-h-svh flex-col justify-center overflow-hidden bg-noir text-ivory py-24">
+            {/* Deep red light rising from below, and fine gold lines framing the stage */}
+            <div aria-hidden="true" className="pointer-events-none absolute inset-0" style={{ background: 'radial-gradient(ellipse 75% 50% at 50% 105%, rgba(139,0,0,0.36), rgba(10,8,7,0) 70%)' }} />
+            <span aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
+
+            <div className="relative mx-auto w-full max-w-[1600px] px-5 md:px-10">
+                <SectionLabel tone="lux" index="02">{philosophy.label}</SectionLabel>
+                <h2 id="philosophy-title" data-title className="mt-6 font-display font-normal text-headline">
+                    {philosophy.title.lead} <em className="lux-foil">{philosophy.title.highlight}</em>
                 </h2>
             </div>
 
-            <blockquote className="mt-12 md:mt-16">
+            <blockquote className="relative mt-12 md:mt-16">
                 {/* On reduced motion this simply wraps onto several lines */}
                 <p
                     ref={track}
-                    className="w-max max-w-none whitespace-nowrap px-5 md:px-10 font-heading font-semibold text-[clamp(4rem,2rem+11vw,14rem)] leading-[0.95] tracking-[-0.045em] motion-reduce:w-auto motion-reduce:whitespace-normal motion-reduce:text-giant"
+                    className="w-max max-w-none whitespace-nowrap px-5 md:px-10 font-display font-normal text-[clamp(4rem,2rem+11vw,14rem)] leading-[1.04] tracking-[-0.02em] motion-reduce:w-auto motion-reduce:whitespace-normal motion-reduce:text-display"
                 >
-                    <span className="text-ink">“{philosophy.quote.lead} </span>
-                    <span className="text-ck-red">{philosophy.quote.highlight}”</span>
+                    <span className="text-ivory"><span className="lux-foil">“</span>{philosophy.quote.lead} </span>
+                    <em className="lux-foil">{philosophy.quote.highlight}”</em>
                 </p>
             </blockquote>
 
-            <div className="mx-auto mt-12 md:mt-16 w-full max-w-[1600px] px-5 md:px-10 motion-reduce:hidden">
-                <div className="h-px bg-ink-faint">
-                    <div data-progress className="h-px origin-left bg-ck-red" />
+            <div className="relative mx-auto mt-12 md:mt-16 w-full max-w-[1600px] px-5 md:px-10 motion-reduce:hidden">
+                <div className="h-px bg-ivory/10">
+                    <div data-progress className="h-px origin-left bg-gradient-to-r from-gold-deep via-gold-light to-gold" />
                 </div>
             </div>
         </section>

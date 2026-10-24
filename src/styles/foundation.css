@@ -124,6 +124,14 @@
   --color-wine-deep: #4a0505;
 
   --font-display: 'Boska', 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+
+  /* Serif headline sizes (Boska needs less tight tracking than the old sans) */
+  --text-display: clamp(2.9rem, 1rem + 6.6vw, 8.25rem);
+  --text-display--line-height: 0.96;
+  --text-display--letter-spacing: -0.02em;
+  --text-headline: clamp(2.2rem, 1rem + 3.5vw, 4.75rem);
+  --text-headline--line-height: 1.02;
+  --text-headline--letter-spacing: -0.015em;
 }
 
 @layer base {
