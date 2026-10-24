@@ -91,24 +91,27 @@ const Testimonials: React.FC = () => {
     }, []);
 
     return (
-        <section ref={root} aria-labelledby="testimonials-title" aria-roledescription="carousel" className="relative overflow-hidden bg-paper text-ink py-28 md:py-40">
-            <div className="mx-auto max-w-[1600px] px-5 md:px-10">
+        <section ref={root} aria-labelledby="testimonials-title" aria-roledescription="carousel" className="relative overflow-hidden bg-noir text-ivory py-28 md:py-44">
+            {/* Soft gold light behind the heading */}
+            <div aria-hidden="true" className="lux-glow-top pointer-events-none absolute inset-0" style={{ background: 'radial-gradient(ellipse 45% 32% at 18% 12%, rgba(212,175,55,0.06), rgba(10,8,7,0) 72%)' }} />
+
+            <div className="relative mx-auto max-w-[1600px] px-5 md:px-10">
                 <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
                     <div>
                         <SectionLabel index="09">{testimonials.label}</SectionLabel>
-                        <h2 id="testimonials-title" data-title className="mt-8 font-heading font-semibold text-giant">
-                            {testimonials.title.lead} <span className="text-ck-red">{testimonials.title.highlight}</span>
+                        <h2 id="testimonials-title" data-title className="mt-8 font-display font-normal text-display">
+                            {testimonials.title.lead} <em className="lux-foil">{testimonials.title.highlight}</em>
                         </h2>
-                        {!quotes.length && <p data-intro className="mt-6 max-w-md text-base md:text-lg text-ink-soft">{testimonials.fallbackIntro}</p>}
+                        {!quotes.length && <p data-intro className="mt-6 max-w-md text-base md:text-lg leading-[1.8] text-ivory-soft">{testimonials.fallbackIntro}</p>}
                     </div>
 
                     {/* Controls */}
-                    <div className="flex items-center gap-5">
-                        <span aria-live="polite" className="font-heading text-lg tabular-nums">
-                            <span className="text-ck-red">{pad(index + 1)}</span>
-                            <span className="text-ink-soft"> / {pad(count)}</span>
+                    <div className="flex items-center gap-6">
+                        <span aria-live="polite" className="font-display text-xl md:text-2xl italic lining-nums">
+                            <span className="text-gold-light">{pad(index + 1)}</span>
+                            <span className="text-ivory-dim"> / {pad(count)}</span>
                         </span>
-                        <div className="flex gap-2">
+                        <div className="flex gap-2.5">
                             {[{ label: 'Previous', dir: -1 }, { label: 'Next', dir: 1 }].map(({ label, dir }) => (
                                 <button
                                     key={label}
@@ -116,7 +119,7 @@ const Testimonials: React.FC = () => {
                                     onClick={() => goTo(index + dir)}
                                     disabled={dir < 0 ? index === 0 : index === count - 1}
                                     aria-label={`${label} slide`}
-                                    className="flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full border border-ink text-ink transition-colors duration-300 hover:bg-ck-red hover:border-ck-red hover:text-paper disabled:pointer-events-none disabled:opacity-25"
+                                    className="flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full border border-gold/40 text-gold-light transition-colors duration-500 hover:border-gold hover:bg-gold hover:text-noir disabled:pointer-events-none disabled:opacity-25"
                                 >
                                     <Chevron flip={dir < 0} />
                                 </button>
@@ -130,42 +133,45 @@ const Testimonials: React.FC = () => {
             <div
                 ref={track}
                 onScroll={onScroll}
-                className="mt-14 md:mt-20 flex snap-x snap-mandatory gap-5 md:gap-8 overflow-x-auto overscroll-x-contain scroll-px-5 md:scroll-px-10 px-5 md:px-10 pb-4 cursor-grab active:cursor-grabbing select-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+                className="relative mt-14 md:mt-20 flex snap-x snap-mandatory gap-5 md:gap-8 overflow-x-auto overscroll-x-contain scroll-px-5 md:scroll-px-10 px-5 md:px-10 pb-4 cursor-grab active:cursor-grabbing select-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
             >
                 {quotes.length
                     ? quotes.map((t, i) => (
-                        <figure key={t.name} data-slide aria-roledescription="slide" aria-label={`${i + 1} of ${count}`} className="flex w-[86vw] md:w-[62vw] lg:w-[48vw] shrink-0 snap-start flex-col justify-between rounded-[28px] border border-ink-faint p-8 md:p-12">
-                            <blockquote className="font-heading font-medium text-[clamp(1.4rem,1rem+1.6vw,2.6rem)] leading-[1.15] tracking-[-0.02em]">
-                                <span className="text-ck-red">“</span>{t.quote}<span className="text-ck-red">”</span>
+                        <figure key={t.name} data-slide aria-roledescription="slide" aria-label={`${i + 1} of ${count}`} className="lux-panel relative flex w-[86vw] md:w-[62vw] lg:w-[48vw] shrink-0 snap-start flex-col justify-between p-8 md:p-12">
+                            <span aria-hidden="true" className="pointer-events-none absolute inset-2.5 md:inset-3 border border-gold/10" />
+                            <blockquote className="relative font-display font-normal italic text-[clamp(1.4rem,1rem+1.6vw,2.6rem)] leading-[1.3] text-ivory">
+                                <span className="text-gold">“</span>{t.quote}<span className="text-gold">”</span>
                             </blockquote>
-                            <figcaption className="mt-10 border-t border-ink-faint pt-5">
-                                <span className="block font-heading text-lg font-semibold">{t.name}</span>
-                                <span className="text-sm text-ink-soft">{t.role}, <span className="text-ck-red">{t.company}</span></span>
+                            <figcaption className="relative mt-10 border-t border-gold/20 pt-5">
+                                <span className="block font-display text-xl text-ivory">{t.name}</span>
+                                <span className="text-sm text-ivory-soft">{t.role}, <span className="text-gold-light">{t.company}</span></span>
                             </figcaption>
                         </figure>
                     ))
                     : works.map((w, i) => (
                         <article key={w.title} data-slide aria-roledescription="slide" aria-label={`${i + 1} of ${count}`} className="group w-[82vw] md:w-[46vw] lg:w-[36vw] shrink-0 snap-start">
-                            <div className="relative aspect-[4/3] overflow-hidden rounded-[28px] bg-ink-ghost">
+                            <div className="relative aspect-[4/3] overflow-hidden bg-noir-3">
                                 <img
                                     src={`https://img.youtube.com/vi/${w.youtubeId}/hqdefault.jpg`}
                                     alt=""
                                     loading="lazy"
                                     draggable={false}
-                                    className="h-full w-full object-cover transition-transform duration-[1200ms] ease-cinema group-hover:scale-105"
+                                    className="h-full w-full object-cover brightness-[0.82] saturate-[0.9] transition-[scale,filter] duration-[1200ms] ease-cinema group-hover:scale-105 group-hover:brightness-100 group-hover:saturate-100"
                                 />
-                                <span className="absolute left-5 top-5 rounded-full bg-paper/90 px-3 py-1.5 text-[0.65rem] font-medium uppercase tracking-[0.2em] text-ck-red backdrop-blur">
+                                <span aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-t from-noir/60 via-noir/0 to-noir/0" />
+                                <span aria-hidden="true" className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-gold/20 transition-[box-shadow] duration-700 group-hover:ring-gold/50" />
+                                <span className="lux-label absolute left-5 top-5 border border-gold/35 bg-noir/70 px-3 py-1.5 backdrop-blur-sm">
                                     {w.category}
                                 </span>
                             </div>
                             <div className="mt-6 flex items-end justify-between gap-4">
-                                <h3 className="font-heading text-2xl md:text-3xl font-semibold leading-tight tracking-[-0.02em]">{w.title}</h3>
+                                <h3 className="font-display text-2xl md:text-3xl font-normal leading-[1.15] text-ivory transition-colors duration-500 group-hover:text-gold-light">{w.title}</h3>
                                 <a
                                     href={w.url}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     draggable={false}
-                                    className="shrink-0 text-xs font-medium uppercase tracking-[0.16em] text-ink underline decoration-ck-red decoration-2 underline-offset-[6px] transition-colors hover:text-ck-red"
+                                    className="shrink-0 text-[0.66rem] font-medium uppercase tracking-[0.24em] text-gold-light underline decoration-gold/40 underline-offset-[6px] transition-colors hover:decoration-gold"
                                 >
                                     Watch<span className="sr-only"> {w.title} on YouTube</span>
                                 </a>
@@ -175,9 +181,9 @@ const Testimonials: React.FC = () => {
             </div>
 
             {/* Progress */}
-            <div className="mx-auto mt-10 max-w-[1600px] px-5 md:px-10">
-                <div className="h-px bg-ink-faint">
-                    <div className="h-px origin-left bg-ck-red transition-transform duration-500 ease-cinema" style={{ transform: `scaleX(${(index + 1) / count})` }} />
+            <div className="relative mx-auto mt-10 max-w-[1600px] px-5 md:px-10">
+                <div className="h-px bg-ivory/10">
+                    <div className="h-px origin-left bg-gradient-to-r from-gold-deep via-gold-light to-gold transition-transform duration-500 ease-cinema" style={{ transform: `scaleX(${(index + 1) / count})` }} />
                 </div>
             </div>
         </section>

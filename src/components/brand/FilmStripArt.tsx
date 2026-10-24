@@ -6,6 +6,8 @@ import { LetterC, LetterK } from './LogoLetters';
  * a tilted 35 mm film strip with three frames — PRE (storyboard sketches), PRODUCTION (the CK mark in a
  * viewfinder) and POST (colour-grading bars). Drawn as one SVG on a 600 × 750 (4:5) canvas so it stays sharp
  * at any size. `data-strip` lets the About section drift the film gently while scrolling.
+ * tone "noir" (2026 luxury redesign): the frames stay lit like projected film, on a black stage with a deep red
+ * glow and a fine gold edge along the strip.
  */
 const RED = '#8B0000';
 const INK = '#111111';
@@ -22,24 +24,37 @@ const BARS: { h: number; fill: string }[] = [
 ];
 const label = { fontSize: 10, fontWeight: 500, letterSpacing: 3, fill: RED } as const;
 
-const FilmStripArt: React.FC<{ className?: string; title?: string }> = ({ className = '', title = 'CK Studio film strip: pre-production, production and post-production' }) => {
+const FilmStripArt: React.FC<{ className?: string; title?: string; tone?: 'light' | 'noir' }> = ({ className = '', title = 'CK Studio film strip: pre-production, production and post-production', tone = 'light' }) => {
     const [pre, prod, post] = FRAME.tops;
     const right = FRAME.x + FRAME.w;
+    const noir = tone === 'noir';
+    const stripFill = noir ? '#050404' : INK;
+    const holeFill = noir ? '#211a15' : PAPER;
+    const frameFill = noir ? '#efe6d6' : '#FFFFFF';
     return (
         <svg viewBox="0 0 600 750" role="img" aria-label={title} className={className} preserveAspectRatio="xMidYMid slice" style={{ fontFamily: 'Satoshi, system-ui, sans-serif' }}>
-            <rect width="600" height="750" fill={PAPER} />
+            {noir && (
+                <defs>
+                    <radialGradient id="fs-noir-bg" cx="50%" cy="45%" r="70%">
+                        <stop offset="0" stopColor="#3a0707" />
+                        <stop offset="0.55" stopColor="#140d0b" />
+                        <stop offset="1" stopColor="#0a0807" />
+                    </radialGradient>
+                </defs>
+            )}
+            <rect width="600" height="750" fill={noir ? 'url(#fs-noir-bg)' : PAPER} />
             <g transform="rotate(-6 300 375)">
                 <g data-strip>
-                    <rect x={STRIP.x} y={STRIP.y} width={STRIP.w} height={STRIP.h} fill={INK} />
+                    <rect x={STRIP.x} y={STRIP.y} width={STRIP.w} height={STRIP.h} fill={stripFill} {...(noir ? { stroke: '#d4af37', strokeOpacity: 0.35, strokeWidth: 1 } : {})} />
                     {SPROCKETS.map((y) => (
                         <g key={y}>
-                            <rect x={STRIP.x + 12} y={y} width="14" height="18" rx="3" fill={PAPER} />
-                            <rect x={STRIP.x + STRIP.w - 26} y={y} width="14" height="18" rx="3" fill={PAPER} />
+                            <rect x={STRIP.x + 12} y={y} width="14" height="18" rx="3" fill={holeFill} />
+                            <rect x={STRIP.x + STRIP.w - 26} y={y} width="14" height="18" rx="3" fill={holeFill} />
                         </g>
                     ))}
 
                     {/* PRE — storyboard sketches */}
-                    <rect x={FRAME.x} y={pre} width={FRAME.w} height={FRAME.h} rx="4" fill="#FFFFFF" />
+                    <rect x={FRAME.x} y={pre} width={FRAME.w} height={FRAME.h} rx="4" fill={frameFill} />
                     <text x={FRAME.x + 14} y={pre + 24} {...label}>PRE</text>
                     {[0, 1, 2].map((i) => (
                         <svg key={i} x={FRAME.x + 14 + i * 80} y={pre + 36} width="72" height={FRAME.h - 50} viewBox="0 0 60 60" preserveAspectRatio="none" overflow="hidden">
@@ -51,7 +66,7 @@ const FilmStripArt: React.FC<{ className?: string; title?: string }> = ({ classN
                     ))}
 
                     {/* PRODUCTION — the CK mark in a camera viewfinder */}
-                    <rect x={FRAME.x} y={prod} width={FRAME.w} height={FRAME.h} rx="4" fill="#FFFFFF" />
+                    <rect x={FRAME.x} y={prod} width={FRAME.w} height={FRAME.h} rx="4" fill={frameFill} />
                     <circle cx={FRAME.x + 17.5} cy={prod + 20.5} r="3.5" fill={RED} />
                     <text x={FRAME.x + 26} y={prod + 24} {...label}>REC</text>
                     <text x={right - 14} y={prod + 24} textAnchor="end" fontSize="10" letterSpacing="1.2" fill={INK} style={{ fontVariantNumeric: 'tabular-nums' }}>00:12:08:14</text>
@@ -67,7 +82,7 @@ const FilmStripArt: React.FC<{ className?: string; title?: string }> = ({ classN
                     <text x="300" y={prod + FRAME.h - 12} textAnchor="middle" {...label}>PRODUCTION</text>
 
                     {/* POST — colour-grading bars */}
-                    <rect x={FRAME.x} y={post} width={FRAME.w} height={FRAME.h} rx="4" fill="#FFFFFF" />
+                    <rect x={FRAME.x} y={post} width={FRAME.w} height={FRAME.h} rx="4" fill={frameFill} />
                     <text x={FRAME.x + 14} y={post + 24} {...label}>POST</text>
                     {BARS.map((bar, i) => {
                         const barW = (228 - 11 * 5) / 12;

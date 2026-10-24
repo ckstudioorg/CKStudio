@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
  * the site, other addresses in a new tab) and **words** become bold. Everything else is shown as written.
  */
 const TOKEN = /\[([^\]]+)\]\(([^)\s]+)\)|\*\*([^*]+)\*\*/g;
-const linkClass = 'text-ck-red underline decoration-ck-red/30 underline-offset-4 transition-colors hover:decoration-ck-red';
+const linkClass = 'text-gold-light underline decoration-gold/35 underline-offset-4 transition-colors hover:decoration-gold';
 
 const RichText: React.FC<{ text: string }> = ({ text }) => {
     const parts: React.ReactNode[] = [];
@@ -17,7 +17,7 @@ const RichText: React.FC<{ text: string }> = ({ text }) => {
         if (at > last) parts.push(text.slice(last, at));
         const [, label, href, bold] = match;
         if (bold) {
-            parts.push(<strong key={key++} className="font-semibold text-ink">{bold}</strong>);
+            parts.push(<strong key={key++} className="font-semibold text-ivory">{bold}</strong>);
         } else if (href.startsWith('/')) {
             parts.push(<Link key={key++} to={href} className={linkClass}>{label}</Link>);
         } else {

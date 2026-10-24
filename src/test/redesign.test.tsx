@@ -28,7 +28,7 @@ describe('redesign safeguards', () => {
         // No tall scroll stage and no animated logo: just the finished hero with its tagline row
         expect(container.querySelector('section')!.className).not.toMatch(/h-\[/);
         expect(container.querySelector('[data-logo-group]')).toBeNull();
-        expect(container.querySelector('img[src*="ck-tagline"]')).not.toBeNull();
+        expect(container.querySelector('[data-hero-tagline]')).not.toBeNull();
         expect(screen.getByRole('button', { name: 'Explore Our Work' })).toBeInTheDocument();
     });
 

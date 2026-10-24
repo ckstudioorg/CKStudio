@@ -8,8 +8,10 @@ type Status = 'idle' | 'sending' | 'sent' | 'failed';
 type Field = 'name' | 'phone' | 'email';
 
 const inputClass =
-    'mt-2 block w-full rounded-none border-0 border-b border-ink-faint bg-transparent px-0 py-3 text-base md:text-lg text-ink placeholder:text-ink-soft/50 transition-colors duration-300 focus:border-ck-red focus:outline-none focus:ring-0';
-const labelClass = 'block text-[0.7rem] md:text-xs font-medium uppercase tracking-[0.22em] text-ink-soft';
+    'mt-2 block w-full rounded-none border-0 border-b border-gold/25 bg-transparent px-0 py-3 text-base md:text-lg text-ivory placeholder:text-ivory-dim/60 transition-colors duration-300 hover:border-gold/45 focus:border-gold focus:outline-none focus:ring-0';
+const labelClass = 'block text-[0.66rem] md:text-[0.7rem] font-medium uppercase tracking-[0.26em] text-ivory-soft';
+/** Error text: a lighter red that stays readable on black */
+const errorClass = 'text-[#f0727a]';
 
 /** Turns the form's answers into one readable block (used for the email fallback). */
 const summarise = (data: Record<string, string>) =>
@@ -88,7 +90,7 @@ const EnquiryForm: React.FC = () => {
     };
 
     const err = (field: Field) =>
-        errors[field] ? <p id={`${id}-${field}-err`} className="mt-2 text-sm text-ck-red">{errors[field]}</p> : null;
+        errors[field] ? <p id={`${id}-${field}-err`} className={`mt-2 text-sm ${errorClass}`}>{errors[field]}</p> : null;
     const described = (field: Field) => (errors[field] ? { 'aria-invalid': true, 'aria-describedby': `${id}-${field}-err` } : {});
 
     return (
@@ -104,15 +106,15 @@ const EnquiryForm: React.FC = () => {
                         role="status"
                         className="py-16 md:py-24 text-center"
                     >
-                        <p className="text-xs md:text-sm font-medium uppercase tracking-[0.28em] text-ck-red">{enquiry.thanks.label}</p>
-                        <p className="mt-6 font-heading font-semibold text-title">
-                            {enquiry.thanks.title}{sentName && <>, <span className="text-ck-red">{sentName}</span></>}.
+                        <p className="lux-label">{enquiry.thanks.label}</p>
+                        <p className="mt-6 font-display font-normal text-headline text-ivory">
+                            {enquiry.thanks.title}{sentName && <>, <em className="lux-foil">{sentName}</em></>}.
                         </p>
-                        <p className="mx-auto mt-5 max-w-xl text-base md:text-lg leading-relaxed text-ink-soft">{enquiry.thanks.text}</p>
+                        <p className="mx-auto mt-5 max-w-xl text-base md:text-lg leading-[1.8] text-ivory-soft">{enquiry.thanks.text}</p>
                         <button
                             type="button"
                             onClick={() => { setStatus('idle'); requestAnimationFrame(() => ScrollTrigger.refresh()); }}
-                            className="mt-10 inline-flex rounded-full border border-ink px-7 py-3.5 text-sm font-medium uppercase tracking-[0.14em] text-ink transition-colors duration-500 hover:bg-ink hover:text-paper"
+                            className="lux-btn-ghost mt-10 px-7 py-3.5"
                         >
                             {enquiry.thanks.again}
                         </button>
@@ -127,18 +129,19 @@ const EnquiryForm: React.FC = () => {
                         onSubmit={onSubmit}
                         noValidate
                         aria-label={`${enquiry.title.lead} ${enquiry.title.highlight}`}
+                        className="lux-form"
                     >
                         {/* Hidden from people; bots that fill it in are ignored */}
                         <input type="checkbox" name="botcheck" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
 
                         <div className="grid gap-x-10 gap-y-8 md:grid-cols-2">
                             <div>
-                                <label htmlFor={`${id}-name`} className={labelClass}>Your name <span className="text-ck-red">*</span></label>
+                                <label htmlFor={`${id}-name`} className={labelClass}>Your name <span className="text-gold">*</span></label>
                                 <input id={`${id}-name`} name="name" autoComplete="name" placeholder="Ravi Kumar" className={inputClass} onInput={() => clearError('name')} {...described('name')} />
                                 {err('name')}
                             </div>
                             <div>
-                                <label htmlFor={`${id}-phone`} className={labelClass}>Phone / WhatsApp <span className="text-ck-red">*</span></label>
+                                <label htmlFor={`${id}-phone`} className={labelClass}>Phone / WhatsApp <span className="text-gold">*</span></label>
                                 <input id={`${id}-phone`} name="phone" type="tel" autoComplete="tel" inputMode="tel" placeholder="+91 98765 43210" className={inputClass} onInput={() => clearError('phone')} {...described('phone')} />
                                 {err('phone')}
                             </div>
@@ -159,7 +162,7 @@ const EnquiryForm: React.FC = () => {
                                 {enquiry.services.map((service) => (
                                     <label key={service} className="cursor-pointer">
                                         <input type="checkbox" name="services" value={service} className="peer sr-only" />
-                                        <span className="inline-flex rounded-full border border-ink-faint px-5 py-2.5 text-sm font-medium text-ink transition-colors duration-300 hover:border-ck-red peer-checked:border-ck-red peer-checked:bg-ck-red peer-checked:text-paper peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-ck-red">
+                                        <span className="inline-flex border border-gold/25 px-5 py-2.5 text-sm font-medium text-ivory/85 transition-colors duration-300 hover:border-gold/60 hover:text-ivory peer-checked:border-gold peer-checked:bg-gold peer-checked:text-noir peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-gold">
                                             {service}
                                         </span>
                                     </label>
@@ -170,13 +173,13 @@ const EnquiryForm: React.FC = () => {
                         <div className="mt-10 grid gap-x-10 gap-y-8 md:grid-cols-2">
                             <div>
                                 <label htmlFor={`${id}-budget`} className={labelClass}>Budget</label>
-                                <select id={`${id}-budget`} name="budget" className={`${inputClass} cursor-pointer`}>
+                                <select id={`${id}-budget`} name="budget" className={`${inputClass} cursor-pointer [&>option]:bg-noir-2 [&>option]:text-ivory`}>
                                     {enquiry.budgets.map((b) => <option key={b}>{b}</option>)}
                                 </select>
                             </div>
                             <div>
                                 <label htmlFor={`${id}-timeline`} className={labelClass}>When do you need it?</label>
-                                <select id={`${id}-timeline`} name="timeline" className={`${inputClass} cursor-pointer`}>
+                                <select id={`${id}-timeline`} name="timeline" className={`${inputClass} cursor-pointer [&>option]:bg-noir-2 [&>option]:text-ivory`}>
                                     {enquiry.timelines.map((t) => <option key={t}>{t}</option>)}
                                 </select>
                             </div>
@@ -188,7 +191,7 @@ const EnquiryForm: React.FC = () => {
                         </div>
 
                         {status === 'failed' && (
-                            <p role="alert" className="mt-8 text-sm md:text-base text-ck-red">
+                            <p role="alert" className={`mt-8 text-sm md:text-base ${errorClass}`}>
                                 {enquiry.errors.failed}{' '}
                                 <a href={whatsappUrl()} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">WhatsApp</a>
                             </p>
@@ -198,19 +201,18 @@ const EnquiryForm: React.FC = () => {
                             <button
                                 type="submit"
                                 disabled={status === 'sending'}
-                                className="group relative inline-flex items-center justify-center gap-3 overflow-hidden rounded-full bg-ck-red px-9 py-5 text-sm font-medium uppercase tracking-[0.14em] text-paper disabled:cursor-wait disabled:opacity-70"
+                                className="lux-btn group px-9 py-5 disabled:cursor-wait disabled:opacity-70"
                             >
-                                <span aria-hidden="true" className="absolute inset-0 translate-y-full rounded-full bg-ink transition-transform duration-500 ease-cinema group-hover:translate-y-0" />
-                                <span className="relative">{status === 'sending' ? enquiry.sending : enquiry.send}</span>
-                                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" className="relative h-4 w-4 transition-transform duration-500 ease-cinema group-hover:translate-x-1">
+                                <span>{status === 'sending' ? enquiry.sending : enquiry.send}</span>
+                                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" className="h-4 w-4 transition-transform duration-500 ease-cinema group-hover:translate-x-1">
                                     <path d="M4 12h15m0 0-6-6m6 6-6 6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg>
                             </button>
-                            <p className="text-sm text-ink-soft">{enquiry.note}</p>
+                            <p className="text-sm text-ivory-soft">{enquiry.note}</p>
                         </div>
-                        <p className="mt-6 text-xs text-ink-soft">
+                        <p className="mt-6 text-xs text-ivory-dim">
                             {enquiry.privacy}{' '}
-                            <Link to="/privacy/" className="underline underline-offset-4 transition-colors hover:text-ck-red">Privacy Policy</Link>.
+                            <Link to="/privacy/" className="text-gold-light underline decoration-gold/40 underline-offset-4 transition-colors hover:decoration-gold">Privacy Policy</Link>.
                         </p>
                     </motion.form>
                 )}

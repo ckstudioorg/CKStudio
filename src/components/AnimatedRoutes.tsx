@@ -24,7 +24,7 @@ const LegalPage = lazy(() => import('../pages/LegalPage'));
 /** Header + page + footer, shared by every page except the home page and 404 */
 const SubPage: React.FC<{ active: string; children: React.ReactNode }> = ({ active, children }) => (
     <PageTransition>
-        <div className="bg-paper text-ink selection:bg-ck-red selection:text-paper">
+        <div className="bg-noir text-ivory">
             <Header activeSection={active} />
             <main id="main" tabIndex={-1} className="pt-16 md:pt-20 outline-none">
                 {children}
@@ -40,14 +40,14 @@ const AnimatedRoutes: React.FC = () => {
     const location = useLocation();
 
     return (
-        <Suspense fallback={<div role="status" className="min-h-screen bg-paper text-ink-soft p-12">Loading page…</div>}>
+        <Suspense fallback={<div role="status" className="min-h-screen bg-noir text-ivory-soft p-12">Loading page…</div>}>
         {/* initial={false}: the first page shows straight away (it may already be on screen, ready-made) */}
         <AnimatePresence mode="wait" initial={false}>
             <Routes location={location}>
                 <Route path="/" element={
                     <PageTransition>
                         <>
-                            <div className="bg-paper text-ink selection:bg-ck-red selection:text-paper">
+                            <div className="bg-noir text-ivory">
                                 <Header activeSection="home" />
                                 <main id="main" tabIndex={-1} className="outline-none">
                                     <div id="home"><Hero /></div>
@@ -70,7 +70,7 @@ const AnimatedRoutes: React.FC = () => {
                 <Route path="/blog" element={
                     <PageTransition>
                         <>
-                            <div className="bg-paper text-ink selection:bg-ck-red selection:text-paper">
+                            <div className="bg-noir text-ivory">
                                 <Header activeSection="blog" />
                                 <main id="main" tabIndex={-1} className="pt-16 md:pt-20 outline-none">
                                     <Blog />
@@ -82,7 +82,7 @@ const AnimatedRoutes: React.FC = () => {
                 } />
                 <Route path="/blog/:slug" element={
                     <PageTransition>
-                        <div className="bg-paper text-ink selection:bg-ck-red selection:text-paper">
+                        <div className="bg-noir text-ivory">
                             <Header activeSection="blog" />
                             <main id="main" tabIndex={-1} className="pt-16 md:pt-20 outline-none">
                                 <BlogPost />
@@ -94,7 +94,7 @@ const AnimatedRoutes: React.FC = () => {
                 <Route path="/faq" element={
                     <PageTransition>
                         <>
-                            <div className="bg-paper text-ink selection:bg-ck-red selection:text-paper">
+                            <div className="bg-noir text-ivory">
                                 <Header activeSection="faq" />
                                 <main id="main" tabIndex={-1} className="pt-16 md:pt-20 outline-none">
                                     <FAQ />
