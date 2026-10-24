@@ -24,17 +24,18 @@ describe('site migration safeguards', () => {
     expect(document.head.querySelectorAll('meta[name="description"]')).toHaveLength(1);
   });
 
-  it('renders complementary red and gold chart arcs and original red labels', () => {
+  it('renders complementary red and gold chart arcs and the legend values', () => {
     render(<WhyUs />);
     const chart = screen.getByRole('img', { name: /Commitment: 80%/ });
     const arcs = chart.querySelectorAll('circle[data-arc]');
     expect(arcs).toHaveLength(2);
     expect(arcs[0]).toHaveAttribute('stroke-dasharray', '80 20');
-    expect(arcs[0]).toHaveClass('text-ck-red');
+    expect(arcs[0]).toHaveAttribute('stroke', 'url(#why-red)');
     expect(arcs[1]).toHaveAttribute('stroke-dasharray', '20 80');
     expect(arcs[1]).toHaveAttribute('stroke-dashoffset', '-80');
-    expect(arcs[1]).toHaveClass('text-ck-gold');
-    expect(screen.getByText('20%')).toHaveClass('text-ck-red');
+    expect(arcs[1]).toHaveAttribute('stroke', 'url(#why-gold)');
+    expect(screen.getByText('80%')).toBeInTheDocument();
+    expect(screen.getByText('20%')).toHaveClass('text-gold-light');
   });
 
   it('preserves the portfolio groups and six existing project links', () => {

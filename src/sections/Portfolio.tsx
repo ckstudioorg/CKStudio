@@ -16,10 +16,20 @@ const ArrowUpRight: React.FC<{ className?: string }> = ({ className = '' }) => (
     </svg>
 );
 
+/** Fine gold corner marks, like a camera viewfinder */
+const Viewfinder: React.FC = () => (
+    <>
+        <span aria-hidden="true" className="absolute left-3 top-3 h-4 w-4 border-l border-t border-gold/45" />
+        <span aria-hidden="true" className="absolute right-3 top-3 h-4 w-4 border-r border-t border-gold/45" />
+        <span aria-hidden="true" className="absolute bottom-3 left-3 h-4 w-4 border-b border-l border-gold/45" />
+        <span aria-hidden="true" className="absolute bottom-3 right-3 h-4 w-4 border-b border-r border-gold/45" />
+    </>
+);
+
 const WorkCard: React.FC<{ work: WorkItem }> = ({ work }) => {
     const thumb = thumbnailFor(work);
     const media = (
-        <div data-thumb className="relative aspect-video overflow-hidden rounded-[20px] bg-ink-ghost">
+        <div data-thumb className="relative aspect-video overflow-hidden bg-noir-3">
             {thumb ? (
                 <>
                     <img
@@ -27,18 +37,26 @@ const WorkCard: React.FC<{ work: WorkItem }> = ({ work }) => {
                         alt={work.title}
                         loading="lazy"
                         decoding="async"
-                        className="h-full w-full scale-[1.04] object-cover transition-transform duration-[1200ms] ease-cinema group-hover:scale-[1.12]"
+                        className="h-full w-full scale-[1.04] object-cover brightness-[0.82] saturate-[0.9] transition-[scale,filter] duration-[1200ms] ease-cinema group-hover:scale-[1.1] group-hover:brightness-100 group-hover:saturate-100"
                     />
-                    <span className="absolute inset-0 bg-ink/0 transition-colors duration-700 group-hover:bg-ink/25" />
-                    {/* Play badge grows in on hover */}
-                    <span aria-hidden="true" className="absolute left-1/2 top-1/2 flex h-20 w-20 md:h-24 md:w-24 -translate-x-1/2 -translate-y-1/2 scale-0 items-center justify-center rounded-full bg-ck-red text-[0.7rem] font-medium uppercase tracking-[0.2em] text-paper transition-transform duration-700 ease-cinema group-hover:scale-100">
-                        Play
+                    {/* Soft shadow from below and a fine gold frame that brightens on hover */}
+                    <span aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-t from-noir/70 via-noir/0 to-noir/0 transition-opacity duration-700 group-hover:opacity-50" />
+                    <span aria-hidden="true" className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-gold/20 transition-[box-shadow] duration-700 group-hover:ring-gold/50" />
+                    {/* Gold play ring grows in on hover */}
+                    <span aria-hidden="true" className="absolute left-1/2 top-1/2 flex h-16 w-16 md:h-20 md:w-20 -translate-x-1/2 -translate-y-1/2 scale-0 items-center justify-center rounded-full border border-gold/70 bg-noir/55 text-gold-light backdrop-blur-sm transition-transform duration-700 ease-cinema group-hover:scale-100">
+                        <svg viewBox="0 0 24 24" className="ml-1 h-5 w-5 md:h-6 md:w-6">
+                            <path d="M8 5.5v13l11-6.5z" fill="currentColor" />
+                        </svg>
                     </span>
                 </>
             ) : (
-                <div className="flex h-full flex-col items-center justify-center gap-4 text-center">
-                    <Logo className="h-8 md:h-10 text-ink-faint" />
-                    <span className="text-[0.65rem] md:text-xs font-medium uppercase tracking-[0.25em] text-ink-soft">{portfolio.comingSoon}</span>
+                <div
+                    className="relative flex h-full flex-col items-center justify-center gap-4 text-center ring-1 ring-inset ring-gold/15"
+                    style={{ background: 'radial-gradient(ellipse 80% 75% at 50% 40%, #1d1613 0%, #0d0a09 75%)' }}
+                >
+                    <Viewfinder />
+                    <Logo className="h-8 md:h-10 text-gold/30" />
+                    <span className="lux-label text-gold/60">{portfolio.comingSoon}</span>
                 </div>
             )}
         </div>
@@ -51,19 +69,18 @@ const WorkCard: React.FC<{ work: WorkItem }> = ({ work }) => {
                     {media}
                 </a>
             ) : media}
-            <div className="mt-5 flex items-start justify-between gap-4">
-                <div>
-                    <p className="text-[0.68rem] font-medium uppercase tracking-[0.22em] text-ck-red">{work.category}</p>
-                    <h4 className="mt-2 font-heading text-xl md:text-2xl font-semibold leading-tight tracking-[-0.02em] text-ink">{work.title}</h4>
-                </div>
+            <div className="mt-6">
+                <p className="lux-label">{work.category}</p>
+                <h4 className="mt-2.5 font-display text-[1.55rem] md:text-[1.75rem] font-normal leading-[1.15] text-ivory transition-colors duration-500 group-hover:text-gold-light">{work.title}</h4>
                 {work.url && (
                     <a
                         href={work.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="mt-1 inline-flex shrink-0 items-center gap-1.5 rounded-full border border-ink-faint px-3.5 py-2 text-xs font-medium uppercase tracking-[0.14em] text-ink transition-colors duration-300 hover:border-ck-red hover:bg-ck-red hover:text-paper"
+                        className="group/watch mt-4 inline-flex items-center gap-2 text-[0.66rem] font-medium uppercase tracking-[0.24em] text-gold-light"
                     >
-                        Watch Project <ArrowUpRight className="h-3 w-3" />
+                        <span className="underline decoration-gold/30 underline-offset-[6px] transition-colors duration-500 group-hover/watch:decoration-gold">Watch Project</span>
+                        <ArrowUpRight className="h-3 w-3 transition-transform duration-500 ease-cinema group-hover/watch:-translate-y-0.5 group-hover/watch:translate-x-0.5" />
                         <span className="sr-only">: {work.title} (opens YouTube)</span>
                     </a>
                 )}
@@ -85,8 +102,8 @@ const Portfolio: React.FC = () => {
             riseIn(cards, group.querySelector('[data-grid]')!, { stagger: 0.1, start: 'top 85%' });
             // Thumbnails open like a curtain as they arrive
             cards.forEach((card) => {
-                gsap.fromTo(card.querySelector('[data-thumb]'), { clipPath: 'inset(0% 0% 100% 0% round 20px)' }, {
-                    clipPath: 'inset(0% 0% 0% 0% round 20px)', duration: 1.4, ease: 'expo.inOut',
+                gsap.fromTo(card.querySelector('[data-thumb]'), { clipPath: 'inset(0% 0% 100% 0%)' }, {
+                    clipPath: 'inset(0% 0% 0% 0%)', duration: 1.4, ease: 'expo.inOut',
                     scrollTrigger: { trigger: card, start: 'top 90%', once: true },
                 });
             });
@@ -94,28 +111,31 @@ const Portfolio: React.FC = () => {
     }, root);
 
     return (
-        <section ref={root} aria-labelledby="portfolio-title" className="relative bg-paper text-ink py-28 md:py-40">
-            <div className="mx-auto max-w-[1600px] px-5 md:px-10">
+        <section ref={root} aria-labelledby="portfolio-title" className="relative bg-noir text-ivory py-28 md:py-44">
+            {/* Fine gold line where the gallery begins */}
+            <span aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
+
+            <div className="relative mx-auto max-w-[1600px] px-5 md:px-10">
                 <div className="grid gap-8 md:grid-cols-12 md:items-end">
                     <div className="md:col-span-7">
-                        <SectionLabel index="07">{portfolio.label}</SectionLabel>
-                        <h2 id="portfolio-title" data-title className="mt-8 font-heading font-semibold text-mega">
-                            {portfolio.title.lead} <span className="text-ck-red">{portfolio.title.highlight}</span>
+                        <SectionLabel tone="lux" index="07">{portfolio.label}</SectionLabel>
+                        <h2 id="portfolio-title" data-title className="mt-8 font-display font-normal text-[clamp(3.75rem,1rem+11vw,13rem)] leading-[0.92] tracking-[-0.025em]">
+                            {portfolio.title.lead} <em className="lux-foil">{portfolio.title.highlight}</em>
                         </h2>
                     </div>
-                    <div data-intro className="md:col-span-5 flex flex-col gap-6 md:items-end">
-                        <p className="max-w-sm text-base md:text-lg leading-relaxed text-ink-soft md:text-right">{portfolio.intro}</p>
+                    <div data-intro className="md:col-span-5 flex flex-col gap-7 md:items-end">
+                        <p className="max-w-sm text-base md:text-lg leading-[1.8] text-ivory-soft md:text-right">{portfolio.intro}</p>
                         {/* Jump to a group */}
-                        <nav aria-label="Portfolio categories" className="flex flex-wrap gap-2">
+                        <nav aria-label="Portfolio categories" className="flex flex-wrap gap-2.5 md:justify-end">
                             {portfolio.groups.map((group) => (
                                 <button
                                     key={group}
                                     type="button"
                                     onClick={() => scrollToSection(groupId(group))}
-                                    className="inline-flex items-center gap-2 rounded-full border border-ink-faint px-4 py-2.5 text-xs font-medium uppercase tracking-[0.16em] text-ink transition-colors duration-300 hover:border-ck-red hover:text-ck-red"
+                                    className="inline-flex items-center gap-2.5 border border-gold/30 px-4 py-2.5 text-[0.66rem] font-medium uppercase tracking-[0.24em] text-ivory transition-colors duration-500 hover:border-gold hover:text-gold-light"
                                 >
                                     {group}
-                                    <span className="tabular-nums text-ink-soft">{pad(portfolio.works.filter((w) => w.group === group).length)}</span>
+                                    <span className="font-display text-sm normal-case italic tracking-normal lining-nums text-gold/80">{pad(portfolio.works.filter((w) => w.group === group).length)}</span>
                                 </button>
                             ))}
                         </nav>
@@ -127,14 +147,17 @@ const Portfolio: React.FC = () => {
                         const items = portfolio.works.filter((w) => w.group === group);
                         return (
                             <section key={group} id={groupId(group)} data-group aria-labelledby={`${groupId(group)}-title`} className="scroll-mt-28">
-                                <div className="flex items-end justify-between gap-6 border-b border-ink pb-5">
-                                    <h3 id={`${groupId(group)}-title`} data-group-title className="font-heading font-semibold text-title">{group}</h3>
-                                    <span aria-hidden="true" className="pb-1 font-heading text-lg md:text-2xl tabular-nums text-ink-soft">({pad(items.length)})</span>
+                                <div className="flex items-end justify-between gap-6 border-b border-gold/25 pb-5">
+                                    <h3 id={`${groupId(group)}-title`} data-group-title className="font-display font-normal text-headline">{group}</h3>
+                                    <span aria-hidden="true" className="pb-1 font-display text-lg md:text-2xl italic lining-nums text-gold-light/80">({pad(items.length)})</span>
                                 </div>
-                                <div data-grid className="mt-10 grid gap-x-6 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
+                                <div data-grid className="mt-10 grid gap-x-6 gap-y-14 md:grid-cols-2 lg:grid-cols-3">
                                     {items.map((work) => <WorkCard key={work.title} work={work} />)}
                                 </div>
-                                <p className="mt-10 text-xs md:text-sm font-medium uppercase tracking-[0.3em] text-ink-soft">{portfolio.more}</p>
+                                <p className="mt-12 flex items-center gap-4 font-display text-lg italic text-ivory-soft">
+                                    <span aria-hidden="true" className="h-px w-10 md:w-16 bg-gradient-to-r from-gold/60 to-transparent" />
+                                    {portfolio.more}
+                                </p>
                             </section>
                         );
                     })}
