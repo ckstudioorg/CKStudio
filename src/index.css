@@ -15,13 +15,13 @@
   }
 
   ::selection {
-    background: var(--color-ck-red);
-    color: var(--color-paper);
+    background: var(--color-gold);
+    color: var(--color-noir);
   }
 
-  /* Keyboard focus: a clear red outline, only when navigating by keyboard */
+  /* Keyboard focus: a clear gold outline, only when navigating by keyboard */
   :focus-visible {
-    outline: 2px solid var(--color-ck-red);
+    outline: 2px solid var(--color-gold);
     outline-offset: 3px;
     border-radius: 4px;
   }
@@ -33,10 +33,10 @@
   }
   ::-webkit-scrollbar-track,
   ::-webkit-scrollbar-corner {
-    background: var(--color-paper);
+    background: var(--color-noir);
   }
   ::-webkit-scrollbar-thumb {
-    background: var(--color-ck-red);
+    background: linear-gradient(180deg, var(--color-gold-light), var(--color-gold-deep));
     border-radius: 9999px;
   }
 

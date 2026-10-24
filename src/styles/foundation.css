@@ -46,6 +46,35 @@
   font-weight: 700;
   font-display: swap;
 }
+/* Boska (Indian Type Foundry, Fontshare, ITF Free Font License): the serif for luxury headlines */
+@font-face {
+  font-family: 'Boska';
+  src: url('/fonts/boska-400.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Boska';
+  src: url('/fonts/boska-400-italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Boska';
+  src: url('/fonts/boska-500.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Boska';
+  src: url('/fonts/boska-500-italic.woff2') format('woff2');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
 
 @theme {
   /* Brand palette */
@@ -76,17 +105,52 @@
 
   /* Motion */
   --ease-cinema: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /*
+   * Luxury "premiere night" palette (2026 noir redesign): a black stage, ivory type, gold for highlights and
+   * fine lines, deep brand red for buttons and velvet light. Sections move to these tokens step by step.
+   */
+  --color-noir: #0a0807;
+  --color-noir-2: #110d0b;
+  --color-noir-3: #1a1411;
+  --color-ivory: #f3ebdc;
+  --color-ivory-soft: #b5aa9b;
+  --color-ivory-dim: #8a8072;
+  --color-gold: #d4af37;
+  --color-gold-light: #f2dc9b;
+  --color-gold-deep: #9a7524;
+  --color-wine: #8b0000;
+  --color-wine-bright: #c1121f;
+  --color-wine-deep: #4a0505;
+
+  --font-display: 'Boska', 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
 }
 
 @layer base {
   html {
-    background: var(--color-paper);
+    background: var(--color-noir);
   }
 
   body {
-    background: var(--color-paper);
-    color: var(--color-ink);
+    background: var(--color-noir);
+    color: var(--color-ivory);
     font-family: var(--font-body);
+  }
+
+  /* A whisper of film grain over the whole site (static, no blending, so it costs almost nothing) */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 80;
+    pointer-events: none;
+    opacity: 0.045;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.9 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  /* The serif needs no artificial bolding: use its real 400 and 500 weights only */
+  .font-display {
+    font-synthesis-weight: none;
   }
 
   /* Hero scroll cue: a red dot travelling down a thin line (switched off by the reduced-motion rule) */
@@ -131,5 +195,107 @@
   /* Tight headline tracking squeezes the gaps between words; open them back up */
   .font-heading {
     word-spacing: 0.14em;
+  }
+}
+
+/*
+ * Luxury building blocks (2026 noir redesign). Use these instead of one-off styles so every page shares
+ * the same gold, the same buttons and the same labels.
+ */
+@layer components {
+  /* Gold foil text, e.g. highlighted words in headlines. Padding keeps italic letters from being cut off. */
+  .lux-foil {
+    background-image: linear-gradient(100deg, #9a7524 0%, #f2dc9b 24%, #d4af37 44%, #fff1c4 56%, #b8902e 74%, #e9cf86 90%, #9a7524 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    padding-inline: 0.06em;
+    margin-inline: -0.06em;
+  }
+
+  /* Fills for logo pieces drawn from PNG stencils (CSS masks) */
+  .lux-gold-fill {
+    background-image: linear-gradient(100deg, #9a7524 0%, #f2dc9b 30%, #d4af37 50%, #fff1c4 62%, #b8902e 80%, #e9cf86 100%);
+  }
+  .lux-ivory-fill {
+    background-color: #efe6d6;
+  }
+
+  /* Small gold capitals above titles and on badges */
+  .lux-label {
+    font-family: var(--font-body);
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--color-gold);
+  }
+
+  /* Primary button: deep red lacquer with a gold edge and a slow light sweep on hover */
+  .lux-btn {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--color-ivory);
+    background: linear-gradient(180deg, #a3121b 0%, #8b0000 48%, #5c0303 100%);
+    border: 1px solid rgba(212, 175, 55, 0.55);
+    box-shadow: 0 14px 34px -16px rgba(139, 0, 0, 0.9), inset 0 1px 0 rgba(255, 222, 186, 0.18);
+    transition: border-color 0.5s var(--ease-cinema), box-shadow 0.5s var(--ease-cinema), color 0.5s var(--ease-cinema);
+  }
+  .lux-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(105deg, transparent 30%, rgba(255, 236, 190, 0.32) 50%, transparent 70%);
+    transform: translateX(-120%);
+    transition: transform 1s var(--ease-cinema);
+  }
+  .lux-btn:hover {
+    border-color: rgba(242, 220, 155, 0.95);
+    box-shadow: 0 18px 44px -14px rgba(139, 0, 0, 0.95), 0 0 0 1px rgba(212, 175, 55, 0.2), inset 0 1px 0 rgba(255, 222, 186, 0.26);
+  }
+  .lux-btn:hover::before {
+    transform: translateX(120%);
+  }
+
+  /* Secondary button: a fine gold outline that fills with gold on hover */
+  .lux-btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--color-gold-light);
+    background: rgba(10, 8, 7, 0.35);
+    border: 1px solid rgba(212, 175, 55, 0.6);
+    transition: background-color 0.5s var(--ease-cinema), color 0.5s var(--ease-cinema), border-color 0.5s var(--ease-cinema);
+  }
+  .lux-btn-ghost:hover {
+    background-color: var(--color-gold);
+    border-color: var(--color-gold);
+    color: var(--color-noir);
+  }
+
+  /* Hero C and K: brand red lacquer with a fine gold rim (gradients are defined in Hero.tsx) */
+  .ck-lacquer path {
+    fill: url(#ck-lacquer);
+    stroke: url(#ck-gold-edge);
+    stroke-width: 2px;
+    vector-effect: non-scaling-stroke;
+    paint-order: stroke fill;
   }
 }

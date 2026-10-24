@@ -50,15 +50,15 @@ const CustomCursor: React.FC = () => {
     return (
         <div aria-hidden="true" className={`pointer-events-none fixed inset-0 z-[9999] transition-opacity duration-300 ${visible ? 'opacity-100' : 'opacity-0'}`}>
             <motion.div
-                className="absolute left-0 top-0 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-ck-red"
+                className="absolute left-0 top-0 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold"
                 style={{ x: dotX, y: dotY }}
                 animate={{ scale: hovering ? 0 : 1 }}
                 transition={{ duration: 0.25 }}
             />
             <motion.div
-                className="absolute left-0 top-0 h-9 w-9 -translate-x-1/2 -translate-y-1/2 rounded-full border border-ck-red"
+                className="absolute left-0 top-0 h-9 w-9 -translate-x-1/2 -translate-y-1/2 rounded-full border border-gold/70"
                 style={{ x: ringX, y: ringY }}
-                animate={{ scale: hovering ? 1.8 : 1, backgroundColor: hovering ? 'rgba(139,0,0,0.12)' : 'rgba(139,0,0,0)' }}
+                animate={{ scale: hovering ? 1.8 : 1, backgroundColor: hovering ? 'rgba(212,175,55,0.12)' : 'rgba(212,175,55,0)' }}
                 transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
             />
         </div>

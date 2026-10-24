@@ -141,7 +141,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection }) => {
             <a
                 href="#main"
                 onClick={skipToContent}
-                className="fixed left-4 top-4 z-[60] -translate-y-24 rounded-full bg-ck-red px-5 py-3 text-sm font-medium text-paper transition-transform focus:translate-y-0"
+                className="fixed left-4 top-4 z-[60] -translate-y-24 bg-gold px-5 py-3 text-sm font-medium text-noir transition-transform focus:translate-y-0"
             >
                 Skip to content
             </a>
@@ -153,13 +153,13 @@ const Header: React.FC<HeaderProps> = ({ activeSection }) => {
             >
                 <div
                     className={`transition-[background-color,backdrop-filter,border-color] duration-500 border-b ${
-                        solid ? 'bg-paper/95 backdrop-blur-md border-ink-faint/60' : 'bg-transparent border-transparent'
+                        solid ? 'bg-noir/85 backdrop-blur-xl border-gold/15' : 'bg-transparent border-transparent'
                     }`}
                 >
                     <div className="mx-auto flex h-16 md:h-20 max-w-[1600px] items-center justify-between px-5 md:px-10">
                         {/* The home-page hero fades this logo in as its big logo shrinks into it (--ck-header-logo) */}
-                        <a href="/" aria-label="CK Studio home" data-header-logo className="block text-ck-red transition-opacity hover:opacity-80" style={{ opacity: 'var(--ck-header-logo, 1)' }}>
-                            <Logo className="h-8 md:h-9" />
+                        <a href="/" aria-label="CK Studio home" data-header-logo className="block transition-opacity hover:opacity-80" style={{ opacity: 'var(--ck-header-logo, 1)' }}>
+                            <Logo tone="lux" className="h-8 md:h-9" />
                         </a>
 
                         {/* Desktop navigation */}
@@ -172,15 +172,15 @@ const Header: React.FC<HeaderProps> = ({ activeSection }) => {
                                         href={hrefFor(link.id)}
                                         onClick={(e) => handleNavClick(link.id, e)}
                                         aria-current={active ? 'true' : undefined}
-                                        className={`group relative px-3.5 py-2 text-[0.8rem] font-medium uppercase tracking-[0.14em] transition-colors duration-300 ${
-                                            active ? 'text-ck-red' : 'text-ink hover:text-ck-red'
+                                        className={`group relative px-3.5 py-2 text-[0.68rem] font-medium uppercase tracking-[0.3em] transition-colors duration-300 ${
+                                            active ? 'text-gold-light' : 'text-ivory/75 hover:text-gold-light'
                                         }`}
                                     >
                                         <RollText>{link.name}</RollText>
                                         {active && (
                                             <motion.span
                                                 layoutId="nav-dot"
-                                                className="absolute bottom-0.5 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-ck-red"
+                                                className="absolute -bottom-0.5 left-1/2 h-[5px] w-[5px] -translate-x-1/2 rotate-45 bg-gold"
                                                 transition={{ duration: 0.6, ease }}
                                             />
                                         )}
@@ -193,9 +193,8 @@ const Header: React.FC<HeaderProps> = ({ activeSection }) => {
                             <a
                                 href={hrefFor('contact')}
                                 onClick={(e) => handleNavClick('contact', e)}
-                                className="group relative hidden md:inline-flex items-center gap-2 overflow-hidden rounded-full bg-ck-red px-5 py-2.5 text-[0.8rem] font-medium uppercase tracking-[0.12em] text-paper"
+                                className="group relative hidden md:inline-flex items-center gap-2.5 border border-gold/60 bg-noir/30 px-5 py-2.5 text-[0.66rem] font-medium uppercase tracking-[0.28em] text-gold-light transition-colors duration-500 ease-cinema hover:border-gold hover:bg-gold hover:text-noir"
                             >
-                                <span aria-hidden="true" className="absolute inset-0 translate-y-full rounded-full bg-ink transition-transform duration-500 ease-cinema group-hover:translate-y-0" />
                                 <span className="relative"><RollText>Get Started</RollText></span>
                                 <Arrow className="relative transition-transform duration-500 ease-cinema group-hover:rotate-45" />
                             </a>
@@ -205,7 +204,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection }) => {
                                 onClick={() => setIsMenuOpen((open) => !open)}
                                 aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
                                 aria-expanded={isMenuOpen}
-                                className="lg:hidden inline-flex h-11 items-center gap-3 rounded-full border border-ink-faint bg-paper/70 pl-4 pr-3 text-[0.8rem] font-medium uppercase tracking-[0.14em] text-ink"
+                                className="lg:hidden inline-flex h-11 items-center gap-3 border border-gold/40 bg-noir/60 pl-4 pr-3 text-[0.68rem] font-medium uppercase tracking-[0.28em] text-ivory"
                             >
                                 {isMenuOpen ? 'Close' : 'Menu'}
                                 <span className="relative block h-3 w-5">
@@ -218,7 +217,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection }) => {
                 </div>
 
                 {/* Reading progress */}
-                <div ref={progressRef} aria-hidden="true" className="h-[2px] origin-left scale-x-0 bg-ck-red" />
+                <div ref={progressRef} aria-hidden="true" className="h-px origin-left scale-x-0 bg-gradient-to-r from-gold-deep via-gold-light to-gold" />
             </motion.header>
 
             {/* Mobile / tablet full-screen menu */}
@@ -230,11 +229,13 @@ const Header: React.FC<HeaderProps> = ({ activeSection }) => {
                         animate={{ clipPath: 'inset(0 0 0% 0)' }}
                         exit={{ clipPath: 'inset(0 0 100% 0)' }}
                         transition={{ duration: 0.8, ease }}
-                        className="fixed inset-0 z-40 flex flex-col bg-paper px-5 pb-8 pt-24 md:px-10 lg:hidden"
+                        className="fixed inset-0 z-40 flex flex-col bg-noir px-5 pb-8 pt-24 md:px-10 lg:hidden"
                     >
+                        {/* Deep red velvet light rising from the bottom of the menu */}
+                        <span aria-hidden="true" className="pointer-events-none absolute inset-0" style={{ background: 'radial-gradient(ellipse 90% 55% at 50% 110%, rgba(139,0,0,0.45), rgba(10,8,7,0) 70%)' }} />
                         <nav aria-label="Mobile" className="flex flex-1 flex-col justify-center">
                             {navLinks.map((link, index) => (
-                                <div key={link.id} className="overflow-hidden border-b border-ink-faint/70">
+                                <div key={link.id} className="relative overflow-hidden border-b border-gold/15">
                                     <motion.a
                                         href={hrefFor(link.id)}
                                         onClick={(e) => handleNavClick(link.id, e)}
@@ -242,11 +243,11 @@ const Header: React.FC<HeaderProps> = ({ activeSection }) => {
                                         animate={{ y: 0 }}
                                         exit={{ y: '110%' }}
                                         transition={{ duration: 0.8, ease, delay: 0.15 + index * 0.05 }}
-                                        className={`flex w-full items-baseline gap-4 py-2 text-left font-heading text-[clamp(2.4rem,9vw,4.5rem)] font-semibold leading-[1.05] tracking-[-0.03em] ${
-                                            tracked === link.id ? 'text-ck-red' : 'text-ink'
+                                        className={`flex w-full items-baseline gap-5 py-2.5 text-left font-display text-[clamp(2.4rem,9vw,4.5rem)] font-normal leading-[1.05] tracking-[-0.01em] ${
+                                            tracked === link.id ? 'italic text-gold-light' : 'text-ivory'
                                         }`}
                                     >
-                                        <span className="font-body text-xs font-medium tracking-[0.2em] text-ink-soft">0{index + 1}</span>
+                                        <span className="font-body text-[0.66rem] font-medium not-italic tracking-[0.3em] text-gold/80">0{index + 1}</span>
                                         {link.name}
                                     </motion.a>
                                 </div>
@@ -257,13 +258,13 @@ const Header: React.FC<HeaderProps> = ({ activeSection }) => {
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0 }}
                             transition={{ duration: 0.6, ease, delay: 0.55 }}
-                            className="flex flex-wrap items-center justify-between gap-4 pt-6"
+                            className="relative flex flex-wrap items-center justify-between gap-4 pt-6"
                         >
-                            <a href={`tel:${contact.phone.tel}`} className="text-sm text-ink-soft">{contact.phone.international}</a>
+                            <a href={`tel:${contact.phone.tel}`} className="text-sm tracking-[0.08em] text-ivory-soft">{contact.phone.international}</a>
                             <a
                                 href={hrefFor('contact')}
                                 onClick={(e) => handleNavClick('contact', e)}
-                                className="inline-flex items-center gap-2 rounded-full bg-ck-red px-6 py-3.5 text-sm font-medium uppercase tracking-[0.12em] text-paper"
+                                className="lux-btn px-6 py-3.5"
                             >
                                 Start Your Project <Arrow />
                             </a>
