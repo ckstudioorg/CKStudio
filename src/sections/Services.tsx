@@ -27,7 +27,7 @@ const Services: React.FC = () => {
     return (
         <section ref={root} aria-labelledby="services-title" className="relative bg-noir text-ivory py-28 md:py-44">
             {/* Deep red light behind the heading */}
-            <div aria-hidden="true" className="pointer-events-none absolute inset-0" style={{ background: 'radial-gradient(ellipse 42% 30% at 14% 10%, rgba(139,0,0,0.22), rgba(10,8,7,0) 72%)' }} />
+            <div aria-hidden="true" className="lux-glow-top pointer-events-none absolute inset-0" style={{ background: 'radial-gradient(ellipse 42% 30% at 14% 10%, rgba(139,0,0,0.22), rgba(10,8,7,0) 72%)' }} />
 
             <div className="relative mx-auto grid max-w-[1600px] gap-14 px-5 md:px-10 lg:grid-cols-12 lg:gap-10">
                 {/* Heading stays in view while the list scrolls */}

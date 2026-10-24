@@ -13,7 +13,8 @@ const socialIcons: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> = {
     Instagram: InstagramIcon,
 };
 
-const linkClass = 'group inline-flex items-center gap-2 text-ink transition-colors duration-300 hover:text-ck-red';
+const linkClass = 'group inline-flex items-center gap-2 text-ivory/80 transition-colors duration-300 hover:text-gold-light';
+const headingClass = 'lux-label';
 
 const Footer: React.FC = () => {
     const root = useRef<HTMLElement>(null);
@@ -30,17 +31,21 @@ const Footer: React.FC = () => {
 
     useGsap(() => {
         const q = gsap.utils.selector(root);
-        // Giant wordmark letters rise up as the footer comes into view
+        // Giant wordmark letters rise up as the footer comes into view. Each letter gets its own
+        // red lacquer or gold so the colour stays visible while the letters move.
         SplitText.create(q('[data-wordmark]')[0], {
             type: 'chars',
             mask: 'chars',
             autoSplit: true,
-            onSplit: (self) => gsap.from(self.chars, {
-                yPercent: 100,
-                ease: 'none',
-                stagger: 0.06,
-                scrollTrigger: { trigger: root.current, start: 'top 85%', end: 'bottom bottom', scrub: 0.8 },
-            }),
+            onSplit: (self) => {
+                self.chars.forEach((char) => char.classList.add(char.closest('[data-ck]') ? 'lux-lacquer-text' : 'lux-foil-v'));
+                return gsap.from(self.chars, {
+                    yPercent: 100,
+                    ease: 'none',
+                    stagger: 0.06,
+                    scrollTrigger: { trigger: root.current, start: 'top 85%', end: 'bottom bottom', scrub: 0.8 },
+                });
+            },
         });
         gsap.from(q('[data-col]'), {
             y: 30, autoAlpha: 0, duration: 1, ease: 'expo.out', stagger: 0.08,
@@ -49,20 +54,23 @@ const Footer: React.FC = () => {
     }, root);
 
     return (
-        <footer ref={root} className="relative overflow-hidden border-t border-ink bg-paper text-ink">
-            <div className="mx-auto max-w-[1600px] px-5 md:px-10 pt-20 md:pt-28">
+        <footer ref={root} className="relative overflow-hidden border-t border-gold/20 bg-noir text-ivory">
+            {/* Faint red glow under the wordmark */}
+            <div aria-hidden="true" className="pointer-events-none absolute inset-0" style={{ background: 'radial-gradient(ellipse 60% 45% at 50% 100%, rgba(139,0,0,0.22), rgba(10,8,7,0) 70%)' }} />
+
+            <div className="relative mx-auto max-w-[1600px] px-5 md:px-10 pt-20 md:pt-28">
                 <div className="grid grid-cols-2 gap-x-6 gap-y-12 md:grid-cols-12">
                     {/* Brand */}
                     <div data-col className="col-span-2 md:col-span-4">
-                        <p className="max-w-xs text-base leading-relaxed text-ink-soft">{footer.blurb}</p>
-                        <p className="mt-6 inline-flex items-center gap-2 rounded-full border border-ck-red/30 px-3.5 py-1.5 text-[0.7rem] font-medium uppercase tracking-[0.2em] text-ck-red">
-                            <span aria-hidden="true">✦</span> {footer.badge}
+                        <p className="max-w-xs text-base leading-[1.8] text-ivory-soft">{footer.blurb}</p>
+                        <p className="lux-label mt-6 inline-flex items-center gap-2 border border-gold/30 px-3.5 py-1.5">
+                            <span aria-hidden="true" className="text-gold-light">✦</span> {footer.badge}
                         </p>
                     </div>
 
                     {footer.columns.map((col) => (
                         <nav key={col.title} data-col aria-label={col.title} className="md:col-span-2">
-                            <h2 className="text-[0.7rem] font-medium uppercase tracking-[0.25em] text-ink-soft">{col.title}</h2>
+                            <h2 className={headingClass}>{col.title}</h2>
                             <ul className="mt-5 space-y-3 text-[0.95rem]">
                                 {col.links.map((link) => (
                                     <li key={link.name}>
@@ -81,7 +89,7 @@ const Footer: React.FC = () => {
 
                     {/* Contact + socials */}
                     <div data-col className="col-span-2 md:col-span-2">
-                        <h2 className="text-[0.7rem] font-medium uppercase tracking-[0.25em] text-ink-soft">Reach us</h2>
+                        <h2 className={headingClass}>Reach us</h2>
                         <ul className="mt-5 space-y-3 text-[0.95rem]">
                             <li><a href={`tel:${contact.phone.tel}`} className={linkClass}>{contact.phone.international}</a></li>
                             <li><a href={`mailto:${contact.email}`} className={`${linkClass} break-all`}>{contact.email}</a></li>
@@ -96,7 +104,7 @@ const Footer: React.FC = () => {
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             aria-label={`CK Studio on ${name}`}
-                                            className="flex h-10 w-10 items-center justify-center rounded-full border border-ink-faint text-ink transition-colors duration-300 hover:border-ck-red hover:bg-ck-red hover:text-paper"
+                                            className="flex h-10 w-10 items-center justify-center rounded-full border border-gold/30 text-gold-light transition-colors duration-500 hover:border-gold hover:bg-gold hover:text-noir"
                                         >
                                             {Icon && <Icon className="h-4 w-4" aria-hidden="true" />}
                                         </a>
@@ -108,21 +116,21 @@ const Footer: React.FC = () => {
                 </div>
             </div>
 
-            {/* Giant wordmark */}
-            <div aria-hidden="true" className="mt-16 md:mt-24 select-none px-3 md:px-6">
-                <p data-wordmark className="whitespace-nowrap text-center font-heading font-semibold leading-[0.8] tracking-[-0.055em] text-[17.8vw]">
-                    <span className="text-ck-red">CK</span> STUDIO
+            {/* Giant wordmark: CK in red lacquer, STUDIO in gold */}
+            <div aria-hidden="true" className="relative mt-16 md:mt-24 select-none px-3 md:px-6">
+                <p data-wordmark className="whitespace-nowrap text-center font-display font-normal leading-[0.85] tracking-[-0.02em] text-[21.5vw]">
+                    <span data-ck className="text-wine-bright">CK</span> <span className="text-gold">STUDIO</span>
                 </p>
             </div>
 
             {/* Bottom bar */}
-            <div className="mx-auto max-w-[1600px] px-5 md:px-10">
-                <div className="flex flex-col gap-3 border-t border-ink-faint py-6 text-xs text-ink-soft md:flex-row md:items-center md:justify-between">
+            <div className="relative mx-auto max-w-[1600px] px-5 md:px-10">
+                <div className="flex flex-col gap-3 border-t border-gold/15 py-6 text-xs text-ivory-dim md:flex-row md:items-center md:justify-between">
                     <p suppressHydrationWarning>&copy; {new Date().getFullYear()} {footer.copyright}</p>
                     <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
-                        <a href={contact.website.url} className="transition-colors hover:text-ck-red">{contact.website.label}</a>
+                        <a href={contact.website.url} className="transition-colors hover:text-gold-light">{contact.website.label}</a>
                         {footer.legal.filter((l) => l.ready).map((l) => (
-                            <Link key={l.name} to={l.page} className="transition-colors hover:text-ck-red">{l.name}</Link>
+                            <Link key={l.name} to={l.page} className="transition-colors hover:text-gold-light">{l.name}</Link>
                         ))}
                     </div>
                 </div>

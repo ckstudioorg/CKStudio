@@ -68,7 +68,7 @@ const Partners: React.FC = () => {
     return (
         <section id="clients" ref={root} aria-labelledby="partners-title" className="relative overflow-hidden bg-noir text-ivory py-28 md:py-44">
             {/* Deep red light high on the right */}
-            <div aria-hidden="true" className="pointer-events-none absolute inset-0" style={{ background: 'radial-gradient(ellipse 45% 35% at 85% 8%, rgba(139,0,0,0.22), rgba(10,8,7,0) 72%)' }} />
+            <div aria-hidden="true" className="lux-glow-top pointer-events-none absolute inset-0" style={{ background: 'radial-gradient(ellipse 45% 35% at 85% 8%, rgba(139,0,0,0.22), rgba(10,8,7,0) 72%)' }} />
 
             <div className="relative mx-auto max-w-[1600px] px-5 md:px-10">
                 <div className="grid gap-8 md:grid-cols-12 md:items-end">

@@ -37,7 +37,7 @@ const Philosophy: React.FC = () => {
     return (
         <section id="philosophy" ref={root} aria-labelledby="philosophy-title" className="relative flex min-h-svh flex-col justify-center overflow-hidden bg-noir text-ivory py-24">
             {/* Deep red light rising from below, and fine gold lines framing the stage */}
-            <div aria-hidden="true" className="pointer-events-none absolute inset-0" style={{ background: 'radial-gradient(ellipse 75% 50% at 50% 105%, rgba(139,0,0,0.36), rgba(10,8,7,0) 70%)' }} />
+            <div aria-hidden="true" className="lux-glow-bottom pointer-events-none absolute inset-0" style={{ background: 'radial-gradient(ellipse 75% 50% at 50% 105%, rgba(139,0,0,0.36), rgba(10,8,7,0) 70%)' }} />
             <span aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
 
             <div className="relative mx-auto w-full max-w-[1600px] px-5 md:px-10">

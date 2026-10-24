@@ -26,7 +26,7 @@ const VisionMission: React.FC = () => {
     return (
         <section id="vision-mission" ref={root} aria-labelledby="vision-mission-title" className="relative overflow-hidden bg-noir text-ivory py-28 md:py-44">
             {/* Soft gold light behind the vision statement */}
-            <div aria-hidden="true" className="pointer-events-none absolute inset-0" style={{ background: 'radial-gradient(ellipse 50% 32% at 70% 12%, rgba(212,175,55,0.07), rgba(10,8,7,0) 70%)' }} />
+            <div aria-hidden="true" className="lux-glow-top pointer-events-none absolute inset-0" style={{ background: 'radial-gradient(ellipse 50% 32% at 70% 12%, rgba(212,175,55,0.07), rgba(10,8,7,0) 70%)' }} />
             <h2 id="vision-mission-title" className="sr-only">Vision and Mission</h2>
             <div className="relative mx-auto max-w-[1600px] px-5 md:px-10">
                 {/* Vision */}

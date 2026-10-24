@@ -317,6 +317,48 @@
     from { opacity: 0; transform: translateY(0.3em); }
   }
 
+  /*
+   * Gradient text for pieces that animate letter by letter (closing headline, footer wordmark). Text clipped
+   * to a gradient disappears when its letters move on their own, so the code adds these to each moving piece.
+   */
+  .lux-foil-v {
+    background-image: linear-gradient(180deg, #fff1c4 0%, #e9cf86 30%, #d4af37 58%, #9a7524 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .lux-lacquer-text {
+    background-image: linear-gradient(180deg, #d8333c 0%, #a3121b 35%, #8b0000 62%, #5c0303 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Soft section lights fade out before the section edge, so no line shows where two sections meet */
+  .lux-glow-top {
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 14rem);
+    mask-image: linear-gradient(to bottom, transparent 0, #000 14rem);
+  }
+  .lux-glow-bottom {
+    -webkit-mask-image: linear-gradient(to top, transparent 0, #000 9rem);
+    mask-image: linear-gradient(to top, transparent 0, #000 9rem);
+  }
+
+  /* Dark form fields: native pickers in dark mode, and no light boxes from browser autofill */
+  .lux-form {
+    color-scheme: dark;
+  }
+  .lux-form input:-webkit-autofill,
+  .lux-form input:-webkit-autofill:hover,
+  .lux-form input:-webkit-autofill:focus,
+  .lux-form textarea:-webkit-autofill,
+  .lux-form select:-webkit-autofill {
+    -webkit-text-fill-color: var(--color-ivory);
+    caret-color: var(--color-ivory);
+    -webkit-box-shadow: 0 0 0 1000px #15100e inset;
+    transition: background-color 9999s ease-out 0s;
+  }
+
   /* Hero C and K: brand red lacquer with a fine gold rim (gradients are defined in Hero.tsx) */
   .ck-lacquer path {
     fill: url(#ck-lacquer);

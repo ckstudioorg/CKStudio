@@ -40,7 +40,7 @@ const About: React.FC = () => {
     return (
         <section ref={root} aria-labelledby="about-title" className="relative overflow-hidden bg-noir text-ivory py-28 md:py-44">
             {/* Deep red light behind the title */}
-            <div aria-hidden="true" className="pointer-events-none absolute inset-0" style={{ background: 'radial-gradient(ellipse 45% 38% at 88% 6%, rgba(139,0,0,0.24), rgba(10,8,7,0) 72%)' }} />
+            <div aria-hidden="true" className="lux-glow-top pointer-events-none absolute inset-0" style={{ background: 'radial-gradient(ellipse 45% 38% at 88% 6%, rgba(139,0,0,0.24), rgba(10,8,7,0) 72%)' }} />
 
             <div className="relative mx-auto max-w-[1600px] px-5 md:px-10">
                 <SectionLabel tone="lux" index="01">{about.label}</SectionLabel>
