@@ -163,6 +163,8 @@
   /* The serif needs no artificial bolding: use its real 400 and 500 weights only */
   .font-display {
     font-synthesis-weight: none;
+    /* Even, capital-height numbers (2026, 150+) instead of the old-style ones that bob up and down */
+    font-variant-numeric: lining-nums;
   }
 
   /* Hero scroll cue: a red dot travelling down a thin line (switched off by the reduced-motion rule) */
