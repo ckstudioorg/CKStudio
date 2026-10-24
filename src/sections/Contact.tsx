@@ -69,7 +69,7 @@ const Contact: React.FC = () => {
             <div aria-hidden="true" className="lux-glow-top pointer-events-none absolute inset-x-0 top-0 h-[60rem]" style={{ background: 'radial-gradient(ellipse 45% 40% at 85% 10%, rgba(139,0,0,0.2), rgba(10,8,7,0) 72%)' }} />
 
             <div className="relative mx-auto max-w-[1600px] px-5 md:px-10">
-                <SectionLabel tone="lux" index="10">{getInTouch.label}</SectionLabel>
+                <SectionLabel index="10">{getInTouch.label}</SectionLabel>
                 <div className="mt-8 grid gap-8 md:grid-cols-12 md:items-end">
                     <h2 id="contact-title" data-title className="md:col-span-8 font-display font-normal text-[clamp(3.5rem,1rem+10vw,12rem)] leading-[0.92] tracking-[-0.025em]">
                         {getInTouch.title.lead} <em className="lux-foil">{getInTouch.title.highlight}</em>

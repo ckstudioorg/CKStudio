@@ -98,7 +98,7 @@ const Testimonials: React.FC = () => {
             <div className="relative mx-auto max-w-[1600px] px-5 md:px-10">
                 <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
                     <div>
-                        <SectionLabel tone="lux" index="09">{testimonials.label}</SectionLabel>
+                        <SectionLabel index="09">{testimonials.label}</SectionLabel>
                         <h2 id="testimonials-title" data-title className="mt-8 font-display font-normal text-display">
                             {testimonials.title.lead} <em className="lux-foil">{testimonials.title.highlight}</em>
                         </h2>

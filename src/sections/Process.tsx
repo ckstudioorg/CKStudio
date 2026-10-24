@@ -51,7 +51,7 @@ const Process: React.FC = () => {
                 {/* Heading + step index (stays in view on large screens) */}
                 <div className="lg:col-span-5">
                     <div className="lg:sticky lg:top-32">
-                        <SectionLabel tone="lux" index="05">{process.label}</SectionLabel>
+                        <SectionLabel index="05">{process.label}</SectionLabel>
                         <h2 id="process-title" data-title className="mt-8 font-display font-normal text-section">
                             {process.title.lead} <em className="lux-foil">{process.title.highlight}</em>
                         </h2>

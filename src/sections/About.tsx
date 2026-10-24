@@ -43,7 +43,7 @@ const About: React.FC = () => {
             <div aria-hidden="true" className="lux-glow-top pointer-events-none absolute inset-0" style={{ background: 'radial-gradient(ellipse 45% 38% at 88% 6%, rgba(139,0,0,0.24), rgba(10,8,7,0) 72%)' }} />
 
             <div className="relative mx-auto max-w-[1600px] px-5 md:px-10">
-                <SectionLabel tone="lux" index="01">{about.label}</SectionLabel>
+                <SectionLabel index="01">{about.label}</SectionLabel>
                 <h2 id="about-title" data-title className="mt-8 max-w-[14ch] font-display font-normal text-display">
                     {about.title.lead} <em className="lux-foil">{about.title.highlight}</em>
                 </h2>

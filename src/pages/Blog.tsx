@@ -33,7 +33,7 @@ const Blog: React.FC = () => {
             <div aria-hidden="true" className="lux-glow-top pointer-events-none absolute inset-x-0 top-0 h-[50rem]" style={{ background: 'radial-gradient(ellipse 45% 45% at 85% 12%, rgba(139,0,0,0.22), rgba(10,8,7,0) 72%)' }} />
 
             <header className="relative mx-auto max-w-[1600px] px-5 md:px-10 pt-16 md:pt-24">
-                <SectionLabel tone="lux">{blogPage.label}</SectionLabel>
+                <SectionLabel>{blogPage.label}</SectionLabel>
                 <h1 data-title className="mt-8 max-w-[14ch] font-display font-normal text-[clamp(3.5rem,1rem+10vw,12rem)] leading-[0.92] tracking-[-0.025em]">
                     {blogPage.title.lead} <em className="lux-foil">{blogPage.title.highlight}</em>
                 </h1>

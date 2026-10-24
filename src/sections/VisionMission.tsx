@@ -32,7 +32,7 @@ const VisionMission: React.FC = () => {
                 {/* Vision */}
                 <div className="grid gap-8 md:grid-cols-12 md:gap-10">
                     <div className="md:col-span-3">
-                        <SectionLabel tone="lux" index="03">{visionMission.vision.label}</SectionLabel>
+                        <SectionLabel index="03">{visionMission.vision.label}</SectionLabel>
                     </div>
                     <blockquote className="md:col-span-9">
                         <p data-vision className="font-display font-normal text-[clamp(1.6rem,1rem+2.3vw,3.5rem)] leading-[1.2] tracking-[-0.01em] text-ivory">

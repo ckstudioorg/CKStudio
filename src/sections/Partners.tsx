@@ -73,7 +73,7 @@ const Partners: React.FC = () => {
             <div className="relative mx-auto max-w-[1600px] px-5 md:px-10">
                 <div className="grid gap-8 md:grid-cols-12 md:items-end">
                     <div className="md:col-span-7">
-                        <SectionLabel tone="lux" index="06">{partners.label}</SectionLabel>
+                        <SectionLabel index="06">{partners.label}</SectionLabel>
                         <h2 id="partners-title" data-title className="mt-8 font-display font-normal text-display">
                             {partners.title.lead} <em className="lux-foil">{partners.title.highlight}</em>
                         </h2>

@@ -41,7 +41,7 @@ const Philosophy: React.FC = () => {
             <span aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
 
             <div className="relative mx-auto w-full max-w-[1600px] px-5 md:px-10">
-                <SectionLabel tone="lux" index="02">{philosophy.label}</SectionLabel>
+                <SectionLabel index="02">{philosophy.label}</SectionLabel>
                 <h2 id="philosophy-title" data-title className="mt-6 font-display font-normal text-headline">
                     {philosophy.title.lead} <em className="lux-foil">{philosophy.title.highlight}</em>
                 </h2>

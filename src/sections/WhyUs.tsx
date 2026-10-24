@@ -42,7 +42,7 @@ const WhyUs: React.FC = () => {
             <div className="relative mx-auto max-w-[1600px] px-5 md:px-10">
                 <div className="grid gap-8 md:grid-cols-12 md:items-end">
                     <div className="md:col-span-7">
-                        <SectionLabel tone="lux" index="08">{whyUs.label}</SectionLabel>
+                        <SectionLabel index="08">{whyUs.label}</SectionLabel>
                         <h2 id="why-title" data-title className="mt-8 font-display font-normal text-display">
                             {whyUs.title.lead} <em className="lux-foil">{whyUs.title.highlight}</em>
                         </h2>

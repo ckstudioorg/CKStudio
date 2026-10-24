@@ -36,7 +36,7 @@ const FAQ: React.FC = () => {
                 {/* Heading, search and categories */}
                 <div className="lg:col-span-5">
                     <div className="lg:sticky lg:top-32">
-                        <SectionLabel tone="lux">{faqPage.label}</SectionLabel>
+                        <SectionLabel>{faqPage.label}</SectionLabel>
                         <h1 data-title className="mt-8 font-display font-normal text-section">
                             {faqPage.title.lead} <em className="lux-foil">{faqPage.title.highlight}</em>
                         </h1>

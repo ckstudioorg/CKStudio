@@ -33,7 +33,7 @@ const Services: React.FC = () => {
                 {/* Heading stays in view while the list scrolls */}
                 <div className="lg:col-span-5">
                     <div className="lg:sticky lg:top-32">
-                        <SectionLabel tone="lux" index="04">{services.label}</SectionLabel>
+                        <SectionLabel index="04">{services.label}</SectionLabel>
                         <h2 id="services-title" data-title className="mt-8 font-display font-normal text-section">
                             {services.title.lead} <em className="lux-foil">{services.title.highlight}</em>
                         </h2>

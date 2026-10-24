@@ -48,7 +48,7 @@ const LegalPage: React.FC<{ slug: 'privacy' | 'terms' }> = ({ slug }) => {
             <div aria-hidden="true" className="lux-glow-top pointer-events-none absolute inset-x-0 top-0 h-[40rem]" style={{ background: 'radial-gradient(ellipse 45% 45% at 80% 15%, rgba(212,175,55,0.07), rgba(10,8,7,0) 72%)' }} />
 
             <div className="relative mx-auto max-w-[1600px] px-5 md:px-10 pt-16 md:pt-24 pb-28 md:pb-40">
-                <SectionLabel tone="lux">Legal</SectionLabel>
+                <SectionLabel>Legal</SectionLabel>
                 <h1 data-title className="mt-6 font-display font-normal text-display">{page.title}</h1>
                 <p data-intro className="mt-6 text-[0.66rem] uppercase tracking-[0.24em] text-ivory-dim">Last updated {formatDate(page.updated)}</p>
 

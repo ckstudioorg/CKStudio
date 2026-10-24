@@ -69,7 +69,7 @@ const ServicePage: React.FC = () => {
                         <li aria-current="page" className="text-ivory">{page.name}</li>
                     </ol>
                 </nav>
-                <SectionLabel tone="lux" className="mt-12">{t.label}</SectionLabel>
+                <SectionLabel className="mt-12">{t.label}</SectionLabel>
                 <h1 data-title className="mt-6 max-w-[16ch] font-display font-normal text-[clamp(2.8rem,1rem+6.2vw,8rem)] leading-[0.96] tracking-[-0.02em]">
                     {page.headline.lead} <em className="lux-foil">{page.headline.highlight}</em>
                 </h1>

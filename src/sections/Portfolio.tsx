@@ -118,7 +118,7 @@ const Portfolio: React.FC = () => {
             <div className="relative mx-auto max-w-[1600px] px-5 md:px-10">
                 <div className="grid gap-8 md:grid-cols-12 md:items-end">
                     <div className="md:col-span-7">
-                        <SectionLabel tone="lux" index="07">{portfolio.label}</SectionLabel>
+                        <SectionLabel index="07">{portfolio.label}</SectionLabel>
                         <h2 id="portfolio-title" data-title className="mt-8 font-display font-normal text-[clamp(3.75rem,1rem+11vw,13rem)] leading-[0.92] tracking-[-0.025em]">
                             {portfolio.title.lead} <em className="lux-foil">{portfolio.title.highlight}</em>
                         </h2>
