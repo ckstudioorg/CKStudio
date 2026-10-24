@@ -132,6 +132,10 @@
   --text-headline: clamp(2.2rem, 1rem + 3.5vw, 4.75rem);
   --text-headline--line-height: 1.02;
   --text-headline--letter-spacing: -0.015em;
+  /* Headings that share the row with a list or cards (What We Do, Our Process …) */
+  --text-section: clamp(2.75rem, 1rem + 4.2vw, 6.25rem);
+  --text-section--line-height: 0.98;
+  --text-section--letter-spacing: -0.02em;
 }
 
 @layer base {
@@ -296,6 +300,21 @@
     background-color: var(--color-gold);
     border-color: var(--color-gold);
     color: var(--color-noir);
+  }
+
+  /* Dark lacquered panel with a fine gold edge (cards and boxes) */
+  .lux-panel {
+    background: linear-gradient(155deg, #1d1613 0%, #120e0c 48%, #0c0908 100%);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    box-shadow: 0 40px 90px -40px rgba(0, 0, 0, 0.95), inset 0 1px 0 rgba(242, 220, 155, 0.07);
+  }
+
+  /* Soft rise for small swaps, e.g. the number of the open service (re-runs when React re-mounts it) */
+  .lux-rise {
+    animation: lux-rise 0.9s var(--ease-cinema) both;
+  }
+  @keyframes lux-rise {
+    from { opacity: 0; transform: translateY(0.3em); }
   }
 
   /* Hero C and K: brand red lacquer with a fine gold rim (gradients are defined in Hero.tsx) */

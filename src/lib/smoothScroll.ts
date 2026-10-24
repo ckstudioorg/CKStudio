@@ -4,6 +4,11 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Reloads always start at the top (App.tsx resets the scroll itself). Without this the browser jumps back down
+// first and the scroll animations get set up mid-page: that crashed them in development and left the live site
+// at a random spot. ScrollTrigger looks after this browser setting, so it has to be switched off through it.
+if (typeof window !== 'undefined') ScrollTrigger.clearScrollMemory('manual');
+
 let lenis: Lenis | null = null;
 
 const prefersReducedMotion = () =>
