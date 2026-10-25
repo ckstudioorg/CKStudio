@@ -32,7 +32,7 @@ const Philosophy: React.FC = () => {
             scaleX: 1, ease: 'none',
             scrollTrigger: { trigger: root.current, start: 'top top', end: () => `+=${distance() * 0.7}`, scrub: true, invalidateOnRefresh: true },
         });
-    }, root);
+    }, root, [], { defer: false }); // pinned: set up straight away so the page height is right from the start
 
     return (
         <section id="philosophy" ref={root} aria-labelledby="philosophy-title" className="relative flex min-h-svh flex-col justify-center overflow-hidden bg-noir text-ivory py-24">

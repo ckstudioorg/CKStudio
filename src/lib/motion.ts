@@ -8,16 +8,46 @@ gsap.registerPlugin(SplitText);
 /**
  * Runs GSAP animations scoped to a section, only when the visitor allows motion.
  * Everything created inside is cleaned up automatically. Selector strings are scoped to `scope`.
+ *
+ * A section that starts off-screen is set up a moment later, when the browser is idle, so the page answers
+ * taps sooner while it loads (fewer long tasks; Google measures this). Pass `{ defer: false }` for a section
+ * that pins: its pin adds page height, and links like /#contact must land in the right place straight away.
  */
-export function useGsap(setup: () => void | (() => void), scope: RefObject<HTMLElement | null>, deps: DependencyList = []) {
+export function useGsap(
+    setup: () => void | (() => void),
+    scope: RefObject<HTMLElement | null>,
+    deps: DependencyList = [],
+    { defer = true }: { defer?: boolean } = {},
+) {
     useLayoutEffect(() => {
-        if (!scope.current) return;
-        const mm = gsap.matchMedia(scope.current);
-        mm.add('(prefers-reduced-motion: no-preference)', () => setup());
-        return () => mm.revert();
+        const el = scope.current;
+        if (!el) return;
+        let mm: ReturnType<typeof gsap.matchMedia> | undefined;
+        const start = () => {
+            mm = gsap.matchMedia(el);
+            mm.add('(prefers-reduced-motion: no-preference)', () => setup());
+        };
+        const box = el.getBoundingClientRect();
+        if (!defer || (box.top < window.innerHeight && box.bottom > 0)) {
+            start();
+            return () => mm?.revert();
+        }
+        const idle = 'requestIdleCallback' in window;
+        const id = idle ? window.requestIdleCallback(start, { timeout: 1200 }) : window.setTimeout(start, 200);
+        return () => {
+            if (idle) window.cancelIdleCallback(id);
+            else window.clearTimeout(id);
+            mm?.revert();
+        };
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, deps);
 }
+
+/**
+ * SplitText labels the element it splits for screen readers, but labels aren't allowed on paragraphs and
+ * plain text boxes (accessibility checkers flag it). Headings keep the label; other text is read as it is.
+ */
+const ariaFor = (el: Element | null | undefined) => (el && /^H[1-6]$/.test(el.tagName) ? 'auto' : 'none');
 
 /** Lines slide up from behind a mask when the element scrolls into view. */
 export function revealLines(target: Element | string, { delay = 0, start = 'top 85%' } = {}) {
@@ -26,6 +56,7 @@ export function revealLines(target: Element | string, { delay = 0, start = 'top 
     return SplitText.create(el, {
         type: 'lines',
         mask: 'lines',
+        aria: ariaFor(el),
         autoSplit: true,
         onSplit: (self) =>
             gsap.from(self.lines, {
@@ -41,8 +72,11 @@ export function revealLines(target: Element | string, { delay = 0, start = 'top 
 
 /** Words light up one by one, in step with the scroll. */
 export function fillWords(target: Element | string, { start = 'top 80%', end = 'bottom 55%' } = {}) {
-    return SplitText.create(target, {
+    const el = typeof target === 'string' ? document.querySelector(target) : target;
+    if (!el) return null;
+    return SplitText.create(el, {
         type: 'words',
+        aria: ariaFor(el),
         autoSplit: true,
         onSplit: (self) =>
             gsap.fromTo(self.words, { opacity: 0.14 }, {

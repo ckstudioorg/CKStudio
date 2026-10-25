@@ -36,6 +36,7 @@ const Footer: React.FC = () => {
         SplitText.create(q('[data-wordmark]')[0], {
             type: 'chars',
             mask: 'chars',
+            aria: 'none', // the wordmark is decorative (hidden from screen readers)
             autoSplit: true,
             onSplit: (self) => {
                 self.chars.forEach((char) => char.classList.add(char.closest('[data-ck]') ? 'lux-lacquer-text' : 'lux-foil-v'));
