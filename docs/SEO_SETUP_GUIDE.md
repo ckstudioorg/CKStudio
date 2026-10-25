@@ -41,7 +41,9 @@ This tells Google your site exists, shows which searches bring visitors, and war
    - **URL prefix** (if DNS is too difficult): type `https://ckstudio.org/` → choose **HTML tag** →
      copy the tag (it looks like `<meta name="google-site-verification" content="…">`) and **send it to
      Claude** to add to the website. Once that update is live, click **Verify**.
-3. **Submit the sitemap:** left menu → **Sitemaps** → type `sitemap.xml` → **Submit**.
+3. **Submit the sitemap:** left menu → **Sitemaps** → type the full address `https://ckstudio.org/sitemap.xml`
+   → **Submit**. (A Domain property shows no web address in front of the box, so just `sitemap.xml`
+   gives "Invalid sitemap address".)
    After a day or two it should say **Success** with about 57 pages.
 4. **Ask Google to read your key pages now:** paste each address into the search bar at the top
    (**URL inspection**) → **Request indexing**. Google allows about 10 a day, so do these first:
