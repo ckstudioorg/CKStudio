@@ -7,7 +7,7 @@ import { articleText, articles, plainText } from '../content/blog';
 import { contact } from '../content/contact';
 import { faqs } from '../content/faq';
 import { services } from '../content/services';
-import { areaServed, pageSeo, site } from '../content/seo';
+import { areaServed, articleSearchTitles, pageSeo, site } from '../content/seo';
 import { servicePages } from '../content/servicePages';
 import { legalPages } from '../content/legal';
 
@@ -30,6 +30,16 @@ export interface PageMeta {
 }
 
 export const absolute = (path: string) => `${site.url}${path}`;
+
+/** Search results show about 155–160 characters of a description: cut longer ones at a word, with an ellipsis. */
+const clip = (text: string, max = 158) =>
+    text.length <= max ? text : `${text.slice(0, text.lastIndexOf(' ', max - 1)).replace(/[\s,;:—–-]+$/, '')}…`;
+
+/** Article title for search results: the shorter search title if there is one, plus " | CK Studio" when it fits. */
+const articleTitle = (slug: string, title: string) => {
+    const base = articleSearchTitles[slug] ?? title;
+    return `${base} | CK Studio`.length <= 60 ? `${base} | CK Studio` : base;
+};
 
 const businessId = `${site.url}/#business`;
 const websiteId = `${site.url}/#website`;
@@ -61,6 +71,7 @@ const business = {
         closes: contact.hours.closes,
     },
     areaServed: areaServed.map((name) => ({ '@type': 'Place', name })),
+    hasMap: contact.mapsUrl,
     sameAs: contact.socials.map((s) => s.url),
     hasOfferCatalog: {
         '@type': 'OfferCatalog',
@@ -152,8 +163,8 @@ export function getPageMeta(pathname: string): PageMeta {
         const service = servicePages.find((s) => s.slug === post.service);
         const image = post.image ? absolute(post.image) : site.image;
         return {
-            title: `${post.title} | CK Studio`,
-            description: post.excerpt,
+            title: articleTitle(post.slug, post.title),
+            description: clip(post.excerpt),
             path,
             type: 'article',
             image,

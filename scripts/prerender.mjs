@@ -55,7 +55,7 @@ async function savePage(url, file) {
         .replace('<!--seo-->', `${headTags(meta)}\n    ${preloadTags(url)}`)
         .replace('<div id="root"></div>', `<div id="root" data-prerendered>${body}</div>`);
     // Home page: the small header logo starts hidden; the hero's scroll animation fades it in
-    if (url === '/') html = html.replace('<html lang="en">', '<html lang="en" style="--ck-header-logo:0">');
+    if (url === '/') html = html.replace('<html lang="en-IN">', '<html lang="en-IN" style="--ck-header-logo:0">');
     const out = join(dist, file);
     await mkdir(join(out, '..'), { recursive: true });
     await writeFile(out, html);

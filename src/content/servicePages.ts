@@ -38,7 +38,7 @@ export const servicePages: ServicePage[] = [
     {
         slug: 'ad-films-and-commercials',
         name: 'Ad Films & Commercials',
-        seoTitle: 'Ad Film Production in Hyderabad | AI Ad Films & TVCs | CK Studio',
+        seoTitle: 'Ad Film Production in Hyderabad | AI Ad Films & TVCs',
         seoDescription:
             'AI ad films, TVCs, corporate, brand and industrial films, product shoots and investor videos — planned, made and finished by CK Studio in Hyderabad.',
         headline: { lead: 'Ad films and', highlight: 'commercials' },
@@ -111,7 +111,7 @@ export const servicePages: ServicePage[] = [
     {
         slug: 'movie-post-production',
         name: 'Movie Post-Production',
-        seoTitle: 'Movie Post-Production in Hyderabad | DI, DCP, Trailers | CK Studio',
+        seoTitle: 'Movie Post-Production in Hyderabad | DI, DCP, Trailers',
         seoDescription:
             'Movie editing, DI and colour correction, DCP outputs, teasers, trailers, lyrical videos, publicity designs, pitch decks and AI pre-looks — CK Studio, Hyderabad.',
         headline: { lead: 'Movie works, from pitch to', highlight: 'premiere' },

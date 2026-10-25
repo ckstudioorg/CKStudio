@@ -14,7 +14,7 @@ const NotFound: React.FC = () => {
         const q = gsap.utils.selector(root);
         if (alreadyOnScreen(q('[data-code]')[0])) return; // arrived ready-made: keep it still, no flicker
         // A line mask (not one per letter) leaves room for the italic numbers to lean
-        const split = SplitText.create(q('[data-code]')[0], { type: 'chars,lines', mask: 'lines' });
+        const split = SplitText.create(q('[data-code]')[0], { type: 'chars,lines', mask: 'lines', aria: 'none' });
         // Moving letters need their own red lacquer to stay visible
         split.chars.forEach((char) => char.classList.add('lux-lacquer-text'));
         gsap.timeline({ delay: 0.15 })
