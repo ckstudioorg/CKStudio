@@ -435,7 +435,7 @@ export const productionArticles: Article[] = [
             { type: 'h2', text: 'What is a 3D walkthrough, and when do you need one?' },
             { type: 'p', text: 'A 3D walkthrough is a computer-generated tour through a project — the entrance, the clubhouse, the flat itself — built from the architect’s drawings before construction is complete. It is the strongest tool for selling under-construction homes, and the same 3D model gives you stills for brochures, hoardings and social posts. Our [VFX and CG](/services/vfx-and-cg/) team builds walkthroughs and renders.' },
             { type: 'h2', text: 'What should you know about drone shots?' },
-            { type: 'p', text: 'Drone shots show location, roads, schools, IT corridors and greenery better than any map. In India, drones must be registered on the Digital Sky platform and flown by a certified pilot for commercial work, and areas near airports and other sensitive zones need prior permission. A professional crew checks and arranges this before the shoot.' },
+            { type: 'p', text: 'Drone shots show location, roads, schools, IT corridors and greenery better than any map. In India, drones must be registered on the Digital Sky platform and flown by a certified pilot for commercial work, and areas near airports and other sensitive zones need prior permission. A professional crew checks and arranges this before the shoot — read our guide to [drone shoots in India](/blog/drone-shoot-rules-india/).' },
             { type: 'h2', text: 'How can AI help real estate marketing?' },
             {
                 type: 'list',
