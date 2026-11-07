@@ -20,6 +20,9 @@ import { videoArticles } from './articles/video';
 import { designArticles } from './articles/design';
 import { digitalArticles } from './articles/digital';
 import { vfxMusicMovieArticles } from './articles/vfx-music-movies';
+import { productionCraftArticles } from './articles/production-craft';
+import { postAndDeliveryArticles } from './articles/post-and-delivery';
+import { marketingAndIndustryArticles } from './articles/marketing-and-industries';
 
 export type Block =
     | { type: 'p'; text: string }
@@ -312,6 +315,9 @@ const originalArticles: Article[] = [
 
 /** Newest first: the 2026 guides, then the original seven articles. */
 export const articles: Article[] = [
+    ...productionCraftArticles,
+    ...postAndDeliveryArticles,
+    ...marketingAndIndustryArticles,
     ...commercialsArticles,
     ...aiArticles,
     ...productionArticles,
