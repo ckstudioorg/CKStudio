@@ -640,7 +640,7 @@ export const marketingAndIndustryArticles: Article[] = [
             { q: 'What is HUID on gold jewellery?', a: 'HUID is a six-digit alphanumeric hallmark unique identification code from the Bureau of Indian Standards. Hallmarked gold jewellery sold in India carries it, which lets customers verify the piece.' },
         ],
         sources: [
-            { label: 'Ministry of Consumer Affairs (PIB) — six-digit HUID hallmarking for gold jewellery', url: 'https://consumeraffairs.nic.in/sites/default/files/PIB1904262.pdf' },
+            { label: 'Ministry of Consumer Affairs (PIB) — six-digit HUID hallmarking for gold jewellery', url: 'https://pib.gov.in/PressReleasePage.aspx?PRID=1904262' },
             { label: 'Bureau of Indian Standards (BIS)', url: 'https://www.bis.gov.in/' },
             asci,
         ],

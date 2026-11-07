@@ -43,3 +43,8 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      # Tells Bing (ChatGPT search, Copilot, DuckDuckGo) to re-read the pages now (scripts/indexnow.mjs)
+      - name: Notify search engines (IndexNow)
+        run: node scripts/indexnow.mjs
+        continue-on-error: true

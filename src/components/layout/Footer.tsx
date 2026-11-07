@@ -115,6 +115,19 @@ const Footer: React.FC = () => {
                         </ul>
                     </div>
                 </div>
+
+                {/* Popular guides: links to the most useful articles from every page */}
+                <nav data-col aria-labelledby="footer-guides" className="mt-14 md:mt-16 flex flex-col gap-4 border-t border-gold/15 pt-8 md:flex-row md:items-baseline md:gap-10">
+                    <h2 id="footer-guides" className={`${headingClass} shrink-0`}>{footer.guides.title}</h2>
+                    <ul className="flex flex-wrap gap-x-8 gap-y-3 text-[0.95rem]">
+                        {footer.guides.links.map((g) => (
+                            <li key={g.page} className="flex items-center gap-3">
+                                <span aria-hidden="true" className="h-[5px] w-[5px] shrink-0 rotate-45 bg-gold/70" />
+                                <Link to={g.page} className={linkClass}>{g.name}</Link>
+                            </li>
+                        ))}
+                    </ul>
+                </nav>
             </div>
 
             {/* Giant wordmark: CK in red lacquer, STUDIO in gold */}

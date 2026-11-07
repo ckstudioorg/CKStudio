@@ -1,7 +1,10 @@
 import { describe, it, expect } from 'vitest';
-import { getPageMeta, headTags, llmsTxt, normalizePath, sitePaths, sitemapXml } from '../lib/seo';
-import { articles, articleText, type Article } from '../content/blog';
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
+import { getPageMeta, headTags, llmsTxt, normalizePath, rssXml, shareImage, sitePaths, sitemapXml } from '../lib/seo';
+import { articles, articleText, headingId, type Article } from '../content/blog';
 import { servicePages } from '../content/servicePages';
+import { footer } from '../content/contact';
 
 describe('search engine details', () => {
     it('gives every page its own title and description', () => {
@@ -66,7 +69,26 @@ describe('search engine details', () => {
             }
             if (a.service && !pages.has(`/services/${a.service}/`)) broken.push(`${a.slug} → service ${a.service}`);
         }
+        for (const p of servicePages) {
+            for (const slug of p.articles) if (!articles.some((a) => a.slug === slug)) broken.push(`service ${p.slug} → ${slug}`);
+        }
+        for (const g of footer.guides.links) if (!pages.has(g.page)) broken.push(`footer → ${g.page}`);
         expect(broken).toEqual([]);
+    });
+
+    it('has a link-preview image for every article (run "npm run share-images" after adding one)', () => {
+        const missing = articles.filter((a) => !a.image && !existsSync(join(process.cwd(), 'public', shareImage(a.slug)))).map((a) => a.slug);
+        expect(missing).toEqual([]);
+        expect(getPageMeta('/blog/ad-film-cost-in-india/').image).toBe('https://ckstudio.org/images/blog/share/ad-film-cost-in-india.jpg');
+    });
+
+    it('gives every heading in an article its own "In this guide" link target', () => {
+        const fixed = ['quick-answer', 'toc-title', 'faq-title', 'sources-title', 'related-title'];
+        for (const a of articles) {
+            const ids = a.body.flatMap((b) => (b.type === 'h2' ? [headingId(b.text)] : []));
+            for (const id of ids) expect(id, `${a.slug}: "${id}"`).toMatch(/^[a-z0-9-]{3,}$/);
+            expect(new Set([...ids, ...fixed]).size, a.slug).toBe(ids.length + fixed.length);
+        }
     });
 
     it('gives every new guide a quick answer, FAQs and enough depth', () => {
@@ -76,6 +98,14 @@ describe('search engine details', () => {
             const words = articleText(a).split(/\s+/).length;
             expect(words).toBeGreaterThan(650);
         }
+    });
+
+    it('lists every article in the blog feed, newest first', () => {
+        const feed = rssXml();
+        expect(feed.match(/<item>/g)).toHaveLength(articles.length);
+        const dates = [...feed.matchAll(/<pubDate>([^<]+)<\/pubDate>/g)].map((m) => Date.parse(m[1]));
+        expect(dates).toEqual([...dates].sort((a, b) => b - a));
+        expect(feed).not.toMatch(/&(?!amp;|lt;|gt;)/);
     });
 
     it('describes the site and every article for AI assistants', () => {

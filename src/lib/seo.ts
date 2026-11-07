@@ -31,6 +31,9 @@ export interface PageMeta {
 
 export const absolute = (path: string) => `${site.url}${path}`;
 
+/** Link-preview image of an article without its own photo (made by scripts/share-images.mjs) */
+export const shareImage = (slug: string) => `/images/blog/share/${slug}.jpg`;
+
 /** Search results show about 155–160 characters of a description: cut longer ones at a word, with an ellipsis. */
 const clip = (text: string, max = 158) =>
     text.length <= max ? text : `${text.slice(0, text.lastIndexOf(' ', max - 1)).replace(/[\s,;:—–-]+$/, '')}…`;
@@ -161,14 +164,15 @@ export function getPageMeta(pathname: string): PageMeta {
     const post = articles.find((a) => path === paths.post(a.slug));
     if (post) {
         const service = servicePages.find((s) => s.slug === post.service);
-        const image = post.image ? absolute(post.image) : site.image;
+        // The article's own photo if it has one, otherwise its title card made by `npm run share-images`
+        const image = absolute(post.image ?? shareImage(post.slug));
         return {
             title: articleTitle(post.slug, post.title),
             description: clip(post.excerpt),
             path,
             type: 'article',
             image,
-            imageAlt: post.image ? post.title : site.imageAlt,
+            imageAlt: post.title,
             published: post.date,
             modified: post.updated ?? post.date,
             tags: post.tags,
@@ -296,7 +300,7 @@ export function headTags(meta: PageMeta): string {
         metaProp('og:description', meta.description),
         metaProp('og:image', meta.image),
         metaProp('og:image:alt', meta.imageAlt),
-        ...(meta.image === site.image ? [metaProp('og:image:width', '1200'), metaProp('og:image:height', '630')] : []),
+        ...(meta.image === site.image || meta.image.includes('/images/blog/share/') ? [metaProp('og:image:width', '1200'), metaProp('og:image:height', '630')] : []),
         ...(meta.published ? [metaProp('article:published_time', meta.published)] : []),
         ...(meta.modified ? [metaProp('article:modified_time', meta.modified)] : []),
         ...(meta.tags ?? []).map((t) => metaProp('article:tag', t)),
@@ -348,8 +352,54 @@ export function llmsTxt(): string {
         `- [Frequently asked questions](${absolute(paths.faq)})`,
         `- [Blog](${absolute(paths.blog)})`,
         `- [Project enquiry form](${site.url}/#enquiry)`,
+        `- [Blog feed (RSS)](${site.url}/feed.xml)`,
         ...legalPages.map((p) => `- [${p.title}](${absolute(paths.legal(p.slug))})`),
         '',
     ];
     return lines.join('\n');
+}
+
+const xml = (value: string) => value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+/**
+ * feed.xml — the blog as an RSS feed, newest first. Feed readers, Google and Bing, and auto-posting tools
+ * (new article → LinkedIn or Facebook post) follow it. Built automatically, so it never goes out of date.
+ */
+export function rssXml(): string {
+    const posts = [...articles].sort((a, b) => b.date.localeCompare(a.date));
+    const rfc822 = (date: string) => new Date(`${date}T09:00:00+05:30`).toUTCString();
+    const latest = articles.map((a) => a.updated ?? a.date).sort().at(-1) ?? posts[0].date;
+    const items = posts.map((a) => {
+        const url = absolute(paths.post(a.slug));
+        const picture = a.image
+            ? `<media:content url="${absolute(a.image)}" medium="image" />`
+            : `<media:content url="${absolute(shareImage(a.slug))}" medium="image" type="image/jpeg" width="1200" height="630" />`;
+        return [
+            '    <item>',
+            `      <title>${xml(a.title)}</title>`,
+            `      <link>${url}</link>`,
+            `      <guid isPermaLink="true">${url}</guid>`,
+            `      <pubDate>${rfc822(a.date)}</pubDate>`,
+            `      <category>${xml(a.category)}</category>`,
+            `      <description>${xml(plainText(a.excerpt))}</description>`,
+            `      ${picture}`,
+            '    </item>',
+        ].join('\n');
+    });
+    return [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">',
+        '  <channel>',
+        `    <title>${xml(site.name)} Blog</title>`,
+        `    <link>${absolute(paths.blog)}</link>`,
+        `    <atom:link href="${site.url}/feed.xml" rel="self" type="application/rss+xml" />`,
+        `    <description>${xml(pageSeo.blog.description)}</description>`,
+        '    <language>en-IN</language>',
+        `    <lastBuildDate>${rfc822(latest)}</lastBuildDate>`,
+        `    <image><url>${site.logo}</url><title>${xml(site.name)} Blog</title><link>${absolute(paths.blog)}</link></image>`,
+        ...items,
+        '  </channel>',
+        '</rss>',
+        '',
+    ].join('\n');
 }

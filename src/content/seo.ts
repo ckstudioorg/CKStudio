@@ -53,7 +53,7 @@ export const site = {
     legalName: 'Chenna Keshav Studio',
     url: 'https://ckstudio.org',
     logo: 'https://ckstudio.org/images/branding/logo.png',
-    image: 'https://ckstudio.org/images/branding/og-image.jpg',
+    image: 'https://ckstudio.org/images/branding/og-image.jpg?v=2',
     imageAlt: 'CK Studio — Where AI Meets Cinema',
     locale: 'en_IN',
 };
