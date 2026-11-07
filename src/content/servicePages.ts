@@ -17,6 +17,10 @@ export interface ServicePage {
     goodFor: string[];
     /** Which portfolio items to show: a portfolio group, optionally narrowed to some categories */
     work?: { group: WorkGroup; categories?: string[] };
+    /**
+     * Guides to show, best first: the first 3 as cards, the next 12 as a list.
+     * Guides whose `service` is this page are added after these automatically (if there is room).
+     */
     articles: string[];
     faqs: { question: string; answer: string }[];
 }
@@ -29,6 +33,8 @@ export const servicePageText = {
     work: 'Recent work',
     faqs: 'Questions',
     articles: 'Read more',
+    moreArticles: 'More guides',
+    allArticles: 'All guides',
     others: 'Other services',
     cta: { title: 'Tell us about your project', text: 'Share a few details and we will call you back within one working day.', primary: 'Start Your Project', secondary: 'WhatsApp Us' },
     notFound: { title: 'Service not found', text: 'This service page may have moved.', back: 'See all services' },
@@ -58,7 +64,23 @@ export const servicePages: ServicePage[] = [
         ],
         goodFor: ['Product launches', 'Festive and seasonal campaigns', 'Real estate and infrastructure', 'Agriculture and manufacturing brands', 'Start-ups and investor pitches'],
         work: { group: 'Commercials' },
-        articles: ['ai-ad-films-what-ai-can-and-cannot-do', 'company-start-package-brand-essentials'],
+        articles: [
+            'ad-film-cost-in-india',
+            'how-to-choose-an-ad-film-production-company-hyderabad',
+            'ai-ad-films-what-ai-can-and-cannot-do',
+            'ad-film-production-process-step-by-step',
+            'how-to-write-an-ad-film-brief',
+            'ad-film-script-writing',
+            'how-to-make-a-storyboard',
+            'tvc-vs-digital-video-ads',
+            'ai-video-generation-for-brands',
+            'voice-over-for-ads',
+            'brand-film-vs-ad-film-vs-corporate-film',
+            'corporate-film-guide',
+            'shooting-locations-hyderabad',
+            'ai-in-ads-india-rules-labelling-consent',
+            'music-for-ads-licensing-india',
+        ],
         faqs: [
             {
                 question: 'Can an ad film be made entirely with AI?',
@@ -92,7 +114,18 @@ export const servicePages: ServicePage[] = [
             { title: 'Product catalogues & brochures', text: 'Catalogues and brochures that present your range clearly, for print and for sharing on WhatsApp and email.' },
         ],
         goodFor: ['New businesses and start-ups', 'Product launches', 'Events and conferences', 'Investor and client meetings', 'Dealers and distributors'],
-        articles: ['company-start-package-brand-essentials', 'how-to-build-a-movie-pitch-deck'],
+        articles: [
+            'logo-design-guide',
+            'company-start-package-brand-essentials',
+            'business-pitch-deck-guide',
+            'event-branding-kit-checklist',
+            'product-catalogue-brochure-design',
+            'movie-poster-design-guide',
+            'how-to-build-a-movie-pitch-deck',
+            'logo-animation-guide',
+            'small-business-website-checklist',
+            'social-media-content-calendar',
+        ],
         faqs: [
             {
                 question: 'What is included in the Company Start Package?',
@@ -132,7 +165,23 @@ export const servicePages: ServicePage[] = [
         ],
         goodFor: ['Feature films', 'Independent and debut filmmakers', 'Producers pitching a project', 'Music and song releases', 'OTT and digital releases'],
         work: { group: 'Movies' },
-        articles: ['ai-pre-looks-and-pre-teasers-for-movies', 'how-to-build-a-movie-pitch-deck', 'di-and-colour-correction-explained', 'what-is-a-dcp-cinema-delivery-guide', 'lyrical-videos-turning-a-song-into-a-campaign'],
+        articles: [
+            'what-is-post-production',
+            'di-and-colour-correction-explained',
+            'what-is-a-dcp-cinema-delivery-guide',
+            'cbfc-certification-guide',
+            'teaser-vs-trailer-vs-promo',
+            'movie-promotion-timeline',
+            'ott-delivery-specs',
+            'sound-design-and-mixing',
+            'offline-online-editing-conform',
+            'subtitles-and-captions-guide',
+            'ai-pre-looks-and-pre-teasers-for-movies',
+            'how-to-build-a-movie-pitch-deck',
+            'movie-poster-design-guide',
+            'lyrical-videos-turning-a-song-into-a-campaign',
+            'ai-video-restoration-upscaling',
+        ],
         faqs: [
             {
                 question: 'Can you deliver a DCP for a cinema release?',
@@ -164,7 +213,23 @@ export const servicePages: ServicePage[] = [
             { title: 'Digital ad campaigns on Meta', text: 'Facebook and Instagram ad campaigns planned, run and improved over time.' },
         ],
         goodFor: ['Local businesses', 'Brands launching online', 'Movie and song promotions', 'Real estate projects', 'Events'],
-        articles: ['lyrical-videos-turning-a-song-into-a-campaign', 'company-start-package-brand-essentials'],
+        articles: [
+            'video-ads-for-local-businesses-instagram-facebook',
+            'instagram-reels-for-brands',
+            'small-business-website-checklist',
+            'social-media-content-calendar',
+            'google-business-profile-guide-hyderabad',
+            'youtube-seo-for-brands',
+            'youtube-ads-for-small-businesses-india',
+            'influencer-marketing-india-guide',
+            'video-ad-metrics',
+            'linkedin-video-for-b2b',
+            'video-ad-sizes-aspect-ratios-cheat-sheet',
+            'restaurant-food-video-marketing-hyderabad',
+            'festival-marketing-calendar-telangana-andhra',
+            'lyrical-videos-turning-a-song-into-a-campaign',
+            'company-start-package-brand-essentials',
+        ],
         faqs: [
             {
                 question: 'Do you run paid ads on Facebook and Instagram?',
@@ -198,7 +263,19 @@ export const servicePages: ServicePage[] = [
         ],
         goodFor: ['Product launches', 'Movie songs and promotions', 'Brand intros and outros', 'Shots too costly to film', 'Fixing or improving existing footage'],
         work: { group: 'Movies', categories: ['Lyrical Video'] },
-        articles: ['lyrical-videos-turning-a-song-into-a-campaign', 'ai-ad-films-what-ai-can-and-cannot-do'],
+        articles: [
+            'vfx-pipeline-explained',
+            'green-screen-vs-virtual-production',
+            'product-video-live-shoot-cgi-or-ai',
+            'logo-animation-guide',
+            'real-estate-video-marketing-hyderabad',
+            'title-sequence-end-credits-design',
+            'ai-video-generation-for-brands',
+            'ai-video-restoration-upscaling',
+            'ai-pre-looks-and-pre-teasers-for-movies',
+            'lyrical-videos-turning-a-song-into-a-campaign',
+            'ai-ad-films-what-ai-can-and-cannot-do',
+        ],
         faqs: [
             {
                 question: 'Can you add effects to footage we have already shot?',

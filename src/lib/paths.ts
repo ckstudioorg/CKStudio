@@ -2,6 +2,9 @@
  * Page addresses. Every page lives in its own folder, so addresses end with "/".
  * Kept separate from lib/seo.ts so pages can link to each other without loading all the search details.
  */
+/** The live site's address (same as `site.url` in content/seo.ts), for share links */
+export const siteOrigin = 'https://ckstudio.org';
+
 export const paths = {
     home: '/',
     blog: '/blog/',

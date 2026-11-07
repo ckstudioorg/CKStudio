@@ -1,13 +1,14 @@
 import React, { useRef } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { gsap } from '../lib/smoothScroll';
+import { gsap, scrollToSection } from '../lib/smoothScroll';
 import { revealLines, riseIn, useGsap } from '../lib/motion';
-import { articles, blogPage, formatDate, readTime, type Block } from '../content/blog';
+import { articles, blogPage, formatDate, headingId, readTime, type Block } from '../content/blog';
 import { mailtoUrl, whatsappUrl } from '../content/contact';
-import { paths } from '../lib/paths';
+import { paths, siteOrigin } from '../lib/paths';
 import { alreadyOnScreen } from '../lib/prerendered';
 import ArticleCover from '../components/ui/ArticleCover';
 import RichText from '../components/ui/RichText';
+import ShareLinks from '../components/ui/ShareLinks';
 import { getServicePage } from '../content/servicePages';
 
 const BackArrow = () => (
@@ -22,7 +23,7 @@ const Diamond = () => <span aria-hidden="true" className="mt-[0.72em] h-[6px] w-
 const renderBlock = (block: Block, i: number) => {
     switch (block.type) {
         case 'h2':
-            return <h2 key={i} className="mt-16 mb-5 font-display text-[clamp(1.75rem,1rem+1.6vw,2.6rem)] font-normal leading-[1.15] text-ivory">{block.text}</h2>;
+            return <h2 key={i} id={headingId(block.text)} tabIndex={-1} className="mt-16 mb-5 scroll-mt-28 font-display text-[clamp(1.75rem,1rem+1.6vw,2.6rem)] font-normal leading-[1.15] text-ivory focus:outline-none">{block.text}</h2>;
         case 'h3':
             return <h3 key={i} className="mt-10 mb-3 font-display text-2xl md:text-[1.7rem] font-normal leading-[1.2] text-ivory">{block.text}</h3>;
         case 'list':
@@ -116,9 +117,25 @@ const BlogPost: React.FC = () => {
     }
 
     const service = getServicePage(post.service);
-    const related = articles.filter((a) => a.slug !== post.slug && a.category === post.category)
-        .concat(articles.filter((a) => a.slug !== post.slug && a.category !== post.category))
-        .slice(0, 2);
+    // The next two articles in the same category (wrapping round), so every article is suggested by its
+    // neighbours instead of everyone suggesting the same two; topped up from the same service if needed.
+    const sameCategory = articles.filter((a) => a.category === post.category);
+    const at = sameCategory.findIndex((a) => a.slug === post.slug);
+    const neighbours = [1, 2].map((step) => sameCategory[(at + step) % sameCategory.length]);
+    const related = [...new Set([
+        ...neighbours,
+        ...articles.filter((a) => post.service && a.service === post.service),
+        ...articles,
+    ])].filter((a) => a.slug !== post.slug).slice(0, 2);
+
+    // "In this guide": the article's main headings, plus the questions at the end
+    const contents = post.body.flatMap((b) => (b.type === 'h2' ? [{ id: headingId(b.text), text: b.text }] : []));
+    if (post.faqs?.length) contents.push({ id: 'faq-title', text: 'Frequently asked questions' });
+    const jumpTo = (event: React.MouseEvent, id: string) => {
+        event.preventDefault();
+        scrollToSection(id);
+        document.getElementById(id)?.focus({ preventScroll: true });
+    };
 
     return (
         <article ref={root} className="relative bg-noir text-ivory">
@@ -163,6 +180,23 @@ const BlogPost: React.FC = () => {
                         </section>
                     )}
 
+                    {/* In this guide: jump links to each part (Google can show them as "Jump to" links) */}
+                    {contents.length >= 3 && (
+                        <nav aria-labelledby="toc-title" className="mt-10 border-t border-gold/20 pt-7">
+                            <h2 id="toc-title" className="lux-label">{blogPage.contents}</h2>
+                            <ol className="mt-4">
+                                {contents.map((c, n) => (
+                                    <li key={c.id}>
+                                        <a href={`#${c.id}`} onClick={(e) => jumpTo(e, c.id)} className="group flex items-baseline gap-4 py-1.5 text-ivory-soft transition-colors duration-300 hover:text-gold-light">
+                                            <span aria-hidden="true" className="w-6 shrink-0 font-display text-base italic text-gold/80">{String(n + 1).padStart(2, '0')}</span>
+                                            <span className="leading-snug">{c.text}</span>
+                                        </a>
+                                    </li>
+                                ))}
+                            </ol>
+                        </nav>
+                    )}
+
                     <div className="mt-10 border-t border-gold/15 pt-4 text-[1.0625rem] md:text-lg leading-[1.8] text-ivory/80">
                         {post.body.map(renderBlock)}
                     </div>
@@ -170,7 +204,7 @@ const BlogPost: React.FC = () => {
                     {/* Frequently asked questions */}
                     {post.faqs && post.faqs.length > 0 && (
                         <section aria-labelledby="faq-title" className="mt-16">
-                            <h2 id="faq-title" className="font-display text-[clamp(1.75rem,1rem+1.6vw,2.6rem)] font-normal leading-[1.15] text-ivory">Frequently asked questions</h2>
+                            <h2 id="faq-title" tabIndex={-1} className="scroll-mt-28 font-display text-[clamp(1.75rem,1rem+1.6vw,2.6rem)] font-normal leading-[1.15] text-ivory focus:outline-none">Frequently asked questions</h2>
                             <dl className="mt-6 border-t border-gold/40">
                                 {post.faqs.map((f) => (
                                     <div key={f.q} className="border-b border-gold/15 py-6">
@@ -200,6 +234,8 @@ const BlogPost: React.FC = () => {
                             <li key={tag} className="border border-gold/20 px-3.5 py-1.5 text-xs text-ivory-soft">{tag}</li>
                         ))}
                     </ul>
+
+                    <ShareLinks url={`${siteOrigin}${paths.post(post.slug)}`} title={post.title} label={blogPage.share} className="mt-12 border-t border-gold/15 pt-8" />
 
                     {/* Gentle call to action */}
                     <aside className="lux-panel relative mt-16 overflow-hidden p-8 md:p-10">

@@ -73,6 +73,10 @@ export const blockText = (b: Block): string => {
 export const articleText = (a: Article) =>
     [a.answer ?? '', ...a.body.map(blockText), ...(a.faqs ?? []).flatMap((f) => [f.q, plainText(f.a)])].join(' ');
 
+/** Address-friendly id for a heading, for "In this guide" links: "What Is a DCP?" → "what-is-a-dcp" */
+export const headingId = (text: string) =>
+    plainText(text).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60).replace(/-+$/, '');
+
 export const blogPage = {
     label: 'Our Blog',
     title: { lead: 'AI Film Making', highlight: 'Insights' },
@@ -81,6 +85,8 @@ export const blogPage = {
     empty: 'No articles found. Try a different search or category.',
     back: 'Back to Blog',
     related: 'Related Articles',
+    contents: 'In this guide',
+    share: 'Share this guide',
     notFound: { title: 'Post Not Found', text: 'This article may have moved or been renamed.' },
     articleCta: { title: 'Planning a project like this?', text: 'Tell us about it on WhatsApp or by email.', whatsapp: 'WhatsApp Us', email: 'Email Us' },
 };

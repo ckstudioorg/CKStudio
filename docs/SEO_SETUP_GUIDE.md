@@ -1,7 +1,7 @@
 # Getting CK Studio found on Google, Bing and AI search
 
 A step-by-step guide for the owner. Do the steps in order; each one takes 10–30 minutes.
-Last updated: 25 October 2026.
+Last updated: 8 November 2026.
 
 **Be realistic:** nobody can promise the #1 spot for every search. Google ranks pages using hundreds of
 signals: how useful the page is, how fast and safe the site is, how many trusted websites link to it,
@@ -15,13 +15,21 @@ like "ad film makers in Hyderabad" depend most on your **Google Business Profile
 - Every page is ready-made for Google: full text, title, description, link previews.
 - Google's "structured data" on every page: your business details (name, address, phone, hours, map link,
   social profiles), each article, each FAQ, each service and the page path (breadcrumbs).
-- A sitemap listing all 57 pages: https://ckstudio.org/sitemap.xml
+- A sitemap listing all 77 pages: https://ckstudio.org/sitemap.xml
 - A summary written for AI assistants: https://ckstudio.org/llms.txt
 - AI search tools (ChatGPT, Perplexity, Claude, Google's Gemini, Copilot) are allowed to read the site.
-- Secure (https), works on phones, quick to load, and 47 articles written to answer real questions.
-- Google's own test (PageSpeed Insights, phone, 25 Oct 2026): SEO 100, Best Practices 100,
-  Accessibility 96 (the one issue it flagged is fixed in this update), Performance 79 (this update makes
-  the page respond sooner while it loads; re-test at https://pagespeed.web.dev after it is live).
+- Secure (https), works on phones, quick to load, and 67 articles written to answer real questions.
+- Each service page links to its best guides, and each guide links back to its service page. The footer
+  links to the most popular guides from every page.
+- A link-preview image in the black, red and gold look (shown when the site is shared on WhatsApp,
+  LinkedIn, Facebook or X), and every article has its own preview image with its title.
+- Share buttons on every article (WhatsApp, LinkedIn, Facebook, X, copy link) and an "In this guide" list
+  of jump links at the top (Google can show these as "Jump to" links under your result).
+- Every time the site updates, Bing is told straight away which pages to re-read (IndexNow). Bing also
+  feeds ChatGPT search, Microsoft Copilot, DuckDuckGo and Yahoo.
+- A blog feed (RSS) at https://ckstudio.org/feed.xml for feed readers and auto-posting tools.
+- Google's own test (PageSpeed Insights, phone, 7 Nov 2026): Accessibility, Best Practices and SEO 100;
+  Performance 89 on the homepage and 95 on an article. Re-test any time at https://pagespeed.web.dev.
 
 ---
 
@@ -44,7 +52,9 @@ This tells Google your site exists, shows which searches bring visitors, and war
 3. **Submit the sitemap:** left menu → **Sitemaps** → type the full address `https://ckstudio.org/sitemap.xml`
    → **Submit**. (A Domain property shows no web address in front of the box, so just `sitemap.xml`
    gives "Invalid sitemap address".)
-   After a day or two it should say **Success** with about 57 pages.
+   After a day or two it should say **Success** with about 77 pages.
+   Optional: also submit `https://ckstudio.org/feed.xml` the same way. Google reads it often, so new
+   articles get found sooner.
 4. **Ask Google to read your key pages now:** paste each address into the search bar at the top
    (**URL inspection**) → **Request indexing**. Google allows about 10 a day, so do these first:
    - https://ckstudio.org/
@@ -95,7 +105,7 @@ This is the biggest single factor for local searches such as "ad film production
    equipment), a phone call or a postcard. Follow its instructions; it can take a few days.
 7. **Complete everything** once verified:
    - Hours: Monday–Saturday, 9 am – 6 pm (same as the website).
-   - Description (up to 750 characters). Ask Claude to draft one from the website text.
+   - Description (up to 750 characters): use the one in Step 6.
    - Services: list each service from the website (Ad films, TVCs, AI ad films, movie post-production,
      DI/colour grading, DCP, teasers and trailers, VFX, logo animation, design, social media…).
    - Photos: logo, a cover photo, the studio, the team at work, editing suites, behind the scenes on
@@ -128,6 +138,59 @@ Use exactly the same **name, address, phone and website** on every listing:
 - The website already lets AI tools read it and gives them a summary at https://ckstudio.org/llms.txt.
 - Once a month, ask ChatGPT, Perplexity and Google: "best ad film production companies in Hyderabad",
   "movie post-production studio Hyderabad", "AI ad film makers India". Note whether CK Studio appears.
+
+---
+
+## Step 6 — Get listed where AI tools look (business directories)
+
+When someone asks ChatGPT, Perplexity or Google "best ad film production companies in Hyderabad", the
+answers often come from directory lists. Each listing is also a link to your website. A basic profile is
+free on all of these; they may offer paid upgrades, which you don't need.
+
+| Directory | What it's for | Address |
+|---|---|---|
+| Clutch | Agency rankings that AI tools quote a lot (category: Video Production) | https://clutch.co |
+| GoodFirms | Agency directory (Video Production, Branding) | https://www.goodfirms.co |
+| DesignRush | Agency directory (Video Production Companies) | https://www.designrush.com |
+| Sortlist | Agency directory for brands looking for a studio | https://www.sortlist.com |
+| JustDial | Local searches in India | https://www.justdial.com (Free Listing) |
+| Sulekha | Local service searches in India | https://www.sulekha.com |
+| Behance | Your design work (posters, logos, branding) | https://www.behance.net |
+| Vimeo | Your showreel and ad films in full quality | https://vimeo.com |
+
+Clutch and GoodFirms rank studios higher once they have verified client reviews, so line up 2–3 happy
+clients who are willing to leave one.
+
+**Use exactly these details everywhere:**
+
+- **Name:** CK Studio (legal name: Chenna Keshav Studio)
+- **Address:** 11-008 N/R, Gajularamaram, IDA Jeedimetla, Hyderabad, Telangana 500055
+- **Phone:** +91 9700 970 762 · **Email:** ckstudio.org@gmail.com · **Website:** https://ckstudio.org
+- **Categories:** Video production, Film production / post-production, Advertising, Branding / Graphic design
+
+**Description to paste** (about 600 characters, also fits the Google Business Profile description):
+
+> CK Studio (Chenna Keshav Studio) is a pre- and post-production studio in IDA Jeedimetla, Hyderabad. We
+> make ad films, TV commercials and AI-powered ad films, and handle movie post-production: DI and colour
+> grading, DCP delivery, teasers, trailers and lyrical videos. We also create VFX and CG, logo animations,
+> design and branding, and social media and website design. AI is built into every stage of our work, from
+> pre-production to final delivery. We work in Telugu, Hindi and English with brands and filmmakers across
+> Hyderabad, Telangana, Andhra Pradesh and the rest of India. Website: https://ckstudio.org
+
+**Short version** (for bios with little space):
+
+> Hyderabad studio for ad films, AI ad films, movie post-production (DI, DCP, trailers), VFX, design and
+> social media. https://ckstudio.org
+
+---
+
+## Step 7 — Share every new article (a few minutes each)
+
+- Open the article on your phone and use the share buttons at the end: send it to WhatsApp groups and
+  your status, post it on LinkedIn and Facebook. Each article now shows its own preview picture.
+- To post new articles automatically, tools such as IFTTT, Zapier or Make can watch
+  `https://ckstudio.org/feed.xml` and post each new article to your LinkedIn or Facebook page
+  (check their current free plans).
 
 ---
 

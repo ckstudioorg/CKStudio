@@ -132,6 +132,16 @@ export const footer = {
             ],
         },
     ] as { title: string; links: { name: string; section?: string; page?: string; external?: 'whatsapp' }[] }[],
+    /** The most useful guides, linked from every page (helps them rank) */
+    guides: {
+        title: 'Popular guides',
+        links: [
+            { name: 'What does an ad film cost?', page: '/blog/ad-film-cost-in-india/' },
+            { name: 'Choosing an ad film company', page: '/blog/how-to-choose-an-ad-film-production-company-hyderabad/' },
+            { name: 'AI ad films explained', page: '/blog/ai-ad-films-what-ai-can-and-cannot-do/' },
+            { name: 'What is post-production?', page: '/blog/what-is-post-production/' },
+        ],
+    },
     /** Wording for these pages lives in content/legal.ts. `ready: false` hides a link. */
     legal: [
         { name: 'Privacy Policy', page: '/privacy/', ready: true },

@@ -50,7 +50,12 @@ const ServicePage: React.FC = () => {
     const work = page.work
         ? portfolio.works.filter((w) => w.group === page.work!.group && w.youtubeId && (!page.work!.categories || page.work!.categories.includes(w.category))).slice(0, 3)
         : [];
-    const reading = page.articles.map((s) => articles.find((a) => a.slug === s)).filter((a) => !!a).slice(0, 3);
+    // Hand-picked guides first, then any other guide written for this service
+    const guides = [...new Set([...page.articles, ...articles.filter((a) => a.service === page.slug).map((a) => a.slug)])]
+        .map((s) => articles.find((a) => a.slug === s))
+        .filter((a) => !!a);
+    const reading = guides.slice(0, 3);
+    const moreReading = guides.slice(3, 15);
     const others = servicePages.filter((p) => p.slug !== page.slug);
 
     return (
@@ -172,6 +177,25 @@ const ServicePage: React.FC = () => {
                                 </li>
                             ))}
                         </ul>
+                        {moreReading.length > 0 && (
+                            <div data-rise className="mt-16 md:mt-20">
+                                <h3 className="lux-label">{t.moreArticles}</h3>
+                                <ul className="mt-5 grid border-t border-gold/25 md:grid-cols-2 md:gap-x-10 lg:grid-cols-3">
+                                    {moreReading.map((a) => (
+                                        <li key={a.slug} className="border-b border-gold/15">
+                                            <Link to={paths.post(a.slug)} className="group flex h-full items-start gap-4 py-4 md:py-5">
+                                                <span aria-hidden="true" className="mt-[0.6em] h-1.5 w-1.5 shrink-0 rotate-45 bg-gold/60 transition-colors duration-500 group-hover:bg-gold-light" />
+                                                <span className="font-display text-[1.15rem] leading-[1.35] text-ivory transition-colors duration-500 group-hover:text-gold-light">{a.title}</span>
+                                            </Link>
+                                        </li>
+                                    ))}
+                                </ul>
+                                <Link to={paths.blog} className="lux-label mt-8 inline-flex items-center gap-2 transition-colors duration-500 hover:text-gold-light">
+                                    {t.allArticles}
+                                    <Arrow />
+                                </Link>
+                            </div>
+                        )}
                     </section>
                 )}
 
