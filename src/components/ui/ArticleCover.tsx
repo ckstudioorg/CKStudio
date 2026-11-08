@@ -1,12 +1,12 @@
 import React from 'react';
-import type { Article } from '../../content/blog';
+import type { ArticleMeta } from '../../content/blog';
 
 /**
  * Article cover: the article's own image when provided, otherwise a designed typographic cover
  * (no stock photos). Two dark versions alternate so a grid of covers has rhythm: red velvet light with a
  * gold-foil number, and soft gold light with an outlined gold number.
  */
-const ArticleCover: React.FC<{ article: Article; index: number; className?: string; large?: boolean }> = ({ article, index, className = '', large }) => {
+const ArticleCover: React.FC<{ article: ArticleMeta; index: number; className?: string; large?: boolean }> = ({ article, index, className = '', large }) => {
     if (article.image) {
         return <img src={article.image} alt="" loading="lazy" decoding="async" className={`h-full w-full object-cover ${className}`} />;
     }

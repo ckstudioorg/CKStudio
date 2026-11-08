@@ -2,8 +2,10 @@
  * Search-engine details for every page, in one place.
  * Used twice: at build time (scripts/prerender.mjs writes them into each page's HTML file)
  * and in the browser (components/SEO.tsx updates them when the visitor moves between pages).
+ * Article cards come from content/blog.ts; an article's text (for its structured data) is loaded only for its own page.
  */
 import { articleText, articles, plainText } from '../content/blog';
+import { loadAllArticles, loadArticle } from './loadArticle';
 import { contact } from '../content/contact';
 import { faqs } from '../content/faq';
 import { services } from '../content/services';
@@ -114,8 +116,11 @@ const graph = (...nodes: object[]) => [{ '@context': 'https://schema.org', '@gra
 
 const base = { type: 'website' as const, image: site.image, imageAlt: site.imageAlt };
 
-/** The search details for any address on the site. Unknown addresses get the "not found" details. */
-export function getPageMeta(pathname: string): PageMeta {
+/**
+ * The search details for any address on the site. Unknown addresses get the "not found" details.
+ * Waits for the article's text on article pages (its quick answer, FAQs, sources and word count).
+ */
+export async function getPageMeta(pathname: string): Promise<PageMeta> {
     const path = normalizePath(pathname);
 
     if (path === paths.home) {
@@ -161,7 +166,8 @@ export function getPageMeta(pathname: string): PageMeta {
         };
     }
 
-    const post = articles.find((a) => path === paths.post(a.slug));
+    const card = articles.find((a) => path === paths.post(a.slug));
+    const post = card && (await loadArticle(card.slug));
     if (post) {
         const service = servicePages.find((s) => s.slug === post.service);
         // The article's own photo if it has one, otherwise its title card made by `npm run share-images`
@@ -332,8 +338,10 @@ export function sitemapXml(buildDate: string): string {
 /**
  * llms.txt — a plain summary of the site for AI assistants and answer engines (ChatGPT, Claude, Perplexity,
  * Gemini). Built automatically from the same content as the pages, so it never goes out of date.
+ * Build time only: it reads every article's quick answer, so it loads all article texts.
  */
-export function llmsTxt(): string {
+export async function llmsTxt(): Promise<string> {
+    const guides = await loadAllArticles();
     const lines = [
         `# ${site.name} (${site.legalName})`,
         '',
@@ -346,7 +354,7 @@ export function llmsTxt(): string {
         ...servicePages.map((p) => `- [${p.name}](${absolute(paths.service(p.slug))}): ${p.seoDescription}`),
         '',
         '## Guides',
-        ...articles.map((a) => `- [${a.title}](${absolute(paths.post(a.slug))}): ${plainText(a.answer ?? a.excerpt)}`),
+        ...guides.map((a) => `- [${a.title}](${absolute(paths.post(a.slug))}): ${plainText(a.answer ?? a.excerpt)}`),
         '',
         '## More',
         `- [Frequently asked questions](${absolute(paths.faq)})`,

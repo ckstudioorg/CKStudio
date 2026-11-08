@@ -1,8 +1,10 @@
-import React, { useRef } from 'react';
+import React, { use, useRef } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { gsap, scrollToSection } from '../lib/smoothScroll';
 import { revealLines, riseIn, useGsap } from '../lib/motion';
-import { articles, blogPage, formatDate, headingId, readTime, type Block } from '../content/blog';
+import { articles, blogPage, headingId, readTime, type Block } from '../content/blog';
+import { formatDate } from '../lib/dates';
+import { findArticle, loadArticle } from '../lib/loadArticle';
 import { mailtoUrl, whatsappUrl } from '../content/contact';
 import { paths, siteOrigin } from '../lib/paths';
 import { alreadyOnScreen } from '../lib/prerendered';
@@ -88,11 +90,20 @@ const renderBlock = (block: Block, i: number) => {
     }
 };
 
+/**
+ * The whole article for this page. Its text is a separate small file (lib/loadArticle.ts); until it has arrived,
+ * React keeps what is already on screen (the ready-made page, or the page the visitor is leaving), so the page
+ * never flashes empty and the live site matches the ready-made HTML exactly.
+ * Always read through use(), even when the text is already there: React may re-run this component while
+ * attaching to the ready-made page, and skipping use() then would make it give up and redraw the page.
+ */
+const useArticle = (slug: string | undefined) => (slug && findArticle(slug) ? use(loadArticle(slug)) : undefined);
+
 const BlogPost: React.FC = () => {
     const { slug } = useParams();
     const root = useRef<HTMLElement>(null);
     const index = articles.findIndex((a) => a.slug === slug);
-    const post = articles[index];
+    const post = useArticle(slug);
 
     useGsap(() => {
         if (!post) return;
