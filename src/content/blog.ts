@@ -23,6 +23,10 @@ import { vfxMusicMovieArticles } from './articles/vfx-music-movies';
 import { productionCraftArticles } from './articles/production-craft';
 import { postAndDeliveryArticles } from './articles/post-and-delivery';
 import { marketingAndIndustryArticles } from './articles/marketing-and-industries';
+import { adMakingArticles } from './articles/ad-making';
+import { moreIndustryArticles } from './articles/more-industries';
+import { socialAndAiArticles } from './articles/social-and-ai';
+import { filmVfxDesignArticles } from './articles/film-vfx-and-design';
 
 export type Block =
     | { type: 'p'; text: string }
@@ -321,6 +325,10 @@ const originalArticles: Article[] = [
 
 /** Newest first: the 2026 guides, then the original seven articles. */
 export const articles: Article[] = [
+    ...adMakingArticles,
+    ...moreIndustryArticles,
+    ...socialAndAiArticles,
+    ...filmVfxDesignArticles,
     ...productionCraftArticles,
     ...postAndDeliveryArticles,
     ...marketingAndIndustryArticles,
