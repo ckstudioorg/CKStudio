@@ -1,14 +1,21 @@
-import { describe, it, expect } from 'vitest';
-import { existsSync } from 'node:fs';
+import { beforeAll, describe, it, expect } from 'vitest';
+import { existsSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { getPageMeta, headTags, llmsTxt, normalizePath, rssXml, shareImage, sitePaths, sitemapXml } from '../lib/seo';
-import { articles, articleText, headingId, type Article } from '../content/blog';
+import { articles, articleText, headingId, plainText, readingMinutes, type Article } from '../content/blog';
+import { loadAllArticles } from '../lib/loadArticle';
 import { servicePages } from '../content/servicePages';
 import { footer } from '../content/contact';
 
+/** Every article whole: its card (content/blog.ts) plus its text (content/articles/<slug>.ts) */
+let full: Article[] = [];
+beforeAll(async () => {
+    full = await loadAllArticles();
+});
+
 describe('search engine details', () => {
-    it('gives every page its own title and description', () => {
-        const metas = sitePaths().map(getPageMeta);
+    it('gives every page its own title and description', async () => {
+        const metas = await Promise.all(sitePaths().map(getPageMeta));
         expect(metas).toHaveLength(3 + articles.length + servicePages.length + 2);
         expect(new Set(metas.map((m) => m.title)).size).toBe(metas.length);
         expect(new Set(metas.map((m) => m.description)).size).toBe(metas.length);
@@ -19,26 +26,38 @@ describe('search engine details', () => {
         }
     });
 
-    it('treats addresses with and without a final slash as the same page', () => {
+    it('treats addresses with and without a final slash as the same page', async () => {
         expect(normalizePath('/blog')).toBe('/blog/');
         expect(normalizePath('/faq?x=1')).toBe('/faq/');
-        expect(getPageMeta('/blog').title).toBe(getPageMeta('/blog/').title);
+        expect((await getPageMeta('/blog')).title).toBe((await getPageMeta('/blog/')).title);
     });
 
-    it('marks unknown pages as not for search results', () => {
-        const meta = getPageMeta('/no-such-page');
+    it('marks unknown pages as not for search results', async () => {
+        const meta = await getPageMeta('/no-such-page');
         expect(meta.noindex).toBe(true);
         expect(headTags(meta)).toContain('noindex');
         expect(headTags(meta)).not.toContain('rel="canonical"');
     });
 
-    it('describes articles as blog posts with breadcrumbs', () => {
+    it('describes articles as blog posts with breadcrumbs', async () => {
         const post = articles[0];
-        const html = headTags(getPageMeta(`/blog/${post.slug}`));
+        const html = headTags(await getPageMeta(`/blog/${post.slug}`));
         expect(html).toContain(`href="https://ckstudio.org/blog/${post.slug}/"`);
         expect(html).toContain('"@type":"BlogPosting"');
         expect(html).toContain('"@type":"BreadcrumbList"');
         expect(html).toContain(`content="${post.date}"`);
+    });
+
+    it("puts an article's quick answer, questions, sources and word count into its structured data", async () => {
+        const post = full.find((a) => a.answer && a.faqs?.length && a.sources?.length)!;
+        const meta = await getPageMeta(`/blog/${post.slug}/`);
+        const nodes = (meta.jsonLd[0] as { '@graph': Record<string, unknown>[] })['@graph'];
+        const blogPosting = nodes.find((n) => n['@type'] === 'BlogPosting')!;
+        const faqPage = nodes.find((n) => n['@type'] === 'FAQPage') as { mainEntity: { name: string }[] };
+        expect(blogPosting.abstract).toBe(plainText(post.answer!));
+        expect(blogPosting.citation).toEqual(post.sources!.map((s) => s.url));
+        expect(blogPosting.wordCount).toBe(articleText(post).split(/\s+/).length);
+        expect(faqPage.mainEntity.map((q) => q.name)).toEqual(post.faqs!.map((f) => f.q));
     });
 
     it('lists every page in the sitemap', () => {
@@ -56,7 +75,7 @@ describe('search engine details', () => {
             ...(a.faqs ?? []).map((q) => q.a),
         ];
         const broken: string[] = [];
-        for (const a of articles) {
+        for (const a of full) {
             for (const text of texts(a)) {
                 for (const [, href] of text.matchAll(/\]\(([^)\s]+)\)/g)) {
                     if (!href.startsWith('/')) continue;
@@ -76,15 +95,15 @@ describe('search engine details', () => {
         expect(broken).toEqual([]);
     });
 
-    it('has a link-preview image for every article (run "npm run share-images" after adding one)', () => {
+    it('has a link-preview image for every article (run "npm run share-images" after adding one)', async () => {
         const missing = articles.filter((a) => !a.image && !existsSync(join(process.cwd(), 'public', shareImage(a.slug)))).map((a) => a.slug);
         expect(missing).toEqual([]);
-        expect(getPageMeta('/blog/ad-film-cost-in-india/').image).toBe('https://ckstudio.org/images/blog/share/ad-film-cost-in-india.jpg');
+        expect((await getPageMeta('/blog/ad-film-cost-in-india/')).image).toBe('https://ckstudio.org/images/blog/share/ad-film-cost-in-india.jpg');
     });
 
     it('gives every heading in an article its own "In this guide" link target', () => {
         const fixed = ['quick-answer', 'toc-title', 'faq-title', 'sources-title', 'related-title'];
-        for (const a of articles) {
+        for (const a of full) {
             const ids = a.body.flatMap((b) => (b.type === 'h2' ? [headingId(b.text)] : []));
             for (const id of ids) expect(id, `${a.slug}: "${id}"`).toMatch(/^[a-z0-9-]{3,}$/);
             expect(new Set([...ids, ...fixed]).size, a.slug).toBe(ids.length + fixed.length);
@@ -92,7 +111,7 @@ describe('search engine details', () => {
     });
 
     it('gives every new guide a quick answer, FAQs and enough depth', () => {
-        for (const a of articles.filter((x) => x.answer)) {
+        for (const a of full.filter((x) => x.answer)) {
             expect(a.faqs?.length ?? 0).toBeGreaterThanOrEqual(3);
             expect(a.excerpt.length).toBeLessThanOrEqual(200);
             const words = articleText(a).split(/\s+/).length;
@@ -108,9 +127,26 @@ describe('search engine details', () => {
         expect(feed).not.toMatch(/&(?!amp;|lt;|gt;)/);
     });
 
-    it('describes the site and every article for AI assistants', () => {
-        const txt = llmsTxt();
+    it('describes the site and every article for AI assistants', async () => {
+        const txt = await llmsTxt();
         expect(txt).toContain('# CK Studio');
-        for (const a of articles) expect(txt).toContain(`/blog/${a.slug}/`);
+        for (const a of full) {
+            expect(txt).toContain(`/blog/${a.slug}/`);
+            expect(txt).toContain(plainText(a.answer ?? a.excerpt));
+        }
+    });
+});
+
+describe('article files', () => {
+    it("keeps each article's text in its own file, named after its card's slug", () => {
+        const files = readdirSync(join(process.cwd(), 'src/content/articles')).map((f) => f.replace(/\.ts$/, ''));
+        expect(files.sort()).toEqual(articles.map((a) => a.slug).sort());
+        expect(new Set(articles.map((a) => a.slug)).size).toBe(articles.length);
+        for (const a of full) expect(a.body.length, a.slug).toBeGreaterThan(0);
+    });
+
+    it('shows the right reading time on every card (the "minutes" in content/blog.ts)', () => {
+        const wrong = full.filter((a) => a.minutes !== readingMinutes(a)).map((a) => `${a.slug}: minutes should be ${readingMinutes(a)}`);
+        expect(wrong).toEqual([]);
     });
 });

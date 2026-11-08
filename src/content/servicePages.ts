@@ -73,13 +73,13 @@ export const servicePages: ServicePage[] = [
             'ad-film-script-writing',
             'how-to-make-a-storyboard',
             'tvc-vs-digital-video-ads',
-            'ai-video-generation-for-brands',
+            'casting-actors-and-models-for-ads',
             'voice-over-for-ads',
-            'brand-film-vs-ad-film-vs-corporate-film',
+            'cinema-advertising-in-india',
             'corporate-film-guide',
             'shooting-locations-hyderabad',
             'ai-in-ads-india-rules-labelling-consent',
-            'music-for-ads-licensing-india',
+            'telugu-ads-for-telugu-audiences',
         ],
         faqs: [
             {
@@ -177,9 +177,9 @@ export const servicePages: ServicePage[] = [
             'offline-online-editing-conform',
             'subtitles-and-captions-guide',
             'ai-pre-looks-and-pre-teasers-for-movies',
-            'how-to-build-a-movie-pitch-deck',
-            'movie-poster-design-guide',
-            'lyrical-videos-turning-a-song-into-a-campaign',
+            'film-dubbing-for-pan-india-release',
+            'script-registration-and-film-copyright-india',
+            'film-festival-submission-guide',
             'ai-video-restoration-upscaling',
         ],
         faqs: [
@@ -227,8 +227,8 @@ export const servicePages: ServicePage[] = [
             'video-ad-sizes-aspect-ratios-cheat-sheet',
             'restaurant-food-video-marketing-hyderabad',
             'festival-marketing-calendar-telangana-andhra',
-            'lyrical-videos-turning-a-song-into-a-campaign',
-            'company-start-package-brand-essentials',
+            'whatsapp-business-video-marketing',
+            'get-recommended-by-ai-search',
         ],
         faqs: [
             {
@@ -267,6 +267,7 @@ export const servicePages: ServicePage[] = [
             'vfx-pipeline-explained',
             'green-screen-vs-virtual-production',
             'product-video-live-shoot-cgi-or-ai',
+            'fooh-cgi-ads',
             'logo-animation-guide',
             'real-estate-video-marketing-hyderabad',
             'title-sequence-end-credits-design',

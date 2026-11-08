@@ -35,14 +35,29 @@ const collect = (key, out = new Set()) => {
     return out;
 };
 const alreadyLoaded = collect(entryKey);
+// An article page also needs its own text file (src/content/articles/<slug>.ts, see src/lib/loadArticle.ts)
+const articleModule = (url) => {
+    const slug = url.match(/^\/blog\/([^/]+)\/$/)?.[1];
+    return slug ? `src/content/articles/${slug}.ts` : null;
+};
 const preloadTags = (url) => {
-    const key = pageModule(url);
-    if (!key || !manifest[key]) return '';
-    return [...collect(key)]
+    const keys = new Set();
+    for (const key of [pageModule(url), articleModule(url)]) if (key && manifest[key]) collect(key, keys);
+    return [...keys]
         .filter((k) => !alreadyLoaded.has(k))
         .map((k) => `<link rel="modulepreload" crossorigin href="/${manifest[k].file}">`)
         .join('\n    ');
 };
+
+// Each article's text must stay in its own file, fetched only on its own page. If any page's code pulled an
+// article text in directly, every visitor of that page would download it: stop the build instead.
+const articleKeys = Object.keys(manifest).filter((k) => k.startsWith('src/content/articles/'));
+for (const key of Object.keys(manifest).filter((k) => manifest[k].isEntry || manifest[k].isDynamicEntry)) {
+    if (articleKeys.includes(key)) continue;
+    const deps = collect(key);
+    const pulledIn = articleKeys.filter((k) => deps.has(k));
+    if (pulledIn.length) throw new Error(`${key} loads article texts directly (${pulledIn.join(', ')}); use src/lib/loadArticle.ts`);
+}
 if (!template.includes('<!--seo-->') || !template.includes('<div id="root"></div>')) {
     throw new Error('index.html is missing the <!--seo--> marker or the empty root element');
 }
@@ -50,7 +65,7 @@ if (!template.includes('<!--seo-->') || !template.includes('<div id="root"></div
 async function savePage(url, file) {
     const body = await render(url);
     if (!body.includes('<h1')) throw new Error(`Page ${url} has no main heading (h1)`);
-    const meta = getPageMeta(url);
+    const meta = await getPageMeta(url);
     let html = template
         .replace('<!--seo-->', `${headTags(meta)}\n    ${preloadTags(url)}`)
         .replace('<div id="root"></div>', `<div id="root" data-prerendered>${body}</div>`);
@@ -73,7 +88,7 @@ const today = new Date().toISOString().slice(0, 10);
 await writeFile(join(dist, 'sitemap.xml'), sitemapXml(today));
 console.log(`  sitemap.xml with ${sitePaths().length} pages`);
 // A plain-text guide to the site for AI assistants (see llmsTxt in src/lib/seo.ts)
-await writeFile(join(dist, 'llms.txt'), llmsTxt());
+await writeFile(join(dist, 'llms.txt'), await llmsTxt());
 console.log('  llms.txt for AI assistants');
 // The blog as an RSS feed (see rssXml in src/lib/seo.ts)
 await writeFile(join(dist, 'feed.xml'), rssXml());
