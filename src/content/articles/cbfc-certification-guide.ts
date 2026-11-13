@@ -58,6 +58,7 @@ const article: ArticleContent = {
         ] },
         { type: 'tip', text: 'Lock picture, sound and subtitles before you submit. Changing a certified film means applying again — and losing days you may not have before release.' },
         { type: 'p', text: 'CK Studio supports films through [post-production and delivery](/services/movie-post-production/) — editing, DI, trailers, lyrical videos and DCP outputs — and can plan your certification masters with your release schedule.' },
+        { type: 'p', text: 'Related guides: [how to run your ad in cinemas](/blog/cinema-advertising-in-india/), [dubbing a film for a pan-India release](/blog/film-dubbing-for-pan-india-release/) and [protecting your script and film](/blog/script-registration-and-film-copyright-india/).' },
     ],
     faqs: [
         { q: 'How long does CBFC certification take?', a: 'It varies with the length of the film, the office’s schedule and whether modifications are requested. Apply well before release and keep a buffer.' },

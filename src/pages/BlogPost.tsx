@@ -163,7 +163,7 @@ const BlogPost: React.FC = () => {
                     <span>{post.author}</span><span>{formatDate(post.date)}</span><span>{readTime(post)}</span>
                 </p>
                 <div data-cover className="relative mt-12 md:mt-16 aspect-[16/9] md:aspect-[21/9] overflow-hidden">
-                    <ArticleCover article={post} index={index} large />
+                    <ArticleCover article={post} index={index} large alt={`Illustration for the guide “${post.title}”`} />
                     <span aria-hidden="true" className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-gold/20" />
                 </div>
             </header>

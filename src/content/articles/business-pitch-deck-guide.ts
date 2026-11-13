@@ -65,6 +65,7 @@ const article: ArticleContent = {
         ] },
         { type: 'tip', text: 'Read only the headlines of your slides, in order. If they tell the whole story on their own, the deck works.' },
         { type: 'p', text: 'CK Studio designs commercial pitch decks for businesses and professional pitch decks for films, as part of our [design and branding](/services/design-and-branding/) work. [Send us your draft](/#enquiry) and we will shape the story and design.' },
+        { type: 'p', text: 'Related guides: [how to trademark your logo in India](/blog/trademark-your-logo-india/).' },
     ],
     faqs: [
         { q: 'How many slides should a pitch deck have?', a: 'About 10 to 15 for presenting. A send-ahead version can be slightly longer, with extra detail in an appendix.' },

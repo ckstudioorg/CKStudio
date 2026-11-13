@@ -51,6 +51,7 @@ const article: ArticleContent = {
         { type: 'p', text: 'Google cross-checks your business name, address and phone number (often called NAP) across your website, social profiles and directories. Different versions — an old phone number here, a shortened name there — reduce trust. Make them identical everywhere, including on your [website](/blog/small-business-website-checklist/).' },
         { type: 'tip', text: 'Print a small QR code linking to your Google review page and place it at your counter or on invoices. Asking at the moment of happiness gets the most genuine reviews.' },
         { type: 'p', text: 'CK Studio creates the photos, videos and website content that make local profiles stand out — see our [social media and web design](/services/social-media-and-web-design/) service and [video ideas for local businesses](/blog/video-ads-for-local-businesses-instagram-facebook/).' },
+        { type: 'p', text: 'Related guides: [getting recommended by ChatGPT and Google AI](/blog/get-recommended-by-ai-search/) and [why websites are slow and how to fix it](/blog/website-speed-core-web-vitals/).' },
     ],
     faqs: [
         { q: 'How long does it take to rank on Google Maps?', a: 'It varies. A complete, verified profile can start appearing within weeks; ranking higher for competitive searches depends on reviews, activity and your wider web presence over months.' },

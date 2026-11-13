@@ -51,6 +51,7 @@ const article: ArticleContent = {
         { type: 'p', text: 'If your website collects personal details — through an enquiry form, for example — publish a privacy policy that explains what you collect, why, and how people can contact you. India’s Digital Personal Data Protection Act is being brought into force in phases under the DPDP Rules, 2025, with most obligations applying from 2027, so it is worth getting the basics right now.' },
         { type: 'tip', text: 'Open your website on your own phone, on mobile data, and try to contact yourself in under 10 seconds. If you cannot, your customers will not either.' },
         { type: 'p', text: 'CK Studio designs fast, modern websites with enquiry forms and search-ready structure as part of our [social media and web design](/services/social-media-and-web-design/) service. Pair your website with a strong [Google Business Profile](/blog/google-business-profile-guide-hyderabad/).' },
+        { type: 'p', text: 'Related guides: [why websites are slow and how to fix it](/blog/website-speed-core-web-vitals/), [landing pages for ads](/blog/landing-pages-for-ads/) and [farm stay and resort websites that get direct bookings](/blog/farm-stay-resort-website-direct-bookings/).' },
     ],
     faqs: [
         { q: 'How many pages does a small business website need?', a: 'Usually five to ten: home, services (ideally one page per main service), work or portfolio, about, contact, FAQ and a privacy policy.' },

@@ -51,6 +51,7 @@ const article: ArticleContent = {
         ] },
         { type: 'tip', text: 'Bring the VFX supervisor to the shoot. Ten minutes of advice on set can save days of clean-up in post-production.' },
         { type: 'p', text: 'CK Studio handles AI compositing, CGI enhancements and VFX for ads and films — see our [VFX and CG works](/services/vfx-and-cg/) and [what is post-production](/blog/what-is-post-production/).' },
+        { type: 'p', text: 'Related guides: [shooting for VFX: the on-set checklist](/blog/shooting-for-vfx-on-set-checklist/) and [de-ageing, face replacement and digital doubles](/blog/de-ageing-face-replacement-digital-doubles/).' },
     ],
     faqs: [
         { q: 'Why is green used for chroma key?', a: 'Green is far from human skin tones and digital cameras are very sensitive to it, which makes it easier to separate people from the background. Blue is used when green appears in the scene.' },

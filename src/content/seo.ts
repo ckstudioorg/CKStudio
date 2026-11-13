@@ -71,6 +71,19 @@ export const articleSearchTitles: Record<string, string> = {
     'brand-guidelines-document': 'Brand Guidelines Checklist: What Goes in a Brand Book',
     'rebranding-guide': 'Rebranding Guide: When and How to Refresh Your Brand',
     'hoarding-and-outdoor-ad-design': 'Hoarding Design Tips: Outdoor Ads That Work',
+    'ai-in-post-production': 'AI in Post-Production: What It Can and Cannot Do',
+    'writing-ad-scripts-with-ai': 'Writing Ad Scripts with ChatGPT and AI Tools',
+    'ai-ad-variations-and-creative-testing': 'Testing Ad Variations Made with AI',
+    'de-ageing-face-replacement-digital-doubles': 'De-Ageing, Face Replacement and Digital Doubles',
+    'video-file-formats-and-codecs': 'Video File Formats: MP4, MOV, ProRes, H.264, H.265',
+    'footage-backup-3-2-1-rule': 'Backing Up Footage: The 3-2-1 Rule for Film Shoots',
+    'sync-sound-vs-dubbing': 'Sync Sound vs Dubbing (ADR): Which Should You Use?',
+    'background-score-for-films': 'Background Score (BGM): How Film Music Is Made',
+    'vfx-breakdown-and-quotes-for-films': 'VFX Breakdown and Quotes: How to Budget Film VFX',
+    'campaign-adaptations-key-visual': 'Campaign Adaptations: One Key Visual, Every Size',
+    'social-media-post-templates': 'Social Media Post Templates That Stay On-Brand',
+    'website-speed-core-web-vitals': 'Why Is My Website Slow? Core Web Vitals Explained',
+    'shoot-video-on-your-phone': 'How to Shoot Good Video on Your Phone',
 };
 
 export const site = {
@@ -98,6 +111,15 @@ export const pageSeo = {
         title: 'FAQ: Ad Films and Post-Production | CK Studio',
         description:
             'Answers about CK Studio’s services, AI in film production, timelines, quality and working with clients in Hyderabad and across India.',
+    },
+    glossary: {
+        title: 'Film & Advertising Glossary: Terms Explained | CK Studio',
+        description:
+            'Plain-language meanings of film, ad, post-production, VFX and design terms: DCP, DI, LUT, TVC, ADR, CGI, storyboard, key visual and more.',
+    },
+    tools: {
+        title: 'Free Tools for Video and Ads | CK Studio',
+        description: 'Free tools from CK Studio: a video size and aspect ratio checker and an ad film brief builder. They run in your browser.',
     },
     notFound: {
         title: 'Page Not Found | CK Studio',

@@ -77,6 +77,7 @@ const article: ArticleContent = {
         { type: 'p', text: 'Because screen items are easy to change, keep agenda-dependent information — speaker names, session times — on screens rather than in print where possible.' },
         { type: 'tip', text: 'Ask the AV vendor for the LED wall’s exact pixel resolution, then design every screen graphic to that size. It is the single most common event design mistake.' },
         { type: 'p', text: 'Event branding kits are part of our [design and branding](/services/design-and-branding/) service. [Share your event details](/#enquiry) and we will plan the kit with you.' },
+        { type: 'p', text: 'Related guides: [adapting a key visual for every size](/blog/campaign-adaptations-key-visual/).' },
     ],
     faqs: [
         { q: 'What is an event branding kit?', a: 'A coordinated set of designs — invitations, backdrops, signage, badges, screen graphics and social posts — that gives an event one consistent look.' },

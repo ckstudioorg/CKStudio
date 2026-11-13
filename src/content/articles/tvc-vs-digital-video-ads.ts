@@ -70,6 +70,7 @@ const article: ArticleContent = {
         { type: 'p', text: 'The strongest campaigns use both: TV for reach, digital for targeting and proof, and the learnings from digital to sharpen the next TV spot.' },
         { type: 'tip', text: 'If your budget allows only one, start with digital. You can test messages cheaply, then put the proven one on TV.' },
         { type: 'p', text: 'CK Studio produces [TVCs and digital ad films](/services/ad-films-and-commercials/) in Hyderabad, with every version — TV, YouTube, Reels and cinema — planned from one script.' },
+        { type: 'p', text: 'Related guides: [how to run your ad in cinemas](/blog/cinema-advertising-in-india/) and [testing ad variations](/blog/ai-ad-variations-and-creative-testing/).' },
     ],
     faqs: [
         { q: 'How long is a typical TV ad in India?', a: 'Most TV spots are 10, 20 or 30 seconds long. Thirty seconds is the common hero length, with shorter cuts used to repeat the message more often.' },

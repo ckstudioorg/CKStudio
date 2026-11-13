@@ -2,10 +2,13 @@ import { beforeAll, describe, it, expect } from 'vitest';
 import { existsSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { getPageMeta, headTags, llmsTxt, normalizePath, rssXml, shareImage, sitePaths, sitemapXml } from '../lib/seo';
-import { articles, articleText, headingId, plainText, readingMinutes, type Article } from '../content/blog';
+import { articles, articleText, coverImage, headingId, plainText, readingMinutes, type Article } from '../content/blog';
 import { loadAllArticles } from '../lib/loadArticle';
 import { servicePages } from '../content/servicePages';
 import { footer } from '../content/contact';
+import { glossary } from '../content/glossary';
+import { briefBuilder, sizeChecker, toolList } from '../content/tools';
+import { teServices } from '../content/telugu';
 
 /** Every article whole: its card (content/blog.ts) plus its text (content/articles/<slug>.ts) */
 let full: Article[] = [];
@@ -16,7 +19,8 @@ beforeAll(async () => {
 describe('search engine details', () => {
     it('gives every page its own title and description', async () => {
         const metas = await Promise.all(sitePaths().map(getPageMeta));
-        expect(metas).toHaveLength(3 + articles.length + servicePages.length + 2);
+        // home, blog, FAQ + articles + services + 2 legal pages + glossary and its terms + tools + Telugu home and services
+        expect(metas).toHaveLength(3 + articles.length + servicePages.length + 2 + 1 + glossary.length + 1 + toolList.length + 1 + teServices.length);
         expect(new Set(metas.map((m) => m.title)).size).toBe(metas.length);
         expect(new Set(metas.map((m) => m.description)).size).toBe(metas.length);
         for (const m of metas) {
@@ -92,12 +96,40 @@ describe('search engine details', () => {
             for (const slug of p.articles) if (!articles.some((a) => a.slug === slug)) broken.push(`service ${p.slug} → ${slug}`);
         }
         for (const g of footer.guides.links) if (!pages.has(g.page)) broken.push(`footer → ${g.page}`);
+        for (const column of footer.columns) for (const l of column.links) if (l.page && !pages.has(l.page)) broken.push(`footer → ${l.page}`);
+        for (const t of glossary) {
+            if (t.guide && !pages.has(t.guide.page)) broken.push(`glossary ${t.slug} → ${t.guide.page}`);
+            for (const r of t.related ?? []) if (!glossary.some((g) => g.slug === r)) broken.push(`glossary ${t.slug} → related ${r}`);
+        }
+        for (const page of [sizeChecker.guide.page, briefBuilder.guide.page]) if (!pages.has(page)) broken.push(`tools → ${page}`);
         expect(broken).toEqual([]);
+    });
+
+    it('keeps glossary terms unique, defined and matched to real pages', () => {
+        expect(new Set(glossary.map((t) => t.slug)).size).toBe(glossary.length);
+        expect(new Set(glossary.map((t) => t.term.toLowerCase())).size).toBe(glossary.length);
+        for (const t of glossary) {
+            expect(t.slug).toMatch(/^[a-z0-9-]+$/);
+            expect(t.short.length, t.slug).toBeGreaterThan(60);
+            expect(t.more.length, t.slug).toBeGreaterThan(60);
+        }
+    });
+
+    it('has a Telugu page for every service, linked both ways for search engines', async () => {
+        expect(teServices.map((s) => s.slug).sort()).toEqual(servicePages.map((s) => s.slug).sort());
+        const english = await getPageMeta('/services/vfx-and-cg/');
+        const telugu = await getPageMeta('/te/services/vfx-and-cg/');
+        expect(telugu.lang).toBe('te');
+        expect(headTags(english)).toContain('hreflang="te" href="https://ckstudio.org/te/services/vfx-and-cg/"');
+        expect(headTags(telugu)).toContain('hreflang="en-IN" href="https://ckstudio.org/services/vfx-and-cg/"');
+        expect(headTags(await getPageMeta('/'))).toContain('hreflang="te" href="https://ckstudio.org/te/"');
     });
 
     it('has a link-preview image for every article (run "npm run share-images" after adding one)', async () => {
         const missing = articles.filter((a) => !a.image && !existsSync(join(process.cwd(), 'public', shareImage(a.slug)))).map((a) => a.slug);
         expect(missing).toEqual([]);
+        const noCover = articles.filter((a) => !a.image && !existsSync(join(process.cwd(), 'public', coverImage(a.slug)))).map((a) => a.slug);
+        expect(noCover).toEqual([]);
         expect((await getPageMeta('/blog/ad-film-cost-in-india/')).image).toBe('https://ckstudio.org/images/blog/share/ad-film-cost-in-india.jpg');
     });
 

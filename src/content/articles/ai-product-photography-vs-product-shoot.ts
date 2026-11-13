@@ -65,6 +65,7 @@ const article: ArticleContent = {
         ] },
         { type: 'tip', text: 'Keep a “product truth sheet” with the exact colours, label text and dimensions, and check every AI image against it before publishing.' },
         { type: 'p', text: 'AI photoshoots and product shoots are part of our [ad films and commercials](/services/ad-films-and-commercials/) service. [Tell us what you sell](/#enquiry) and we will suggest the right mix.' },
+        { type: 'p', text: 'Related guides: [product videos for Amazon and Flipkart](/blog/ecommerce-product-videos-amazon-flipkart/), [3D product animation](/blog/3d-product-animation-guide/) and [fashion and saree brand videos](/blog/fashion-and-saree-brand-videos/).' },
     ],
     faqs: [
         { q: 'Are AI product photos allowed on Amazon and Flipkart?', a: 'Marketplaces require images that accurately represent the product, and main images usually need a plain background. Use real, retouched photos for main images, keep AI scenes for secondary images and ads, and check each marketplace’s current image policy.' },

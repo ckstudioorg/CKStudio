@@ -55,6 +55,7 @@ const article: ArticleContent = {
         { type: 'p', text: 'Subtitles make your film accessible to deaf and hard-of-hearing viewers, watchable on mute in offices and on public transport, and understandable to audiences in other languages. On social media, burned-in subtitles also keep viewers watching when sound is off — place them inside the safe area shown in our [video ad sizes cheat sheet](/blog/video-ad-sizes-aspect-ratios-cheat-sheet/).' },
         { type: 'tip', text: 'Burn subtitles into social media cuts, but upload closed caption files on YouTube and for OTT delivery. One video can then serve every language.' },
         { type: 'p', text: 'Subtitles are part of every [OTT delivery](/blog/ott-delivery-specs/) and of many [lyrical videos](/blog/lyrical-videos-turning-a-song-into-a-campaign/). CK Studio creates subtitles and captions in Telugu, Hindi and English — see our [movie post-production](/services/movie-post-production/) service.' },
+        { type: 'p', text: 'Related guides: [dubbing a film for a pan-India release](/blog/film-dubbing-for-pan-india-release/) and [vertical micro-dramas](/blog/vertical-micro-dramas/).' },
     ],
     faqs: [
         { q: 'What is an SRT file?', a: 'A plain-text subtitle file listing each subtitle’s number, start and end time, and text. Most video platforms accept it.' },

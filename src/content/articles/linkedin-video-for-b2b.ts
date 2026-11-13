@@ -50,6 +50,7 @@ const article: ArticleContent = {
         ] },
         { type: 'tip', text: 'Film one long interview with a leader or a client, then cut it into five or six one-minute clips. One shoot day can fill a month of LinkedIn posts.' },
         { type: 'p', text: 'Strong LinkedIn content often starts with a [corporate film](/blog/corporate-film-guide/) or [customer testimonial videos](/blog/customer-testimonial-videos/). CK Studio produces B2B video and manages company social media — see our [social media and web design](/services/social-media-and-web-design/) service.' },
+        { type: 'p', text: 'Related guides: [video podcasts for brands](/blog/video-podcasts-for-brands/), [corporate training and safety videos](/blog/corporate-training-videos/) and [investor pitch videos](/blog/investor-pitch-video-startups/).' },
     ],
     faqs: [
         { q: 'How long should a LinkedIn video be?', a: 'Short enough to hold attention — often under two minutes for feed videos. Longer talks and webinars can work when the topic is valuable to your audience.' },

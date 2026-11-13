@@ -67,6 +67,7 @@ const article: ArticleContent = {
         ] },
         { type: 'tip', text: 'Record ten seconds of silence (“room tone”) at every location. Your sound editor will use it to make dialogue cuts seamless.' },
         { type: 'p', text: 'CK Studio offers editing, colour grading, sound supervision and DCP for independent and debut filmmakers as part of our [movie post-production](/services/movie-post-production/) service.' },
+        { type: 'p', text: 'Related guides: [vertical micro-dramas](/blog/vertical-micro-dramas/), [submitting your film to festivals](/blog/film-festival-submission-guide/) and [making a music video for an independent song](/blog/music-video-production-guide/).' },
     ],
     faqs: [
         { q: 'How long should a short film be?', a: 'Many strong short films run 5 to 15 minutes. Check the length limits of the festivals you plan to enter.' },

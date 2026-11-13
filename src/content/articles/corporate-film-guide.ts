@@ -68,6 +68,7 @@ const article: ArticleContent = {
         ] },
         { type: 'tip', text: 'Write down the one thing a viewer should believe about your company after watching. Cut every shot that does not help them believe it.' },
         { type: 'p', text: 'CK Studio makes corporate films, brand films, investor videos and corporate documentaries as part of our [ad films and commercials](/services/ad-films-and-commercials/) work. See [how to choose a production company](/blog/how-to-choose-an-ad-film-production-company-hyderabad/) or [send us your brief](/#enquiry).' },
+        { type: 'p', text: 'Related guides: [corporate training and safety videos](/blog/corporate-training-videos/), [CSR and NGO impact films](/blog/csr-and-ngo-impact-films/) and [event videography](/blog/event-videography-guide/).' },
     ],
     faqs: [
         { q: 'What is the difference between a corporate film and a brand film?', a: 'A corporate film explains who a company is and what it does, often for partners, investors and recruits. A brand film tells a story about what the brand stands for, usually for customers, and is closer to an ad.' },

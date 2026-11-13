@@ -46,6 +46,7 @@ const article: ArticleContent = {
         { type: 'p', text: 'Our [playbook for local video ads](/blog/video-ads-for-local-businesses-instagram-facebook/) covers targeting and budgets in detail.' },
         { type: 'tip', text: 'Film construction updates from the same spots every month. Side-by-side progress becomes the most convincing proof you can give buyers.' },
         { type: 'p', text: 'CK Studio creates 3D walkthroughs, CGI renders, drone films, brand films and Reels for real estate developers in Hyderabad. See our [VFX and CG works](/services/vfx-and-cg/) or [ask for a quote](/#enquiry).' },
+        { type: 'p', text: 'Related guides: [videos for hotels, resorts and farm stays](/blog/hotel-resort-farm-stay-videos/) and [landing pages for ads](/blog/landing-pages-for-ads/).' },
     ],
     faqs: [
         { q: 'How much does a 3D walkthrough cost?', a: 'It depends on the size of the project, the number of spaces shown, the level of detail and the length. Share your plans and the spaces you want to show for an accurate quote.' },

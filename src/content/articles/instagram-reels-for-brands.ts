@@ -51,6 +51,7 @@ const article: ArticleContent = {
         { type: 'p', text: 'Yes, your best-performing Reels are often your best ads, because they already feel native and have proven they hold attention. Run them as ads with a clear call to action and targeting — see our [playbook for video ads for local businesses](/blog/video-ads-for-local-businesses-instagram-facebook/).' },
         { type: 'tip', text: 'Film five Reels in one session: same location, different ideas and outfits. Batch shooting keeps you consistent without filming every day.' },
         { type: 'p', text: 'CK Studio plans, shoots and edits Reels for brands in Hyderabad — see our [social media and web design](/services/social-media-and-web-design/) service.' },
+        { type: 'p', text: 'Related guides: [video marketing for salons, spas and gyms](/blog/video-marketing-for-salons-spas-gyms/), [UGC ads](/blog/ugc-ads-india/) and [how to shoot good video on your phone](/blog/shoot-video-on-your-phone/).' },
     ],
     faqs: [
         { q: 'How many hashtags should a business Reel use?', a: 'A few relevant ones are enough. A clear hook, a good caption and content people want to share matter far more for reach than hashtags.' },

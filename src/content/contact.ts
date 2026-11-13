@@ -111,6 +111,9 @@ export const footer = {
                 { name: 'Our Work', section: 'portfolio' },
                 { name: 'Blog', page: '/blog/' },
                 { name: 'FAQ', page: '/faq/' },
+                { name: 'Glossary', page: '/glossary/' },
+                { name: 'Free Tools', page: '/tools/' },
+                { name: 'తెలుగు', page: '/te/' },
             ],
         },
         {

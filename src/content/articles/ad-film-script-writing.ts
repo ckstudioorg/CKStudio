@@ -69,6 +69,7 @@ const article: ArticleContent = {
         { type: 'p', text: 'The script becomes a [storyboard](/blog/how-to-make-a-storyboard/), then a shot list, schedule and budget. If you are still at the idea stage, start with a clear brief — our guide to [writing an ad film brief](/blog/how-to-write-an-ad-film-brief/) has a template — and see the full [ad film production process](/blog/ad-film-production-process-step-by-step/).' },
         { type: 'tip', text: 'Read the script aloud with a stopwatch at a relaxed pace, then cut ten per cent. Scripts always read faster in your head than they play on screen.' },
         { type: 'p', text: 'CK Studio writes, produces and finishes ad films in Hyderabad, from the first idea to the final cut — see our [ad films and commercials](/services/ad-films-and-commercials/) service.' },
+        { type: 'p', text: 'Related guides: [writing ad scripts with AI tools](/blog/writing-ad-scripts-with-ai/) and [how to find the big idea for an ad](/blog/how-to-find-the-big-idea-for-an-ad/).' },
     ],
     faqs: [
         { q: 'How long should the script for a 30-second ad be?', a: 'At a natural pace, about 60–70 spoken words, and fewer if the ad relies on visuals and music. Always time it by reading aloud.' },

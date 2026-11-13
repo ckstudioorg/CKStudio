@@ -58,6 +58,7 @@ const article: ArticleContent = {
         ] },
         { type: 'tip', text: 'Never rename camera files or folders after ingest. Matching names and timecode are what make the conform work.' },
         { type: 'p', text: 'For the bigger picture, read [what post-production includes](/blog/what-is-post-production/). CK Studio handles editing, conform, DI, VFX and mastering for films and ads — see our [movie post-production](/services/movie-post-production/) service.' },
+        { type: 'p', text: 'Related guides: [log footage and LUTs](/blog/log-footage-and-luts-explained/), [video file formats and codecs](/blog/video-file-formats-and-codecs/) and [backing up footage with the 3-2-1 rule](/blog/footage-backup-3-2-1-rule/).' },
     ],
     faqs: [
         { q: 'What is picture lock?', a: 'The point at which the edit’s timing is final. After picture lock, VFX, grading, sound and titles can be finished without the timeline changing under them.' },

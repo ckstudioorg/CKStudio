@@ -55,6 +55,7 @@ const article: ArticleContent = {
         { type: 'p', text: 'Jewellery buying peaks around Akshaya Tritiya, Dhanteras and Diwali, Sankranti, Dasara and the wedding seasons. Shoot campaigns six to eight weeks ahead — see our [festival marketing calendar](/blog/festival-marketing-calendar-telangana-andhra/). A strong photo library also powers [catalogues and brochures](/blog/product-catalogue-brochure-design/).' },
         { type: 'tip', text: 'Shoot every piece in a consistent packshot setup the first time. A uniform catalogue looks premium, and new pieces can be added later in the same style.' },
         { type: 'p', text: 'CK Studio shoots jewellery ad films, campaigns and product photography in Hyderabad — see our [ad films and commercials](/services/ad-films-and-commercials/) service.' },
+        { type: 'p', text: 'Related guides: [art direction and set design for ads](/blog/art-direction-and-set-design-for-ads/) and [fashion and saree brand videos](/blog/fashion-and-saree-brand-videos/).' },
     ],
     faqs: [
         { q: 'How do you photograph gold jewellery so it doesn’t look dull?', a: 'Use large, soft light sources and white and black cards to shape reflections, keep colour calibrated so the gold tone is accurate, and clean every piece before shooting.' },

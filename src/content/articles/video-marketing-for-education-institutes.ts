@@ -53,6 +53,7 @@ const article: ArticleContent = {
         ] },
         { type: 'tip', text: 'Film the campus tour from a parent’s point of view: arrival, safety, classrooms, food and transport. That is what parents ask about first.' },
         { type: 'p', text: 'Student and parent stories follow the same principles as [customer testimonial videos](/blog/customer-testimonial-videos/). CK Studio produces admission films, campus tours and ads for education institutes — see our [ad films and commercials](/services/ad-films-and-commercials/) service.' },
+        { type: 'p', text: 'Related guides: [corporate training and safety videos](/blog/corporate-training-videos/) and [video marketing for hospitals and clinics](/blog/healthcare-hospital-video-marketing-india/).' },
     ],
     faqs: [
         { q: 'Can a coaching centre advertise its toppers’ ranks?', a: 'Yes, if the results are genuine and can be substantiated, presented accurately with details such as the exam and year, and with the students’ consent. Avoid implying that every student will achieve the same.' },

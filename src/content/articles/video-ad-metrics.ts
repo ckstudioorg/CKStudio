@@ -51,6 +51,7 @@ const article: ArticleContent = {
         ] },
         { type: 'tip', text: 'Before launch, write down the one number that will tell you the ad worked, and the target. It keeps everyone honest when the reports arrive.' },
         { type: 'p', text: 'Running ads on YouTube? Start with our [YouTube ads guide for small businesses](/blog/youtube-ads-for-small-businesses-india/), and for Instagram and Facebook see [video ads for local businesses](/blog/video-ads-for-local-businesses-instagram-facebook/). CK Studio makes and optimises video ads — see our [social media and web design](/services/social-media-and-web-design/) service.' },
+        { type: 'p', text: 'Related guides: [testing ad variations](/blog/ai-ad-variations-and-creative-testing/) and [landing pages for ads](/blog/landing-pages-for-ads/).' },
     ],
     faqs: [
         { q: 'What is a good view rate for a YouTube ad?', a: 'It varies by format, audience, length and industry, so there is no universal number. Compare your ads with each other and with your own past campaigns, and improve the hook and targeting.' },

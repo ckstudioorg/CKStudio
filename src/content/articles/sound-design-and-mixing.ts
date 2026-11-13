@@ -70,6 +70,7 @@ const article: ArticleContent = {
         ] },
         { type: 'tip', text: 'Check the final mix on a phone speaker. That is where most people will hear your ad — if the words are clear there, they will be clear everywhere.' },
         { type: 'p', text: 'Sound is one stage of the wider [post-production process](/blog/what-is-post-production/), and a good mix starts with a well-recorded [voice-over](/blog/voice-over-for-ads/). CK Studio handles sound design and mixing for ads and films — see our [movie post-production](/services/movie-post-production/) service.' },
+        { type: 'p', text: 'Related guides: [sync sound vs dubbing](/blog/sync-sound-vs-dubbing/) and [how a background score is made](/blog/background-score-for-films/).' },
     ],
     faqs: [
         { q: 'What is foley?', a: 'Foley is the art of re-recording everyday sounds — footsteps, clothes, objects being handled — in sync with the picture, so scenes sound full and real.' },

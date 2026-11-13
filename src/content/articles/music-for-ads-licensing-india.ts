@@ -45,6 +45,7 @@ const article: ArticleContent = {
         ] },
         { type: 'tip', text: 'If your campaign will run for years, commission original music you own. It becomes part of your brand, like your logo.' },
         { type: 'p', text: 'When we make your film, we plan the music route with you and make sure it is licensed for where the ad will run. See our [ad films and commercials](/services/ad-films-and-commercials/) service, [lyrical videos](/blog/lyrical-videos-turning-a-song-into-a-campaign/) and [what is post-production](/blog/what-is-post-production/).' },
+        { type: 'p', text: 'Related guides: [how a background score is made](/blog/background-score-for-films/) and [making a music video for an independent song](/blog/music-video-production-guide/).' },
     ],
     faqs: [
         { q: 'Can I use a Telugu film song in my ad?', a: 'Only with permission from the owners of both the composition and the sound recording, usually through the music label and publisher. Without it, the ad can be taken down and you may face legal claims.' },

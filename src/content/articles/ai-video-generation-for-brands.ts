@@ -56,6 +56,7 @@ const article: ArticleContent = {
         { type: 'p', text: 'Often, for the right idea: there are no locations, crew or sets, and changes are faster. But good AI ads still need direction, many generations, compositing and finishing, so they are not free. For ideas built on real people and real places, a short live shoot plus AI for everything else is often the best value. See [what decides the cost of an ad film](/blog/ad-film-cost-in-india/).' },
         { type: 'tip', text: 'Photograph or 3D-model your product properly once. With a clean, accurate product asset, AI can place it in dozens of scenes without ever changing your label.' },
         { type: 'p', text: 'CK Studio makes AI ad films from script to final cut, finished by our editors and colourists in Hyderabad. See our [ad films and commercials](/services/ad-films-and-commercials/) and [VFX and CG](/services/vfx-and-cg/) services.' },
+        { type: 'p', text: 'Related guides: [AI avatars and digital presenters](/blog/ai-avatars-and-digital-presenters/), [restoring and upscaling old footage with AI](/blog/ai-video-restoration-upscaling/) and [FOOH and CGI billboard ads](/blog/fooh-cgi-ads/).' },
     ],
     faqs: [
         { q: 'Can a full TV ad be made with AI?', a: 'Yes, for many ideas — especially stylised, product-led or concept-driven ones. Ideas that depend on real people, close-up emotion or exact locations usually still benefit from filming.' },

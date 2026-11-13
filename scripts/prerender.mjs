@@ -25,6 +25,10 @@ const pageModule = (url) => {
     if (url === '/faq/') return 'src/pages/FAQ.tsx';
     if (url.startsWith('/services/')) return 'src/pages/ServicePage.tsx';
     if (url === '/privacy/' || url === '/terms/') return 'src/pages/LegalPage.tsx';
+    if (url === '/glossary/') return 'src/pages/Glossary.tsx';
+    if (url.startsWith('/glossary/')) return 'src/pages/GlossaryTerm.tsx';
+    if (url.startsWith('/tools/')) return 'src/pages/Tools.tsx';
+    if (url.startsWith('/te/')) return 'src/pages/Telugu.tsx';
     return 'src/pages/NotFound.tsx';
 };
 const entryKey = Object.keys(manifest).find((k) => manifest[k].isEntry);
@@ -71,6 +75,8 @@ async function savePage(url, file) {
         .replace('<div id="root"></div>', `<div id="root" data-prerendered>${body}</div>`);
     // Home page: the small header logo starts hidden; the hero's scroll animation fades it in
     if (url === '/') html = html.replace('<html lang="en-IN">', '<html lang="en-IN" style="--ck-header-logo:0">');
+    // Telugu pages say so on the page itself (the Telugu text is also marked lang="te" inside the page)
+    if (meta.lang) html = html.replace('<html lang="en-IN">', `<html lang="${meta.lang}">`);
     const out = join(dist, file);
     await mkdir(join(out, '..'), { recursive: true });
     await writeFile(out, html);

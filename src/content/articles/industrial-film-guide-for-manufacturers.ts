@@ -68,6 +68,7 @@ const article: ArticleContent = {
         { type: 'p', text: 'Dealers and farmers in Telangana and Andhra Pradesh may prefer Telugu, buyers elsewhere in India Hindi, and export partners English or their own language. Recording the voice-over in each language from one edit costs little and makes the film far more persuasive. See [AI dubbing and localisation](/blog/ai-dubbing-telugu-hindi-tamil-ads/).' },
         { type: 'tip', text: 'Ask your sales team for the five questions buyers ask most often. Build the film so that it answers all five.' },
         { type: 'p', text: 'CK Studio makes industrial films and corporate documentaries for manufacturers, from planning and shoot to 3D, graphics and language versions. See our [ad films and commercials](/services/ad-films-and-commercials/) service and [VFX and CG works](/services/vfx-and-cg/).' },
+        { type: 'p', text: 'Related guides: [ad films for agri brands](/blog/agri-brand-ad-films-reaching-farmers/), [CSR and NGO impact films](/blog/csr-and-ngo-impact-films/) and [corporate training and safety videos](/blog/corporate-training-videos/).' },
     ],
     faqs: [
         { q: 'How long does it take to film a factory?', a: 'Usually one to two shoot days for a single plant, planned around the production schedule, plus time for interviews, drone shots and any 3D animation.' },
