@@ -66,6 +66,7 @@ const article: ArticleContent = {
         },
         { type: 'tip', text: 'Name files and folders clearly on the shoot day — scene, shot and take. Organised footage can save days in the edit room.' },
         { type: 'p', text: 'CK Studio offers complete [movie post-production](/services/movie-post-production/) — editing, DI, VFX, sound supervision and DCP — as well as finishing for [ad films](/services/ad-films-and-commercials/), from Hyderabad.' },
+        { type: 'p', text: 'Related guides: [log footage and LUTs](/blog/log-footage-and-luts-explained/), [sync sound vs dubbing](/blog/sync-sound-vs-dubbing/) and [how a background score is made](/blog/background-score-for-films/).' },
     ],
     faqs: [
         { q: 'What is the difference between editing and post-production?', a: 'Editing is one part of post-production. Post-production also includes VFX, colour grading, sound design, music, mixing, titles, mastering and delivery.' },

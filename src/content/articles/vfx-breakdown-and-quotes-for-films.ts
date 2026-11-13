@@ -1,0 +1,87 @@
+/** Text of "VFX Breakdowns and Quotes for Films: How to Budget Visual Effects". Its card (title, summary, date, reading time) is in content/blog.ts. */
+import type { ArticleContent } from '../blog';
+
+const article: ArticleContent = {
+    answer: 'A VFX breakdown is a list of every shot in a film that needs visual effects, with what each one involves. Studios use it to quote, usually pricing each shot by its difficulty and length. To get quotes you can compare, prepare the breakdown from the script, add storyboards or previs for complex scenes, send every studio the same document, and agree what is included: the number of revisions, the delivery format and the schedule.',
+    keyPoints: [
+        'The breakdown, not a rough guess, is the basis of a reliable VFX budget.',
+        'Shots are graded by complexity; a few hard shots can outweigh many easy ones.',
+        'Compare quotes on the same shot list and the same assumptions.',
+        'Changes after shots are approved are the main cause of overruns.',
+    ],
+    body: [
+        { type: 'h2', text: 'What is a VFX breakdown?' },
+        { type: 'p', text: 'It is a spreadsheet made by going through the script scene by scene and marking every moment that cannot be captured in camera as it is. Early on it lists scenes and estimated shot counts. After storyboards it becomes more exact. After the edit is locked it becomes the final shot list, with timecodes.' },
+        { type: 'table', head: ['Column', 'Example'], rows: [
+            ['Scene and shot number', 'Sc 42, shot 6'],
+            ['Description', 'Hero jumps between rooftops; city behind'],
+            ['VFX work needed', 'Wire removal, sky and city extension, dust'],
+            ['Method', 'Green screen plus CG background'],
+            ['Complexity', 'Simple / medium / complex'],
+            ['Estimated length', '4 seconds'],
+            ['Assets needed', 'CG city, digital double for the wide shot'],
+            ['Notes', 'Night; rain in the previous shot'],
+        ] },
+        { type: 'h2', text: 'How do VFX studios price the work?' },
+        { type: 'list', items: [
+            '**Per shot** — the most common method, by complexity and length.',
+            '**Assets separately** — a creature, a vehicle or a digital city is built once and priced as an item, then used across shots.',
+            '**Per sequence or lump sum** — for a large body of similar work.',
+            '**Artist days** — for open-ended work such as clean-up, charged by time.',
+        ] },
+        { type: 'p', text: 'The stages inside each shot are described in [the VFX pipeline explained](/blog/vfx-pipeline-explained/).' },
+        { type: 'h2', text: 'What makes a shot simple or complex?' },
+        { type: 'table', head: ['Level', 'Typical work'], rows: [
+            ['Simple', 'Wire or logo removal, screen replacement, a static sky change'],
+            ['Medium', 'Green-screen composites, set extensions with a moving camera, muzzle flashes, added crowds'],
+            ['Complex', 'CG creatures or vehicles, digital doubles, destruction, water, fire, large environments'],
+            ['Very complex', 'Long close-up shots of digital characters, full-CG sequences'],
+        ] },
+        { type: 'p', text: 'Length matters too: a ten-second shot is more than twice the work of a four-second one, and close-ups cost more than wides. See [invisible VFX](/blog/invisible-vfx-cleanup-sky-replacement/) for the simpler categories and [de-ageing and digital doubles](/blog/de-ageing-face-replacement-digital-doubles/) for the hardest.' },
+        { type: 'h2', text: 'How do you get quotes you can compare?' },
+        { type: 'steps', items: [
+            '**Prepare one breakdown** with the director and, ideally, a VFX supervisor.',
+            '**Add references** — storyboards, concept art, previs or films with a similar look.',
+            '**Send the same pack to each studio**, under a confidentiality agreement.',
+            '**Ask them to state assumptions** — shot counts, lengths, resolution, number of revisions.',
+            '**Ask for a schedule** with delivery dates for each sequence.',
+            '**Hold a call** to walk through the complex scenes.',
+            '**Compare line by line**, not only the total.',
+            '**Check past work** of a similar kind and speak to a previous client.',
+        ] },
+        { type: 'h2', text: 'What should the quote and contract cover?' },
+        { type: 'list', items: [
+            '**The shot list** it is based on, attached.',
+            '**Revisions** — how many rounds per shot are included.',
+            '**Resolution and format** of delivery, and the colour workflow.',
+            '**What the production supplies** — plates, scans, on-set data.',
+            '**On-set supervision** — included or charged separately.',
+            '**Schedule and payment stages** linked to deliveries.',
+            '**How new or changed shots are priced** — a rate card for additions.',
+            '**Ownership** of assets and files, and confidentiality.',
+        ] },
+        { type: 'p', text: 'Many of these mirror any production agreement; see [video production contracts](/blog/video-production-contract-checklist/).' },
+        { type: 'h2', text: 'How do you keep VFX within budget?' },
+        { type: 'list', items: [
+            '**Plan on paper first** — previs is far cheaper than finished shots.',
+            '**Design shots for the budget** — a suggestion of a creature in shadow can be stronger than a full view.',
+            '**Shoot properly for VFX** — see [shooting for VFX](/blog/shooting-for-vfx-on-set-checklist/).',
+            '**Lock the edit** before final work begins.',
+            '**Give feedback once per round**, from one voice.',
+            '**Keep a contingency** — some shots always turn out harder than expected.',
+            '**Approve stage by stage** — layout, animation, then lighting; do not wait for the final image to comment on movement.',
+        ] },
+        { type: 'p', text: 'VFX is one line in the overall film budget; [how to make a film or ad budget](/blog/film-and-ad-budget-template/) shows where it sits.' },
+        { type: 'h2', text: 'When should the VFX team join the film?' },
+        { type: 'p', text: 'At script stage for any film where effects are central. Early advice changes how scenes are written and shot, and often removes cost before it exists. For films with light VFX, bring the team in before the shoot schedule is fixed. We provide breakdowns and supervision as part of [VFX and CG](/services/vfx-and-cg/).' },
+        { type: 'tip', text: 'Rank your VFX scenes by importance to the story. If the budget tightens, you will know which shots to protect and which to simplify.' },
+    ],
+    faqs: [
+        { q: 'Can a studio quote from the script alone?', a: 'It can give an estimate, with wide margins. A firm quote needs shot counts and descriptions, which come from storyboards or, best of all, the locked edit.' },
+        { q: 'Why do VFX quotes differ so much between studios?', a: 'Different assumptions about quality, shot counts, revision rounds and methods, as well as different team sizes and overheads. Ask each studio to list its assumptions so you compare like with like.' },
+        { q: 'What is the difference between a VFX supervisor and a VFX producer?', a: 'The supervisor is responsible for how the shots are done and how they look. The producer is responsible for schedule, budget and communication.' },
+        { q: 'Can AI reduce VFX costs?', a: 'It speeds up some tasks such as cut-outs, tracking and clean-up. Complex creative shots still depend on skilled artists and review time; see [AI in post-production](/blog/ai-in-post-production/).' },
+    ],
+};
+
+export default article;

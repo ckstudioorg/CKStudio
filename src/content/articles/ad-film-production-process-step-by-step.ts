@@ -62,6 +62,7 @@ const article: ArticleContent = {
             'Broadcast files for TV channels, or a [DCP for cinema screens](/blog/what-is-a-dcp-cinema-delivery-guide/), if needed',
         ] },
         { type: 'p', text: 'CK Studio handles every stage — from AI ideation and scripting to shoot, editing, colour, VFX and delivery — in Hyderabad. See our [ad films and commercials](/services/ad-films-and-commercials/) service.' },
+        { type: 'p', text: 'Related guides: [how to find the big idea for an ad](/blog/how-to-find-the-big-idea-for-an-ad/), [art direction and set design for ads](/blog/art-direction-and-set-design-for-ads/) and [celebrity ads: contracts and rules](/blog/celebrity-endorsement-ads-india/).' },
     ],
     faqs: [
         { q: 'What is a PPM in ad film production?', a: 'A pre-production meeting where the client, agency and production team confirm the script, cast, locations, wardrobe, props, shot list and schedule before the shoot.' },

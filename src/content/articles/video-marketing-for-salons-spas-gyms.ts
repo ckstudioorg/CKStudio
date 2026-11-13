@@ -1,0 +1,93 @@
+/** Text of "Video Marketing for Salons, Spas and Gyms". Its card (title, summary, date, reading time) is in content/blog.ts. */
+import type { ArticleContent } from '../blog';
+
+const article: ArticleContent = {
+    answer: 'Salons, spas and gyms sell results and atmosphere, and video shows both. The most useful videos are transformations (with the client’s permission), a tour of the space, introductions to stylists and trainers, short how-to tips, client stories and clear offer videos. Post them as reels and shorts, add them to your Google Business Profile, and link each one to an easy way to book. Avoid promising results you cannot guarantee.',
+    keyPoints: [
+        'Before-and-after and “meet the team” videos build the most trust.',
+        'Always get written consent before filming clients.',
+        'Every video should point to one action: book, call or WhatsApp.',
+        'Be careful with results claims, especially for weight loss and skin treatments.',
+    ],
+    body: [
+        { type: 'h2', text: 'Why does video work for these businesses?' },
+        { type: 'list', items: [
+            '**The result is visible** — a haircut, a glow, a stronger body.',
+            '**The choice is personal** — people want to see who will be touching their hair or coaching them.',
+            '**Atmosphere matters** — cleanliness, space, music and mood are hard to describe and easy to show.',
+            '**It is local** — customers come from a few kilometres around, which suits low-cost local promotion.',
+            '**There is always something new** — styles, seasons, classes, offers.',
+        ] },
+        { type: 'h2', text: 'Which videos should you make?' },
+        { type: 'table', head: ['Video', 'What it shows', 'Length'], rows: [
+            ['Transformation', 'Before, a glimpse of the process, the reveal', '15–40 seconds'],
+            ['Space tour', 'Reception, stations or equipment, treatment rooms, hygiene', '30–60 seconds'],
+            ['Meet the team', 'A stylist, therapist or trainer: speciality and approach', '20–40 seconds'],
+            ['Tip or how-to', 'Hair care at home, a stretch, correct form for an exercise', '20–60 seconds'],
+            ['Client story', 'A member or regular client in their own words', '30–90 seconds'],
+            ['Service explainer', 'What a treatment or class involves, who it suits, how long', '30–60 seconds'],
+            ['Offer or event', 'Festival packages, bridal bookings, new batch dates', '10–20 seconds'],
+            ['Day in the life', 'Opening up, a busy evening, a class in full flow', '20–40 seconds'],
+        ] },
+        { type: 'p', text: 'For how to shoot, pace and caption these, see [Instagram Reels for brands](/blog/instagram-reels-for-brands/). Client stories are covered in [customer testimonial videos](/blog/customer-testimonial-videos/).' },
+        { type: 'h2', text: 'How do you film in a salon, spa or gym?' },
+        { type: 'list', items: [
+            '**Mirrors** — stand at an angle so the camera and crew are not reflected.',
+            '**Light** — salon lighting is often good for faces; in gyms, film near windows or add a soft light.',
+            '**Sound** — hairdryers and gym music drown speech; record voice in a quiet corner or add it afterwards.',
+            '**Music** — the songs playing in your space are not cleared for your videos; use the platform’s library or licensed tracks.',
+            '**Other customers** — keep them out of frame or ask first.',
+            '**Tidy first** — clean stations, folded towels, weights racked.',
+            '**Film during real activity** — an empty gym feels lifeless; a quiet hour with a few willing members is ideal.',
+            '**Spa content** — keep it calm and respectful; show hands, spaces and details, never anything that compromises a guest’s privacy.',
+        ] },
+        { type: 'p', text: 'Most of this can be done on a phone; see [shooting good video on your phone](/blog/shoot-video-on-your-phone/). A professional shoot once a quarter gives you a tour film and polished pieces for ads.' },
+        { type: 'h2', text: 'What consent do you need?' },
+        { type: 'steps', items: [
+            '**Ask before filming**, not after.',
+            '**Explain where the video will be used** — Instagram, ads, your website.',
+            '**Get it in writing** — a simple signed form or a clear message.',
+            '**Take extra care with minors** — a parent’s or guardian’s consent.',
+            '**Honour withdrawals** — if someone later asks for a video to be removed, remove it.',
+            '**Never film in changing areas or treatment rooms** without explicit agreement, and never without the person knowing.',
+        ] },
+        { type: 'h2', text: 'What should you be careful about claiming?' },
+        { type: 'list', items: [
+            '**Results vary** — do not promise a specific weight loss, inch loss or skin outcome in a fixed time.',
+            '**Real, unedited before-and-afters** — same light, same angle, no retouching.',
+            '**Medical-style claims** — treatments that claim to cure or treat conditions fall under stricter rules; see [video marketing for hospitals and clinics](/blog/healthcare-hospital-video-marketing-india/).',
+            '**Qualifications** — state trainers’ and therapists’ certifications accurately.',
+            '**Paid promotions** — creators you pay or host for free must disclose it; see [influencer marketing in India](/blog/influencer-marketing-india-guide/).',
+        ] },
+        { type: 'p', text: 'Advertising in India is expected to be honest and supportable under consumer protection law and the ASCI code. This is general information, not legal advice.' },
+        { type: 'h2', text: 'Where should the videos go?' },
+        { type: 'table', head: ['Place', 'Use it for'], rows: [
+            ['Instagram Reels and Stories', 'Transformations, tips, daily life, offers'],
+            ['YouTube Shorts and longer videos', 'How-tos and tours people search for'],
+            ['Google Business Profile', 'Tour, team and result videos beside your reviews; see our [Google Business Profile guide](/blog/google-business-profile-guide-hyderabad/)'],
+            ['WhatsApp Status and broadcasts', 'Offers and reminders to existing clients; see [video on WhatsApp Business](/blog/whatsapp-business-video-marketing/)'],
+            ['Paid local ads', 'A strong reel shown to people nearby; see [video ads for local businesses](/blog/video-ads-for-local-businesses-instagram-facebook/)'],
+            ['In-store screens', 'Services and packages while clients wait'],
+        ] },
+        { type: 'h2', text: 'How do you turn views into bookings?' },
+        { type: 'list', items: [
+            '**One action per video** — “Book on WhatsApp”, spoken and written.',
+            '**A link that works** — bio link to a booking page or WhatsApp with a pre-filled message.',
+            '**Reply fast** to comments and messages.',
+            '**Name the area** in captions so local people find you.',
+            '**Ask happy clients for a Google review** on the day.',
+            '**Track where bookings came from** — a simple “How did you hear about us?”.',
+        ] },
+        { type: 'h2', text: 'What is a workable monthly plan?' },
+        { type: 'p', text: 'Aim for two or three videos a week: one transformation or result, one tip or team piece, one offer or atmosphere piece. Film in batches on a quiet morning and schedule ahead; our [social media content calendar](/blog/social-media-content-calendar/) has a template. If time is short, see [agency or in-house?](/blog/social-media-agency-vs-in-house/). We plan and produce this kind of content as part of [social media and web design](/services/social-media-and-web-design/).' },
+        { type: 'tip', text: 'Keep a consent form and a phone tripod at the reception desk. The best transformation of the week usually happens when nobody planned to film.' },
+    ],
+    faqs: [
+        { q: 'Can I post before-and-after videos of clients?', a: 'Yes, with their clear consent, and provided the results are real and shown honestly. Avoid implying that everyone will get the same outcome.' },
+        { q: 'Can I use trending songs in my salon or gym reels?', a: 'Use the music the platform offers to business accounts, or licensed tracks. Popular songs added outside those libraries can lead to videos being muted or removed.' },
+        { q: 'How often should a salon or gym post?', a: 'Two or three good videos a week, kept up steadily, is better than daily posts for a fortnight followed by silence.' },
+        { q: 'Should the owner appear on camera?', a: 'If they are comfortable, yes. A familiar face builds trust in a personal-service business. Stylists and trainers with their own following help too.' },
+    ],
+};
+
+export default article;

@@ -63,6 +63,7 @@ const article: ArticleContent = {
         { type: 'p', text: 'A teaser can usually be cut in days; a trailer often takes one to two weeks of cutting, reviews and finishing, especially when it must be ready in several languages.' },
         { type: 'tip', text: 'Never put the film’s best twist in the trailer. Sell the question, not the answer.' },
         { type: 'p', text: 'CK Studio cuts teasers, trailers, promos and lyrical videos, including our work on the [Baali movie teaser](https://www.youtube.com/watch?v=MIL0vVMcZ9k). See our [movie post-production](/services/movie-post-production/) service.' },
+        { type: 'p', text: 'Related guides: [title sequence and end credits design](/blog/title-sequence-end-credits-design/) and [submitting your film to festivals](/blog/film-festival-submission-guide/).' },
     ],
     faqs: [
         { q: 'What is the difference between a teaser and a trailer?', a: 'A teaser is short and mysterious, built to create curiosity. A trailer is longer and explains the story, characters and stakes to convince people to watch the film.' },

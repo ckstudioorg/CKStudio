@@ -53,6 +53,7 @@ const article: ArticleContent = {
         ] },
         { type: 'tip', text: 'Bring your VFX team in at the storyboard stage. A shot planned for VFX can cost a fraction of the same shot fixed after the shoot.' },
         { type: 'p', text: 'VFX is one part of [post-production](/blog/what-is-post-production/) and starts with a good [storyboard](/blog/how-to-make-a-storyboard/). CK Studio delivers compositing, CG and AI-assisted effects for ads and films — see our [VFX and CG](/services/vfx-and-cg/) service.' },
+        { type: 'p', text: 'Related guides: [VFX breakdowns and quotes for films](/blog/vfx-breakdown-and-quotes-for-films/), [invisible VFX: clean-up and sky replacement](/blog/invisible-vfx-cleanup-sky-replacement/) and [de-ageing, face replacement and digital doubles](/blog/de-ageing-face-replacement-digital-doubles/).' },
     ],
     faqs: [
         { q: 'What is previs?', a: 'Previsualisation is a rough animated version of complex shots made before the shoot. It decides camera moves, timing and what must be filmed versus created in VFX.' },

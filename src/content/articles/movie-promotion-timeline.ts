@@ -64,6 +64,7 @@ const article: ArticleContent = {
         { type: 'p', text: 'Trailers and promos shown in cinemas need [CBFC certification](/blog/cbfc-certification-guide/), and the film needs its certificate before release. Cinemas need [DCPs](/blog/what-is-a-dcp-cinema-delivery-guide/) in time for testing. Put both in the promotion calendar with buffers — they are the deadlines that cannot move.' },
         { type: 'tip', text: 'Make a one-page campaign calendar that shows every asset, its release date, the person responsible and its certification status. Share it with the whole team every week.' },
         { type: 'p', text: 'CK Studio supports films from [pre-looks and pitch decks](/blog/ai-pre-looks-and-pre-teasers-for-movies/) to teasers, trailers, lyrical videos, publicity designs, DI and DCP. See our [movie post-production](/services/movie-post-production/) service.' },
+        { type: 'p', text: 'Related guides: [title sequence and end credits design](/blog/title-sequence-end-credits-design/), [submitting your film to festivals](/blog/film-festival-submission-guide/) and [vertical micro-dramas](/blog/vertical-micro-dramas/).' },
     ],
     faqs: [
         { q: 'When should film promotion start?', a: 'Ideally two to three months before release, with the title announcement and first look; bigger films often start earlier.' },

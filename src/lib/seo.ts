@@ -4,7 +4,7 @@
  * and in the browser (components/SEO.tsx updates them when the visitor moves between pages).
  * Article cards come from content/blog.ts; an article's text (for its structured data) is loaded only for its own page.
  */
-import { articleText, articles, plainText } from '../content/blog';
+import { articleText, articles, coverImage, plainText } from '../content/blog';
 import { loadAllArticles, loadArticle } from './loadArticle';
 import { contact } from '../content/contact';
 import { faqs } from '../content/faq';
@@ -12,6 +12,9 @@ import { services } from '../content/services';
 import { areaServed, articleSearchTitles, pageSeo, site } from '../content/seo';
 import { servicePages } from '../content/servicePages';
 import { legalPages } from '../content/legal';
+import { glossary, glossaryPage, sortedGlossary } from '../content/glossary';
+import { toolList } from '../content/tools';
+import { teHome, teServices } from '../content/telugu';
 
 import { normalizePath, paths } from './paths';
 
@@ -25,6 +28,10 @@ export interface PageMeta {
     image: string;
     imageAlt: string;
     noindex?: boolean;
+    /** Page language when it is not English ('te' for the Telugu pages) */
+    lang?: string;
+    /** The same page in other languages, for search engines (hreflang) */
+    alternates?: { lang: string; path: string }[];
     published?: string;
     modified?: string;
     tags?: string[];
@@ -116,6 +123,19 @@ const graph = (...nodes: object[]) => [{ '@context': 'https://schema.org', '@gra
 
 const base = { type: 'website' as const, image: site.image, imageAlt: site.imageAlt };
 
+/** A page and its Telugu version, told to search engines both ways round */
+const languagePair = (english: string, telugu: string) => [
+    { lang: 'en-IN', path: english },
+    { lang: 'te', path: telugu },
+    { lang: 'x-default', path: english },
+];
+
+/** Glossary term title for search results, with " | CK Studio" when it fits */
+const termTitle = (term: string) => {
+    const title = `${term}: Meaning in Film & Advertising`;
+    return `${title} | CK Studio`.length <= 60 ? `${title} | CK Studio` : title;
+};
+
 /**
  * The search details for any address on the site. Unknown addresses get the "not found" details.
  * Waits for the article's text on article pages (its quick answer, FAQs, sources and word count).
@@ -124,7 +144,113 @@ export async function getPageMeta(pathname: string): Promise<PageMeta> {
     const path = normalizePath(pathname);
 
     if (path === paths.home) {
-        return { ...base, ...pageSeo.home, path, jsonLd: graph(business, website) };
+        return { ...base, ...pageSeo.home, path, alternates: languagePair(paths.home, paths.te), jsonLd: graph(business, website) };
+    }
+
+    if (path === paths.te) {
+        return {
+            ...base, title: teHome.seoTitle, description: teHome.seoDescription, path, lang: 'te',
+            alternates: languagePair(paths.home, paths.te),
+            jsonLd: graph(
+                { '@type': 'WebPage', '@id': `${absolute(path)}#page`, name: teHome.seoTitle, description: teHome.seoDescription, url: absolute(path), inLanguage: 'te', isPartOf: { '@id': websiteId }, about: { '@id': businessId } },
+                {
+                    '@type': 'FAQPage',
+                    '@id': `${absolute(path)}#faq`,
+                    inLanguage: 'te',
+                    mainEntity: teHome.faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+                },
+                business,
+            ),
+        };
+    }
+
+    const teService = teServices.find((s) => path === paths.teService(s.slug));
+    if (teService) {
+        return {
+            ...base, title: teService.seoTitle, description: teService.seoDescription, path, lang: 'te',
+            alternates: languagePair(paths.service(teService.slug), path),
+            jsonLd: graph(
+                {
+                    '@type': 'Service',
+                    '@id': `${absolute(path)}#service`,
+                    name: teService.name,
+                    description: teService.seoDescription,
+                    url: absolute(path),
+                    inLanguage: 'te',
+                    provider: { '@id': businessId },
+                    areaServed: areaServed.map((name) => ({ '@type': 'Place', name })),
+                },
+                breadcrumbs([{ name: 'తెలుగు', path: paths.te }, { name: teService.name, path }]),
+                business,
+            ),
+        };
+    }
+
+    if (path === paths.glossary) {
+        return {
+            ...base, ...pageSeo.glossary, path,
+            jsonLd: graph(
+                {
+                    '@type': 'DefinedTermSet',
+                    '@id': `${absolute(path)}#glossary`,
+                    name: 'CK Studio Film & Advertising Glossary',
+                    description: glossaryPage.intro,
+                    url: absolute(path),
+                    hasDefinedTerm: sortedGlossary.map((t) => ({ '@type': 'DefinedTerm', name: t.term, description: t.short, url: absolute(paths.term(t.slug)) })),
+                },
+                breadcrumbs([{ name: 'Glossary', path }]),
+                business,
+            ),
+        };
+    }
+
+    const term = glossary.find((t) => path === paths.term(t.slug));
+    if (term) {
+        return {
+            ...base,
+            title: termTitle(term.term),
+            description: clip(term.short),
+            path,
+            jsonLd: graph(
+                {
+                    '@type': 'DefinedTerm',
+                    '@id': `${absolute(path)}#term`,
+                    name: term.term,
+                    ...(term.aka ? { alternateName: term.aka.split(', ') } : {}),
+                    description: `${term.short} ${term.more}`,
+                    url: absolute(path),
+                    inDefinedTermSet: `${absolute(paths.glossary)}#glossary`,
+                },
+                breadcrumbs([{ name: 'Glossary', path: paths.glossary }, { name: term.term, path }]),
+                business,
+            ),
+        };
+    }
+
+    if (path === paths.tools) {
+        return { ...base, ...pageSeo.tools, path, jsonLd: graph(breadcrumbs([{ name: 'Free Tools', path }]), business) };
+    }
+
+    const tool = toolList.find((t) => path === paths.tool(t.slug));
+    if (tool) {
+        return {
+            ...base, title: tool.seoTitle, description: tool.seoDescription, path,
+            jsonLd: graph(
+                {
+                    '@type': 'WebApplication',
+                    '@id': `${absolute(path)}#tool`,
+                    name: tool.name,
+                    description: tool.seoDescription,
+                    url: absolute(path),
+                    applicationCategory: 'UtilitiesApplication',
+                    operatingSystem: 'Any (web browser)',
+                    offers: { '@type': 'Offer', price: '0', priceCurrency: 'INR' },
+                    provider: { '@id': businessId },
+                },
+                breadcrumbs([{ name: 'Free Tools', path: paths.tools }, { name: tool.name, path }]),
+                business,
+            ),
+        };
     }
 
     if (path === paths.blog) {
@@ -189,7 +315,8 @@ export async function getPageMeta(pathname: string): Promise<PageMeta> {
                     headline: post.title,
                     description: post.excerpt,
                     ...(post.answer ? { abstract: plainText(post.answer) } : {}),
-                    image,
+                    // The title card and, when the article has no photo of its own, its cover illustration
+                    image: post.image ? image : [image, absolute(coverImage(post.slug))],
                     datePublished: post.date,
                     dateModified: post.updated ?? post.date,
                     inLanguage: 'en-IN',
@@ -222,6 +349,7 @@ export async function getPageMeta(pathname: string): Promise<PageMeta> {
             title: service.seoTitle,
             description: service.seoDescription,
             path,
+            alternates: teServices.some((s) => s.slug === service.slug) ? languagePair(path, paths.teService(service.slug)) : undefined,
             jsonLd: graph(
                 {
                     '@type': 'Service',
@@ -278,6 +406,12 @@ export function sitePaths(): string[] {
         paths.blog,
         ...articles.map((a) => paths.post(a.slug)),
         paths.faq,
+        paths.glossary,
+        ...sortedGlossary.map((t) => paths.term(t.slug)),
+        paths.tools,
+        ...toolList.map((t) => paths.tool(t.slug)),
+        paths.te,
+        ...teServices.map((s) => paths.teService(s.slug)),
         ...legalPages.map((p) => paths.legal(p.slug)),
     ];
 }
@@ -298,9 +432,10 @@ export function headTags(meta: PageMeta): string {
         metaName('description', meta.description),
         metaName('robots', meta.noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'),
         ...(meta.noindex ? [] : [tag('link', { rel: 'canonical', href: url })]),
+        ...(meta.alternates ?? []).map((a) => tag('link', { rel: 'alternate', hreflang: a.lang, href: absolute(a.path) })),
         metaProp('og:type', meta.type),
         metaProp('og:site_name', site.name),
-        metaProp('og:locale', site.locale),
+        metaProp('og:locale', meta.lang === 'te' ? 'te_IN' : site.locale),
         metaProp('og:url', url),
         metaProp('og:title', meta.title),
         metaProp('og:description', meta.description),
@@ -358,6 +493,9 @@ export async function llmsTxt(): Promise<string> {
         '',
         '## More',
         `- [Frequently asked questions](${absolute(paths.faq)})`,
+        `- [Glossary of film, advertising, post-production, VFX and design terms](${absolute(paths.glossary)})`,
+        ...toolList.map((t) => `- [${t.name} (free tool)](${absolute(paths.tool(t.slug))}): ${t.summary}`),
+        `- [CK Studio in Telugu (తెలుగు)](${absolute(paths.te)})`,
         `- [Blog](${absolute(paths.blog)})`,
         `- [Project enquiry form](${site.url}/#enquiry)`,
         `- [Blog feed (RSS)](${site.url}/feed.xml)`,

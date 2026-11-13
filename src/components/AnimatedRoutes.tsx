@@ -20,6 +20,10 @@ const BlogPost = lazy(() => import('../pages/BlogPost'));
 const FAQ = lazy(() => import('../pages/FAQ'));
 const ServicePage = lazy(() => import('../pages/ServicePage'));
 const LegalPage = lazy(() => import('../pages/LegalPage'));
+const Glossary = lazy(() => import('../pages/Glossary'));
+const GlossaryTerm = lazy(() => import('../pages/GlossaryTerm'));
+const Tools = lazy(() => import('../pages/Tools'));
+const Telugu = lazy(() => import('../pages/Telugu'));
 
 /** Header + page + footer, shared by every page except the home page and 404 */
 const SubPage: React.FC<{ active: string; children: React.ReactNode }> = ({ active, children }) => (
@@ -107,6 +111,13 @@ const AnimatedRoutes: React.FC = () => {
                 <Route path="/services/:slug" element={<SubPage active="services"><ServicePage /></SubPage>} />
                 <Route path="/privacy" element={<SubPage active=""><LegalPage slug="privacy" /></SubPage>} />
                 <Route path="/terms" element={<SubPage active=""><LegalPage slug="terms" /></SubPage>} />
+                <Route path="/glossary" element={<SubPage active=""><Glossary /></SubPage>} />
+                <Route path="/glossary/:slug" element={<SubPage active=""><GlossaryTerm /></SubPage>} />
+                <Route path="/tools" element={<SubPage active=""><Tools /></SubPage>} />
+                <Route path="/tools/video-size-checker" element={<SubPage active=""><Tools slug="video-size-checker" /></SubPage>} />
+                <Route path="/tools/ad-brief-builder" element={<SubPage active=""><Tools slug="ad-brief-builder" /></SubPage>} />
+                <Route path="/te" element={<SubPage active=""><Telugu /></SubPage>} />
+                <Route path="/te/services/:slug" element={<SubPage active="services"><Telugu /></SubPage>} />
                 <Route path="*" element={
                     <PageTransition>
                         <NotFound />

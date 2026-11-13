@@ -61,6 +61,7 @@ const article: ArticleContent = {
         { type: 'p', text: 'A logo is the start of a brand, not the whole of it. Most new businesses also need visiting cards, letterhead, a presentation template, brochures and social media templates that use the logo consistently — see our guide to the [company start package](/blog/company-start-package-brand-essentials/). For video, an [animated version of the logo](/blog/logo-animation-guide/) makes intros and outros feel finished.' },
         { type: 'tip', text: 'Before approving a logo, print it the size of a visiting card and look at it from across the room. If you cannot recognise it, simplify it.' },
         { type: 'p', text: 'CK Studio designs logos and complete brand kits as part of our [design and branding](/services/design-and-branding/) service in Hyderabad. [Tell us about your business](/#enquiry) to start.' },
+        { type: 'p', text: 'Related guides: [how to trademark your logo in India](/blog/trademark-your-logo-india/) and [adapting a key visual for every size](/blog/campaign-adaptations-key-visual/).' },
     ],
     faqs: [
         { q: 'How long does it take to design a logo?', a: 'Usually one to three weeks, depending on research, the number of directions and how quickly feedback comes back.' },

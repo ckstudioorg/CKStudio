@@ -65,6 +65,7 @@ const article: ArticleContent = {
         ] },
         { type: 'tip', text: 'Ask your original voice artist to record the lines in every language they speak fluently. Real multilingual voices often beat synthetic ones for the hero version, and AI can cover the rest.' },
         { type: 'p', text: 'CK Studio delivers ads and [lyrical videos](/blog/lyrical-videos-turning-a-song-into-a-campaign/) in Telugu, Hindi, English and other languages, from script adaptation to the final mix. Talk to us through our [enquiry form](/#enquiry).' },
+        { type: 'p', text: 'Related guides: [dubbing a film for a pan-India release](/blog/film-dubbing-for-pan-india-release/) and [AI avatars and digital presenters](/blog/ai-avatars-and-digital-presenters/).' },
     ],
     faqs: [
         { q: 'Is AI dubbing good enough for TV ads?', a: 'For voice-over-led ads, often yes, after human direction and review. For close-up dialogue, lip-sync quality varies, so many brands use real voice artists for the hero language and AI for additional versions.' },

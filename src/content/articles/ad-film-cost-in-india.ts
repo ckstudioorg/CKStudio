@@ -70,6 +70,7 @@ const article: ArticleContent = {
             'Whether taxes such as GST are included',
         ] },
         { type: 'p', text: 'At CK Studio we plan ad films end to end — script, AI or live production, editing, colour, VFX and final delivery — from Hyderabad. See our [ad films and commercials](/services/ad-films-and-commercials/) service, or [tell us about your project](/#enquiry) for a quote.' },
+        { type: 'p', text: 'Related guides: [how to choose an ad film production company](/blog/how-to-choose-an-ad-film-production-company-hyderabad/), [celebrity ads: contracts and rules](/blog/celebrity-endorsement-ads-india/) and [art direction and set design for ads](/blog/art-direction-and-set-design-for-ads/).' },
     ],
     faqs: [
         { q: 'What is the cheapest way to make an ad film?', a: 'A tight 15–30 second script, one location or a studio, a small crew and a single shoot day. For product-led or stylised ideas, an AI-led ad film with no shoot at all can cost less still. Planning every version at the start avoids paying for re-edits later.' },

@@ -1,0 +1,88 @@
+/** Text of "Landing Pages for Ads: Turn Clicks into Enquiries". Its card (title, summary, date, reading time) is in content/blog.ts. */
+import type { ArticleContent } from '../blog';
+
+const article: ArticleContent = {
+    answer: 'A landing page is a single web page built for one ad and one action: call, WhatsApp, fill in a form or buy. It repeats the promise made in the ad, shows proof, answers the main doubts and asks for that one action, with nothing else to distract. Sending ad traffic to a focused page usually works better than sending it to a home page, because the visitor finds exactly what they clicked for.',
+    keyPoints: [
+        'One page, one audience, one offer, one action.',
+        'The headline must match the ad the visitor just clicked.',
+        'Short forms and a tap-to-WhatsApp button lift enquiries.',
+        'Measure enquiries, not clicks, and test one change at a time.',
+    ],
+    body: [
+        { type: 'h2', text: 'How is a landing page different from a home page?' },
+        { type: 'table', head: ['', 'Home page', 'Landing page'], rows: [
+            ['Purpose', 'Introduce the whole business', 'Get one specific action'],
+            ['Audience', 'Everyone', 'People who clicked one ad'],
+            ['Content', 'All services, many links', 'One offer, explained fully'],
+            ['Navigation', 'Full menu', 'Little or none'],
+            ['Success', 'Visitors explore', 'Visitors enquire or buy'],
+        ] },
+        { type: 'p', text: 'A visitor who clicked “Farm stay weekend offer” and lands on a general home page has to hunt for the offer. Many will not.' },
+        { type: 'h2', text: 'What goes on a landing page, in order?' },
+        { type: 'steps', items: [
+            '**Headline** — the same promise as the ad, in the same words.',
+            '**One supporting line** — who it is for and what they get.',
+            '**A picture or short video** of the product, place or result.',
+            '**The action button** — visible without scrolling: “WhatsApp us”, “Get a quote”, “Book now”.',
+            '**Benefits** — three to five, written from the customer’s side.',
+            '**Proof** — reviews, client logos, numbers you can support, photos of real work.',
+            '**How it works** — three simple steps.',
+            '**Offer details** — price or starting price, what is included, dates and terms.',
+            '**Questions and answers** — the doubts that stop people enquiring.',
+            '**The action again** — the same button, repeated.',
+            '**Contact and legal** — business name, address, privacy policy link.',
+        ] },
+        { type: 'h2', text: 'How do you make the action easy?' },
+        { type: 'list', items: [
+            '**Ask for less** — name and phone number are often enough. Every extra field loses people.',
+            '**Offer WhatsApp** — one tap, with a pre-filled message naming the offer.',
+            '**Tap-to-call** on phones.',
+            '**Say what happens next** — “We reply within an hour, 9 am to 8 pm”.',
+            '**Keep the button visible** — a bar fixed at the bottom of the phone screen.',
+            '**Thank them** — a confirmation page or message, so they know it worked.',
+        ] },
+        { type: 'p', text: 'Many ad platforms also offer built-in lead forms and click-to-WhatsApp ads that skip the website. They can bring more enquiries at lower cost; a landing page tends to bring better-informed ones. Try both.' },
+        { type: 'h2', text: 'What role does video play?' },
+        { type: 'p', text: 'A short video near the top lets visitors see the product or place quickly. Keep it under a minute, start it muted or on tap, add captions and use a light poster image so the page stays fast. Customer stories work well lower down; see [customer testimonial videos](/blog/customer-testimonial-videos/). The video in the ad and the video on the page should feel like the same campaign.' },
+        { type: 'h2', text: 'Why does speed matter so much here?' },
+        { type: 'p', text: 'You have paid for every click. If the page takes too long on mobile data, some of those visitors leave before it appears. Keep images compressed, avoid heavy add-ons and test on a phone; [why is my website slow?](/blog/website-speed-core-web-vitals/) explains the checks.' },
+        { type: 'h2', text: 'How do you measure and improve it?' },
+        { type: 'table', head: ['Number', 'What it means'], rows: [
+            ['Visits', 'People who arrived from the ad'],
+            ['Conversion rate', 'Share of visitors who enquired or bought'],
+            ['Cost per enquiry', 'Ad spend divided by enquiries'],
+            ['Enquiry quality', 'How many were serious; ask whoever answers them'],
+            ['Cost per sale', 'Ad spend divided by actual sales'],
+        ] },
+        { type: 'p', text: 'Set up tracking for button taps and form submissions before the ads start. Then test one thing at a time: the headline, the first image, the button wording, the form length. See [testing ad variations](/blog/ai-ad-variations-and-creative-testing/) and [video ad metrics](/blog/video-ad-metrics/).' },
+        { type: 'h2', text: 'What must the page be honest about?' },
+        { type: 'list', items: [
+            '**The offer on the page matches the ad** — same price, same terms.',
+            '**No fake urgency** — countdown timers and “only 2 left” should be true.',
+            '**Real reviews and results** only.',
+            '**A privacy policy** that says how you use the details people give, and consent before sending marketing messages. India’s data protection law places duties on businesses that collect personal data.',
+            '**Platform rules** — ad platforms check landing pages; misleading pages get ads rejected.',
+        ] },
+        { type: 'h2', text: 'What are the common mistakes?' },
+        { type: 'list', items: [
+            '**Sending ads to the home page**.',
+            '**A headline that does not match the ad**.',
+            '**Several competing buttons** — call, download, subscribe, follow.',
+            '**Long forms**.',
+            '**No proof**.',
+            '**Not checking the page on a phone**.',
+            '**No one answering enquiries quickly** — the best page cannot fix a slow reply.',
+        ] },
+        { type: 'p', text: 'For running the ads themselves, see [video ads for local businesses on Instagram and Facebook](/blog/video-ads-for-local-businesses-instagram-facebook/) and [YouTube ads for small businesses](/blog/youtube-ads-for-small-businesses-india/). We build landing pages as part of [social media and web design](/services/social-media-and-web-design/).' },
+        { type: 'tip', text: 'Read the ad and then the top of the landing page aloud, one after the other. If they do not sound like the same sentence continuing, rewrite the headline.' },
+    ],
+    faqs: [
+        { q: 'Do I need a separate landing page for every ad?', a: 'One for each distinct offer or audience is ideal. Several ads with the same promise can share a page; ads with different promises should not.' },
+        { q: 'Should a landing page have a menu?', a: 'Usually not, or only a minimal one. Links to other pages lead visitors away from the action you are paying for.' },
+        { q: 'How long should a landing page be?', a: 'As long as it takes to answer a buyer’s doubts. A simple, low-cost offer needs a short page; a costly or unfamiliar service needs more proof and explanation.' },
+        { q: 'What is a good conversion rate?', a: 'It varies widely by industry, offer and traffic source, so compare against your own past results. The aim is steady improvement in cost per genuine enquiry.' },
+    ],
+};
+
+export default article;

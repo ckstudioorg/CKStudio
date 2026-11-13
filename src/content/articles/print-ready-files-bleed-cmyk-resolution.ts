@@ -1,0 +1,90 @@
+/** Text of "Print-Ready Files: Bleed, CMYK and Resolution Explained". Its card (title, summary, date, reading time) is in content/blog.ts. */
+import type { ArticleContent } from '../blog';
+
+const article: ArticleContent = {
+    answer: 'A print-ready file is artwork a printer can use without fixing anything. It is the exact finished size, has extra background (bleed, commonly 3 mm) beyond the cut line, keeps text inside a safe margin, uses CMYK colour, has images at about 300 pixels per inch at printed size, and has fonts embedded or converted to outlines. It is normally supplied as a PDF with crop marks. Always confirm the exact requirements with your printer first.',
+    keyPoints: [
+        'Bleed stops white slivers at the edge after cutting.',
+        'Screens use RGB; presses use CMYK, so colours shift unless planned.',
+        '300 ppi at final size for hand-held print; large formats need less.',
+        'Ask the printer for their specification before design starts.',
+    ],
+    body: [
+        { type: 'h2', text: 'What makes a file “print-ready”?' },
+        { type: 'table', head: ['Check', 'What it means'], rows: [
+            ['Size', 'The document is the exact trimmed size of the finished piece'],
+            ['Bleed', 'Background colour and images extend beyond the trim edge'],
+            ['Safe margin', 'Text and logos sit well inside the trim edge'],
+            ['Colour', 'CMYK, plus any spot (Pantone) colours the job needs'],
+            ['Images', 'High enough resolution at the size they will print'],
+            ['Fonts', 'Embedded in the PDF or converted to outlines'],
+            ['Black', 'Small text in pure black; large black areas as the printer advises'],
+            ['Marks', 'Crop marks to show where to cut'],
+            ['Format', 'A print-quality PDF (often a PDF/X standard)'],
+        ] },
+        { type: 'h2', text: 'What are bleed, trim and safe area?' },
+        { type: 'p', text: 'Printers print on larger sheets and cut them down. Cutting is accurate but not perfect, and the blade can land a fraction of a millimetre either way.' },
+        { type: 'list', items: [
+            '**Trim line** — where the piece is meant to be cut; the finished size.',
+            '**Bleed** — background that continues past the trim line, commonly 3 mm on each side for small print. If the cut drifts outward, colour is still there instead of a white edge.',
+            '**Safe area** — an inner margin, often 3 to 5 mm inside the trim, where nothing important is placed. If the cut drifts inward, text is not sliced.',
+        ] },
+        { type: 'p', text: 'Large pieces need more: banners and hoardings may need wide margins for stitching, eyelets or frames. See [hoarding and outdoor ad design](/blog/hoarding-and-outdoor-ad-design/).' },
+        { type: 'h2', text: 'Why do colours look different in print?' },
+        { type: 'table', head: ['', 'RGB', 'CMYK', 'Spot (Pantone)'], rows: [
+            ['Made from', 'Red, green and blue light', 'Cyan, magenta, yellow and black ink', 'One pre-mixed ink'],
+            ['Used for', 'Screens', 'Most colour printing', 'Exact brand colours, metallics, fluorescents'],
+            ['Range', 'Widest; very bright colours possible', 'Smaller; some bright colours cannot be matched', 'Precise and consistent'],
+        ] },
+        { type: 'p', text: 'A glowing blue or green on screen may print duller, because ink cannot reproduce it. Design print pieces in CMYK from the start, use the CMYK and Pantone values in your [brand guidelines](/blog/brand-guidelines-document/), and remember that paper changes colour too: the same ink looks different on glossy, matt and uncoated stock.' },
+        { type: 'h2', text: 'What resolution do images need?' },
+        { type: 'table', head: ['Printed piece', 'Viewed from', 'Typical image resolution at final size'], rows: [
+            ['Visiting cards, brochures, catalogues, packaging', 'Hand-held', 'About 300 ppi'],
+            ['Posters', 'A metre or two', 'About 150–300 ppi'],
+            ['Banners and standees', 'A few metres', 'About 100–150 ppi'],
+            ['Hoardings', 'Many metres', 'Much lower; follow the printer’s specification'],
+        ] },
+        { type: 'p', text: 'These are common guidelines, not fixed rules. Two cautions: an image copied from a website or WhatsApp is almost never good enough for print, and enlarging a small image in software does not add real detail. Logos and text should be **vector** artwork, which stays sharp at any size; see [logo design: process and file formats](/blog/logo-design-guide/).' },
+        { type: 'h2', text: 'What about fonts and black?' },
+        { type: 'list', items: [
+            '**Embed or outline fonts** — otherwise the printer’s computer may swap in a different font. This matters especially for Telugu and other Indian scripts; see [Telugu–English design](/blog/telugu-english-bilingual-design/).',
+            '**Small black text** — use 100% black only, so it prints crisply on one plate.',
+            '**Large black areas** — plain black can look grey; printers often suggest a “rich black” mix. Ask for their values.',
+            '**Thin lines and tiny reversed text** — white text on a dark background fills in if too small.',
+            '**Total ink** — very heavy mixes of all four inks can smudge; printers set a limit.',
+        ] },
+        { type: 'h2', text: 'How do you prepare and send the file?' },
+        { type: 'steps', items: [
+            '**Ask the printer for their specification** — size, bleed, colour profile, PDF standard.',
+            '**Set up the document** at final size with bleed from the beginning.',
+            '**Design in CMYK**, using brand colour values.',
+            '**Check images** at 100% size for sharpness.',
+            '**Proofread** — names, numbers, addresses, prices. Printing is permanent.',
+            '**Export a print PDF** with bleed and crop marks, fonts embedded.',
+            '**Open the PDF and check it** — pages, edges, colours.',
+            '**Ask for a proof** — on screen at least; a printed proof for colour-critical or large jobs.',
+            '**Approve in writing** before the full run.',
+        ] },
+        { type: 'h2', text: 'Which mistakes cause reprints?' },
+        { type: 'list', items: [
+            '**No bleed** — white edges or cropped designs.',
+            '**Text too close to the edge**.',
+            '**RGB files** converted automatically, with dull results.',
+            '**Low-resolution images and logos**.',
+            '**Missing fonts**.',
+            '**The wrong size** — a design made for A4 sent for a different format.',
+            '**Spelling and number errors** nobody checked.',
+            '**Folds and binding not allowed for** in brochures; see [product catalogue and brochure design](/blog/product-catalogue-brochure-design/).',
+        ] },
+        { type: 'p', text: 'Packaging adds its own layer: cutter guides, glue areas and mandatory label information, covered in [packaging and label design](/blog/packaging-design-and-label-rules-india/). Print-ready artwork is part of our [design and branding](/services/design-and-branding/) work.' },
+        { type: 'tip', text: 'Print the design on an office printer at actual size, cut it out and hold it. Text that is too small and margins that are too tight are obvious in the hand and easy to miss on screen.' },
+    ],
+    faqs: [
+        { q: 'How much bleed do I need?', a: '3 mm on each side is common for cards, flyers and brochures. Large-format prints and packaging often need more. Your printer’s specification is the final word.' },
+        { q: 'Can I send a JPG or a Word file for printing?', a: 'Printers can sometimes work with them, but quality and layout are at risk. A print-quality PDF made from design software is the dependable option.' },
+        { q: 'Why does my logo look blurry in print?', a: 'It was probably a small image file such as a PNG from a website. Use the vector version of the logo (AI, EPS, SVG or a vector PDF), which stays sharp at any size.' },
+        { q: 'Is dpi the same as ppi?', a: 'People use them interchangeably. Strictly, ppi describes pixels in the image and dpi describes dots a printer lays down. For preparing artwork, think in ppi at the final printed size.' },
+    ],
+};
+
+export default article;

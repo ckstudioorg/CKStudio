@@ -57,6 +57,7 @@ const article: ArticleContent = {
         ] },
         { type: 'tip', text: 'Add a page of “do this, not that” examples — a stretched logo, the wrong colours, a busy background. A misuse page prevents more mistakes than any amount of rules.' },
         { type: 'p', text: 'If your brand has a character, give it its own section — see [brand mascots](/blog/brand-mascot-design-and-animation/). And if your guidelines are badly out of date, it may be time for a [brand refresh](/blog/rebranding-guide/).' },
+        { type: 'p', text: 'Related guides: [how to trademark your logo in India](/blog/trademark-your-logo-india/), [adapting a key visual for every size](/blog/campaign-adaptations-key-visual/) and [social media post templates](/blog/social-media-post-templates/).' },
     ],
     faqs: [
         { q: 'Do small businesses need brand guidelines?', a: 'Yes, even a short version. A few pages covering your logo, colours, fonts and tone keep your signboard, social posts, packaging and videos consistent as more people work on them.' },

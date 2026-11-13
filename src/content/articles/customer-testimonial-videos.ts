@@ -68,6 +68,7 @@ const article: ArticleContent = {
         ] },
         { type: 'tip', text: 'Ask the last question twice: “In one sentence, what would you tell a friend about us?” The second answer is usually shorter, warmer and perfect for an ad.' },
         { type: 'p', text: 'CK Studio films customer stories, brand films and [corporate films](/blog/corporate-film-guide/) as part of our [ad films and commercials](/services/ad-films-and-commercials/) service.' },
+        { type: 'p', text: 'Related guides: [CSR and NGO impact films](/blog/csr-and-ngo-impact-films/), [video marketing for hospitals and clinics](/blog/healthcare-hospital-video-marketing-india/) and [video marketing for schools and colleges](/blog/video-marketing-for-education-institutes/).' },
     ],
     faqs: [
         { q: 'Should testimonial videos be scripted?', a: 'No. Give customers topics and questions, not lines. Scripted testimonials sound stiff and can mislead viewers.' },

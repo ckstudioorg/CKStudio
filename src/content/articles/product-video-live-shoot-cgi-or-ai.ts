@@ -67,6 +67,7 @@ const article: ArticleContent = {
         { type: 'p', text: 'Planning these together means one shoot or one 3D model feeds all of them — far cheaper than making each separately later.' },
         { type: 'tip', text: 'Send at least three samples of the product to a shoot — one always gets scratched, and the best-looking one becomes the hero.' },
         { type: 'p', text: 'Product videos, CGI enhancements and AI compositing are part of our [VFX and CG works](/services/vfx-and-cg/). For still images, see [AI product photography vs a product shoot](/blog/ai-product-photography-vs-product-shoot/).' },
+        { type: 'p', text: 'Related guides: [3D product animation](/blog/3d-product-animation-guide/), [food and beverage ad films](/blog/food-and-beverage-ad-films/) and [product videos for Amazon and Flipkart](/blog/ecommerce-product-videos-amazon-flipkart/).' },
     ],
     faqs: [
         { q: 'Is CGI cheaper than a live product shoot?', a: 'It depends on the product. Simple hard-surface products can be cheaper and more flexible in CGI, especially when many angles or changes are needed; complex organic products are often quicker to film.' },

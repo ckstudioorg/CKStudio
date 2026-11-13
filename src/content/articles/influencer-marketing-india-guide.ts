@@ -48,6 +48,7 @@ const article: ArticleContent = {
         { type: 'p', text: 'Creator videos often make excellent ads because they feel natural. Agree the usage rights before the post — which platforms, how long and whether paid ads are included — and keep the disclosure on the content when it runs as an ad. See our [playbook for Instagram and Facebook video ads](/blog/video-ads-for-local-businesses-instagram-facebook/).' },
         { type: 'tip', text: 'Ask for the creator’s audience insights (location, age, gender) as screenshots before you sign. They tell you more than follower counts.' },
         { type: 'p', text: 'CK Studio plans social media campaigns, produces brand content and runs [Meta ad campaigns](/services/social-media-and-web-design/) that can include creator content. See also our [social media content calendar](/blog/social-media-content-calendar/).' },
+        { type: 'p', text: 'Related guides: [celebrity ads: contracts and rules](/blog/celebrity-endorsement-ads-india/) and [UGC ads](/blog/ugc-ads-india/).' },
     ],
     faqs: [
         { q: 'Do influencers in India have to label paid posts?', a: 'Yes. ASCI’s guidelines and the government’s endorsement rules require clear labels such as “Ad”, “Sponsored” or “Collaboration” when there is a material connection with the brand.' },

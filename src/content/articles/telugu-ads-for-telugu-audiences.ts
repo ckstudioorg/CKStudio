@@ -46,6 +46,7 @@ const article: ArticleContent = {
         ] },
         { type: 'tip', text: 'Before the shoot, read the script aloud with someone from your target district. If a line makes them smile or wince, you’ll know.' },
         { type: 'p', text: 'Where you run the ad matters too: Telugu TV, YouTube, Instagram, cinema and outdoor each reach different people — see [where to advertise in Telangana and Andhra Pradesh](/blog/advertising-media-telangana-andhra/).' },
+        { type: 'p', text: 'Related guides: [ad films for agri brands](/blog/agri-brand-ad-films-reaching-farmers/).' },
     ],
     faqs: [
         { q: 'Should our Hyderabad ad be in Telugu or Hindi?', a: 'It depends on who your customers are. Many Hyderabad brands make a Telugu version for the wider state audience and a Hindi version for parts of the city, planned together so both feel natural.' },

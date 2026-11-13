@@ -1,0 +1,81 @@
+/** Text of "One Campaign, Every Size: Adapting a Key Visual for Print, Outdoor and Social". Its card (title, summary, date, reading time) is in content/blog.ts. */
+import type { ArticleContent } from '../blog';
+
+const article: ArticleContent = {
+    answer: 'A key visual is the one master design of a campaign: the main image, headline, logo and colours. Adaptation is the job of reshaping it for every place it will appear, from a hoarding to an Instagram story, without losing what makes it recognisable. Do it well by building a layered master, deciding which elements are fixed and which can move, listing every size before you start, and redesigning for each shape instead of stretching or cropping.',
+    keyPoints: [
+        'One strong master, many careful adaptations.',
+        'Fix the essentials (logo, headline, hero image, colours); let the layout flex.',
+        'Make a size list first; missing formats cause last-minute compromises.',
+        'Never stretch. Recompose for each shape.',
+    ],
+    body: [
+        { type: 'h2', text: 'What is a key visual?' },
+        { type: 'p', text: 'It is the image people should remember from a campaign, sometimes shortened to “KV”. For a product launch it might be the product with a headline; for a festival sale, an illustration and an offer; for a film, the main poster. Everything else in the campaign is derived from it, so that someone who sees the hoarding in the morning and the reel at night knows they belong together.' },
+        { type: 'h2', text: 'Which elements stay fixed and which can change?' },
+        { type: 'table', head: ['Usually fixed', 'Can flex'], rows: [
+            ['Logo and its clear space', 'Position of the logo (top, bottom, corner)'],
+            ['Campaign headline wording', 'Line breaks and size of the headline'],
+            ['Hero image or product', 'Crop, scale and placement of the hero'],
+            ['Colours and fonts', 'Amount of background'],
+            ['Offer and legal text wording', 'Secondary text: shortened or dropped on small formats'],
+            ['Overall mood', 'Extra elements such as patterns and icons'],
+        ] },
+        { type: 'p', text: 'These rules come from your [brand guidelines](/blog/brand-guidelines-document/); a campaign adds its own page on top.' },
+        { type: 'h2', text: 'Which sizes does a campaign usually need?' },
+        { type: 'table', head: ['Family', 'Typical pieces', 'What changes'], rows: [
+            ['Outdoor', 'Hoardings, bus shelters, metro panels, standees', 'Very few words, huge type; see [hoarding design](/blog/hoarding-and-outdoor-ad-design/)'],
+            ['Print', 'Newspaper ads, flyers, posters, brochures', 'CMYK, bleed, finer detail; see [print-ready files](/blog/print-ready-files-bleed-cmyk-resolution/)'],
+            ['Social posts', 'Square, portrait and story formats', 'Safe areas clear of app buttons; text kept short'],
+            ['Digital ads', 'Banner sizes, wide and tall', 'Extreme shapes: often logo, one line and a button'],
+            ['Video', 'End cards, thumbnails, vertical and horizontal cuts', 'See the [video ad sizes cheat sheet](/blog/video-ad-sizes-aspect-ratios-cheat-sheet/)'],
+            ['In-store', 'Shelf strips, danglers, counter cards, screens', 'Close viewing; price and offer lead'],
+            ['Messaging', 'WhatsApp images and status', 'Light files, readable on a phone'],
+        ] },
+        { type: 'p', text: 'Exact dimensions change with each media owner and platform. Collect them in one size list before design starts.' },
+        { type: 'h2', text: 'How do you build a master that adapts well?' },
+        { type: 'list', items: [
+            '**Keep layers separate** — background, hero, headline, logo, offer.',
+            '**Extend the background** well beyond the main frame, so there is image to spare for wide and tall formats.',
+            '**Shoot or render the hero with space around it** — tight crops cannot be widened later. Brief the photographer or 3D artist for this.',
+            '**Use vector logos and live text**.',
+            '**Work at high resolution** — sized for the largest piece.',
+            '**Design three shapes first** — one wide, one square, one tall. If the idea survives all three, it will adapt anywhere.',
+        ] },
+        { type: 'h2', text: 'What is the adaptation process?' },
+        { type: 'steps', items: [
+            '**Approve the key visual** in its main format.',
+            '**Agree the size list** with media, digital and print teams.',
+            '**Create master layouts** for the main shapes: wide, square, tall, extreme banner.',
+            '**Approve those masters** before producing everything else.',
+            '**Roll out the remaining sizes** from the nearest master.',
+            '**Make language versions** — Telugu, English, Hindi; see [Telugu–English design](/blog/telugu-english-bilingual-design/).',
+            '**Check each file** — spelling, offer, dates, logo, safe areas, colour mode.',
+            '**Name and deliver** files clearly by medium, size and language.',
+        ] },
+        { type: 'h2', text: 'What are the common mistakes?' },
+        { type: 'list', items: [
+            '**Stretching** the design to fit, distorting the logo and faces.',
+            '**Shrinking the whole layout** so text becomes unreadable on small formats.',
+            '**Keeping every element everywhere** — a web banner cannot carry what a newspaper page can.',
+            '**Cropping the hero** so the product or face is cut awkwardly.',
+            '**Ignoring safe areas** on stories and reels, where buttons cover text.',
+            '**RGB files sent to print**, or print files used online.',
+            '**Different offers or dates** across versions because one was updated and others were not.',
+            '**Starting adaptations before the master is approved** — every late change is then multiplied.',
+        ] },
+        { type: 'h2', text: 'Can AI and templates help?' },
+        { type: 'p', text: 'Yes, for the routine parts. AI tools can extend backgrounds for wider formats, remove backgrounds and suggest resized layouts, and design software can link text across versions so one edit updates all. A designer still needs to check each result: generated backgrounds can contain odd details, and automatic resizing does not understand hierarchy. For regular content, see [social media post templates](/blog/social-media-post-templates/).' },
+        { type: 'h2', text: 'How should a campaign be handed over?' },
+        { type: 'p', text: 'Ask for final files in the right format for each medium, the layered master files, and a one-page guide showing the fixed elements and examples of each shape. With these, a new size requested next month can be made quickly and correctly. Campaign design and adaptation are part of our [design and branding](/services/design-and-branding/) service; for events, see the [event branding kit checklist](/blog/event-branding-kit-checklist/).' },
+        { type: 'tip', text: 'Print the smallest and view the largest. Check the tiniest banner at actual size on a phone, and look at the hoarding artwork from across the room at thumbnail size. Both should still read in three seconds.' },
+    ],
+    faqs: [
+        { q: 'What does “KV” mean in advertising?', a: 'Key visual: the main campaign image from which all other formats are derived.' },
+        { q: 'How many adaptations does a typical campaign need?', a: 'It varies from a handful for a local social campaign to dozens or hundreds for a multi-city launch across outdoor, print and digital. The size list decides it.' },
+        { q: 'Why can’t the designer just resize the artwork?', a: 'Because shapes differ. A wide hoarding and a tall phone story need different arrangements of the same elements. Simple resizing leaves text too small, crops the image badly or distorts it.' },
+        { q: 'Who should supply the sizes?', a: 'The media agency or media owners for outdoor and print, the digital team for platforms and ads, and the printer for in-store pieces. Gather them into one list and confirm before work begins.' },
+    ],
+};
+
+export default article;

@@ -1,0 +1,87 @@
+/** Text of "Social Media Post Templates: Stay On-Brand Without Looking Repetitive". Its card (title, summary, date, reading time) is in content/blog.ts. */
+import type { ArticleContent } from '../blog';
+
+const article: ArticleContent = {
+    answer: 'A social media template system is a small set of pre-designed layouts, each for one kind of post: an offer, a tip, a customer quote, a festival greeting, an announcement. With fixed fonts, colours and logo placement, anyone on the team can make a post in minutes that looks like the brand. Six to ten templates, each with a few variations, is enough for most businesses. Refresh them every few months so the feed does not look stamped out.',
+    keyPoints: [
+        'One template per content type, not one template for everything.',
+        'Fix the fonts, colours and logo position; vary the picture and words.',
+        'Keep text short and inside each platform’s safe area.',
+        'Build in variations so the feed stays fresh.',
+    ],
+    body: [
+        { type: 'h2', text: 'Why use templates at all?' },
+        { type: 'list', items: [
+            '**Recognition** — followers know a post is yours before reading the name.',
+            '**Speed** — no designing from a blank page each morning.',
+            '**Consistency across people** — the feed looks the same whoever made the post.',
+            '**Fewer mistakes** — the logo, colours and fonts are already right.',
+            '**Lower cost** — the designer builds the system once; the team uses it daily.',
+        ] },
+        { type: 'h2', text: 'Which templates does a business need?' },
+        { type: 'table', head: ['Template', 'Used for', 'Key parts'], rows: [
+            ['Offer or sale', 'Discounts, festival offers, new prices', 'Big offer line, product image, dates, terms'],
+            ['Product or service highlight', 'One item and its main benefit', 'Photo, name, one line'],
+            ['Tip or how-to', 'Useful advice in your field', 'Title, three to five short points; often a carousel'],
+            ['Customer quote', 'Reviews and testimonials', 'The quote, customer name, with permission'],
+            ['Announcement', 'New branch, timings, events, hiring', 'Headline, date, place'],
+            ['Festival greeting', 'Festivals and special days', 'Illustration or photo, greeting, small logo'],
+            ['Behind the scenes or team', 'People and process', 'Photo-led, light text'],
+            ['Reel cover', 'The cover image for videos', 'Short title, consistent style'],
+            ['Story frames', 'Polls, questions, daily updates', 'Space left for app stickers'],
+        ] },
+        { type: 'p', text: 'Match the list to what you actually post. Our guide to a [social media content calendar](/blog/social-media-content-calendar/) helps decide the mix, and the [festival marketing calendar](/blog/festival-marketing-calendar-telangana-andhra/) lists dates worth planning for.' },
+        { type: 'h2', text: 'What goes into a good template?' },
+        { type: 'list', items: [
+            '**A simple grid** — the same margins and alignment every time.',
+            '**Two fonts at most** — one for headlines, one for details, in set sizes.',
+            '**Brand colours** — a main colour, one or two supporting colours, and rules for text on each.',
+            '**A fixed logo position and size**.',
+            '**A clear place for the picture** — and guidance on the kind of picture.',
+            '**Text limits** — a headline of a few words; details in the caption, not the image.',
+            '**Safe areas** — nothing important near the top and bottom of stories and reels, where app buttons sit.',
+            '**Both languages** — a Telugu version of each, where needed; see [Telugu–English design](/blog/telugu-english-bilingual-design/).',
+        ] },
+        { type: 'p', text: 'All of this should follow your [brand guidelines](/blog/brand-guidelines-document/).' },
+        { type: 'h2', text: 'How do you avoid a feed that looks repetitive?' },
+        { type: 'list', items: [
+            '**Give each template two or three variations** — picture left or right, light or dark background.',
+            '**Rotate colours** within the brand palette.',
+            '**Alternate post types** — a photo, then a graphic, then a video.',
+            '**Let photographs and videos lead** — templates frame content; they are not the content.',
+            '**Look at the profile grid as a whole** before scheduling a week.',
+            '**Refresh seasonally** — a festive layer, a new pattern, an updated layout every few months.',
+        ] },
+        { type: 'h2', text: 'How do you set the system up?' },
+        { type: 'steps', items: [
+            '**List your post types** from the last three months and the next three.',
+            '**Have a designer create the templates** in a tool your team can use, with fonts and colours locked.',
+            '**Make each size** — square or portrait for the feed, vertical for stories and reel covers. Check current platform sizes in the [video ad sizes cheat sheet](/blog/video-ad-sizes-aspect-ratios-cheat-sheet/).',
+            '**Write a one-page guide** — which template for what, text limits, image style, examples of right and wrong.',
+            '**Train whoever posts**, and give them a shared folder of approved photos and logos.',
+            '**Set an approval step** for offers, prices and anything sensitive.',
+            '**Review every quarter** — keep what works, retire what does not.',
+        ] },
+        { type: 'h2', text: 'What are the common mistakes?' },
+        { type: 'list', items: [
+            '**Too much text on the image** — it becomes unreadable on a phone.',
+            '**Editing the template itself** each time, until nothing matches.',
+            '**Stretched or pixelated logos**.',
+            '**Low-quality or watermarked images**; pictures taken from the internet without rights.',
+            '**The same layout for every post**.',
+            '**No alt text or captions** — add image descriptions and video captions so more people can follow.',
+            '**Posting graphics only** — people respond to faces, places and real work.',
+        ] },
+        { type: 'h2', text: 'Should you design in-house, use an agency or use AI?' },
+        { type: 'p', text: 'A practical split: a designer or studio creates the system and the important campaign pieces; your team produces day-to-day posts from the templates. AI tools help with caption drafts, background clean-up and image variations, but check anything they produce for accuracy and for odd details. For the wider decision, see [social media management: agency or in-house?](/blog/social-media-agency-vs-in-house/). Template systems are part of our [social media and web design](/services/social-media-and-web-design/) work.' },
+        { type: 'tip', text: 'Before approving a template, fill it with your longest real headline and your worst real photo. If it still looks good, it will survive daily use.' },
+    ],
+    faqs: [
+        { q: 'How many templates do I need?', a: 'Most small businesses manage well with six to ten, each with a few variations. More than that and the team stops knowing which to use.' },
+        { q: 'Which tool should templates be made in?', a: 'One your team can use confidently. Many businesses use an online design tool with brand fonts and colours locked in; design studios may build masters in professional software and hand over editable versions.' },
+        { q: 'How much text should be on a post image?', a: 'As little as possible: a headline and perhaps one supporting line. Put the details in the caption, where they can be read and searched.' },
+        { q: 'How often should templates be refreshed?', a: 'A light refresh every three to six months keeps the feed from looking stale, while the fonts, colours and logo stay the same.' },
+    ],
+};
+
+export default article;

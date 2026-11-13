@@ -55,6 +55,7 @@ const article: ArticleContent = {
         ] },
         { type: 'tip', text: 'Book one shoot day a month: film the new dishes, a chef clip, the atmosphere and a few customer moments. That is enough for a month of Reels and fresh Google photos.' },
         { type: 'p', text: 'CK Studio films and edits food videos and manages social media for restaurants and cafés in Hyderabad — see our [social media and web design](/services/social-media-and-web-design/) service.' },
+        { type: 'p', text: 'Related guides: [food and beverage ad films](/blog/food-and-beverage-ad-films/) and [how to shoot good video on your phone](/blog/shoot-video-on-your-phone/).' },
     ],
     faqs: [
         { q: 'What kind of videos get restaurants more customers?', a: 'Short, appetising videos of signature dishes, the chef’s story and the atmosphere, shared as Reels, on Google Business Profile and as local ads targeted around the restaurant.' },

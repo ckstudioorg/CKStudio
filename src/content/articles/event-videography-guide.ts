@@ -68,6 +68,7 @@ const article: ArticleContent = {
         ] },
         { type: 'tip', text: 'Ask for three vertical clips to be delivered the same evening. Posting while people are still talking about the event multiplies its reach.' },
         { type: 'p', text: 'CK Studio covers corporate events, launches and public events — see the Events section of [our work](/#portfolio) and our [ad films and commercials](/services/ad-films-and-commercials/) service.' },
+        { type: 'p', text: 'Related guides: [video podcasts for brands](/blog/video-podcasts-for-brands/) and [CSR and NGO impact films](/blog/csr-and-ngo-impact-films/).' },
     ],
     faqs: [
         { q: 'How many cameras does an event need?', a: 'A small event can be covered with one or two cameras; conferences and large launches usually need a fixed wide camera, a stage camera and one or two roaming cameras.' },

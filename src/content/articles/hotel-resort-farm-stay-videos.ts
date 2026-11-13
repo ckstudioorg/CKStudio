@@ -53,6 +53,7 @@ const article: ArticleContent = {
             '**Post regularly**, planned around seasons and long weekends — see the [social media content calendar](/blog/social-media-content-calendar/).',
             '**Reply quickly** to every enquiry, with a short room-tour video if they ask about a particular cottage.',
         ] },
+        { type: 'p', text: 'Related guides: [farm stay and resort websites that get direct bookings](/blog/farm-stay-resort-website-direct-bookings/).' },
         { type: 'tip', text: 'Record clean sound of the place: birds at dawn, water, the fire at night. Sound sells the feeling of a stay as much as the picture does.' },
     ],
     faqs: [

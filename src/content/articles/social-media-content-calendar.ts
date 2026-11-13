@@ -53,6 +53,7 @@ const article: ArticleContent = {
         ] },
         { type: 'tip', text: 'Start each month by planning the festival and launch posts first. They are the ones that cannot be late — fill the rest of the calendar around them.' },
         { type: 'p', text: 'CK Studio plans and produces social media content and campaigns for brands in Hyderabad — see our [social media and web design](/services/social-media-and-web-design/) service, our [playbook for local video ads](/blog/video-ads-for-local-businesses-instagram-facebook/) and [Instagram Reels for brands](/blog/instagram-reels-for-brands/).' },
+        { type: 'p', text: 'Related guides: [social media post templates](/blog/social-media-post-templates/) and [video podcasts for brands](/blog/video-podcasts-for-brands/).' },
     ],
     faqs: [
         { q: 'What is a social media content calendar?', a: 'A schedule that lists what will be posted, on which platform, when and in which format, along with captions, assets and who is responsible.' },

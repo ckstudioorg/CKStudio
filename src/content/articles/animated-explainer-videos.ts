@@ -70,6 +70,7 @@ const article: ArticleContent = {
         ] },
         { type: 'tip', text: 'Read your script aloud with a stopwatch before approving it. It is the fastest way to find words to cut.' },
         { type: 'p', text: 'CK Studio makes explainer and training videos, motion graphics and [3D product animation](/blog/product-video-live-shoot-cgi-or-ai/) as part of our [ad films](/services/ad-films-and-commercials/) and [VFX and CG](/services/vfx-and-cg/) services.' },
+        { type: 'p', text: 'Related guides: [3D product animation](/blog/3d-product-animation-guide/) and [corporate training and safety videos](/blog/corporate-training-videos/).' },
     ],
     faqs: [
         { q: 'How long should an explainer video be?', a: 'Usually 60 to 120 seconds. Shorter versions of 15–30 seconds work for ads and social media.' },

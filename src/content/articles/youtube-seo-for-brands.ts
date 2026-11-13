@@ -66,6 +66,7 @@ const article: ArticleContent = {
         },
         { type: 'tip', text: 'Look at YouTube’s search suggestions as you type your topic. Those are real phrases people search — use them to name your videos.' },
         { type: 'p', text: 'CK Studio produces YouTube videos, Shorts and ad films for brands, and plans [social media strategy](/services/social-media-and-web-design/). For formats and lengths, see our [video size cheat sheet](/blog/video-ad-sizes-aspect-ratios-cheat-sheet/); to advertise on YouTube, read [YouTube ads for small businesses](/blog/youtube-ads-for-small-businesses-india/).' },
+        { type: 'p', text: 'Related guides: [video podcasts for brands](/blog/video-podcasts-for-brands/).' },
     ],
     faqs: [
         { q: 'How long should a YouTube video be for a brand?', a: 'As long as it needs to be to answer the viewer’s question well. Short explainers often work at three to eight minutes; Shorts are vertical clips of up to a few minutes, with most under one minute.' },

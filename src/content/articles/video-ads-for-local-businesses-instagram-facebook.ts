@@ -63,6 +63,7 @@ const article: ArticleContent = {
         ] },
         { type: 'tip', text: 'Film three hooks for the same ad — a question, a bold claim you can prove, and a surprising visual. Run all three and let the results choose.' },
         { type: 'p', text: 'CK Studio plans social media, creates Reels and runs [digital ad campaigns on Meta](/services/social-media-and-web-design/) for businesses in Hyderabad. See our [video size cheat sheet](/blog/video-ad-sizes-aspect-ratios-cheat-sheet/) or [talk to us](/#enquiry).' },
+        { type: 'p', text: 'Related guides: [video marketing for salons, spas and gyms](/blog/video-marketing-for-salons-spas-gyms/), [landing pages for ads](/blog/landing-pages-for-ads/) and [fashion and saree brand videos](/blog/fashion-and-saree-brand-videos/).' },
     ],
     faqs: [
         { q: 'Are Instagram ads or Facebook ads better for a local business?', a: 'Both run from the same Meta ads system, and the same video can appear on both. Let Meta place the ads across Instagram and Facebook, then check which placements bring genuine enquiries.' },
