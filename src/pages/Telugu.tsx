@@ -55,7 +55,7 @@ const Telugu: React.FC = () => {
     if (slug && !service) return <NotFound />;
 
     return (
-        <div ref={root} lang={teUi.lang} style={teFont} className="relative bg-noir text-ivory">
+        <div ref={root} lang={teUi.lang} style={teFont} className="relative bg-noir text-ivory [&_.lux-label]:text-sm [&_.lux-label]:tracking-normal">
             <div aria-hidden="true" className="lux-glow-top pointer-events-none absolute inset-x-0 top-0 h-[50rem]" style={{ background: 'radial-gradient(ellipse 42% 42% at 14% 14%, rgba(139,0,0,0.22), rgba(10,8,7,0) 72%)' }} />
 
             <div className="relative mx-auto max-w-[1600px] px-5 md:px-10 pt-16 md:pt-24 pb-28 md:pb-40">

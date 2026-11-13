@@ -15,10 +15,10 @@ like "ad film makers in Hyderabad" depend most on your **Google Business Profile
 - Every page is ready-made for Google: full text, title, description, link previews.
 - Google's "structured data" on every page: your business details (name, address, phone, hours, map link,
   social profiles), each article, each FAQ, each service and the page path (breadcrumbs).
-- A sitemap listing all 107 pages: https://ckstudio.org/sitemap.xml
+- A sitemap listing all 231 pages: https://ckstudio.org/sitemap.xml
 - A summary written for AI assistants: https://ckstudio.org/llms.txt
 - AI search tools (ChatGPT, Perplexity, Claude, Google's Gemini, Copilot) are allowed to read the site.
-- Secure (https), works on phones, quick to load, and 97 articles written to answer real questions.
+- Secure (https), works on phones, quick to load, and 127 articles written to answer real questions.
 - Each service page links to its best guides, and each guide links back to its service page. The footer
   links to the most popular guides from every page.
 - A link-preview image in the black, red and gold look (shown when the site is shared on WhatsApp,
@@ -52,7 +52,7 @@ This tells Google your site exists, shows which searches bring visitors, and war
 3. **Submit the sitemap:** left menu → **Sitemaps** → type the full address `https://ckstudio.org/sitemap.xml`
    → **Submit**. (A Domain property shows no web address in front of the box, so just `sitemap.xml`
    gives "Invalid sitemap address".)
-   After a day or two it should say **Success** with about 107 pages.
+   After a day or two it should say **Success** with about 231 pages.
    Optional: also submit `https://ckstudio.org/feed.xml` the same way. Google reads it often, so new
    articles get found sooner.
 4. **Ask Google to read your key pages now:** paste each address into the search bar at the top

@@ -71,7 +71,7 @@ const article: ArticleContent = {
         { q: 'Can we use a film star’s old movie clip in our ad?', a: 'Not without permission from the film’s rights holder and usually the actor as well. A clip is protected by copyright and the person by personality rights.' },
     ],
     sources: [
-        { label: 'Central Consumer Protection Authority (Department of Consumer Affairs)', url: 'https://doca.gov.in/ccpa/' },
+        { label: 'PIB — CCPA guidelines on misleading advertisements and endorsements, 2022', url: 'https://pib.gov.in/PressReleasePage.aspx?PRID=1832906' },
         { label: 'ASCI — Advertising Standards Council of India', url: 'https://www.ascionline.in/' },
     ],
 };
